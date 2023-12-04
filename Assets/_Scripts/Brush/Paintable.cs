@@ -13,6 +13,8 @@ public class Paintable : MonoBehaviour
     [SerializeField] private bool useMaskAlpha = true;
     [SerializeField] private bool usePaintAlpha;
     
+    private int[] _pixelParent;
+    
     private SpriteMapper _spriteMapper;
     private Material _material;
     private Texture2D _maskTexture;
@@ -23,7 +25,7 @@ public class Paintable : MonoBehaviour
     {
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         _material = spriteRenderer.material;
-     
+
         _maskTexture = Instantiate(maskTexture ? maskTexture : baseTexture);
         _mainTexture = Instantiate(baseTexture);
         _paintTexture = Instantiate(paintTextures[_paintTextureIndex]);
@@ -36,7 +38,9 @@ public class Paintable : MonoBehaviour
         
         spriteRenderer.sprite = Sprite.Create(_mainTexture, new Rect(Vector2.zero,  new Vector2(baseTexture.width, baseTexture.height)), Vector2.one/2f);
         _spriteMapper = new SpriteMapper(spriteRenderer.sprite, transform);
-
+        
+        _pixelParent = new int[_maskTexture.width*_maskTexture.height];
+        
         ResetTexture(_maskTexture, Color.black);
     }
     
@@ -62,6 +66,7 @@ public class Paintable : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             ChangePaint(0);
+            GetPercentages();
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
@@ -96,10 +101,14 @@ public class Paintable : MonoBehaviour
                 int texX = coordX + x - brush.size/2;
                 int texY = coordY + y - brush.size/2;
 
-                if (texX >= 0 && texX < _maskTexture.width && texY >= 0 && texY < _maskTexture.height)
-                { 
-                    if(!useMaskAlpha || maskTexture.GetPixel(texX, texY).a > 0)
-                        _maskTexture.SetPixel(texX, texY, _maskTexture.GetPixel(texX, texY)+brush.GetPixel(x, y));
+                if (texX >= 0 && texX < _maskTexture.width && texY >= 0 && texY < _maskTexture.height && brush.GetPixel(x, y).a > 0)
+                {
+                    Color maskColor = _maskTexture.GetPixel(texX, texY);
+                    if (!useMaskAlpha || maskColor.a > 0)
+                    {
+                        _maskTexture.SetPixel(texX, texY, maskColor+brush.GetPixel(x, y));
+                        _pixelParent[texX + texY * _maskTexture.width] = _paintTextureIndex+1;
+                    }
                 }
             }
         }
@@ -139,5 +148,32 @@ public class Paintable : MonoBehaviour
         _mainTexture.Apply();
 
         ResetTexture(_maskTexture, Color.black);
+    }    
+
+    public float[] GetPercentages()
+    {
+        float[] percentages = new float[paintTextures.Length+1];
+        int[] pixelCount = new int[paintTextures.Length+1];
+        int total = _pixelParent.Length;
+        
+        int height = useMaskAlpha ? _maskTexture.height : _mainTexture.height;
+        int width = useMaskAlpha ? _maskTexture.width : _mainTexture.width;
+        
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                if (useMaskAlpha && _maskTexture.GetPixel(x,  y).a == 0) total--;
+                else pixelCount[_pixelParent[x + y * width]]++;
+            }
+        }
+        
+        for (int i = 0; i < percentages.Length; i++)
+        {
+            percentages[i] = (float)pixelCount[i]/total;
+            //Debug.Log("Texture " + i + " has: " + pixelCount[i] + " pixels, it is: " + percentages[i]*100f + "%");
+        }
+        
+        return percentages;
     }
 }
