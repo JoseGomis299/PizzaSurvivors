@@ -1,4 +1,5 @@
 using System;
+using ProjectUtils.Helpers;
 using UnityEngine;
 
 public class Paintable : MonoBehaviour
@@ -21,7 +22,12 @@ public class Paintable : MonoBehaviour
     private Texture2D _mainTexture;
     private Texture2D _paintTexture;
 
-    private void OnEnable()
+    private void Start()
+    {
+        Initialize();
+    }
+
+    public void Initialize()
     {
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         _material = spriteRenderer.material;
@@ -37,6 +43,7 @@ public class Paintable : MonoBehaviour
         _material.SetFloat("_UsePaintAlpha", usePaintAlpha ? 1 : 0);
         
         spriteRenderer.sprite = Sprite.Create(_mainTexture, new Rect(Vector2.zero,  new Vector2(baseTexture.width, baseTexture.height)), Vector2.one/2f);
+        transform.localScale /= baseTexture.width / spriteRenderer.sprite.pixelsPerUnit;
         _spriteMapper = new SpriteMapper(spriteRenderer.sprite, transform);
         
         _pixelParent = new int[_maskTexture.width*_maskTexture.height];
@@ -171,7 +178,7 @@ public class Paintable : MonoBehaviour
         for (int i = 0; i < percentages.Length; i++)
         {
             percentages[i] = (float)pixelCount[i]/total;
-            //Debug.Log("Texture " + i + " has: " + pixelCount[i] + " pixels, it is: " + percentages[i]*100f + "%");
+            Debug.Log("Texture " + i + " has: " + pixelCount[i] + " pixels, it is: " + percentages[i]*100f + "%");
         }
         
         return percentages;
