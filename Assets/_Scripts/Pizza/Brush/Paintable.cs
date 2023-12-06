@@ -16,7 +16,7 @@ public class Paintable : MonoBehaviour
     
     private int[] _pixelParent;
     
-    private SpriteMapper _spriteMapper;
+    private SpriteRenderer _spriteRenderer;
     private Material _material;
     private Texture2D _maskTexture;
     private Texture2D _mainTexture;
@@ -27,10 +27,15 @@ public class Paintable : MonoBehaviour
         Initialize();
     }
 
+    private void OnEnable()
+    {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        SpriteMapper.SetRenderer(_spriteRenderer);
+    }
+
     public void Initialize()
     {
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-        _material = spriteRenderer.material;
+        _material = _spriteRenderer.material;
 
         _maskTexture = Instantiate(maskTexture ? maskTexture : baseTexture);
         _mainTexture = Instantiate(baseTexture);
@@ -42,9 +47,8 @@ public class Paintable : MonoBehaviour
         _material.SetFloat("_UseMaskAplha", useMaskAlpha ? 1 : 0);
         _material.SetFloat("_UsePaintAlpha", usePaintAlpha ? 1 : 0);
         
-        spriteRenderer.sprite = Sprite.Create(_mainTexture, new Rect(Vector2.zero,  new Vector2(baseTexture.width, baseTexture.height)), Vector2.one/2f);
-        transform.localScale /= baseTexture.width / spriteRenderer.sprite.pixelsPerUnit;
-        _spriteMapper = new SpriteMapper(spriteRenderer.sprite, transform);
+        _spriteRenderer.sprite = Sprite.Create(_mainTexture, new Rect(Vector2.zero,  new Vector2(baseTexture.width, baseTexture.height)), Vector2.one/2f);
+        transform.localScale /= baseTexture.width / _spriteRenderer.sprite.pixelsPerUnit;
         
         _pixelParent = new int[_maskTexture.width*_maskTexture.height];
         
@@ -69,34 +73,11 @@ public class Paintable : MonoBehaviour
     {
         Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         if(Input.GetMouseButton(0)) Paint(pos);
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            ChangePaint(0);
-            GetPercentages();
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            ChangePaint(1);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            ChangePaint(2);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            ChangePaint(3);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            ChangePaint(4);
-        }
     }
 
     private void Paint(Vector3 pos)
     {
-        Vector2 coords = _spriteMapper.TextureSpaceUV(pos);
-        if(coords.x < 0 || coords.x > 1 || coords.y < 0 || coords.y > 1) return;
+        if(!SpriteMapper.TryGetTextureSpaceUV(_spriteRenderer, pos, out var coords)) return;
         
         int coordX = (int)(coords.x*_maskTexture.width);
         int coordY = (int)(coords.y*_maskTexture.height);
