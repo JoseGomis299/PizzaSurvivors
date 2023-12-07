@@ -1,12 +1,12 @@
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(Effect))]
+[CustomEditor(typeof(EffectInfo))]
 public class EffectEditor : Editor
 {
     public override void OnInspectorGUI()
     {
-        Effect effect = (Effect)target;
+        EffectInfo effectInfo = (EffectInfo)target;
         
         SerializedProperty iterator = serializedObject.GetIterator();
         iterator.NextVisible(true);
@@ -18,7 +18,7 @@ public class EffectEditor : Editor
         // If timerType is Infinite, disable the 'duration' field
         while (iterator.NextVisible(false))
         {
-            if (iterator.name == "duration" && effect.timerType == TimerType.Infinite) 
+            if (iterator.name == "duration" && effectInfo.timerType == TimerType.Infinite) 
             {
                 EditorGUI.BeginDisabledGroup(true);
                 EditorGUILayout.PropertyField(iterator, true);

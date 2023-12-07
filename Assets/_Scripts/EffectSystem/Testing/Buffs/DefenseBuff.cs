@@ -1,4 +1,4 @@
-public class DefenseBuff : IncrementalEffect
+public class DefenseBuff : StatsManagerEffect
 {
     public DefenseBuff(StatsManager target, float duration, int maxStacks, TimerType timerType , float defenseIncrement, IncrementType incrementType) : base(target, duration, maxStacks, timerType, defenseIncrement, incrementType){}
 

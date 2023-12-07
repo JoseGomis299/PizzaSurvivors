@@ -5,7 +5,7 @@ public abstract class IncrementalEffect : BaseEffect {
     protected readonly float increment;
     protected readonly IncrementType incrementType;
     
-    protected IncrementalEffect(StatsManager target, float duration, int maxStacks, TimerType timerType, float increment, IncrementType incrementType) : base(target, duration, maxStacks, timerType)
+    protected IncrementalEffect(IEffectTarget target, float duration, int maxStacks, TimerType timerType, float increment, IncrementType incrementType) : base(target, duration, maxStacks, timerType)
     {
         this.increment = increment;
         this.incrementType = incrementType;

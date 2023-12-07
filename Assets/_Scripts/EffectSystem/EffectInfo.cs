@@ -1,8 +1,8 @@
 using UnityEditor;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Create Effect", fileName = "Effect", order = 0)]
-public class Effect : ScriptableObject
+[CreateAssetMenu(menuName = "Effect/Stats Effect", fileName = "Effect", order = 0)]
+public class EffectInfo : ScriptableObject
 {
     [Header("Effect Type")]
     
@@ -17,7 +17,7 @@ public class Effect : ScriptableObject
     public IncrementType incrementType;
     public TimerType timerType;
     
-    public BaseEffect GetEffect(StatsManager target)
+    public BaseEffect GetEffect(IEffectTarget target)
     {
         return System.Activator.CreateInstance(type.GetClass(), target, duration, maxStacks, timerType, multiplier,  incrementType) as BaseEffect;
     }

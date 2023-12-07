@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class FreezingDebuff : IncrementalEffect
+public class FreezingDebuff : StatsManagerEffect
 {
     private readonly Freeze _freeze;
 

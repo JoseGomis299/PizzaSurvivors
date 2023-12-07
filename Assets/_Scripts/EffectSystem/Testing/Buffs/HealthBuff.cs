@@ -1,4 +1,4 @@
-public class HealthBuff : IncrementalEffect
+public class HealthBuff : StatsManagerEffect
 {
     public HealthBuff(StatsManager target, float duration, int maxStacks, TimerType timerType , float healthIncrement, IncrementType incrementType) : base(target, duration, maxStacks, timerType, healthIncrement, incrementType){}
 

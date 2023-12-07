@@ -69,13 +69,7 @@ public class Paintable : MonoBehaviour
         texture.Apply();
     }
 
-    private void Update()
-    {
-        Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if(Input.GetMouseButton(0)) Paint(pos);
-    }
-
-    private void Paint(Vector3 pos)
+    public void Paint(Vector3 pos)
     {
         if(!SpriteMapper.TryGetTextureSpaceUV(_spriteRenderer, pos, out var coords)) return;
         

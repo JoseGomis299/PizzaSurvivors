@@ -85,4 +85,3 @@ public class Stats : ScriptableObject
         return 1;
     }
 }
-

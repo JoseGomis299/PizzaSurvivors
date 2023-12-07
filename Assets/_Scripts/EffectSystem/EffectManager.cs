@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-public class EffectManager : IEffectTarget
+public class EffectManager
 {
     private readonly Dictionary<Type, BaseEffect> _buffs = new Dictionary<Type, BaseEffect>();
     

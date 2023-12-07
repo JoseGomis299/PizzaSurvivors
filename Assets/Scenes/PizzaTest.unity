@@ -475,6 +475,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sauceCanvas: {fileID: 2094828909}
   cheeseCanvas: {fileID: 1717132344}
+  borderLength: 0.35
 --- !u!1 &1717132342
 GameObject:
   m_ObjectHideFlags: 0

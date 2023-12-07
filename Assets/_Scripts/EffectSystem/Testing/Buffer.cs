@@ -6,7 +6,7 @@ using UnityEngine;
 public class Buffer : MonoBehaviour
 {
     private StatsManager _statsManager;
-    public List<Effect> Buffs;
+    public List<EffectInfo> Buffs;
 
     private void Start()
     {

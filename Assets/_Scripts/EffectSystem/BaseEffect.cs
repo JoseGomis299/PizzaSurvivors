@@ -15,14 +15,14 @@ public abstract class BaseEffect {
     public int CurrentStacks { get; private set; }
     public readonly int MaxStacks;
     
-    protected StatsManager EffectTarget;
+    protected readonly IEffectTarget EffectTarget;
     
-    protected BaseEffect(StatsManager target, float duration, int maxStacks, TimerType timerType)
+    protected BaseEffect(IEffectTarget target, float duration, int maxStacks, TimerType timerType)
     {
         EffectTarget = target;
         MaxStacks = maxStacks;
         
-        Timer = new Timer(duration, target);
+        Timer = new Timer(duration, target as MonoBehaviour);
         _timerType = timerType;
     }
 
