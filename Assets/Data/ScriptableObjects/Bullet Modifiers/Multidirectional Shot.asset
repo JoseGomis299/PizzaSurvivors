@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09edcca8b3884ecda511a75408bde91e, type: 3}
+  m_Name: Multidirectional Shot
+  m_EditorClassIdentifier: 
+  name: Multi Directional Shot
+  descriptionsByLevel: []
+  type: {fileID: 11500000, guid: 3b0eb602aad2458e8c19bc49b8cf5f91, type: 3}
+  maxLevel: 2
+  remainsAfterHit: 100
+  priority: 1

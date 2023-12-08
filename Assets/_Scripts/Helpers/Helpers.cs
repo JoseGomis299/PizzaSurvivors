@@ -125,5 +125,17 @@ namespace ProjectUtils.Helpers
             MyVector vector = _vectors[Random.Range(0, 4)];
             return vector.startPoint + vector.direction * (vector.distance * Random.value);
         }
+        
+        public static Vector2 Rotate(this Vector2 v, float angle)
+        {
+            float sin = Mathf.Sin(angle * Mathf.Deg2Rad);
+            float cos = Mathf.Cos(angle * Mathf.Deg2Rad);
+        
+            float tx = v.x;
+            float ty = v.y;
+            v.x = (cos * tx) - (sin * ty);
+            v.y = (sin * tx) + (cos * ty);
+            return v;
+        }
     }
 }

@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Effect/Stats Effect", fileName = "Effect", order = 0)]
+[CreateAssetMenu(menuName = "Effects/Stats Effect", fileName = "Stats Effect", order = 0)]
 public class EffectInfo : ScriptableObject
 {
     [Header("Effect Type")]

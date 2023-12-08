@@ -1,17 +1,9 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Create Stats", fileName = "Stats")]
+[CreateAssetMenu(menuName = "Stats/Character Stats", fileName = "Character Stats")]
 public class Stats : ScriptableObject
 {
-    [Serializable]
-    class ElementalMultiplier
-    {
-        public Element Element;
-        public float Multiplier;
-    }
-    
     [field: Header("Base Stats")]
     [field: SerializeField] public float BaseHealth {get; set;} = 100f;
     [field: SerializeField] public float BaseDefense {get; set;} = 10f;
@@ -20,12 +12,12 @@ public class Stats : ScriptableObject
     [field: SerializeField] public float BaseSpeed { get; set; } = 10f;
     [field: SerializeField] public float BaseLuck { get; set; } = 7f;
     
-    [Header("Damage Multipliers")]
-    [SerializeField] private List<ElementalMultiplier> damageMultipliers;
+    [field:Header("Damage Multipliers")]
+    [field: SerializeField] public List<ElementalMultiplier> DamageMultipliers { get; private set; }
     private Dictionary<Element, float> _damageMultipliers;
 
-    [Header("Attack Multipliers")]
-    [SerializeField] private List<ElementalMultiplier> attackMultipliers;
+    [field:Header("Attack Multipliers")]
+    [field: SerializeField] public List<ElementalMultiplier> AttackMultipliers { get; private set; }
     private Dictionary<Element, float> _attackMultipliers;
 
     public float GetReceivedDamage(Element element, float damage)
@@ -59,15 +51,15 @@ public class Stats : ScriptableObject
         BaseSpeed = otherStats.BaseSpeed;
         BaseLuck = otherStats.BaseLuck;
         
-        damageMultipliers = new List<ElementalMultiplier>(otherStats.damageMultipliers);
-        attackMultipliers = new List<ElementalMultiplier>(otherStats.attackMultipliers);
+        DamageMultipliers = new List<ElementalMultiplier>(otherStats.DamageMultipliers);
+        AttackMultipliers = new List<ElementalMultiplier>(otherStats.AttackMultipliers);
         
         _damageMultipliers = new Dictionary<Element, float>();
-        foreach (var multiplier in damageMultipliers)
+        foreach (var multiplier in DamageMultipliers)
          _damageMultipliers.Add(multiplier.Element, multiplier.Multiplier);
         
         _attackMultipliers = new Dictionary<Element, float>();
-        foreach (var multiplier in attackMultipliers)
+        foreach (var multiplier in AttackMultipliers)
             _attackMultipliers.Add(multiplier.Element, multiplier.Multiplier);
     }
     

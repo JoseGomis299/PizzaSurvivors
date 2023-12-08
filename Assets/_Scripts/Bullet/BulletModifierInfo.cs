@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Effects/BulletModifier", fileName = "BulletModifier")]
+[CreateAssetMenu(menuName = "Effects/Bullet Modifier", fileName = "Bullet Modifier")]
 public class BulletModifierInfo : ScriptableObject
 {
     [Header("Modifier Info")]
@@ -9,15 +9,16 @@ public class BulletModifierInfo : ScriptableObject
     [SerializeField] private string[] descriptionsByLevel;
 
     [Header("Modifier Type")]
-    
     public MonoScript type;
     
     [Header("Modifier Settings")]
     public int maxLevel;
+    public int remainsAfterHit;
+    public int priority;
 
-    public BulletModifier GetModifier(IEffectTarget target)
+    public virtual BulletModifier GetModifier(IEffectTarget target)
     {
-        return System.Activator.CreateInstance(type.GetClass(), target, maxLevel) as BulletModifier;
+        return System.Activator.CreateInstance(type.GetClass(), target, maxLevel, remainsAfterHit, priority) as BulletModifier;
     }
     
     public string GetDescription(int level)
