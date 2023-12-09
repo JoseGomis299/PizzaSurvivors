@@ -17,34 +17,61 @@ public class Bullet : MonoBehaviour, IEffectTarget
     public BulletSpawner Spawner { get; private set; }
     private Element _element;
 
-    public BulletMover Mover { get; private set; }
+    //Movement
+    public float Speed { get; set; }
+    private float _initialSpeed;
+    public Vector2 Direction { get; set; }
+    private Vector2 _initialDirection;
+
+    private Rigidbody2D _rb;
+    private List<BulletMovementModifier> _movementModifiers;
+
+    private void Awake()
+    {
+        _rb = GetComponent<Rigidbody2D>();
+    }
 
     public void Initialize(Vector2 direction, List<BulletModifierInfo> modifiers, BulletSpawner spawner, Stats characterStats, Element element = Element.None)
     {
-        _stats = ScriptableObject.CreateInstance<BulletStats>();
-        if(characterStats != null) _stats.SetValues(characterStats, stats);
-        else _stats.SetValues(stats);
+        Spawner = spawner;
+        _element = element;
         
         _modifiers = new List<BulletModifier>();
         foreach (var modifier in modifiers)
             _modifiers.Add(modifier.GetModifier(this));
 
-        Spawner = spawner;
-        _element = element;
-        
-        Mover = new BulletMover(GetComponent<Rigidbody2D>(), 
-            _modifiers.FindAll(modifier => modifier is BulletMovementModifier).ConvertAll(modifier => modifier as BulletMovementModifier),
-            stats.BaseSpeed, direction);
+        // If there are any bullet stats modifiers, create a new BulletStats object and apply the modifiers to it
+        if (_modifiers.Any(modifier => modifier is BulletStatsModifier))
+        {
+            _stats = ScriptableObject.CreateInstance<BulletStats>();
+            if(characterStats != null) _stats.SetValues(characterStats, stats);
+            else _stats.SetValues(stats);
+            
+            foreach (var modifier in _modifiers.OfType<BulletStatsModifier>())
+                ApplyEffect(modifier);
+        }
+        else _stats = stats;
 
-        foreach (var modifier in _modifiers.Where(modifier => modifier.GetType() == typeof(BulletStatsModifier)))
-            ApplyEffect(modifier);
+        // If there are any bullet movement modifiers, add them to the list
+        _movementModifiers = new List<BulletMovementModifier>();
+        foreach (var modifier in _modifiers.OfType<BulletMovementModifier>())
+            _movementModifiers.Add(modifier);
+        
+        _initialSpeed = Speed = _stats.BaseSpeed;
+        _initialDirection = Direction = direction;
     }
 
     public void Move()
     {
-        Mover.Move();
+        Speed = _initialSpeed;
+        Direction = _initialDirection;
+        foreach (var modifier in _movementModifiers)
+            modifier.Apply();
+        
+        Direction.Normalize();
+        _rb.velocity = Direction * Speed;
     }
-
+    
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.TryGetComponent(out IDamageable damageable) && col.gameObject != Spawner.gameObject)
@@ -68,3 +95,4 @@ public class Bullet : MonoBehaviour, IEffectTarget
     }
     public void ReApplyEffects() { }
 }
+

@@ -11,14 +11,11 @@ public class IngredientPlacer : MonoBehaviour
 
     [SerializeField] private float borderLength = 0.35f;
     private Ingredient _currentIngredient;
+
     public GameObject CurrentIngredient
     {
         get => _currentIngredient.gameObject;
-        set
-        {
-            if (value.TryGetComponent(out Ingredient ingredient))
-                _currentIngredient = ingredient;
-        }
+        set => _currentIngredient = value.TryGetComponent(out Ingredient ingredient) ? ingredient : null;
     }
     
     public readonly Dictionary<IngredientInfo, int> PlacedIngredients = new Dictionary<IngredientInfo, int>();
@@ -60,7 +57,7 @@ public class IngredientPlacer : MonoBehaviour
              if (PlacedIngredients.ContainsKey(info)) PlacedIngredients[info]++;
              else PlacedIngredients.Add(info, 1);
             
-             Instantiate(CurrentIngredient, mousePos, Quaternion.identity);
+             Instantiate(CurrentIngredient, mousePos,  Quaternion.Euler(0, 0, Random.Range(0, 360)));
         }
     }
 }
