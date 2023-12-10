@@ -17,13 +17,13 @@ public class BulletSpawner : MonoBehaviour, IEffectTarget
     private Dictionary<Type, BulletShootModifier> _shootModifiers;
     private List<BulletShootModifier> _shootModifiersList;
 
-    private List<Bullet> _bullets;
+    private HashSet<Bullet> _bullets;
 
     public void Initialize(List<BulletModifierInfo> modifiers)
     {
         _modifiers = modifiers;
         _shootModifiers = new Dictionary<Type, BulletShootModifier>();
-        _bullets = new List<Bullet>();
+        _bullets = new HashSet<Bullet>();
         
         foreach (var modifier in modifiers)
         {
@@ -56,7 +56,7 @@ public class BulletSpawner : MonoBehaviour, IEffectTarget
 
         foreach (var bulletMovement in movementData)
         {
-            Vector2 dir = bulletMovement.Direction;
+            Vector2 dir = bulletMovement.Direction.normalized;
             List<BulletModifierInfo> modifiers = _modifiers.Where(x => x.GetModifier(this).GetType() != typeof(BulletShootModifier)).ToList();
             if(bulletMovement.Modifiers != null) modifiers.AddRange(bulletMovement.Modifiers);
             

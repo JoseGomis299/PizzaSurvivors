@@ -7,8 +7,8 @@ public class SineMovementModifier : BulletMovementModifier
 
     public override void Apply()
     {
-        EffectTarget.Direction +=  (Vector2) EffectTarget.transform.up * (Mathf.Cos(Time * Frequency) * Amplitude);
-        Time += UnityEngine.Time.deltaTime;
+        EffectTarget.Direction +=  (Vector2) EffectTarget.transform.up * (Mathf.Cos(time * frequency) * amplitude);
+        time += Time.fixedDeltaTime;
     }
 
     protected override void DeApply() { }

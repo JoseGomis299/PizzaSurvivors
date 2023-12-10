@@ -68,8 +68,7 @@ public class Bullet : MonoBehaviour, IEffectTarget
         foreach (var modifier in _movementModifiers)
             modifier.Apply();
         
-        Direction.Normalize();
-        _rb.velocity = Direction * Speed;
+        _rb.velocity = Direction.normalized * Speed;
     }
     
     private void OnTriggerEnter2D(Collider2D col)

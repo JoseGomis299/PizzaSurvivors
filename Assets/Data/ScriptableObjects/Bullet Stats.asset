@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Bullet Stats
   m_EditorClassIdentifier: 
   <BaseDamage>k__BackingField: 20
-  <BaseSpeed>k__BackingField: 10
+  <BaseSpeed>k__BackingField: 20
   <BaseSize>k__BackingField: 1
   attackMultipliers: []
