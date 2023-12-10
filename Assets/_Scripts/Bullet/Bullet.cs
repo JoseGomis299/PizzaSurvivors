@@ -24,11 +24,18 @@ public class Bullet : MonoBehaviour, IEffectTarget
     private Vector2 _initialDirection;
 
     private Rigidbody2D _rb;
-    private List<BulletMovementModifier> _movementModifiers;
+    private Dictionary<Type, BulletMovementModifier> _movementModifiers;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void OnDisable()
+    {
+        if (_movementModifiers == null) return;
+        foreach (var modifier in _movementModifiers)
+            modifier.Value.ReApply();
     }
 
     public void Initialize(Vector2 direction, List<BulletModifierInfo> modifiers, BulletSpawner spawner, Stats characterStats, Element element = Element.None)
@@ -52,11 +59,15 @@ public class Bullet : MonoBehaviour, IEffectTarget
         }
         else _stats = stats;
 
-        // If there are any bullet movement modifiers, add them to the list
-        _movementModifiers = new List<BulletMovementModifier>();
+        // If there are any bullet movement modifiers, add them to the list, and apply them
+        _movementModifiers = new Dictionary<Type, BulletMovementModifier>();
         foreach (var modifier in _modifiers.OfType<BulletMovementModifier>())
-            _movementModifiers.Add(modifier);
-        
+        {
+            if(!_movementModifiers.ContainsKey(modifier.GetType()))
+                _movementModifiers.Add(modifier.GetType(), modifier);
+            
+            _movementModifiers[modifier.GetType()].Apply();
+        }
         _initialSpeed = Speed = _stats.BaseSpeed;
         _initialDirection = Direction = direction;
     }
@@ -66,7 +77,7 @@ public class Bullet : MonoBehaviour, IEffectTarget
         Speed = _initialSpeed;
         Direction = _initialDirection;
         foreach (var modifier in _movementModifiers)
-            modifier.Apply();
+            modifier.Value.ModifyMovement();
         
         _rb.velocity = Direction.normalized * Speed;
     }

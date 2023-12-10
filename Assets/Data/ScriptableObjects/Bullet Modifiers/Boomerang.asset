@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Boomerang
   descriptionsByLevel: []
   type: {fileID: 11500000, guid: 2626ccf2c8499004e872c888e4c13d47, type: 3}
-  maxLevel: 1
+  maxLevel: 2
   remainsAfterHit: 100
   priority: 1
   amplitude: 0.5

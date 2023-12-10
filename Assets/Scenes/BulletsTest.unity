@@ -511,7 +511,6 @@ MonoBehaviour:
   speed: 5
   modifiers:
   - {fileID: 11400000, guid: ae34107e5a8ae5f4ebad180a5a1ca401, type: 2}
-  - {fileID: 11400000, guid: d60dda64a6fc3a448b3f0c62b6791f7f, type: 2}
 --- !u!50 &1891677119
 Rigidbody2D:
   serializedVersion: 4

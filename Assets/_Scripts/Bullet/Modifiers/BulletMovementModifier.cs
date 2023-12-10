@@ -9,4 +9,6 @@ public abstract class BulletMovementModifier : BulletModifier
         this.amplitude = amplitude;
         this.frequency = frequency;
     }
+    
+    public abstract void ModifyMovement();
 }
