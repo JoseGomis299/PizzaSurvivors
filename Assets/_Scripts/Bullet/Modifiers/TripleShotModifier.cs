@@ -4,26 +4,27 @@ using UnityEngine;
 
 public class TripleShotModifier : BulletShootModifier
 {
-    public TripleShotModifier(IEffectTarget target, int maxStacks, int remainsAfterHit, int priority) : base(target, maxStacks, remainsAfterHit, priority) { }
+    public TripleShotModifier(IEffectTarget target, int maxStacks, int remainsAfterHit, int priority, List<BulletModifierInfo> modifiers) : base(target, maxStacks, remainsAfterHit, priority, modifiers) { }
 
-    public override List<BulletMovementData> GetModifications(BulletMovementData baseData)
+    public override void Apply() { }
+    
+    public override List<BulletShotData> GetModifications(BulletShotData baseData)
     {
-        List<BulletMovementData> modifications = new List<BulletMovementData>();
+        List<BulletShotData> modifications = new List<BulletShotData>();
+        List<BulletModifierInfo> modifiers = new List<BulletModifierInfo>(Modifiers);
+        if(baseData.Modifiers != null) modifiers.AddRange(baseData.Modifiers);
+        
         Vector2 direction = baseData.Direction;
         
         direction = direction.Rotate(-45);
-        modifications.Add(new BulletMovementData(baseData.StartPosition, baseData.StartPositionDistance, direction, baseData.Modifiers));
+        modifications.Add(new BulletShotData(baseData.StartPosition, baseData.StartPositionDistance, direction, modifiers));
         
         direction = direction.Rotate(45);
-        modifications.Add(new BulletMovementData(baseData.StartPosition, baseData.StartPositionDistance, direction, baseData.Modifiers));
+        modifications.Add(new BulletShotData(baseData.StartPosition, baseData.StartPositionDistance, direction, modifiers));
         
         direction = direction.Rotate(45);
-        modifications.Add(new BulletMovementData(baseData.StartPosition, baseData.StartPositionDistance, direction, baseData.Modifiers));
+        modifications.Add(new BulletShotData(baseData.StartPosition, baseData.StartPositionDistance, direction, modifiers));
         
         return modifications;
     }
-
-    public override void Apply() { }
-    protected override void DeApply() { }
-    public override void ReApply() { }
 }

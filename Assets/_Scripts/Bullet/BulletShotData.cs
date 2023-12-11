@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletMovementData
+public struct BulletShotData
 {
     public Vector2 StartPosition;
     public readonly float StartPositionDistance;
@@ -9,7 +9,7 @@ public class BulletMovementData
     public Vector2 Direction;
     public List<BulletModifierInfo> Modifiers;
 
-    public BulletMovementData(Vector2 startPosition, float startPositionDistanceDistance, Vector2 direction, List<BulletModifierInfo> modifiers)
+    public BulletShotData(Vector2 startPosition, float startPositionDistanceDistance, Vector2 direction, List<BulletModifierInfo> modifiers)
     {
         StartPosition = startPosition;
         Direction = direction;
@@ -22,5 +22,7 @@ public class BulletMovementData
         Vector2 originalPos = StartPosition - Direction*StartPositionDistance;
         StartPosition = StartPositionDistance*direction + originalPos;
         Direction = direction;
+        
+        this = new BulletShotData(StartPosition, StartPositionDistance, Direction, Modifiers);
     }
 }

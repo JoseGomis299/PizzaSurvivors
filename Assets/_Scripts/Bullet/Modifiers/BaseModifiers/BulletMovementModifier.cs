@@ -11,4 +11,5 @@ public abstract class BulletMovementModifier : BulletModifier
     }
     
     public abstract void ModifyMovement();
+    
 }

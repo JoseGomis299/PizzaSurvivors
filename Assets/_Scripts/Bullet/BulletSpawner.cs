@@ -41,26 +41,29 @@ public class BulletSpawner : MonoBehaviour, IEffectTarget
 
     public void SpawnBullet(Vector2 direction)
     {
-        List<BulletMovementData> movementData = new List<BulletMovementData>();
-        movementData.Add(new BulletMovementData(firePoint.position, _firePointDistance, direction, null));
+        List<BulletShotData> shotData = new List<BulletShotData>();
+        shotData.Add(new BulletShotData(firePoint.position, _firePointDistance, direction, null));
         
         foreach (var shootModifier in _shootModifiersList)
         {
-            List<BulletMovementData> temp = new List<BulletMovementData>();
-            foreach (var data in movementData)
+            List<BulletShotData> temp = new List<BulletShotData>();
+            foreach (var data in shotData)
             {
                 temp.AddRange(shootModifier.GetModifications(data));
             }
-            movementData = temp;
+            shotData = temp;
         }
 
-        foreach (var bulletMovement in movementData)
+        //Add modifiers that are not BulletShootModifiers and sort them by priority
+        List<BulletModifierInfo> modifiers = _modifiers.Where(x => x.GetModifier(this).GetType() != typeof(BulletShootModifier)).ToList();
+        if(shotData[0].Modifiers != null) modifiers.AddRange(shotData[0].Modifiers);
+        modifiers = modifiers.OrderByDescending(x => x.priority).ToList();
+        
+        foreach (var bulletShot in shotData)
         {
-            Vector2 dir = bulletMovement.Direction.normalized;
-            List<BulletModifierInfo> modifiers = _modifiers.Where(x => x.GetModifier(this).GetType() != typeof(BulletShootModifier)).ToList();
-            if(bulletMovement.Modifiers != null) modifiers.AddRange(bulletMovement.Modifiers);
-            
-            GameObject bullet = ObjectPool.Instance.InstantiateFromPool(bulletPrefab, bulletMovement.StartPosition, Quaternion.identity, true);
+            Vector2 dir = bulletShot.Direction.normalized;
+
+            GameObject bullet = ObjectPool.Instance.InstantiateFromPool(bulletPrefab, bulletShot.StartPosition, Quaternion.identity, true);
             Bullet bulletComponent = bullet.GetComponent<Bullet>();
             bullet.transform.right = dir;
             

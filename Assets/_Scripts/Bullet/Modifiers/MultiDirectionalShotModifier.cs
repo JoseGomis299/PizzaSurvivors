@@ -3,30 +3,29 @@ using ProjectUtils.Helpers;
 
 public class MultiDirectionalShotModifier : BulletShootModifier
 {
-    public MultiDirectionalShotModifier(IEffectTarget target, int maxStacks, int remainsAfterHit, int priority) : base(target, maxStacks, remainsAfterHit, priority)
+    public MultiDirectionalShotModifier(IEffectTarget target, int maxStacks, int remainsAfterHit, int priority, List<BulletModifierInfo> modifiers) : base(target, maxStacks, remainsAfterHit, priority, modifiers)
     {
     }
     
-    public override List<BulletMovementData> GetModifications(BulletMovementData baseData)
+    public override List<BulletShotData> GetModifications(BulletShotData baseData)
     {
-        List<BulletMovementData> modifications = new List<BulletMovementData>();
-        
-        modifications.Add(baseData);
-        BulletMovementData data = new BulletMovementData(baseData.StartPosition, baseData.StartPositionDistance, baseData.Direction, baseData.Modifiers);
+        List<BulletShotData> modifications = new List<BulletShotData>();
+        List<BulletModifierInfo> modifiers = new List<BulletModifierInfo>(Modifiers);
+        if(baseData.Modifiers != null) modifiers.AddRange(baseData.Modifiers);
+
+        BulletShotData data = new BulletShotData(baseData.StartPosition, baseData.StartPositionDistance, baseData.Direction, modifiers);
+        modifications.Add(data);
         data.RotateStartPositionTo(baseData.Direction.Rotate(180));
         modifications.Add(data);
         
         if (CurrentStacks >= 2)
         {
-            data = new BulletMovementData(baseData.StartPosition, baseData.StartPositionDistance, baseData.Direction, baseData.Modifiers);
             data.RotateStartPositionTo(baseData.Direction.Rotate(90));
             modifications.Add(data);
-            data = new BulletMovementData(baseData.StartPosition, baseData.StartPositionDistance, baseData.Direction, baseData.Modifiers);
             data.RotateStartPositionTo(baseData.Direction.Rotate(-90));
             modifications.Add(data);
         }
 
-        
         return modifications;
     }
 
@@ -34,6 +33,4 @@ public class MultiDirectionalShotModifier : BulletShootModifier
     {
         AddStack();
     }
-    protected override void DeApply() { }
-    public override void ReApply() { }
 }

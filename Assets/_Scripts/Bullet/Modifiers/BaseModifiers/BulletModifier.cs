@@ -10,4 +10,7 @@ public abstract class BulletModifier : BaseEffect
         RemainsAfterHit = remainsAfterHit;
         Priority = priority;
     }
+
+    protected override void DeApply() { }
+    public override void ReApply() { }
 }

@@ -10,8 +10,8 @@ public class BulletStats : ScriptableObject
     [field: SerializeField] public float BaseSize { get; set; } = 1f;
     
     [Header("Attack Multipliers")]
-    [SerializeField] private List<ElementalMultiplier> attackMultipliers;
-    private Dictionary<Element, float> _attackMultipliers;
+    [SerializeField] private List<ElementalMultiplier> attackMultipliers = new List<ElementalMultiplier>();
+    private Dictionary<Element, float> _attackMultipliers = new Dictionary<Element, float>();
 
     public float GetAttack(Element element, float attack)
     {

@@ -24,20 +24,17 @@ public class Bullet : MonoBehaviour, IEffectTarget
     private Vector2 _initialDirection;
 
     private Rigidbody2D _rb;
+    private GameObject _gfx;
+    
     private Dictionary<Type, BulletMovementModifier> _movementModifiers;
+    private Dictionary<Type, BulletHitModifier> _hitModifiers;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _gfx = transform.GetChild(0).gameObject;
     }
-
-    private void OnDisable()
-    {
-        if (_movementModifiers == null) return;
-        foreach (var modifier in _movementModifiers)
-            modifier.Value.ReApply();
-    }
-
+    
     public void Initialize(Vector2 direction, List<BulletModifierInfo> modifiers, BulletSpawner spawner, Stats characterStats, Element element = Element.None)
     {
         Spawner = spawner;
@@ -55,19 +52,32 @@ public class Bullet : MonoBehaviour, IEffectTarget
             else _stats.SetValues(stats);
             
             foreach (var modifier in _modifiers.OfType<BulletStatsModifier>())
-                ApplyEffect(modifier);
+                modifier.Apply();
         }
         else _stats = stats;
+        transform.localScale = Vector3.one * _stats.BaseSize;
 
-        // If there are any bullet movement modifiers, add them to the list, and apply them
         _movementModifiers = new Dictionary<Type, BulletMovementModifier>();
-        foreach (var modifier in _modifiers.OfType<BulletMovementModifier>())
+        _hitModifiers = new Dictionary<Type, BulletHitModifier>();
+        //If there are any bullet modifiers that need to be applied on shoot, apply them and add them to the dictionaries
+        foreach (var modifier in _modifiers)
         {
-            if(!_movementModifiers.ContainsKey(modifier.GetType()))
-                _movementModifiers.Add(modifier.GetType(), modifier);
+            if (modifier is BulletMovementModifier movementModifier)
+            {
+                if(!_movementModifiers.ContainsKey(movementModifier.GetType()))
+                    _movementModifiers.Add(movementModifier.GetType(), movementModifier);
             
-            _movementModifiers[modifier.GetType()].Apply();
+                _movementModifiers[movementModifier.GetType()].Apply();
+            }
+            else if (modifier is BulletHitModifier hitModifier)
+            {
+                if(!_hitModifiers.ContainsKey(hitModifier.GetType()))
+                    _hitModifiers.Add(hitModifier.GetType(), hitModifier);
+            
+                _hitModifiers[hitModifier.GetType()].Apply();
+            }
         }
+        
         _initialSpeed = Speed = _stats.BaseSpeed;
         _initialDirection = Direction = direction;
     }
@@ -79,30 +89,28 @@ public class Bullet : MonoBehaviour, IEffectTarget
         foreach (var modifier in _movementModifiers)
             modifier.Value.ModifyMovement();
         
+        _gfx.transform.up = Direction;
         _rb.velocity = Direction.normalized * Speed;
     }
     
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.TryGetComponent(out IDamageable damageable) && col.gameObject != Spawner.gameObject)
+        if((Spawner != null && col.gameObject == Spawner.gameObject) || col.CompareTag("Bullet")) return;
+        
+        float attack = _stats.GetAttack(_element, stats.BaseDamage);
+
+        if (col.TryGetComponent(out IDamageable damageable))
+            damageable.TakeDamage(attack);
+
+        foreach (var modifier in _hitModifiers)
         {
-            damageable.TakeDamage(_stats.GetAttack(_element, stats.BaseDamage));
-            ApplyHitModifiers();
-            gameObject.SetActive(false);
+            modifier.Value.OnHit(col.GetComponent<IEffectTarget>(), attack, modifier.Value is ExplosiveModifier ? _hitModifiers.Values.Where(m => m.RemainsAfterHit > 0 && m != modifier.Value).ToList() : null);
         }
+        
+        gameObject.SetActive(false);
     }
-
-    public void ApplyHitModifiers()
-    {
-        foreach (var modifier in _modifiers.Where(modifier => modifier.GetType() == typeof(BulletHitModifier)))
-            modifier.Apply();
-    }
-
-    public void ApplyEffect(BaseEffect effect)
-    {
-        effect.Apply();
-        ((BulletModifier)effect).RemainsAfterHit--;
-    }
+    
+    public void ApplyEffect(BaseEffect effect) { }
     public void ReApplyEffects() { }
 }
 

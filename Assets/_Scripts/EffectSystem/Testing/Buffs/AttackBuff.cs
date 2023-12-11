@@ -11,7 +11,6 @@ public class AttackBuff : StatsManagerEffect
         AddStack();
 
         EffectTarget.Stats.BaseAttack = IncrementStat(EffectTarget.Stats.BaseAttack, EffectTarget.BaseStats.BaseAttack);
-        Debug.Log($"Buff applied, attack is now: {EffectTarget.Stats.BaseAttack} stacks: {CurrentStacks} max stacks: {MaxStacks}");
     }
 
     protected override void DeApply()

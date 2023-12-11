@@ -9,14 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a44fa2b7a0ed4ab4bb56e55f7d6d59fa, type: 3}
-  m_Name: Multidirectional Shot
+  m_Script: {fileID: 11500000, guid: 9b51703f307d4e139e8e17acd209facb, type: 3}
+  m_Name: Explosion
   m_EditorClassIdentifier: 
-  name: Multi Directional Shot
+  name: Explosion
   descriptionsByLevel: []
-  type: {fileID: 11500000, guid: 3b0eb602aad2458e8c19bc49b8cf5f91, type: 3}
-  maxLevel: 2
+  type: {fileID: 11500000, guid: 8f6d9806265f40b092b2c9c164fc18f0, type: 3}
+  maxLevel: 1
   remainsAfterHit: 100
-  priority: 1
-  modifiers:
-  - {fileID: 11400000, guid: f514c6d072da46e4e845aff3c5a21be0, type: 2}
+  priority: 100
+  OnHitEffect: {fileID: 1694715364255247975, guid: c7601adafcc51ab47aef5e5042abbe73, type: 3}

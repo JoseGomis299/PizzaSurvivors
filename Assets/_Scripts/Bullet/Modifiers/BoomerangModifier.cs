@@ -5,6 +5,8 @@ public class BoomerangModifier : BulletMovementModifier
 {
     private Vector2 _startPosition;
     private Vector2 _returnDirection = Vector2.zero;
+    
+    private Vector2 _spawnerPosition;
 
     public BoomerangModifier(IEffectTarget target, int maxStacks, int remainsAfterHit, int priority, float amplitude, float frequency) : base(target, maxStacks, remainsAfterHit, priority, amplitude, frequency)
     {
@@ -15,18 +17,12 @@ public class BoomerangModifier : BulletMovementModifier
         AddStack();
         _startPosition = EffectTarget.Spawner.transform.position;
     }
-
-    protected override void DeApply() { }
-
-    public override void ReApply()
-    {
-        time = 0;
-        _returnDirection = Vector2.zero;
-    }
     
     public override void ModifyMovement()
     {
-        float distance = Vector2.Distance(EffectTarget.transform.position, EffectTarget.Spawner.transform.position);
+        if(EffectTarget.Spawner != null) _spawnerPosition = EffectTarget.Spawner.transform.position;
+        
+        float distance = Vector2.Distance(EffectTarget.transform.position, _spawnerPosition);
         float multiplier = Mathf.Lerp(-1, 1, time / frequency);
 
         float t = Mathf.Clamp01(time / (frequency / 2f));
@@ -36,7 +32,7 @@ public class BoomerangModifier : BulletMovementModifier
         if(multiplier < 0.5f) _returnDirection =  (_startPosition - (Vector2) EffectTarget.transform.position);
         if (CurrentStacks >= 2)
         {
-            _returnDirection =  (EffectTarget.Spawner.transform.position - EffectTarget.transform.position);
+            _returnDirection =  (_spawnerPosition - (Vector2) EffectTarget.transform.position);
             if(distance <= 0.3f) EffectTarget.gameObject.SetActive(false);
         }
 
