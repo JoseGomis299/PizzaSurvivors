@@ -24,7 +24,7 @@ public class Freeze : BaseEffect
         if(CurrentStacks <= 0) return;
         RemoveStack();
         
-        _renderer.material.color = Color.white;    
+        _renderer.color = Color.white;    
     }
 
     public override void ReApply() { }
