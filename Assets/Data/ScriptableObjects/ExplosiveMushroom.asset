@@ -14,4 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Explosive Mushroom
   sprite: {fileID: 21300000, guid: 70d739f6f71784e45ab96b781997f548, type: 3}
-  modifier: {fileID: 11400000, guid: 4cb9fa1880ecf5346ae6e15c78ffe67e, type: 2}
+  <BulletModifiers>k__BackingField:
+  - {fileID: 11400000, guid: f2f1d8ec6e928224693b1e5816adca97, type: 2}
+  <Buffs>k__BackingField:
+  - type: {fileID: 11500000, guid: ad3adf04568c44c0bbd5bc84a2c8c20e, type: 3}
+    multiplier: -10
+    incrementType: 4

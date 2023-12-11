@@ -75,8 +75,8 @@ public class BulletSpawner : MonoBehaviour, IEffectTarget
     private void FixedUpdate()
     {
         if(_bullets == null) return;
-        
-        foreach (var bullet in _bullets.Where(bullet => bullet.gameObject.activeInHierarchy))
+
+        foreach (var bullet in _bullets)
             bullet.Move();
     }
     
@@ -86,6 +86,11 @@ public class BulletSpawner : MonoBehaviour, IEffectTarget
         firePoint.right = direction;
     }
 
+    public void RemoveBullet(Bullet bullet)
+    {
+        _bullets.Remove(bullet);
+    }
+    
     public void ApplyEffect(BaseEffect effect)
     {
         if(!_shootModifiers.ContainsKey(effect.GetType()))
@@ -94,5 +99,6 @@ public class BulletSpawner : MonoBehaviour, IEffectTarget
         _shootModifiers[effect.GetType()].Apply();
         _shootModifiers[effect.GetType()].RemainsAfterHit--;
     }
+    
     public void ReApplyEffects() { }
 }
