@@ -20,7 +20,7 @@ public class IngredientPlacer : MonoBehaviour
     
     public readonly Dictionary<IngredientInfo, int> PlacedIngredients = new Dictionary<IngredientInfo, int>();
 
-    private void Awake()
+    private void Start()
     {
         _currentCanvas = sauceCanvas;
         cheeseCanvas.enabled = false;
@@ -32,6 +32,7 @@ public class IngredientPlacer : MonoBehaviour
         {
             _currentCanvas = cheeseCanvas;
             cheeseCanvas.enabled = true;
+            sauceCanvas.enabled = false;
         }else if (Input.GetKeyDown(KeyCode.S))
         {
             _currentCanvas = sauceCanvas;
@@ -43,7 +44,7 @@ public class IngredientPlacer : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0)) PlaceIngredient();
         }
-        else if (Input.GetMouseButton(0)) _currentCanvas.Paint(Helpers.Camera.ScreenToWorldPoint(Input.mousePosition));
+        else if (Input.GetMouseButton(0)) _currentCanvas.Paint(Input.mousePosition);
         
         if(Input.GetMouseButtonDown(1)) _currentIngredient = null;
     }

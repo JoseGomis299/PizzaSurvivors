@@ -1,6 +1,7 @@
 using System;
 using ProjectUtils.Helpers;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Paintable : MonoBehaviour
 {
@@ -17,25 +18,41 @@ public class Paintable : MonoBehaviour
     private int[] _pixelParent;
     
     private SpriteRenderer _spriteRenderer;
+    private Image _image;
+    
     private Material _material;
     private Texture2D _maskTexture;
     private Texture2D _mainTexture;
     private Texture2D _paintTexture;
-
-    private void Start()
+    
+    private void Awake()
     {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        if(_spriteRenderer != null) SpriteMapper.SetRenderer(_spriteRenderer);
+        else
+        {
+            _image = GetComponent<Image>();
+            if(!_image.enabled) _image.enabled = true;
+            ImageMapper.SetImage(_image);
+        }
+        
         Initialize();
     }
 
     private void OnEnable()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        SpriteMapper.SetRenderer(_spriteRenderer);
+        if(_spriteRenderer != null) SpriteMapper.SetRenderer(_spriteRenderer);
+        else
+        {
+            _image = GetComponent<Image>();
+            ImageMapper.SetImage(_image);
+        }
     }
 
     public void Initialize()
     {
-        _material = _spriteRenderer.material;
+        _material = _spriteRenderer == null ? Instantiate(_image.material) : Instantiate(_spriteRenderer.material);
 
         _maskTexture = Instantiate(maskTexture ? maskTexture : baseTexture);
         _mainTexture = Instantiate(baseTexture);
@@ -46,13 +63,24 @@ public class Paintable : MonoBehaviour
         _material.SetTexture("_MaskedTex", _paintTexture);
         _material.SetFloat("_UseMaskAplha", useMaskAlpha ? 1 : 0);
         _material.SetFloat("_UsePaintAlpha", usePaintAlpha ? 1 : 0);
-        
-        _spriteRenderer.sprite = Sprite.Create(_mainTexture, new Rect(Vector2.zero,  new Vector2(baseTexture.width, baseTexture.height)), Vector2.one/2f);
-        transform.localScale /= baseTexture.width / _spriteRenderer.sprite.pixelsPerUnit;
-        
+
+        if (_spriteRenderer != null)
+        {
+            _spriteRenderer.sprite = Sprite.Create(_mainTexture, new Rect(Vector2.zero, new Vector2(baseTexture.width, baseTexture.height)), Vector2.one / 2f);
+            transform.localScale /= baseTexture.width / _spriteRenderer.sprite.pixelsPerUnit;
+        }
+        else
+        {
+            _image.sprite = Sprite.Create(_mainTexture, new Rect(Vector2.zero, new Vector2(baseTexture.width, baseTexture.height)), Vector2.one / 2f);
+            //transform.localScale /= baseTexture.width / _image.sprite.pixelsPerUnit;
+        }
+
         _pixelParent = new int[_maskTexture.width*_maskTexture.height];
         
         ResetTexture(_maskTexture, Color.black);
+        
+        if(_spriteRenderer != null) _spriteRenderer.material = _material;
+        else _image.material = _material;
     }
     
     private void ResetTexture(Texture2D texture, Color color)
@@ -71,7 +99,12 @@ public class Paintable : MonoBehaviour
 
     public void Paint(Vector3 pos)
     {
-        if(!SpriteMapper.TryGetTextureSpaceUV(_spriteRenderer, pos, out var coords)) return;
+        Vector2 coords = Vector2.zero;
+        if (_spriteRenderer != null)
+        {
+            if (!SpriteMapper.TryGetTextureSpaceUV(_spriteRenderer, pos, out  coords)) return;
+        }
+        else if(!ImageMapper.TryGetTextureSpaceUV(_image, pos, out  coords)) return;
         
         int coordX = (int)(coords.x*_maskTexture.width);
         int coordY = (int)(coords.y*_maskTexture.height);
