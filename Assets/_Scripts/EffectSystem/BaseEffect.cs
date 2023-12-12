@@ -1,9 +1,11 @@
+using System;
 using UnityEngine;
 
 public abstract class BaseEffect {
     
     protected Timer Timer;
     private readonly TimerType _timerType;
+    public event Action OnDeApply;
 
     public float Duration
     {
@@ -49,6 +51,14 @@ public abstract class BaseEffect {
         StartTimer();
         Timer.OnTimerEnd -= DeApply;
         Timer.OnTimerEnd += DeApply;
+        
+        Timer.OnTimerEnd -= CallOnDeApply;
+        Timer.OnTimerEnd += CallOnDeApply;
+    }
+    
+    private void CallOnDeApply()
+    {
+        OnDeApply?.Invoke();
     }
     
     private void StartTimer()

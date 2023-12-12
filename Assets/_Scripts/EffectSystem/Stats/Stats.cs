@@ -7,7 +7,7 @@ public class Stats : ScriptableObject
     [field: Header("Base Stats")]
     [field: SerializeField] public float BaseHealth {get; set;} = 100f;
     [field: SerializeField] public float BaseDefense {get; set;} = 10f;
-    [field: SerializeField] public float BaseMana { get; set; } = 100f;
+    [field: SerializeField] public float BaseAttackSpeed { get; set; } = 100f;
     [field: SerializeField] public float BaseAttack { get; set; } = 20f;
     [field: SerializeField] public float BaseSpeed { get; set; } = 10f;
     [field: SerializeField] public float BaseLuck { get; set; } = 7f;
@@ -46,7 +46,7 @@ public class Stats : ScriptableObject
     {
         BaseHealth = otherStats.BaseHealth;
         BaseDefense = otherStats.BaseDefense;
-        BaseMana = otherStats.BaseMana;
+        BaseAttackSpeed = otherStats.BaseAttackSpeed;
         BaseAttack = otherStats.BaseAttack;
         BaseSpeed = otherStats.BaseSpeed;
         BaseLuck = otherStats.BaseLuck;

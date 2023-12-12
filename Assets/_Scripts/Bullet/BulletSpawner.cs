@@ -21,17 +21,15 @@ public class BulletSpawner : MonoBehaviour, IEffectTarget
 
     public void Initialize(List<BulletModifierInfo> modifiers)
     {
-        _modifiers = modifiers;
         _shootModifiers = new Dictionary<Type, BulletShootModifier>();
+        _modifiers = new List<BulletModifierInfo>();
         _bullets = new HashSet<Bullet>();
         
         foreach (var modifier in modifiers)
         {
-            var mod = modifier.GetModifier(this);
-            if (mod is BulletShootModifier shootModifier)
-            {
-                ApplyEffect(shootModifier);
-            }
+            if (modifier is BulletShootModifierInfo)
+                ApplyEffect(modifier.GetModifier(this) as BulletShootModifier);
+            else _modifiers.Add(modifier);
         }
 
         _shootModifiersList = _shootModifiers.Values.OrderByDescending(x => x.Priority).ToList();
@@ -41,6 +39,7 @@ public class BulletSpawner : MonoBehaviour, IEffectTarget
 
     public void SpawnBullet(Vector2 direction)
     {
+        //Get all BulletShotData (directions, modifiers)
         List<BulletShotData> shotData = new List<BulletShotData>();
         shotData.Add(new BulletShotData(firePoint.position, _firePointDistance, direction, null));
         
@@ -55,10 +54,11 @@ public class BulletSpawner : MonoBehaviour, IEffectTarget
         }
 
         //Add modifiers that are not BulletShootModifiers and sort them by priority
-        List<BulletModifierInfo> modifiers = _modifiers.Where(x => x.GetModifier(this).GetType() != typeof(BulletShootModifier)).ToList();
+        List<BulletModifierInfo> modifiers = new List<BulletModifierInfo>(_modifiers);
         if(shotData[0].Modifiers != null) modifiers.AddRange(shotData[0].Modifiers);
         modifiers = modifiers.OrderByDescending(x => x.priority).ToList();
         
+        //Spawn bullets
         foreach (var bulletShot in shotData)
         {
             Vector2 dir = bulletShot.Direction.normalized;

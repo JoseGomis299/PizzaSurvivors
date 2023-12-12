@@ -10,8 +10,8 @@ public struct BuffData
     public float multiplier;
     public IncrementType incrementType;
     
-    public BaseEffect GetEffect(IEffectTarget target)
+    public BaseEffect GetBuff(IEffectTarget target)
     {
-        return Activator.CreateInstance(type.GetClass(), target, 1, 9999, TimerType.Infinite, multiplier,  incrementType) as BaseEffect;
+        return Activator.CreateInstance(type.GetClass(), target, 1, 1, TimerType.Infinite, multiplier,  incrementType) as BaseEffect;
     }
 }

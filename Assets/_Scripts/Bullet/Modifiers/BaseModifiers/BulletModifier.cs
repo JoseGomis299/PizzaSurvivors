@@ -1,6 +1,6 @@
 public abstract class BulletModifier : BaseEffect
 {
-    protected new readonly Bullet EffectTarget;
+    protected new Bullet EffectTarget;
     public int RemainsAfterHit {get; set;}
     public readonly int Priority;
 

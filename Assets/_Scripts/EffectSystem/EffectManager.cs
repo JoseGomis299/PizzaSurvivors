@@ -3,8 +3,9 @@ using System.Collections.Generic;
 
 public class EffectManager
 {
-    private readonly Dictionary<Type, BaseEffect> _buffs = new Dictionary<Type, BaseEffect>();
-    
+    private readonly Dictionary<Type, BaseEffect> _effects = new Dictionary<Type, BaseEffect>();
+    private readonly HashSet<StatsManagerEffect> _statBuffs = new HashSet<StatsManagerEffect>();
+
     private readonly StatsManager _statsManager;
     
     public EffectManager(StatsManager statsManager) {
@@ -13,19 +14,32 @@ public class EffectManager
     
     public void ApplyEffect(BaseEffect effect)
     {
-        if(!_buffs.ContainsKey(effect.GetType()))
-            _buffs.Add(effect.GetType(), effect);
+        if (effect is StatsManagerEffect statBuff && effect.MaxStacks == 1)
+        {
+            _statBuffs.Add(statBuff);
+            statBuff.Apply();
+            statBuff.OnDeApply += () => _statBuffs.Remove(statBuff);
+            return;
+        }
+
+        if(!_effects.ContainsKey(effect.GetType()))
+            _effects.Add(effect.GetType(), effect);
         
-        _buffs[effect.GetType()].Apply();
+        _effects[effect.GetType()].Apply();
     }
 
     public void ReApplyEffects()
     {
         _statsManager.Stats.SetValues(_statsManager.BaseStats);
 
-        foreach (var myBuff in _buffs)
+        foreach (var effect in _effects)
         {
-            myBuff.Value.ReApply();
+            effect.Value.ReApply();
+        }
+
+        foreach (var buff in _statBuffs)
+        {
+            buff.ReApply();
         }
     }
 }
