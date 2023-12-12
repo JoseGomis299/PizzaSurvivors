@@ -1,14 +1,28 @@
 using UnityEditor;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Effects/Bullet Stats Modifier", fileName = "Bullet Stats Modifier")]
+[CreateAssetMenu(menuName = "Bullet Modifiers/Stats Modifier", fileName = "Bullet Stats Modifier")]
 public class BulletStatsModifierInfo : BulletModifierInfo
 {
     [Header("Modifier Settings")]
     public float multiplier;
+    
+    public enum StatsModifierType
+    {
+        Size
+    }
+    
+    [Header("Type")]
+    public StatsModifierType type;
+    
     public override BulletModifier GetModifier(IEffectTarget target)
     {
-        return System.Activator.CreateInstance(type.GetClass(), target, maxLevel, remainsAfterHit, priority, multiplier) as BulletStatsModifier;
+        switch (type)
+        {
+            case StatsModifierType.Size:
+                return new BulletSizeModifier(target, maxLevel, remainsAfterHit, priority, multiplier);
+        }
+        return null;
     }
 }
 

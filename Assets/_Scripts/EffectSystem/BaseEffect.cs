@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public abstract class BaseEffect {
+public abstract class BaseEffect : IEffect{
     
     protected Timer Timer;
     private readonly TimerType _timerType;
@@ -36,7 +36,7 @@ public abstract class BaseEffect {
     /// <summary>
     /// De-applies the effect from the target, decreasing the current stacks.
     /// </summary>
-    protected abstract void DeApply();
+    public abstract void DeApply();
     
     /// <summary>
     /// Applies the effect current stacks times without applying the ApplyEffect logic.

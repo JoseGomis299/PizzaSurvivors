@@ -5,13 +5,39 @@ using UnityEngine;
 [Serializable]
 public struct BuffData 
 {
-    [SerializeField] private MonoScript type;
+    [SerializeField] private BuffType buffType;
     
     public float multiplier;
     public IncrementType incrementType;
     
-    public BaseEffect GetBuff(IEffectTarget target)
+    public StatsManagerEffect GetEffect(StatsManager target)
     {
-        return Activator.CreateInstance(type.GetClass(), target, 1, 1, TimerType.Infinite, multiplier,  incrementType) as BaseEffect;
+        switch (buffType)
+        {
+            case BuffType.Attack:
+                return new AttackBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType);
+            case BuffType.Defense:
+                return new DefenseBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType);
+            case BuffType.Speed:
+                return new SpeedBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType);
+            case BuffType.Health:
+                return new HealthBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType);
+            case BuffType.AttackSpeed:
+                return new AttackSpeedBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType);
+            case BuffType.Luck:
+                return new LuckBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType);
+        }
+
+        return null;
     }
+}
+
+public enum BuffType
+{
+    Attack,
+    AttackSpeed,
+    Defense,
+    Speed,
+    Health,
+    Luck
 }

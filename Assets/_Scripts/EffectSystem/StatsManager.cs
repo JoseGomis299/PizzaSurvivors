@@ -16,8 +16,8 @@ public class StatsManager : MonoBehaviour, IEffectTarget
         _effectManager = new EffectManager(this);
     }
     
-    public void ApplyEffect(BaseEffect effect) {
-        _effectManager.ApplyEffect(effect);
+    public void ApplyEffect(IEffect effect) {
+        _effectManager.ApplyEffect(effect as BaseEffect);
     }
     
     public void ReApplyEffects() {

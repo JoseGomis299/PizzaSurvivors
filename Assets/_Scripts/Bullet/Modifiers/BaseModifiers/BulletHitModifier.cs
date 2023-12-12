@@ -4,6 +4,7 @@ using UnityEngine;
 public abstract class BulletHitModifier : BulletModifier
 {
     protected readonly GameObject OnHitEffect;
+
     protected BulletHitModifier(IEffectTarget target, int maxStacks, int remainsAfterHit, int priority, GameObject onHitEffect) : base(target, maxStacks, remainsAfterHit, priority)
     {
         OnHitEffect = onHitEffect;

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using ProjectUtils.Helpers;
 
-public class MultiDirectionalShotModifier : BulletShootModifier
+public class MultiDirectionalShotModifier : BulletShotModifier
 {
     public MultiDirectionalShotModifier(IEffectTarget target, int maxStacks, int remainsAfterHit, int priority, List<BulletModifierInfo> modifiers) : base(target, maxStacks, remainsAfterHit, priority, modifiers)
     {

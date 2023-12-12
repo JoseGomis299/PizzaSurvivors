@@ -13,7 +13,7 @@ public class AttackBuff : StatsManagerEffect
         EffectTarget.Stats.BaseAttack = IncrementStat(EffectTarget.Stats.BaseAttack, EffectTarget.BaseStats.BaseAttack);
     }
 
-    protected override void DeApply()
+    public override void DeApply()
     {
         RemoveStack();
     }
@@ -26,4 +26,3 @@ public class AttackBuff : StatsManagerEffect
         }
     }
 }
-

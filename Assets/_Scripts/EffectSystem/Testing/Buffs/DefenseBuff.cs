@@ -11,7 +11,7 @@ public class DefenseBuff : StatsManagerEffect
         EffectTarget.Stats.BaseDefense = IncrementStat(EffectTarget.Stats.BaseDefense, EffectTarget.BaseStats.BaseDefense);
     }
 
-    protected override void DeApply()
+    public override void DeApply()
     {
         RemoveStack();
     }

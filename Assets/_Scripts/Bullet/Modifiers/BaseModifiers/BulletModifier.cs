@@ -1,16 +1,26 @@
-public abstract class BulletModifier : BaseEffect
+public abstract class BulletModifier : IEffect
 {
-    protected new Bullet EffectTarget;
+    protected Bullet EffectTarget;
     public int RemainsAfterHit {get; set;}
     public readonly int Priority;
+    
+    protected int MaxStacks;
+    protected int CurrentStacks { get; private set; }
 
-    protected BulletModifier(IEffectTarget target, int maxStacks, int remainsAfterHit, int priority) : base(target, 1, maxStacks, TimerType.Infinite)
+    protected BulletModifier(IEffectTarget target, int maxStacks, int remainsAfterHit, int priority)
     {
         EffectTarget = target as Bullet;
         RemainsAfterHit = remainsAfterHit;
         Priority = priority;
+        this.MaxStacks = maxStacks;
     }
 
-    protected override void DeApply() { }
-    public override void ReApply() { }
+    public virtual void Apply() { }
+    public virtual void DeApply() { }
+    
+    protected void AddStack()
+    {
+        if(CurrentStacks < MaxStacks)
+            CurrentStacks++;
+    }
 }

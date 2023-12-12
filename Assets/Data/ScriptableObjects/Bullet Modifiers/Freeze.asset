@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Freeze
   descriptionsByLevel: []
-  type: {fileID: 11500000, guid: db770f3a46d94c80ba9a5b4185340bca, type: 3}
   maxLevel: 1
   remainsAfterHit: 100
   priority: 0
   OnHitEffect: {fileID: 0}
+  type: 1

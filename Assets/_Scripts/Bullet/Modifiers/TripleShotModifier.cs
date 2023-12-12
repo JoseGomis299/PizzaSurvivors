@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using ProjectUtils.Helpers;
 using UnityEngine;
 
-public class TripleShotModifier : BulletShootModifier
+public class TripleShotModifier : BulletShotModifier
 {
     public TripleShotModifier(IEffectTarget target, int maxStacks, int remainsAfterHit, int priority, List<BulletModifierInfo> modifiers) : base(target, maxStacks, remainsAfterHit, priority, modifiers) { }
 

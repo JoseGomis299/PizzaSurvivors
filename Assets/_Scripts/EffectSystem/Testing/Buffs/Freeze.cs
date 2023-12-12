@@ -19,7 +19,7 @@ public class Freeze : BaseEffect
         _renderer.color = Color.blue;
     }
 
-    protected override void DeApply()
+    public override void DeApply()
     {
         if(CurrentStacks <= 0) return;
         RemoveStack();

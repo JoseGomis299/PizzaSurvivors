@@ -5,8 +5,7 @@ using UnityEngine;
 public class EffectInfo : ScriptableObject
 {
     [Header("Effect Type")]
-    
-    public MonoScript type;
+    public EffectType effectType;
     
     [Header("Effect Settings")]
     public float multiplier;
@@ -17,8 +16,31 @@ public class EffectInfo : ScriptableObject
     public IncrementType incrementType;
     public TimerType timerType;
     
-    public BaseEffect GetEffect(IEffectTarget target)
+    public BaseEffect GetEffect(StatsManager target)
     {
-        return System.Activator.CreateInstance(type.GetClass(), target, duration, maxStacks, timerType, multiplier,  incrementType) as BaseEffect;
+        switch (effectType)
+        {
+            case EffectType.AttackBuff:
+                return new AttackBuff(target, duration, maxStacks, timerType, multiplier, incrementType);
+            case EffectType.DefenseBuff:
+                return new DefenseBuff(target, duration, maxStacks, timerType, multiplier, incrementType);
+            case EffectType.SpeedBuff:
+                return new SpeedBuff(target, duration, maxStacks, timerType, multiplier, incrementType);
+            case EffectType.HealthBuff:
+                return new HealthBuff(target, duration, maxStacks, timerType, multiplier, incrementType);
+            case EffectType.FreezingDebuff:
+                return new FreezingDebuff(target, duration, maxStacks, timerType, multiplier, incrementType);
+        }
+
+        return null;
     }
+}
+
+public enum EffectType
+{
+    AttackBuff,
+    DefenseBuff,
+    SpeedBuff,
+    HealthBuff,
+    FreezingDebuff
 }

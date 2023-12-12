@@ -14,21 +14,21 @@ public class BulletSpawner : MonoBehaviour, IEffectTarget
     
     private List<BulletModifierInfo> _modifiers;
     
-    private Dictionary<Type, BulletShootModifier> _shootModifiers;
-    private List<BulletShootModifier> _shootModifiersList;
+    private Dictionary<Type, BulletShotModifier> _shootModifiers;
+    private List<BulletShotModifier> _shootModifiersList;
 
     private HashSet<Bullet> _bullets;
 
     public void Initialize(List<BulletModifierInfo> modifiers)
     {
-        _shootModifiers = new Dictionary<Type, BulletShootModifier>();
+        _shootModifiers = new Dictionary<Type, BulletShotModifier>();
         _modifiers = new List<BulletModifierInfo>();
         _bullets = new HashSet<Bullet>();
         
         foreach (var modifier in modifiers)
         {
-            if (modifier is BulletShootModifierInfo)
-                ApplyEffect(modifier.GetModifier(this) as BulletShootModifier);
+            if (modifier is BulletShotModifierInfo)
+                ApplyEffect(modifier.GetModifier(this) as BulletShotModifier);
             else _modifiers.Add(modifier);
         }
 
@@ -91,13 +91,13 @@ public class BulletSpawner : MonoBehaviour, IEffectTarget
         _bullets.Remove(bullet);
     }
     
-    public void ApplyEffect(BaseEffect effect)
+    public void ApplyEffect(IEffect effect)
     {
         if(!_shootModifiers.ContainsKey(effect.GetType()))
-            _shootModifiers.Add(effect.GetType(), (BulletShootModifier) effect);
+            _shootModifiers.Add(effect.GetType(), (BulletShotModifier) effect);
         
         _shootModifiers[effect.GetType()].Apply();
-        _shootModifiers[effect.GetType()].RemainsAfterHit--;
+       //_shootModifiers[effect.GetType()].RemainsAfterHit--;
     }
     
     public void ReApplyEffects() { }

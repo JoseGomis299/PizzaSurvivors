@@ -1,5 +1,5 @@
 public interface IEffectTarget  
 {
-    void ApplyEffect(BaseEffect effect);
+    void ApplyEffect(IEffect effect);
     void ReApplyEffects();
 }

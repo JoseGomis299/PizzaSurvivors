@@ -11,7 +11,7 @@ public class HealthBuff : StatsManagerEffect
         EffectTarget.Stats.BaseHealth = IncrementStat(EffectTarget.Stats.BaseHealth, EffectTarget.BaseStats.BaseHealth);
     }
 
-    protected override void DeApply()
+    public override void DeApply()
     {
         RemoveStack();
     }

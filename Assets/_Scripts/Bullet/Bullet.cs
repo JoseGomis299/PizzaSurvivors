@@ -115,7 +115,7 @@ public class Bullet : MonoBehaviour, IEffectTarget
         gameObject.SetActive(false);
     }
     
-    public void ApplyEffect(BaseEffect effect) { }
+    public void ApplyEffect(IEffect effect) { }
     public void ReApplyEffects() { }
 }
 
