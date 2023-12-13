@@ -11,6 +11,12 @@ public class Stats : ScriptableObject
     [field: SerializeField] public float BaseAttack { get; set; } = 20f;
     [field: SerializeField] public float BaseSpeed { get; set; } = 10f;
     [field: SerializeField] public float BaseLuck { get; set; } = 7f;
+
+    [field: Header("Bullets Stats")]
+    [field: SerializeField] public float AdditionalBulletsSpeed { get; set; } = 0f;
+    [field: SerializeField] public int AdditionalBulletsPierce { get; set; } = 0;
+    [field: SerializeField] public float AdditionalBulletsSize { get; set; } = 0f;
+    
     
     [field:Header("Damage Multipliers")]
     [field: SerializeField] public List<ElementalMultiplier> DamageMultipliers { get; private set; }
@@ -50,6 +56,8 @@ public class Stats : ScriptableObject
         BaseAttack = otherStats.BaseAttack;
         BaseSpeed = otherStats.BaseSpeed;
         BaseLuck = otherStats.BaseLuck;
+        AdditionalBulletsPierce = otherStats.AdditionalBulletsPierce;
+        AdditionalBulletsSpeed = otherStats.AdditionalBulletsSpeed;
         
         DamageMultipliers = new List<ElementalMultiplier>(otherStats.DamageMultipliers);
         AttackMultipliers = new List<ElementalMultiplier>(otherStats.AttackMultipliers);

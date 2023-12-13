@@ -9,6 +9,8 @@ public class BulletStats : ScriptableObject
     [field: SerializeField] public float BaseSpeed { get; set; } = 10f;
     [field: SerializeField] public float BaseSize { get; set; } = 1f;
     
+    [field: SerializeField] public int BasePierce { get; set; } = 0;
+
     [Header("Attack Multipliers")]
     [SerializeField] private List<ElementalMultiplier> attackMultipliers = new List<ElementalMultiplier>();
     private Dictionary<Element, float> _attackMultipliers = new Dictionary<Element, float>();
@@ -18,18 +20,12 @@ public class BulletStats : ScriptableObject
         return attack * GetAttackMultiplier(element);
     }
     
-    public void SetValues(BulletStats bulletStats)
-    {
-        BaseDamage = bulletStats.BaseDamage;
-        BaseSpeed = bulletStats.BaseSpeed;
-        BaseSize = bulletStats.BaseSize;
-    }
-    
     public void SetValues(Stats characterStats, BulletStats bulletStats)
     {
-        BaseDamage = bulletStats.BaseDamage;
-        BaseSpeed = bulletStats.BaseSpeed;
-        BaseSize = bulletStats.BaseSize;
+        BaseDamage = bulletStats.BaseDamage + characterStats.BaseAttack;
+        BaseSpeed = bulletStats.BaseSpeed + characterStats.AdditionalBulletsSpeed;
+        BaseSize = bulletStats.BaseSize + characterStats.AdditionalBulletsSize;
+        BasePierce = bulletStats.BasePierce + characterStats.AdditionalBulletsPierce;
         
         List<ElementalMultiplier> multipliers = new List<ElementalMultiplier>(characterStats.AttackMultipliers);
         

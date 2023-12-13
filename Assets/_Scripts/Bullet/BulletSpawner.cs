@@ -7,7 +7,7 @@ using UnityEngine;
 public class BulletSpawner : MonoBehaviour, IEffectTarget
 {
     [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private Stats characterStats;
+    private Stats _characterStats;
     
     [SerializeField] private Transform firePoint;
     private float _firePointDistance;
@@ -21,6 +21,7 @@ public class BulletSpawner : MonoBehaviour, IEffectTarget
 
     public void Initialize(List<BulletModifierInfo> modifiers)
     {
+        _characterStats = GetComponent<StatsManager>().Stats;
         _shootModifiers = new Dictionary<Type, BulletShotModifier>();
         _modifiers = new List<BulletModifierInfo>();
         //_bullets = new HashSet<Bullet>();
@@ -67,7 +68,7 @@ public class BulletSpawner : MonoBehaviour, IEffectTarget
             Bullet bulletComponent = bullet.GetComponent<Bullet>();
             bullet.transform.right = dir;
             
-            bulletComponent.Initialize(dir, modifiers, this, characterStats);
+            bulletComponent.Initialize(dir, modifiers, this, _characterStats);
             //_bullets.Add(bulletComponent);
         }
     }

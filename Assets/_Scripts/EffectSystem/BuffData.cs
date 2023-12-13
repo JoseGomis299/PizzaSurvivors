@@ -26,6 +26,12 @@ public struct BuffData
                 return new AttackSpeedBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType);
             case BuffType.Luck:
                 return new LuckBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType);
+            case BuffType.BulletSpeed:
+                return new BulletSpeedBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType);
+            case BuffType.BulletPierce:
+                return new BulletPierceBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType);
+            case BuffType.BulletSize:
+                return new BulletSizeBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType);
         }
 
         return null;
@@ -39,5 +45,8 @@ public enum BuffType
     Defense,
     Speed,
     Health,
-    Luck
+    Luck,
+    BulletSpeed,
+    BulletPierce,
+    BulletSize
 }

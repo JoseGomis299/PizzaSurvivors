@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour
     
     private void Update()
     {
+        if(Time.timeScale == 0f) return;
+        
         _movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         _movement.Normalize();
         

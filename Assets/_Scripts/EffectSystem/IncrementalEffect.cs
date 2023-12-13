@@ -32,13 +32,18 @@ public abstract class IncrementalEffect : BaseEffect {
                 break;
         }
 
-        if(currentStat < 0) currentStat = 0;
+        if(this is not BulletPierceBuff && currentStat < 0) currentStat = 0;
         return currentStat;
     }
 }
 
 public enum IncrementType
 {
+    /// <summary>
+    /// Stat = Stat + Increment
+    /// </summary>
+    [Tooltip("Stat = Stat + Increment")]
+    Additive,
     /// <summary>
     /// Stat = Stat + (BaseStat * Increment)
     /// </summary>
@@ -58,10 +63,5 @@ public enum IncrementType
     /// Stat = Stat * Increment
     /// </summary>
     [Tooltip("Stat = Stat * Increment")]
-    Exponential,
-    /// <summary>
-    /// Stat = Stat + Increment
-    /// </summary>
-    [Tooltip("Stat = Stat + Increment")]
-    Additive
+    Exponential
 }

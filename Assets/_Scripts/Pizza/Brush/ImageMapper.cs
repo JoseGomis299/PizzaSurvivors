@@ -10,7 +10,6 @@ public class ImageMapper
     {
         if (_image == null || !_image.gameObject.activeInHierarchy || !_image.TryGetComponent(out Paintable paintable) || !paintable.enabled)
         {
-            Debug.Log("VAR");
             _image = image;
         }
         
@@ -41,8 +40,7 @@ public class ImageMapper
     {
         uvs = Vector2.zero;
         if(!SetImage(image)) return false;
-        Debug.Log(_image.name);
-        // Local position on the sprite in pixels.
+        
         uvs = _image.rectTransform.position - screenPoint;
         
         uvs.x /= _image.rectTransform.rect.width * _image.rectTransform.localScale.x;

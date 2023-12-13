@@ -528,7 +528,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -884,8 +884,9 @@ GameObject:
   - component: {fileID: 1173351045}
   - component: {fileID: 1173351044}
   - component: {fileID: 1173351046}
-  m_Layer: 0
-  m_Name: CookingTable
+  - component: {fileID: 1173351047}
+  m_Layer: 6
+  m_Name: PizzaTable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1003,6 +1004,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1173351047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1173351043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70a49d6a5a834afcaa6358744e303355, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pizzaUI: {fileID: 1267363842}
 --- !u!1 &1267363842
 GameObject:
   m_ObjectHideFlags: 0
@@ -1013,6 +1027,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1267363843}
   - component: {fileID: 1267363844}
+  - component: {fileID: 1267363845}
   m_Layer: 0
   m_Name: PizzaUI
   m_TagString: Untagged
@@ -1048,9 +1063,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d640e7b4c405c0449ac206104367542f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sauceCanvas: {fileID: 1270351916}
-  cheeseCanvas: {fileID: 671387154}
-  borderLength: 0.35
+--- !u!114 &1267363845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267363842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08f8d7a68c6240e8805c266adab8ad2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pizzaBase: {fileID: 777923982}
+  borderLength: 100
+  sauce: {fileID: 1270351916}
+  cheese: {fileID: 671387154}
+  currentIngredient: {fileID: 7495433944984911362, guid: 2cb8a0a98b143e14481669f742f7b372, type: 3}
 --- !u!1 &1270351914
 GameObject:
   m_ObjectHideFlags: 0
@@ -1419,18 +1448,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 8878666665695811720, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: modifiers.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8878666665695811720, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: modifiers.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: dba044d124d510e4cb2630d16400ad86, type: 2}
-    - target: {fileID: 8878666665695811720, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: modifiers.Array.data[3]
-      value: 
-      objectReference: {fileID: 11400000, guid: dba044d124d510e4cb2630d16400ad86, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

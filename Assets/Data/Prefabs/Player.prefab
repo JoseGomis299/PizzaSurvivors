@@ -14,9 +14,11 @@ GameObject:
   - component: {fileID: 8878666665695811720}
   - component: {fileID: 8950251199607440318}
   - component: {fileID: 547477470185536393}
+  - component: {fileID: 5200129759369003697}
+  - component: {fileID: 537413709811894413}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,7 +104,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 9185154336958388077, guid: 33aebd7d8475e124f91d5e97e5f23058, type: 3}
-  characterStats: {fileID: 11400000, guid: df18d20399188514797d8c60662df645, type: 2}
   firePoint: {fileID: 6943845065931462988}
 --- !u!114 &8878666665695811720
 MonoBehaviour:
@@ -117,10 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  modifiers:
-  - {fileID: 11400000, guid: d60dda64a6fc3a448b3f0c62b6791f7f, type: 2}
-  - {fileID: 11400000, guid: e09f25795fe85e44ab3f22d6de5237f4, type: 2}
-  - {fileID: 11400000, guid: f2f1d8ec6e928224693b1e5816adca97, type: 2}
+  modifiers: []
 --- !u!50 &8950251199607440318
 Rigidbody2D:
   serializedVersion: 4
@@ -193,6 +191,35 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &5200129759369003697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2747259311984292245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 578a4885f2924c19898d02a807662371, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactRange: 1.5
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!114 &537413709811894413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2747259311984292245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea8caec43dd64666a6e1073142c94895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: df18d20399188514797d8c60662df645, type: 2}
 --- !u!1 &7604485025493525101
 GameObject:
   m_ObjectHideFlags: 0

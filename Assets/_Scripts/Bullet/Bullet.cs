@@ -44,17 +44,13 @@ public class Bullet : MonoBehaviour, IEffectTarget
         foreach (var modifier in modifiers)
             _modifiers.Add(modifier.GetModifier(this));
 
-        // If there are any bullet stats modifiers, create a new BulletStats object and apply the modifiers to it
-        if (_modifiers.Any(modifier => modifier is BulletStatsModifier))
-        {
-            _stats = ScriptableObject.CreateInstance<BulletStats>();
-            if(characterStats != null) _stats.SetValues(characterStats, stats);
-            else _stats.SetValues(stats);
-            
-            foreach (var modifier in _modifiers.OfType<BulletStatsModifier>())
-                modifier.Apply();
-        }
-        else _stats = stats;
+        _stats = ScriptableObject.CreateInstance<BulletStats>();
+        _stats.SetValues(characterStats, stats);
+
+        //Apply all bullet stats modifiers
+        foreach (var modifier in _modifiers.OfType<BulletStatsModifier>())
+            modifier.Apply();
+        
         transform.localScale = Vector3.one * _stats.BaseSize;
 
         _movementModifiers = new Dictionary<Type, BulletMovementModifier>();
@@ -102,7 +98,7 @@ public class Bullet : MonoBehaviour, IEffectTarget
     {
         if((Spawner != null && col.gameObject == Spawner.gameObject) || col.CompareTag("Bullet")) return;
         
-        float attack = _stats.GetAttack(_element, stats.BaseDamage);
+        float attack = _stats.GetAttack(_element, _stats.BaseDamage);
 
         if (col.TryGetComponent(out IDamageable damageable))
             damageable.TakeDamage(attack);
@@ -112,7 +108,7 @@ public class Bullet : MonoBehaviour, IEffectTarget
             modifier.Value.OnHit(col.GetComponent<IEffectTarget>(), attack, modifier.Value is ExplosiveModifier ? _hitModifiers.Values.Where(m => m.RemainsAfterHit > 0 && m != modifier.Value).ToList() : null);
         }
         
-        gameObject.SetActive(false);
+        if(_stats.BasePierce-- <= 0 || damageable == null) gameObject.SetActive(false);
     }
     
     public void ApplyEffect(IEffect effect) { }
