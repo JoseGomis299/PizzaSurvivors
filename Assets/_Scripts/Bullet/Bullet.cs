@@ -34,12 +34,7 @@ public class Bullet : MonoBehaviour, IEffectTarget
         _rb = GetComponent<Rigidbody2D>();
         _gfx = transform.GetChild(0).gameObject;
     }
-
-    private void OnDisable()
-    {
-        if(Spawner != null) Spawner.RemoveBullet(this);
-    }
-
+    
     public void Initialize(Vector2 direction, List<BulletModifierInfo> modifiers, BulletSpawner spawner, Stats characterStats, Element element = Element.None)
     {
         Spawner = spawner;
@@ -87,7 +82,12 @@ public class Bullet : MonoBehaviour, IEffectTarget
         _initialDirection = Direction = direction;
     }
 
-    public void Move()
+    private void FixedUpdate()
+    {
+        Move();
+    }
+
+    private void Move()
     {
         Speed = _initialSpeed;
         Direction = _initialDirection;

@@ -17,13 +17,13 @@ public class BulletSpawner : MonoBehaviour, IEffectTarget
     private Dictionary<Type, BulletShotModifier> _shootModifiers;
     private List<BulletShotModifier> _shootModifiersList;
 
-    private HashSet<Bullet> _bullets;
+    //private HashSet<Bullet> _bullets;
 
     public void Initialize(List<BulletModifierInfo> modifiers)
     {
         _shootModifiers = new Dictionary<Type, BulletShotModifier>();
         _modifiers = new List<BulletModifierInfo>();
-        _bullets = new HashSet<Bullet>();
+        //_bullets = new HashSet<Bullet>();
         
         foreach (var modifier in modifiers)
         {
@@ -68,27 +68,22 @@ public class BulletSpawner : MonoBehaviour, IEffectTarget
             bullet.transform.right = dir;
             
             bulletComponent.Initialize(dir, modifiers, this, characterStats);
-            _bullets.Add(bulletComponent);
+            //_bullets.Add(bulletComponent);
         }
     }
 
-    private void FixedUpdate()
-    {
-        if(_bullets == null) return;
-
-        foreach (var bullet in _bullets)
-            bullet.Move();
-    }
+    // private void FixedUpdate()
+    // {
+    //     if(_bullets == null) return;
+    //
+    //     foreach (var bullet in _bullets)
+    //         bullet.Move();
+    // }
     
     public void MoveFirePoint(Vector2 direction)
     {
         firePoint.position = _firePointDistance*direction + (Vector2) transform.position;
         firePoint.right = direction;
-    }
-
-    public void RemoveBullet(Bullet bullet)
-    {
-        _bullets.Remove(bullet);
     }
     
     public void ApplyEffect(IEffect effect)

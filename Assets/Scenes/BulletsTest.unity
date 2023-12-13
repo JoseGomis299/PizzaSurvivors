@@ -1280,7 +1280,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialObjectPool:
   - gameObject: {fileID: 9185154336958388077, guid: 33aebd7d8475e124f91d5e97e5f23058, type: 3}
-    quantity: 20
+    quantity: 100
     lifeTime: 5
     activeTime: 0
   - gameObject: {fileID: 1694715364255247975, guid: c7601adafcc51ab47aef5e5042abbe73, type: 3}
@@ -1419,6 +1419,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8878666665695811720, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
+      propertyPath: modifiers.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878666665695811720, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
+      propertyPath: modifiers.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: dba044d124d510e4cb2630d16400ad86, type: 2}
+    - target: {fileID: 8878666665695811720, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
+      propertyPath: modifiers.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: dba044d124d510e4cb2630d16400ad86, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

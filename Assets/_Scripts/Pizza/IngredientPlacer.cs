@@ -28,6 +28,7 @@ public class IngredientPlacer : MonoBehaviour
 
     private void Update()
     {
+        if(_currentCanvas == null || !_currentCanvas.gameObject.activeInHierarchy) return;
         if (Input.GetKeyDown(KeyCode.C))
         {
             _currentCanvas = cheeseCanvas;
