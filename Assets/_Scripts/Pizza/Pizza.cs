@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,10 +6,13 @@ using ProjectUtils.Helpers;
 
 public class Pizza : MonoBehaviour
 {
+    public static Action OnEnterPizzaView;
+    public static Action OnExitPizzaView;
+
     private BulletSpawner _bulletSpawner;
     private StatsManager _statsManager;
 
-    private readonly List<IngredientInfo> _placedIngredients = new  List<IngredientInfo> ();
+    private readonly List<Ingredient> _placedIngredients = new  List<Ingredient> ();
     private List<StatsManagerEffect> _currentBuffs = new List<StatsManagerEffect>();
 
     private void Start()
@@ -37,6 +41,7 @@ public class Pizza : MonoBehaviour
         }
         
         _bulletSpawner.Initialize(bulletModifiers);
+        OnExitPizzaView?.Invoke();
     }
     
     public void EnterPizzaView()
@@ -48,9 +53,11 @@ public class Pizza : MonoBehaviour
         {
             buff.DeApply();
         }
+        
+        OnEnterPizzaView?.Invoke();
     }
 
-    public void PlaceIngredient(IngredientInfo ingredient)
+    public void PlaceIngredient(Ingredient ingredient)
     {
         _placedIngredients.Add(ingredient);
     }

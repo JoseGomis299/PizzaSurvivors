@@ -191,4 +191,9 @@ public class Paintable : MonoBehaviour
         
         return percentages;
     }
+    
+    public Sprite GetSprite()
+    {
+        return Sprite.Create(paintTextures[_paintTextureIndex], new Rect(Vector2.zero, new Vector2(baseTexture.width, baseTexture.height)), Vector2.one / 2f);
+    }
 }

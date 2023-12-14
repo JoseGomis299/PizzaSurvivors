@@ -1,8 +1,14 @@
+using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class IngredientPlacer : MonoBehaviour
 {
     private Pizza _pizza;
+    
+    public Action OnIngredientChanged;
 
     [Header("Pizza")]
     [SerializeField] private RectTransform pizzaBase;
@@ -11,9 +17,10 @@ public class IngredientPlacer : MonoBehaviour
     [Header("Paintables")]
     [SerializeField] private Paintable sauce;
     [SerializeField] private Paintable cheese;
-    private Paintable _currentPaintable;
     
-    [SerializeField] private Ingredient currentIngredient;
+    private Paintable _currentPaintable;
+    private Ingredient _currentIngredient;
+    [SerializeField] private GameObject ingredientPrefab;
 
     private void Start()
     {
@@ -21,61 +28,94 @@ public class IngredientPlacer : MonoBehaviour
         
         sauce.enabled = false;
         cheese.enabled = false;
-        
-        IngredientInventory.Clear();
     }
     
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {        
-            _pizza.ExitPizzaView();
+            ExitPizzaView();
             return;
         }
         
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            _currentPaintable = cheese;
-            cheese.enabled = true;
-            sauce.enabled = false;
-        }
-        else if (Input.GetKeyDown(KeyCode.S))
-        {
-            _currentPaintable = sauce;
-            sauce.enabled = true;
-            cheese.enabled = false;
-        }
-
-        if (currentIngredient != null)
+        if (_currentIngredient != null)
         {
             if (Input.GetMouseButtonDown(0)) PlaceIngredient();
         }
-        else if (_currentPaintable != null && Input.GetMouseButton(0)) _currentPaintable.Paint(Input.mousePosition);
-        
-        if(Input.GetMouseButtonDown(1)) currentIngredient = null;
+        else if (_currentPaintable != null && Input.GetMouseButton(0)) 
+            _currentPaintable.Paint(Input.mousePosition);
+
+        if (Input.GetMouseButtonDown(1))
+            ClearSelection();
     }
     
     public void SetIngredient(Ingredient ingredient)
     {
-        currentIngredient = ingredient;
+        _currentPaintable = null;
+        _currentIngredient = ingredient;
+        
+        OnIngredientChanged?.Invoke();
+    }
+    
+    public void StartPlacingCheese()
+    {
+        _currentIngredient = null;
+        
+        _currentPaintable = cheese;
+        cheese.enabled = true;
+        sauce.enabled = false;
+        
+        OnIngredientChanged?.Invoke();
+    }
+    
+    public void StartPlacingSauce()
+    {
+        _currentIngredient = null;
+        
+        _currentPaintable = sauce;
+        sauce.enabled = true;
+        cheese.enabled = false;
+        
+        OnIngredientChanged?.Invoke();
+    }
+    
+    public Sprite GetCurrentSprite()
+    {
+        if(_currentIngredient != null) return _currentIngredient.uiSprite;
+        return _currentPaintable != null ? _currentPaintable.GetSprite() : null;
+    }
+    
+    public void ExitPizzaView()
+    {
+        ClearSelection();
+        
+        _pizza.ExitPizzaView();
+    }
+    
+    private void ClearSelection()
+    {
+        _currentPaintable = null;
+        _currentIngredient = null;
+        
+        OnIngredientChanged?.Invoke();
     }
     
     private void PlaceIngredient()
     {
+        if (IngredientInventory.GetIngredientQuantity(_currentIngredient) <= 0) return;
+
         Vector2 mousePos = Input.mousePosition;
         
         float limit = pizzaBase.rect.width * pizzaBase.localScale.x / 2f - borderLength;
         float distance = Vector2.Distance(mousePos, pizzaBase.position);
         if (distance > limit) return;
         
-        if (IngredientInventory.GetIngredientQuantity(currentIngredient.Info) <= 0)
-        {
-            currentIngredient = null;
-            return;
-        }
-        IngredientInventory.RemoveIngredient(currentIngredient.Info);
+        IngredientInventory.RemoveIngredient(_currentIngredient);
+
+        _pizza.PlaceIngredient(_currentIngredient);
+        GameObject ingredient = Instantiate(ingredientPrefab, mousePos,  Quaternion.Euler(0, 0, Random.Range(0, 360)), pizzaBase.parent);
+        ingredient.GetComponent<Image>().sprite = _currentIngredient.onPizzaSprite;
         
-        _pizza.PlaceIngredient(currentIngredient.Info);
-        Instantiate(currentIngredient, mousePos,  Quaternion.Euler(0, 0, Random.Range(0, 360)), pizzaBase.parent);
+        if (IngredientInventory.GetIngredientQuantity(_currentIngredient) <= 0) ClearSelection();
     }
 }

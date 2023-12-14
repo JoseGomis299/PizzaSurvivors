@@ -1,34 +1,50 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class IngredientInventory 
 {
-    private static readonly Dictionary<IngredientInfo, int> Ingredients = new();
+    public static Action OnInventoryChanged;
+
+    private static Dictionary<Ingredient, int> _ingredients;
+    public static IEnumerable<KeyValuePair<Ingredient, int>> Ingredients => _ingredients;
+
+    [RuntimeInitializeOnLoadMethod]
+    public static void Initialize()
+    {
+        _ingredients = new Dictionary<Ingredient, int>();
+    }
     
     public static void Clear()
     {
-        Ingredients.Clear();
+        _ingredients.Clear();
     }
     
-    public static void AddIngredient(IngredientInfo ingredient, int quantity = 1)
+    public static void AddIngredient(Ingredient ingredient, int quantity = 1)
     {
-        if (Ingredients.ContainsKey(ingredient)) Ingredients[ingredient] += quantity;
-        else Ingredients.Add(ingredient, quantity);
+        if (_ingredients.ContainsKey(ingredient)) _ingredients[ingredient] += quantity;
+        else _ingredients.Add(ingredient, quantity);
+
+        if (_ingredients[ingredient] <= 0)
+            _ingredients.Remove(ingredient);
+            
+        OnInventoryChanged?.Invoke();
+    }
+    
+    public static void RemoveIngredient(Ingredient ingredient, int quantity = 1)
+    {
+        if (_ingredients.ContainsKey(ingredient)) _ingredients[ingredient] -= quantity;
+        else _ingredients.Add(ingredient, 0);
         
-        if(Ingredients[ingredient] < 0) 
-            Ingredients[ingredient] = 0;
-    }
-    
-    public static void RemoveIngredient(IngredientInfo ingredient, int quantity = 1)
-    {
-        if (Ingredients.ContainsKey(ingredient)) Ingredients[ingredient] -= quantity;
-        else Ingredients.Add(ingredient, 0);
+        if(_ingredients[ingredient] <= 0) 
+            _ingredients.Remove(ingredient);
         
-        if(Ingredients[ingredient] < 0) 
-            Ingredients[ingredient] = 0;
+        OnInventoryChanged?.Invoke();
     }
     
-    public static int GetIngredientQuantity(IngredientInfo ingredient)
+    public static int GetIngredientQuantity(Ingredient ingredient)
     {
-        return Ingredients.ContainsKey(ingredient) ? Ingredients[ingredient] : 0;
+        return _ingredients.ContainsKey(ingredient) ? _ingredients[ingredient] : 0;
     }
 }

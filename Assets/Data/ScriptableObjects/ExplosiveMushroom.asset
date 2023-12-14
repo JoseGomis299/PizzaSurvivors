@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: ExplosiveMushroom
   m_EditorClassIdentifier: 
   name: Explosive Mushroom
-  uiSprite: {fileID: 0}
+  onPizzaSprite: {fileID: 21300000, guid: 70d739f6f71784e45ab96b781997f548, type: 3}
+  uiSprite: {fileID: 21300000, guid: 325a01a2176e79047a9f55f886b3cd01, type: 3}
   <BulletModifiers>k__BackingField:
   - {fileID: 11400000, guid: f2f1d8ec6e928224693b1e5816adca97, type: 2}
   <Buffs>k__BackingField:

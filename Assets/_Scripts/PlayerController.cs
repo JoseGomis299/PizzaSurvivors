@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
         
         _bulletSpawner.MoveFirePoint(mousePos);
         
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !Helpers.PointerIsOverUi())
         {
             _bulletSpawner.SpawnBullet(mousePos);
         }
