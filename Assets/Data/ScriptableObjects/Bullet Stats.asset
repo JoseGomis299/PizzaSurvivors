@@ -16,4 +16,5 @@ MonoBehaviour:
   <BaseSpeed>k__BackingField: 20
   <BaseSize>k__BackingField: 1
   <BasePierce>k__BackingField: 0
+  <BaseBounce>k__BackingField: 0
   attackMultipliers: []

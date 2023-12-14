@@ -15,7 +15,9 @@ public class Stats : ScriptableObject
     [field: Header("Bullets Stats")]
     [field: SerializeField] public float AdditionalBulletsSpeed { get; set; } = 0f;
     [field: SerializeField] public int AdditionalBulletsPierce { get; set; } = 0;
+    [field: SerializeField] public int AdditionalBulletsBounce { get; set; } = 0;
     [field: SerializeField] public float AdditionalBulletsSize { get; set; } = 0f;
+    
     
     
     [field:Header("Damage Multipliers")]

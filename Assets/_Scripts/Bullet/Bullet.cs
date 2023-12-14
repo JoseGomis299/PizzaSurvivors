@@ -28,7 +28,7 @@ public class Bullet : MonoBehaviour, IEffectTarget
     
     private Dictionary<Type, BulletMovementModifier> _movementModifiers;
     private Dictionary<Type, BulletHitModifier> _hitModifiers;
-
+    
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -96,6 +96,16 @@ public class Bullet : MonoBehaviour, IEffectTarget
     
     private void OnTriggerEnter2D(Collider2D col)
     {
+        HandleCollision(col);
+    }
+
+    private void OnTriggerStay2D(Collider2D col)
+    {
+        HandleCollision(col);
+    }
+
+    private void HandleCollision(Collider2D col)
+    {
         if((Spawner != null && col.gameObject == Spawner.gameObject) || col.CompareTag("Bullet")) return;
         
         float attack = _stats.GetAttack(_element, _stats.BaseDamage);
@@ -107,10 +117,18 @@ public class Bullet : MonoBehaviour, IEffectTarget
         {
             modifier.Value.OnHit(col.GetComponent<IEffectTarget>(), attack, modifier.Value is ExplosiveModifier ? _hitModifiers.Values.Where(m => m.RemainsAfterHit > 0 && m != modifier.Value).ToList() : null);
         }
-        
+
+        //Bounce if colliding with not an enemy
+        if (damageable == null && _stats.BaseBounce-- > 0)
+        {
+            Vector2 normal = ((Vector2) (transform.position - (Vector3)Direction) - col.ClosestPoint(transform.position - (Vector3)Direction)).normalized;
+            _initialDirection = Vector2.Reflect(Direction, normal);
+            return;
+        }
+        //Piece if colliding with an enemy
         if(_stats.BasePierce-- <= 0 || damageable == null) gameObject.SetActive(false);
     }
-    
+
     public void ApplyEffect(IEffect effect) { }
     public void ReApplyEffects() { }
 }

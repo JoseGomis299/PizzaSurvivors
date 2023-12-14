@@ -32,6 +32,8 @@ public struct BuffData
                 return new BulletPierceBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType);
             case BuffType.BulletSize:
                 return new BulletSizeBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType);
+            case BuffType.BulletBounce:
+                return new BulletBounceBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType);
         }
 
         return null;
@@ -48,5 +50,6 @@ public enum BuffType
     Luck,
     BulletSpeed,
     BulletPierce,
-    BulletSize
+    BulletSize,
+    BulletBounce
 }

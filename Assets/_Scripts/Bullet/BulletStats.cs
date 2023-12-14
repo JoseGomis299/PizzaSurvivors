@@ -10,6 +10,7 @@ public class BulletStats : ScriptableObject
     [field: SerializeField] public float BaseSize { get; set; } = 1f;
     
     [field: SerializeField] public int BasePierce { get; set; } = 0;
+    [field: SerializeField] public int BaseBounce { get; set; } = 0;
 
     [Header("Attack Multipliers")]
     [SerializeField] private List<ElementalMultiplier> attackMultipliers = new List<ElementalMultiplier>();
@@ -26,6 +27,7 @@ public class BulletStats : ScriptableObject
         BaseSpeed = bulletStats.BaseSpeed + characterStats.AdditionalBulletsSpeed;
         BaseSize = bulletStats.BaseSize + characterStats.AdditionalBulletsSize;
         BasePierce = bulletStats.BasePierce + characterStats.AdditionalBulletsPierce;
+        BaseBounce = bulletStats.BaseBounce + characterStats.AdditionalBulletsBounce;
         
         List<ElementalMultiplier> multipliers = new List<ElementalMultiplier>(characterStats.AttackMultipliers);
         
