@@ -12,31 +12,20 @@ public struct BuffData
     
     public StatsManagerEffect GetEffect(StatsManager target)
     {
-        switch (buffType)
+        return buffType switch
         {
-            case BuffType.Attack:
-                return new AttackBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType);
-            case BuffType.Defense:
-                return new DefenseBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType);
-            case BuffType.Speed:
-                return new SpeedBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType);
-            case BuffType.Health:
-                return new HealthBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType);
-            case BuffType.AttackSpeed:
-                return new AttackSpeedBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType);
-            case BuffType.Luck:
-                return new LuckBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType);
-            case BuffType.BulletSpeed:
-                return new BulletSpeedBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType);
-            case BuffType.BulletPierce:
-                return new BulletPierceBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType);
-            case BuffType.BulletSize:
-                return new BulletSizeBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType);
-            case BuffType.BulletBounce:
-                return new BulletBounceBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType);
-        }
-
-        return null;
+            BuffType.Attack => new AttackBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType),
+            BuffType.Defense => new DefenseBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType),
+            BuffType.Speed => new SpeedBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType),
+            BuffType.Health => new HealthBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType),
+            BuffType.AttackSpeed => new AttackSpeedBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType),
+            BuffType.Luck => new LuckBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType),
+            BuffType.BulletSpeed => new BulletSpeedBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType),
+            BuffType.BulletPierce => new BulletPierceBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType),
+            BuffType.BulletSize => new BulletSizeBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType),
+            BuffType.BulletBounce => new BulletBounceBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType),
+            _ => null
+        };
     }
 }
 

@@ -16,14 +16,14 @@ public class BulletHitModifierInfo : BulletModifierInfo
     
     public override BulletModifier GetModifier(IEffectTarget target)
     {
-        switch (type)
+        return type switch
         {
-            case HitModifierType.Explosive:
-                return new ExplosiveModifier(target, maxLevel, remainsAfterHit, priority, OnHitEffect);
-            case HitModifierType.Freezing:
-                return new FreezingModifier(target, maxLevel, remainsAfterHit, priority, OnHitEffect);
-        }
-
-        return null;
+            HitModifierType.Explosive => new ExplosiveModifier(target, maxLevel, remainsAfterHit, priority, OnHitEffect),
+            HitModifierType.Freezing => new FreezingModifier(target, maxLevel, remainsAfterHit, priority, OnHitEffect), 
+            _ => null
+        };
     }
+    
+    
 }
+

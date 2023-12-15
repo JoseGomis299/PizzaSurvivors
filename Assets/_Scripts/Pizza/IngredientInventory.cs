@@ -1,11 +1,10 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class IngredientInventory 
 {
-    public static Action OnInventoryChanged;
+    public static event Action OnInventoryChanged;
 
     private static Dictionary<Ingredient, int> _ingredients;
     public static IEnumerable<KeyValuePair<Ingredient, int>> Ingredients => _ingredients;

@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -8,7 +7,7 @@ public class IngredientPlacer : MonoBehaviour
 {
     private Pizza _pizza;
     
-    public Action OnIngredientChanged;
+    public event Action OnIngredientChanged;
 
     [Header("Pizza")]
     [SerializeField] private RectTransform pizzaBase;

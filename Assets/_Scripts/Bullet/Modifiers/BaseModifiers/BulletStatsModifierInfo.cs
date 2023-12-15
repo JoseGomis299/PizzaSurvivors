@@ -17,12 +17,11 @@ public class BulletStatsModifierInfo : BulletModifierInfo
     
     public override BulletModifier GetModifier(IEffectTarget target)
     {
-        switch (type)
+        return type switch
         {
-            case StatsModifierType.Size:
-                return new BulletSizeModifier(target, maxLevel, remainsAfterHit, priority, multiplier);
-        }
-        return null;
+            StatsModifierType.Size => new BulletSizeModifier(target, maxLevel, remainsAfterHit, priority, multiplier),
+            _ => null
+        };
     }
 }
 

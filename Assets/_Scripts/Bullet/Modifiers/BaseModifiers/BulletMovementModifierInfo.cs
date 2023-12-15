@@ -17,14 +17,11 @@ public class BulletMovementModifierInfo : BulletModifierInfo
     
     public override BulletModifier GetModifier(IEffectTarget target)
     {
-        switch (type)
+        return type switch
         {
-            case MovementModifierType.Sinusoidal:
-                return new SineMovementModifier(target, maxLevel, remainsAfterHit, priority, amplitude, frequency);
-            case MovementModifierType.Boomerang:
-                return new BoomerangModifier(target, maxLevel, remainsAfterHit, priority, amplitude, frequency);
-        }
-
-        return null;
+            MovementModifierType.Sinusoidal => new SineMovementModifier(target, maxLevel, remainsAfterHit, priority, amplitude, frequency),
+            MovementModifierType.Boomerang => new BoomerangModifier(target, maxLevel, remainsAfterHit, priority, amplitude, frequency),
+            _ => null
+        };
     }
 }

@@ -17,13 +17,11 @@ public class BulletShotModifierInfo : BulletModifierInfo
     
     public override BulletModifier GetModifier(IEffectTarget target)
     {
-        switch (type)
+        return type switch
         {
-            case ShootModifierType.TripleShot:
-                return new TripleShotModifier(target, maxLevel, remainsAfterHit, priority, modifiers);
-            case ShootModifierType.MultiDirectionalShot:
-                return new MultiDirectionalShotModifier(target, maxLevel, remainsAfterHit, priority, modifiers);
-        }
-        return null;
+            ShootModifierType.TripleShot => new TripleShotModifier(target, maxLevel, remainsAfterHit, priority, modifiers),
+            ShootModifierType.MultiDirectionalShot => new MultiDirectionalShotModifier(target, maxLevel, remainsAfterHit, priority, modifiers),
+            _ => null
+        };
     }
 }

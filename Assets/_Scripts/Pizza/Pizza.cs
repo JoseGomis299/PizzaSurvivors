@@ -1,13 +1,11 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using ProjectUtils.Helpers;
 
 public class Pizza : MonoBehaviour
 {
-    public static Action OnEnterPizzaView;
-    public static Action OnExitPizzaView;
+    public static event Action OnEnterPizzaView;
+    public static event Action OnExitPizzaView;
 
     private BulletSpawner _bulletSpawner;
     private StatsManager _statsManager;

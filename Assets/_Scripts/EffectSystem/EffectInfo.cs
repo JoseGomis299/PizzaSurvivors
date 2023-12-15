@@ -18,21 +18,15 @@ public class EffectInfo : ScriptableObject
     
     public BaseEffect GetEffect(StatsManager target)
     {
-        switch (effectType)
+        return effectType switch
         {
-            case EffectType.AttackBuff:
-                return new AttackBuff(target, duration, maxStacks, timerType, multiplier, incrementType);
-            case EffectType.DefenseBuff:
-                return new DefenseBuff(target, duration, maxStacks, timerType, multiplier, incrementType);
-            case EffectType.SpeedBuff:
-                return new SpeedBuff(target, duration, maxStacks, timerType, multiplier, incrementType);
-            case EffectType.HealthBuff:
-                return new HealthBuff(target, duration, maxStacks, timerType, multiplier, incrementType);
-            case EffectType.FreezingDebuff:
-                return new FreezingDebuff(target, duration, maxStacks, timerType, multiplier, incrementType);
-        }
-
-        return null;
+            EffectType.AttackBuff => new AttackBuff(target, duration, maxStacks, timerType, multiplier, incrementType),
+            EffectType.DefenseBuff => new DefenseBuff(target, duration, maxStacks, timerType, multiplier, incrementType),
+            EffectType.SpeedBuff => new SpeedBuff(target, duration, maxStacks, timerType, multiplier, incrementType),
+            EffectType.HealthBuff => new HealthBuff(target, duration, maxStacks, timerType, multiplier, incrementType),
+            EffectType.FreezingDebuff => new FreezingDebuff(target, duration, maxStacks, timerType, multiplier, incrementType),
+            _ => null
+        };
     }
 }
 
