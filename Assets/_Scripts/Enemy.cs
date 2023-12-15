@@ -3,18 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IDamageable
+public class Enemy : MonoBehaviour
 {
-    public float Health;
+    private StatsManager statsManager;
 
     private void Start()
     {
-        Health = GetComponent<StatsManager>().Stats.BaseHealth;
+        statsManager = GetComponent<StatsManager>();
     }
 
-    public void TakeDamage(float damage)
-    {
-        Health -= damage;
-    }
 
 }
