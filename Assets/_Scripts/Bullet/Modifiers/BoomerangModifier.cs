@@ -33,7 +33,7 @@ public class BoomerangModifier : BulletMovementModifier
         if (CurrentStacks >= 2)
         {
             _returnDirection =  (_spawnerPosition - (Vector2) EffectTarget.transform.position);
-            if(distance <= 0.3f) EffectTarget.gameObject.SetActive(false);
+            if(multiplier > 0 && distance <= 1f) EffectTarget.gameObject.SetActive(false);
         }
 
         EffectTarget.Direction += _returnDirection.normalized * (2 * lowMultiplier);

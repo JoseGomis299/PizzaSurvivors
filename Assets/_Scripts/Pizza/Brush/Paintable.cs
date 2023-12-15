@@ -9,8 +9,16 @@ public class Paintable : MonoBehaviour
 
     [SerializeField] private Texture2D baseTexture;
     [SerializeField] private Texture2D maskTexture;
-    [SerializeField] private Texture2D[] paintTextures;
-    private int _paintTextureIndex;
+
+    [Serializable]
+    class Paint
+    {
+        public Texture2D texture;
+        public int quantity;
+        public float targetQuantityPercentage;
+    }
+    [SerializeField] private Paint[] paints;
+    private int _paintIndex;
     
     [SerializeField] private bool useMaskAlpha = true;
     [SerializeField] private bool usePaintAlpha;
@@ -56,7 +64,7 @@ public class Paintable : MonoBehaviour
 
         _maskTexture = Instantiate(maskTexture ? maskTexture : baseTexture);
         _mainTexture = Instantiate(baseTexture);
-        _paintTexture = Instantiate(paintTextures[_paintTextureIndex]);
+        _paintTexture = Instantiate(paints[_paintIndex].texture);
         
         _material.SetTexture("_MainTex", _mainTexture);
         _material.SetTexture("_MaskTex", _maskTexture);
@@ -81,6 +89,12 @@ public class Paintable : MonoBehaviour
         
         if(_spriteRenderer != null) _spriteRenderer.material = _material;
         else _image.material = _material;
+        
+        
+        for (int i = 0; i < paints.Length; i++)
+        {
+            paints[i].quantity = (int)((paints[i].targetQuantityPercentage) * _maskTexture.width*_maskTexture.height);
+        }
     }
     
     private void ResetTexture(Texture2D texture, Color color)
@@ -97,7 +111,7 @@ public class Paintable : MonoBehaviour
         texture.Apply();
     }
 
-    public void Paint(Vector3 pos)
+    public void Draw(Vector3 pos)
     {
         Vector2 coords = Vector2.zero;
         if (_spriteRenderer != null)
@@ -109,6 +123,8 @@ public class Paintable : MonoBehaviour
         int coordX = (int)(coords.x*_maskTexture.width);
         int coordY = (int)(coords.y*_maskTexture.height);
         
+        float percentage = 0;
+        
         for (int y = 0; y < brush.size; y++)
         {
             for (int x = 0; x < brush.size; x++)
@@ -119,10 +135,18 @@ public class Paintable : MonoBehaviour
                 if (texX >= 0 && texX < _maskTexture.width && texY >= 0 && texY < _maskTexture.height && brush.GetPixel(x, y).a > 0)
                 {
                     Color maskColor = _maskTexture.GetPixel(texX, texY);
+                    if(maskColor == Color.white) continue;
+                    
                     if (!useMaskAlpha || maskColor.a > 0)
                     {
+                        if (paints[_paintIndex].quantity-- < 0)
+                        {
+                            _maskTexture.Apply();
+                            GetPercentages();
+                            return;
+                        }
                         _maskTexture.SetPixel(texX, texY, maskColor+brush.GetPixel(x, y));
-                        _pixelParent[texX + texY * _maskTexture.width] = _paintTextureIndex+1;
+                        _pixelParent[texX + texY * _maskTexture.width] = _paintIndex+1;
                     }
                 }
             }
@@ -134,10 +158,10 @@ public class Paintable : MonoBehaviour
     public void ChangePaint(int index)
     {
         CommitChanges();
-        if (index < paintTextures.Length && index >= 0)
+        if (index < paints.Length && index >= 0)
         {
-            _paintTextureIndex = index;
-            _paintTexture = Instantiate(paintTextures[_paintTextureIndex]);
+            _paintIndex = index;
+            _paintTexture = Instantiate(paints[_paintIndex].texture);
             _material.SetTexture("_MaskedTex", _paintTexture);
         }
     }
@@ -167,8 +191,8 @@ public class Paintable : MonoBehaviour
 
     public float[] GetPercentages()
     {
-        float[] percentages = new float[paintTextures.Length+1];
-        int[] pixelCount = new int[paintTextures.Length+1];
+        float[] percentages = new float[paints.Length+1];
+        int[] pixelCount = new int[paints.Length+1];
         int total = _pixelParent.Length;
         
         int height = useMaskAlpha ? _maskTexture.height : _mainTexture.height;
@@ -186,7 +210,14 @@ public class Paintable : MonoBehaviour
         for (int i = 0; i < percentages.Length; i++)
         {
             percentages[i] = (float)pixelCount[i]/total;
-            Debug.Log("Texture " + i + " has: " + pixelCount[i] + " pixels, it is: " + percentages[i]*100f + "%");
+        }
+
+        for (int i = 0; i < paints.Length; i++)
+        {
+            if(paints[i].targetQuantityPercentage > percentages[i+1])
+            {
+                paints[i].quantity = (int)((paints[i].targetQuantityPercentage - percentages[i+1]) * total);
+            }
         }
         
         return percentages;
@@ -194,6 +225,6 @@ public class Paintable : MonoBehaviour
     
     public Sprite GetSprite()
     {
-        return Sprite.Create(paintTextures[_paintTextureIndex], new Rect(Vector2.zero, new Vector2(baseTexture.width, baseTexture.height)), Vector2.one / 2f);
+        return Sprite.Create(paints[_paintIndex].texture, new Rect(Vector2.zero, new Vector2(baseTexture.width, baseTexture.height)), Vector2.one / 2f);
     }
 }

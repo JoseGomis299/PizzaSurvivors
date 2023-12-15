@@ -298,6 +298,57 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!1 &106489753
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 106489755}
+  - component: {fileID: 106489754}
+  m_Layer: 0
+  m_Name: Test
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &106489754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106489753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9190c820d58566e439ebbfeb25cf19f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredients:
+  - ingredient: {fileID: 11400000, guid: 750fe77108aeffa42a334b689cde428a, type: 2}
+    amount: 5
+  - ingredient: {fileID: 11400000, guid: c1a8f3e7641e3cf41ab0a7661198d98b, type: 2}
+    amount: 1
+  - ingredient: {fileID: 11400000, guid: f9eb09cc723a0d9469ba01d33b413975, type: 2}
+    amount: 3
+--- !u!4 &106489755
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106489753}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1296.4794, y: -1259.6414, z: -0.83285534}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &163244097
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,7 +675,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &217153147
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2515,8 +2566,10 @@ MonoBehaviour:
     size: 32
   baseTexture: {fileID: 2800000, guid: 67cb1ed814eec564fa61ff23876c48d9, type: 3}
   maskTexture: {fileID: 2800000, guid: 7af9f860ee6553244b2768bf53062350, type: 3}
-  paintTextures:
-  - {fileID: 2800000, guid: 7af9f860ee6553244b2768bf53062350, type: 3}
+  paints:
+  - texture: {fileID: 2800000, guid: 7af9f860ee6553244b2768bf53062350, type: 3}
+    quantity: 0
+    targetQuantityPercentage: 1
   useMaskAlpha: 1
   usePaintAlpha: 0
 --- !u!114 &671387155
@@ -3618,8 +3671,10 @@ MonoBehaviour:
     size: 32
   baseTexture: {fileID: 2800000, guid: 67cb1ed814eec564fa61ff23876c48d9, type: 3}
   maskTexture: {fileID: 2800000, guid: 0d39e205cb8f86b428bb4d2b04c6c319, type: 3}
-  paintTextures:
-  - {fileID: 2800000, guid: 0d39e205cb8f86b428bb4d2b04c6c319, type: 3}
+  paints:
+  - texture: {fileID: 2800000, guid: 0d39e205cb8f86b428bb4d2b04c6c319, type: 3}
+    quantity: 0
+    targetQuantityPercentage: 0.1
   useMaskAlpha: 1
   usePaintAlpha: 0
 --- !u!114 &1270351917
@@ -4302,9 +4357,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1

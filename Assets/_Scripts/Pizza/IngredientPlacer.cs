@@ -43,7 +43,7 @@ public class IngredientPlacer : MonoBehaviour
             if (Input.GetMouseButtonDown(0)) PlaceIngredient();
         }
         else if (_currentPaintable != null && Input.GetMouseButton(0)) 
-            _currentPaintable.Paint(Input.mousePosition);
+            _currentPaintable.Draw(Input.mousePosition);
 
         if (Input.GetMouseButtonDown(1))
             ClearSelection();

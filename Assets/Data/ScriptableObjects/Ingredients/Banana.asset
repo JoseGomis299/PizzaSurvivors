@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36e93d53c04a45cbb155e2f728573f02, type: 3}
-  m_Name: ExplosiveMushroom
+  m_Name: Banana
   m_EditorClassIdentifier: 
-  name: Explosive Mushroom
-  onPizzaSprite: {fileID: 21300000, guid: 70d739f6f71784e45ab96b781997f548, type: 3}
-  uiSprite: {fileID: 21300000, guid: 325a01a2176e79047a9f55f886b3cd01, type: 3}
+  name: Banana
+  onPizzaSprite: {fileID: 21300000, guid: 511218d0ccf5f0d4090d3b8557de538c, type: 3}
+  uiSprite: {fileID: 21300000, guid: 0814899c3703879429eca5ce46b72c6d, type: 3}
   <BulletModifiers>k__BackingField:
-  - {fileID: 11400000, guid: f2f1d8ec6e928224693b1e5816adca97, type: 2}
+  - {fileID: 11400000, guid: ae34107e5a8ae5f4ebad180a5a1ca401, type: 2}
   <Buffs>k__BackingField:
-  - buffType: 7
-    multiplier: -999
+  - buffType: 6
+    multiplier: 2
     incrementType: 0
