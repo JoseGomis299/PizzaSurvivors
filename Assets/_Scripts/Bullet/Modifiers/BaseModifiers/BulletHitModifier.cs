@@ -10,5 +10,5 @@ public abstract class BulletHitModifier : BulletModifier
         OnHitEffect = onHitEffect;
     }
 
-    public abstract void OnHit(IEffectTarget target, float damage, List<BulletHitModifier> hitModifiers);
+    public abstract void OnHit(IEffectTarget target, float damage, List<BulletHitModifier> hitModifiers, Element element);
 }

@@ -8,7 +8,7 @@ public class DefenseBuff : StatsManagerEffect
         if(CurrentStacks >= MaxStacks) return;
         AddStack();
         
-        EffectTarget.Stats.BaseDefense = IncrementStat(EffectTarget.Stats.BaseDefense, EffectTarget.BaseStats.BaseDefense);
+        EffectTarget.Stats.Defense = IncrementStat(EffectTarget.Stats.Defense, EffectTarget.BaseStats.Defense);
     }
 
     public override void DeApply()
@@ -20,7 +20,7 @@ public class DefenseBuff : StatsManagerEffect
     {
         for (int i = 0; i < CurrentStacks; i++)
         {
-            EffectTarget.Stats.BaseDefense = IncrementStat(EffectTarget.Stats.BaseDefense, EffectTarget.BaseStats.BaseDefense);
+            EffectTarget.Stats.Defense = IncrementStat(EffectTarget.Stats.Defense, EffectTarget.BaseStats.Defense);
         }
     }
 }

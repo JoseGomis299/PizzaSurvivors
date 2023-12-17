@@ -4,6 +4,6 @@ public class BulletSizeModifier : BulletStatsModifier
 
     public override void Apply()
     {
-        EffectTarget.Stats.BaseSize *= Multiplier;
+        EffectTarget.Stats.Size *= Multiplier;
     }
 }

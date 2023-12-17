@@ -12,22 +12,22 @@ public class ExplosiveModifier : BulletHitModifier
         AddStack();
     }
     
-    public override void OnHit(IEffectTarget target, float damage, List<BulletHitModifier> hitModifiers)
+    public override void OnHit(IEffectTarget target, float damage, List<BulletHitModifier> hitModifiers, Element element)
     {
-        var collisions = Physics2D.OverlapCircleAll(EffectTarget.transform.position, EffectTarget.Stats.BaseSize * 1.5f);
+        var collisions = Physics2D.OverlapCircleAll(EffectTarget.transform.position, EffectTarget.Stats.Size * 1.5f);
         foreach (var col in collisions)
         {
-            if(col.gameObject == EffectTarget.gameObject || !col.TryGetComponent(out IDamageable damageable)) continue;
-            damageable.TakeDamage(damage * 0.5f);
+            if((CurrentStacks >= 2 && col.gameObject == EffectTarget.Spawner.gameObject) || !col.TryGetComponent(out IDamageable damageable)) continue;
+            damageable.TakeDamage(damage * 0.5f, element);
             
             if(target != null && col.gameObject == ((MonoBehaviour)target).gameObject) continue;
             foreach (var modifier in hitModifiers)
             {
-                modifier.OnHit(col.GetComponent<IEffectTarget>(), damage * 0.5f, hitModifiers);
+                modifier.OnHit(col.GetComponent<IEffectTarget>(), damage * 0.5f, hitModifiers, element);
             }
         }
 
         GameObject effect = ObjectPool.Instance.InstantiateFromPool(OnHitEffect, EffectTarget.transform.position, Quaternion.identity, true);
-        effect.transform.localScale = Vector3.one * EffectTarget.Stats.BaseSize * 3;
+        effect.transform.localScale = Vector3.one * EffectTarget.Stats.Size * 3;
     }
 }

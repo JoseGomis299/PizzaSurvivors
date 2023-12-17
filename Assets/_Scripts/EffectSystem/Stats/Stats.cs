@@ -5,21 +5,19 @@ using UnityEngine;
 public class Stats : ScriptableObject
 {
     [field: Header("Base Stats")]
-    [field: SerializeField] public float BaseHealth {get; set;} = 100f;
-    [field: SerializeField] public float BaseDefense {get; set;} = 10f;
-    [field: SerializeField] public float BaseAttackSpeed { get; set; } = 100f;
-    [field: SerializeField] public float BaseAttack { get; set; } = 20f;
-    [field: SerializeField] public float BaseSpeed { get; set; } = 10f;
-    [field: SerializeField] public float BaseLuck { get; set; } = 7f;
+    [field: SerializeField] public float MaxHealth {get; set;} = 100f;
+    [field: SerializeField] public float Defense {get; set;} = 10f;
+    [field: SerializeField] public float AttackSpeed { get; set; } = 0.1f;
+    [field: SerializeField] public float Attack { get; set; } = 20f;
+    [field: SerializeField] public float Speed { get; set; } = 10f;
+    [field: SerializeField] public float Luck { get; set; } = 7f;
 
     [field: Header("Bullets Stats")]
     [field: SerializeField] public float AdditionalBulletsSpeed { get; set; } = 0f;
     [field: SerializeField] public int AdditionalBulletsPierce { get; set; } = 0;
     [field: SerializeField] public int AdditionalBulletsBounce { get; set; } = 0;
     [field: SerializeField] public float AdditionalBulletsSize { get; set; } = 0f;
-    
-    
-    
+
     [field:Header("Damage Multipliers")]
     [field: SerializeField] public List<ElementalMultiplier> DamageMultipliers { get; private set; }
     private Dictionary<Element, float> _damageMultipliers;
@@ -30,7 +28,7 @@ public class Stats : ScriptableObject
 
     public float GetReceivedDamage(Element element, float damage)
     {
-        return damage * GetDamageMultiplier(element) * (0.4f/(BaseDefense/10f) + 0.6f);
+        return damage * GetDamageMultiplier(element) * (0.4f/(Defense/10f) + 0.6f);
     }
     
     public float GetAttack(Element element, float attack)
@@ -52,12 +50,12 @@ public class Stats : ScriptableObject
 
     public void SetValues(Stats otherStats)
     {
-        BaseHealth = otherStats.BaseHealth;
-        BaseDefense = otherStats.BaseDefense;
-        BaseAttackSpeed = otherStats.BaseAttackSpeed;
-        BaseAttack = otherStats.BaseAttack;
-        BaseSpeed = otherStats.BaseSpeed;
-        BaseLuck = otherStats.BaseLuck;
+        MaxHealth = otherStats.MaxHealth;
+        Defense = otherStats.Defense;
+        AttackSpeed = otherStats.AttackSpeed;
+        Attack = otherStats.Attack;
+        Speed = otherStats.Speed;
+        Luck = otherStats.Luck;
         AdditionalBulletsPierce = otherStats.AdditionalBulletsPierce;
         AdditionalBulletsSpeed = otherStats.AdditionalBulletsSpeed;
         

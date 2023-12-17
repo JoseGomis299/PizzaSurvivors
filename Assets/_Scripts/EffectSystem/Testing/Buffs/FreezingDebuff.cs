@@ -16,7 +16,7 @@ public class FreezingDebuff : StatsManagerEffect
             return;
         }
         
-        EffectTarget.Stats.BaseSpeed = IncrementStat(EffectTarget.Stats.BaseSpeed, EffectTarget.BaseStats.BaseSpeed);
+        EffectTarget.Stats.Speed = IncrementStat(EffectTarget.Stats.Speed, EffectTarget.BaseStats.Speed);
     }
 
     public override void DeApply()
@@ -28,7 +28,7 @@ public class FreezingDebuff : StatsManagerEffect
     {
         for (int i = 0; i < CurrentStacks; i++)
         {
-            EffectTarget.Stats.BaseSpeed = IncrementStat(EffectTarget.Stats.BaseSpeed, EffectTarget.BaseStats.BaseSpeed);
+            EffectTarget.Stats.Speed = IncrementStat(EffectTarget.Stats.Speed, EffectTarget.BaseStats.Speed);
         }
     }
 }

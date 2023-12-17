@@ -1,29 +1,46 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(StatsManager))]
 public class HealthComponent : MonoBehaviour, IDamageable
 {
-    private StatsManager statsManager;
-    public float Health => statsManager.Stats.BaseHealth;
+    private StatsManager _statsManager;
+    private float _health;
+    
+    public float Health => _health;
+    public float MaxHealth => _statsManager.Stats.MaxHealth;
 
-    public event Action<float> onHealthUpdate;
+    public event Action<float> OnHealthUpdate;
+    public event Action<float> OnMaxHealthUpdate;
 
-    private void Start()
+    private void Awake()
     {
-        statsManager = GetComponent<StatsManager>();
+        _statsManager = GetComponent<StatsManager>();
+        _health = _statsManager.Stats.MaxHealth;
+    }
+    
+    public void Heal(float amount)
+    {
+        _health += amount;
+        
+        if(_health > MaxHealth) _health = MaxHealth;
+        OnHealthUpdate?.Invoke(Health);
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, Element element)
     {
-        statsManager.Stats.BaseHealth -= statsManager.Stats.GetReceivedDamage(Element.None, damage);
-        if (Health <= 0)
+        _health -= _statsManager.Stats.GetReceivedDamage(element, damage);
+        if (_health <= 0)
         {
             gameObject.SetActive(false);
         }
         //Debug.Log(statsManager.Stats.BaseHealth);
-        onHealthUpdate?.Invoke(Health);
+        OnHealthUpdate?.Invoke(_health);
     }
 
+    public void SetMaxHealth(float maxHealth)
+    {
+        _statsManager.Stats.MaxHealth = maxHealth;
+        OnMaxHealthUpdate?.Invoke(maxHealth);
+    }
 }

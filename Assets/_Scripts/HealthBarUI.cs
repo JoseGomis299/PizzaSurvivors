@@ -7,24 +7,32 @@ using UnityEngine.UI;
 public class HealthBarUI : MonoBehaviour
 {
     [SerializeField] private Slider healthBarSlider;
-    private HealthComponent healthComponent;
+    private HealthComponent _healthComponent;
 
     private void Start()
     {
-        healthComponent = GetComponent<HealthComponent>();
+        _healthComponent = GetComponent<HealthComponent>();
 
-        healthComponent.onHealthUpdate += UpdateSlider;
-        healthBarSlider.maxValue = healthComponent.Health;
-        healthBarSlider.value = healthComponent.Health;
+        _healthComponent.OnHealthUpdate += UpdateSlider;
+        _healthComponent.OnMaxHealthUpdate += UpdateMaxValue;
+        
+        healthBarSlider.maxValue = _healthComponent.Health;
+        healthBarSlider.value = _healthComponent.Health;
     }
 
     private void OnDestroy()
     {
-        healthComponent.onHealthUpdate -= UpdateSlider;
+        _healthComponent.OnHealthUpdate -= UpdateSlider;
+        _healthComponent.OnMaxHealthUpdate -= UpdateMaxValue;
     }
 
     private void UpdateSlider(float health)
     {
         healthBarSlider.value = health;
+    }
+    
+    private void UpdateMaxValue(float maxHealth)
+    {
+        healthBarSlider.maxValue = maxHealth;
     }
 }

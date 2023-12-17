@@ -2,23 +2,24 @@ using System.Collections.Generic;
 using ProjectUtils.Helpers;
 using UnityEngine;
 
+[RequireComponent(typeof(CharacterMovement))]
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float speed = 5f;
-    
-    private Vector2 _movement;
-    private Rigidbody2D _rb;
+    private Vector2 _direction;
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
     private BulletSpawner _bulletSpawner;
+    
+    private CharacterMovement _playerMovement;
 
     public List<BulletModifierInfo> modifiers;
     private void Awake()
     {
-        _rb = GetComponent<Rigidbody2D>();
         //_animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _bulletSpawner = GetComponent<BulletSpawner>();
+        
+        _playerMovement = GetComponent<CharacterMovement>();
         
         _bulletSpawner.Initialize(modifiers);
     }
@@ -27,15 +28,18 @@ public class PlayerController : MonoBehaviour
     {
         if(Time.timeScale == 0f) return;
         
-        _movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        _movement.Normalize();
+        _direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        _direction.Normalize();
+        
+        if (_direction.x > 0) _spriteRenderer.flipX = false;
+        else if (_direction.x < 0) _spriteRenderer.flipX = true;
         
         Vector2 mousePos = Helpers.Camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         mousePos.Normalize();
         
         _bulletSpawner.MoveFirePoint(mousePos);
         
-        if (Input.GetMouseButtonDown(0) && !Helpers.PointerIsOverUi())
+        if (Input.GetMouseButton(0))
         {
             _bulletSpawner.SpawnBullet(mousePos);
         }
@@ -43,9 +47,6 @@ public class PlayerController : MonoBehaviour
     
     private void FixedUpdate()
     {
-        _rb.velocity = _movement * speed;
-        
-        if (_movement.x > 0) _spriteRenderer.flipX = false;
-        else if (_movement.x < 0) _spriteRenderer.flipX = true;
+        _playerMovement.UpdateMovement(_direction);
     }
 }

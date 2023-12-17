@@ -8,7 +8,7 @@ public class LuckBuff : StatsManagerEffect
         if(CurrentStacks >= MaxStacks) return;
         AddStack();
 
-        EffectTarget.Stats.BaseLuck = IncrementStat(EffectTarget.Stats.BaseLuck, EffectTarget.BaseStats.BaseLuck);
+        EffectTarget.Stats.Luck = IncrementStat(EffectTarget.Stats.Luck, EffectTarget.BaseStats.Luck);
     }
 
     public override void DeApply()
@@ -20,7 +20,7 @@ public class LuckBuff : StatsManagerEffect
     {
         for (int i = 0; i < CurrentStacks; i++)
         {
-            EffectTarget.Stats.BaseLuck = IncrementStat(EffectTarget.Stats.BaseLuck, EffectTarget.BaseStats.BaseLuck);
+            EffectTarget.Stats.Luck = IncrementStat(EffectTarget.Stats.Luck, EffectTarget.BaseStats.Luck);
         }
     }
 }

@@ -18,6 +18,8 @@ public class BulletSpawner : MonoBehaviour, IEffectTarget
     private List<BulletShotModifier> _shootModifiersList;
 
     //private HashSet<Bullet> _bullets;
+    
+    private float _lastShotTime;
 
     public void Initialize(List<BulletModifierInfo> modifiers)
     {
@@ -25,7 +27,7 @@ public class BulletSpawner : MonoBehaviour, IEffectTarget
         _shootModifiers = new Dictionary<Type, BulletShotModifier>();
         _modifiers = new List<BulletModifierInfo>();
         //_bullets = new HashSet<Bullet>();
-        
+
         foreach (var modifier in modifiers)
         {
             if (modifier is BulletShotModifierInfo)
@@ -36,10 +38,14 @@ public class BulletSpawner : MonoBehaviour, IEffectTarget
         _shootModifiersList = _shootModifiers.Values.OrderByDescending(x => x.Priority).ToList();
         
         _firePointDistance = Vector2.Distance(firePoint.position, transform.position);
+        
+        _lastShotTime = float.MinValue;
     }
 
     public void SpawnBullet(Vector2 direction)
     {
+        if(_characterStats.AttackSpeed > Time.time - _lastShotTime) return;
+        
         //Get all BulletShotData (directions, modifiers)
         List<BulletShotData> shotData = new List<BulletShotData>();
         shotData.Add(new BulletShotData(firePoint.position, _firePointDistance, direction, null));
@@ -71,6 +77,8 @@ public class BulletSpawner : MonoBehaviour, IEffectTarget
             bulletComponent.Initialize(dir, modifiers, this, _characterStats);
             //_bullets.Add(bulletComponent);
         }
+        
+        _lastShotTime = Time.time;
     }
 
     // private void FixedUpdate()

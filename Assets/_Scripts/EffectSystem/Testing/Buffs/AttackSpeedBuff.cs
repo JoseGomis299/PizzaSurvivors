@@ -8,7 +8,7 @@ public class AttackSpeedBuff : StatsManagerEffect
         if(CurrentStacks >= MaxStacks) return;
         AddStack();
 
-        EffectTarget.Stats.BaseAttackSpeed = IncrementStat(EffectTarget.Stats.BaseAttackSpeed, EffectTarget.BaseStats.BaseAttackSpeed);
+        EffectTarget.Stats.AttackSpeed = IncrementStat(EffectTarget.Stats.AttackSpeed, EffectTarget.BaseStats.AttackSpeed);
     }
 
     public override void DeApply()
@@ -20,7 +20,7 @@ public class AttackSpeedBuff : StatsManagerEffect
     {
         for (int i = 0; i < CurrentStacks; i++)
         {
-            EffectTarget.Stats.BaseAttackSpeed = IncrementStat(EffectTarget.Stats.BaseAttackSpeed, EffectTarget.BaseStats.BaseAttackSpeed);
+            EffectTarget.Stats.AttackSpeed = IncrementStat(EffectTarget.Stats.AttackSpeed, EffectTarget.BaseStats.AttackSpeed);
         }
     }
 }

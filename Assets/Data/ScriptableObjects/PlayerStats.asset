@@ -12,19 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81bd3edd334f42b9a096ed79eb52c70b, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
-  <BaseHealth>k__BackingField: 100
-  <BaseDefense>k__BackingField: 10
-  <BaseMana>k__BackingField: 100
-  <BaseAttack>k__BackingField: 20
-  <BaseSpeed>k__BackingField: 10
-  <BaseLuck>k__BackingField: 7
-  damageMultipliers:
-  - Element: 2
-    Multiplier: 1.5
-  - Element: 4
-    Multiplier: 0.8
-  attackMultipliers:
-  - Element: 2
-    Multiplier: 0.6
-  - Element: 4
-    Multiplier: 2
+  <MaxHealth>k__BackingField: 100
+  <Defense>k__BackingField: 10
+  <AttackSpeed>k__BackingField: 0.25
+  <Attack>k__BackingField: 10
+  <Speed>k__BackingField: 5
+  <Luck>k__BackingField: 0
+  <AdditionalBulletsSpeed>k__BackingField: 0
+  <AdditionalBulletsPierce>k__BackingField: 0
+  <AdditionalBulletsBounce>k__BackingField: 0
+  <AdditionalBulletsSize>k__BackingField: 0
+  <DamageMultipliers>k__BackingField: []
+  <AttackMultipliers>k__BackingField: []

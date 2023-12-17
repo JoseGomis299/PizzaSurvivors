@@ -10,7 +10,7 @@ public class AttackBuff : StatsManagerEffect
         if(CurrentStacks >= MaxStacks) return;
         AddStack();
 
-        EffectTarget.Stats.BaseAttack = IncrementStat(EffectTarget.Stats.BaseAttack, EffectTarget.BaseStats.BaseAttack);
+        EffectTarget.Stats.Attack = IncrementStat(EffectTarget.Stats.Attack, EffectTarget.BaseStats.Attack);
     }
 
     public override void DeApply()
@@ -22,7 +22,7 @@ public class AttackBuff : StatsManagerEffect
     {
         for (int i = 0; i < CurrentStacks; i++)
         {
-            EffectTarget.Stats.BaseAttack = IncrementStat(EffectTarget.Stats.BaseAttack, EffectTarget.BaseStats.BaseAttack);
+            EffectTarget.Stats.Attack = IncrementStat(EffectTarget.Stats.Attack, EffectTarget.BaseStats.Attack);
         }
     }
 }

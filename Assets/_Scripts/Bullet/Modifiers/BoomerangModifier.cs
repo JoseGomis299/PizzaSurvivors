@@ -7,6 +7,7 @@ public class BoomerangModifier : BulletMovementModifier
     private Vector2 _returnDirection = Vector2.zero;
     
     private Vector2 _spawnerPosition;
+    private bool _hasReturned = false;
 
     public BoomerangModifier(IEffectTarget target, int maxStacks, int remainsAfterHit, int priority, float amplitude, float frequency) : base(target, maxStacks, remainsAfterHit, priority, amplitude, frequency)
     {
@@ -29,11 +30,11 @@ public class BoomerangModifier : BulletMovementModifier
         float lowMultiplier = Mathf.Lerp(-1, 1, t);
         float highMultiplier = Mathf.Lerp(1, -1, time / frequency - t/2f);
 
-        if(multiplier < 0.5f) _returnDirection =  (_startPosition - (Vector2) EffectTarget.transform.position);
-        if (CurrentStacks >= 2)
+        if(multiplier < 0.25f) _returnDirection =  Vector2.Lerp(_returnDirection,_startPosition - (Vector2) EffectTarget.transform.position, Time.fixedDeltaTime * 10f);
+        if (CurrentStacks >= 2 && !_hasReturned)
         {
-            _returnDirection =  (_spawnerPosition - (Vector2) EffectTarget.transform.position);
-            if(multiplier > 0 && distance <= 1f) EffectTarget.gameObject.SetActive(false);
+            if (multiplier >= 0 && distance <= 1.25f) _hasReturned = true;
+            else _returnDirection =  Vector2.Lerp(_returnDirection,_spawnerPosition - (Vector2) EffectTarget.transform.position, Time.fixedDeltaTime * 15f);
         }
 
         EffectTarget.Direction += _returnDirection.normalized * (2 * lowMultiplier);

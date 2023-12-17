@@ -15,7 +15,6 @@ public class Bullet : MonoBehaviour, IEffectTarget
     private List<BulletModifier> _modifiers;
 
     public BulletSpawner Spawner { get; private set; }
-    private Element _element;
 
     //Movement
     public float Speed { get; set; }
@@ -35,10 +34,9 @@ public class Bullet : MonoBehaviour, IEffectTarget
         _gfx = transform.GetChild(0).gameObject;
     }
     
-    public void Initialize(Vector2 direction, List<BulletModifierInfo> modifiers, BulletSpawner spawner, Stats characterStats, Element element = Element.None)
+    public void Initialize(Vector2 direction, List<BulletModifierInfo> modifiers, BulletSpawner spawner, Stats characterStats)
     {
         Spawner = spawner;
-        _element = element;
         
         _modifiers = new List<BulletModifier>();
         foreach (var modifier in modifiers)
@@ -51,7 +49,7 @@ public class Bullet : MonoBehaviour, IEffectTarget
         foreach (var modifier in _modifiers.OfType<BulletStatsModifier>())
             modifier.Apply();
         
-        transform.localScale = Vector3.one * _stats.BaseSize;
+        transform.localScale = Vector3.one * _stats.Size;
 
         _movementModifiers = new Dictionary<Type, BulletMovementModifier>();
         _hitModifiers = new Dictionary<Type, BulletHitModifier>();
@@ -74,7 +72,7 @@ public class Bullet : MonoBehaviour, IEffectTarget
             }
         }
         
-        _initialSpeed = Speed = _stats.BaseSpeed;
+        _initialSpeed = Speed = _stats.Speed;
         _initialDirection = Direction = direction;
     }
 
@@ -108,25 +106,25 @@ public class Bullet : MonoBehaviour, IEffectTarget
     {
         if((Spawner != null && col.gameObject == Spawner.gameObject) || col.CompareTag("Bullet")) return;
         
-        float attack = _stats.GetAttack(_element, _stats.BaseDamage);
+        float attack = _stats.GetAttack(_stats.Element, _stats.Damage);
 
         if (col.TryGetComponent(out IDamageable damageable))
-            damageable.TakeDamage(attack);
+            damageable.TakeDamage(attack, _stats.Element);
 
         foreach (var modifier in _hitModifiers)
         {
-            modifier.Value.OnHit(col.GetComponent<IEffectTarget>(), attack, modifier.Value is ExplosiveModifier ? _hitModifiers.Values.Where(m => m.RemainsAfterHit > 0 && m != modifier.Value).ToList() : null);
+            modifier.Value.OnHit(col.GetComponent<IEffectTarget>(), attack, modifier.Value is ExplosiveModifier ? _hitModifiers.Values.Where(m => m.RemainsAfterHit > 0 && m != modifier.Value).ToList() : null, _stats.Element);
         }
 
         //Bounce if colliding with not an enemy
-        if (damageable == null && _stats.BaseBounce-- > 0)
+        if (damageable == null && _stats.Bounce-- > 0)
         {
             Vector2 normal = ((Vector2) (transform.position - (Vector3)Direction) - col.ClosestPoint(transform.position - (Vector3)Direction)).normalized;
             _initialDirection = Vector2.Reflect(Direction, normal);
             return;
         }
         //Piece if colliding with an enemy
-        if(_stats.BasePierce-- <= 0 || damageable == null) gameObject.SetActive(false);
+        if(_stats.Pierce-- <= 0 || damageable == null) gameObject.SetActive(false);
     }
 
     public void ApplyEffect(IEffect effect) { }

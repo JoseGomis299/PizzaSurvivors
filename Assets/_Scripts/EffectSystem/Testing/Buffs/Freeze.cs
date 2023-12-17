@@ -15,7 +15,7 @@ public class Freeze : BaseEffect
         if(CurrentStacks >= MaxStacks) return;
         AddStack();
 
-        ((StatsManager)EffectTarget).Stats.BaseSpeed *= 0;
+        ((StatsManager)EffectTarget).Stats.Speed *= 0;
         _renderer.color = Color.blue;
     }
 

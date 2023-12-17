@@ -1,6 +1,11 @@
 public class HealthBuff : StatsManagerEffect
 {
-    public HealthBuff(StatsManager target, float duration, int maxStacks, TimerType timerType , float healthIncrement, IncrementType incrementType) : base(target, duration, maxStacks, timerType, healthIncrement, incrementType){}
+    private HealthComponent _healthComponent;
+    public HealthBuff(StatsManager target, float duration, int maxStacks, TimerType timerType, float healthIncrement,
+        IncrementType incrementType) : base(target, duration, maxStacks, timerType, healthIncrement, incrementType)
+    {
+        _healthComponent = target.GetComponent<HealthComponent>();
+    }
 
     public override void Apply()
     {
@@ -8,7 +13,7 @@ public class HealthBuff : StatsManagerEffect
         if(CurrentStacks >= MaxStacks) return;
         AddStack();
 
-        EffectTarget.Stats.BaseHealth = IncrementStat(EffectTarget.Stats.BaseHealth, EffectTarget.BaseStats.BaseHealth);
+        _healthComponent.SetMaxHealth(IncrementStat(EffectTarget.Stats.MaxHealth, EffectTarget.BaseStats.MaxHealth));
     }
 
     public override void DeApply()
@@ -20,7 +25,7 @@ public class HealthBuff : StatsManagerEffect
     {
         for (int i = 0; i < CurrentStacks; i++)
         {
-            EffectTarget.Stats.BaseHealth = IncrementStat(EffectTarget.Stats.BaseHealth, EffectTarget.BaseStats.BaseHealth);
+            _healthComponent.SetMaxHealth(IncrementStat(EffectTarget.Stats.MaxHealth, EffectTarget.BaseStats.MaxHealth));
         }
     }
 }

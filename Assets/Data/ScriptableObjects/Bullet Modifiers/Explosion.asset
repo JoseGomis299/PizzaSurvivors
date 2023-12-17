@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Explosion
   descriptionsByLevel: []
-  type: {fileID: 11500000, guid: 8f6d9806265f40b092b2c9c164fc18f0, type: 3}
-  maxLevel: 1
+  maxLevel: 2
   remainsAfterHit: 100
   priority: 100
   OnHitEffect: {fileID: 1694715364255247975, guid: c7601adafcc51ab47aef5e5042abbe73, type: 3}
+  type: 0
