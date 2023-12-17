@@ -9,12 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70038bdc3d8e40a5a172616ff044b7f2, type: 3}
-  m_Name: Bullet Stats
+  m_Script: {fileID: 11500000, guid: 9b51703f307d4e139e8e17acd209facb, type: 3}
+  m_Name: Fragmentation
   m_EditorClassIdentifier: 
-  <Damage>k__BackingField: 20
-  <Speed>k__BackingField: 10
-  <Size>k__BackingField: 1
-  <Pierce>k__BackingField: 0
-  <Bounce>k__BackingField: 0
-  <Element>k__BackingField: 0
+  name: Fragmentation
+  descriptionsByLevel: []
+  maxLevel: 2
+  remainsAfterHit: 0
+  priority: 0
+  OnHitEffect: {fileID: 0}
+  type: 2

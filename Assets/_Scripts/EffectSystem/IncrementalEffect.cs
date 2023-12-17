@@ -30,6 +30,9 @@ public abstract class IncrementalEffect : BaseEffect {
             case IncrementType.KeepBestAdditive:
                 currentStat = Mathf.Max(currentStat, baseStat + increment);
                 break;
+            case IncrementType.Set:
+                currentStat = increment;
+                break;
         }
 
         if(this is not BulletPierceBuff && currentStat < 0) currentStat = 0;
@@ -63,5 +66,6 @@ public enum IncrementType
     /// Stat = Stat * Increment
     /// </summary>
     [Tooltip("Stat = Stat * Increment")]
-    Exponential
+    Exponential,
+    Set
 }

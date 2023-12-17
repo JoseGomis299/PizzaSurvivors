@@ -20,3 +20,6 @@ MonoBehaviour:
   - buffType: 0
     multiplier: 3
     incrementType: 0
+  - buffType: 10
+    multiplier: 0.1
+    incrementType: 4

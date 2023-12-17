@@ -8,6 +8,8 @@ public class BoomerangModifier : BulletMovementModifier
     
     private Vector2 _spawnerPosition;
     private bool _hasReturned = false;
+    
+    private Transform _spawner;
 
     public BoomerangModifier(IEffectTarget target, int maxStacks, int remainsAfterHit, int priority, float amplitude, float frequency) : base(target, maxStacks, remainsAfterHit, priority, amplitude, frequency)
     {
@@ -16,12 +18,14 @@ public class BoomerangModifier : BulletMovementModifier
     public override void Apply()
     {
         AddStack();
-        _startPosition = EffectTarget.Spawner.transform.position;
+        _spawner = EffectTarget.PreviousHit != null ? ((MonoBehaviour) EffectTarget.PreviousHit).transform : EffectTarget.Spawner.transform;
+        _startPosition = _spawner.position;
     }
     
     public override void ModifyMovement()
     {
-        if(EffectTarget.Spawner != null) _spawnerPosition = EffectTarget.Spawner.transform.position;
+        if(_spawner != null) _spawnerPosition = _spawner.position;
+        Debug.Log(_spawner);
         
         float distance = Vector2.Distance(EffectTarget.transform.position, _spawnerPosition);
         float multiplier = Mathf.Lerp(-1, 1, time / frequency);

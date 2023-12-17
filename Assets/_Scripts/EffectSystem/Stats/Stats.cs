@@ -6,17 +6,32 @@ public class Stats : ScriptableObject
 {
     [field: Header("Base Stats")]
     [field: SerializeField] public float MaxHealth {get; set;} = 100f;
-    [field: SerializeField] public float Defense {get; set;} = 10f;
+    [SerializeField, Range(0,100), InspectorName("Defense")] private float defense = 10f;
+    public float Defense
+    {
+        get => defense;
+        set
+        {
+            if(value > 100) value = 100;
+            defense = value;
+        }
+    } 
+
+    [SerializeField] private AnimationCurve defenseCurve;
+    
+    [field: Space(10)]
     [field: SerializeField] public float AttackSpeed { get; set; } = 0.1f;
     [field: SerializeField] public float Attack { get; set; } = 20f;
     [field: SerializeField] public float Speed { get; set; } = 10f;
     [field: SerializeField] public float Luck { get; set; } = 7f;
 
     [field: Header("Bullets Stats")]
+    [field: SerializeField] public float BulletsMaxRange { get; set; } = 100f;
     [field: SerializeField] public float AdditionalBulletsSpeed { get; set; } = 0f;
     [field: SerializeField] public int AdditionalBulletsPierce { get; set; } = 0;
     [field: SerializeField] public int AdditionalBulletsBounce { get; set; } = 0;
     [field: SerializeField] public float AdditionalBulletsSize { get; set; } = 0f;
+    
 
     [field:Header("Damage Multipliers")]
     [field: SerializeField] public List<ElementalMultiplier> DamageMultipliers { get; private set; }
@@ -25,10 +40,11 @@ public class Stats : ScriptableObject
     [field:Header("Attack Multipliers")]
     [field: SerializeField] public List<ElementalMultiplier> AttackMultipliers { get; private set; }
     private Dictionary<Element, float> _attackMultipliers;
+    
 
     public float GetReceivedDamage(Element element, float damage)
     {
-        return damage * GetDamageMultiplier(element) * (0.4f/(Defense/10f) + 0.6f);
+        return damage * GetDamageMultiplier(element) * (0.5f*defenseCurve.Evaluate(defense/100f) + 0.5f);
     }
     
     public float GetAttack(Element element, float attack)
@@ -58,6 +74,11 @@ public class Stats : ScriptableObject
         Luck = otherStats.Luck;
         AdditionalBulletsPierce = otherStats.AdditionalBulletsPierce;
         AdditionalBulletsSpeed = otherStats.AdditionalBulletsSpeed;
+        AdditionalBulletsBounce = otherStats.AdditionalBulletsBounce;
+        AdditionalBulletsSize = otherStats.AdditionalBulletsSize;
+        BulletsMaxRange = otherStats.BulletsMaxRange;
+        
+        defenseCurve = otherStats.defenseCurve;
         
         DamageMultipliers = new List<ElementalMultiplier>(otherStats.DamageMultipliers);
         AttackMultipliers = new List<ElementalMultiplier>(otherStats.AttackMultipliers);

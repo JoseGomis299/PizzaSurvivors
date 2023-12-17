@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class BulletSpawner : MonoBehaviour, IEffectTarget
 {
-    [SerializeField] private GameObject bulletPrefab;
+    [field: SerializeField] public GameObject bulletPrefab { get; private set; }
     private Stats _characterStats;
     
     [SerializeField] private Transform firePoint;

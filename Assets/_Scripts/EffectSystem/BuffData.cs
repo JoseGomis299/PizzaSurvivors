@@ -24,6 +24,7 @@ public struct BuffData
             BuffType.BulletPierce => new BulletPierceBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType),
             BuffType.BulletSize => new BulletSizeBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType),
             BuffType.BulletBounce => new BulletBounceBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType),
+            BuffType.BulletMaxRange => new BulletMaxRangeBuff(target, 1, 1, TimerType.Infinite, multiplier, incrementType),
             _ => null
         };
     }
@@ -40,5 +41,6 @@ public enum BuffType
     BulletSpeed,
     BulletPierce,
     BulletSize,
-    BulletBounce
+    BulletBounce,
+    BulletMaxRange
 }

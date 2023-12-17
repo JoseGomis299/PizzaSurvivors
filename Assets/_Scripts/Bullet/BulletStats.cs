@@ -8,7 +8,8 @@ public class BulletStats : ScriptableObject
     [field: SerializeField] public float Damage { get; set; } = 20f;
     [field: SerializeField] public float Speed { get; set; } = 10f;
     [field: SerializeField] public float Size { get; set; } = 1f;
-    
+    public float MaxRange { get; private set; }
+
     [field: SerializeField] public int Pierce { get; set; } = 0;
     [field: SerializeField] public int Bounce { get; set; } = 0;
     
@@ -28,12 +29,27 @@ public class BulletStats : ScriptableObject
         Size = bulletStats.Size + characterStats.AdditionalBulletsSize;
         Pierce = bulletStats.Pierce + characterStats.AdditionalBulletsPierce;
         Bounce = bulletStats.Bounce + characterStats.AdditionalBulletsBounce;
+        MaxRange = characterStats.BulletsMaxRange;
         
         List<ElementalMultiplier> multipliers = new List<ElementalMultiplier>(characterStats.AttackMultipliers);
         
         _attackMultipliers = new Dictionary<Element, float>();
         foreach (var multiplier in multipliers)
             _attackMultipliers.Add(multiplier.Element, multiplier.Multiplier);
+    }
+    
+    public void SetValues(BulletStats bulletStats)
+    {
+        Damage = bulletStats.Damage;
+        Speed = bulletStats.Speed;
+        Size = bulletStats.Size;
+        Pierce = bulletStats.Pierce;
+        Bounce = bulletStats.Bounce;
+        MaxRange = bulletStats.MaxRange;
+        
+        _attackMultipliers = new Dictionary<Element, float>();
+        foreach (var multiplier in bulletStats._attackMultipliers)
+            _attackMultipliers.Add(multiplier.Key, multiplier.Value);
     }
     
     public void AddAttackMultiplier(Element element, float multiplier)

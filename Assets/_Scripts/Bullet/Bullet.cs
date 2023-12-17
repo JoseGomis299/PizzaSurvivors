@@ -8,14 +8,17 @@ public class Bullet : MonoBehaviour, IEffectTarget
 {
     [SerializeField] private BulletStats stats;
     private BulletStats _stats;
-
-    public BulletStats BaseStats => stats;
+    private Stats _characterStats;
     public BulletStats Stats => _stats;
 
-    private List<BulletModifier> _modifiers;
+    private List<BulletModifierInfo> _modifiersInfo;
 
     public BulletSpawner Spawner { get; private set; }
+    public int ID { get; private set; }
+    public IEffectTarget PreviousHit { get; private set; }
 
+    private Vector3 _initialPosition;
+    
     //Movement
     public float Speed { get; set; }
     private float _initialSpeed;
@@ -33,47 +36,111 @@ public class Bullet : MonoBehaviour, IEffectTarget
         _rb = GetComponent<Rigidbody2D>();
         _gfx = transform.GetChild(0).gameObject;
     }
+
+    public void Initialize(Bullet other, Vector2 direction, IEffectTarget previousHit)
+    {
+        Spawner = other.Spawner;
+        _initialPosition = transform.position;
+        ID = other.ID + 1;
+        
+        PreviousHit = previousHit;
+
+        _stats = ScriptableObject.CreateInstance<BulletStats>();
+        _stats.SetValues(other._characterStats, stats);
+        _characterStats = other._characterStats;
+        
+        _modifiersInfo = new List<BulletModifierInfo>();
+        
+        _movementModifiers = new Dictionary<Type, BulletMovementModifier>();
+        _hitModifiers = new Dictionary<Type, BulletHitModifier>();
+        
+        foreach (var mod in other._modifiersInfo)
+        {
+            var modifier = mod.GetModifier(this);
+            float remains = other._hitModifiers.ContainsKey(modifier.GetType()) ? other._hitModifiers[modifier.GetType()].RemainsAfterHit : mod.remainsAfterHit;
+            if(remains - ID < 0) continue;
+
+            _modifiersInfo.Add(mod);
+
+            switch (modifier)
+            {
+                case BulletStatsModifier statsModifier:
+                    statsModifier.Apply();
+                    break;
+                case BulletMovementModifier movementModifier:
+                {
+                    if(!_movementModifiers.ContainsKey(movementModifier.GetType()))
+                        _movementModifiers.Add(movementModifier.GetType(), movementModifier);
+            
+                    _movementModifiers[movementModifier.GetType()].Apply();
+                    break;
+                }
+                case BulletHitModifier hitModifier:
+                {
+                    if(!_hitModifiers.ContainsKey(hitModifier.GetType()))
+                        _hitModifiers.Add(hitModifier.GetType(), hitModifier);
+            
+                    _hitModifiers[hitModifier.GetType()].Apply();
+                    break;
+                }
+            }
+        }
+        
+        transform.localScale = Vector3.one * _stats.Size;
+
+        _initialSpeed = Speed = _stats.Speed;
+        _initialDirection = Direction = direction.normalized;
+        
+        transform.right = Direction;
+    }
     
     public void Initialize(Vector2 direction, List<BulletModifierInfo> modifiers, BulletSpawner spawner, Stats characterStats)
     {
         Spawner = spawner;
+        _initialPosition = transform.position;
+        ID = 0;
         
-        _modifiers = new List<BulletModifier>();
-        foreach (var modifier in modifiers)
-            _modifiers.Add(modifier.GetModifier(this));
-
         _stats = ScriptableObject.CreateInstance<BulletStats>();
         _stats.SetValues(characterStats, stats);
-
-        //Apply all bullet stats modifiers
-        foreach (var modifier in _modifiers.OfType<BulletStatsModifier>())
-            modifier.Apply();
+        _characterStats = characterStats;
         
-        transform.localScale = Vector3.one * _stats.Size;
-
+        _modifiersInfo = new List<BulletModifierInfo>(modifiers);
+        
         _movementModifiers = new Dictionary<Type, BulletMovementModifier>();
         _hitModifiers = new Dictionary<Type, BulletHitModifier>();
-        //If there are any bullet modifiers that need to be applied on shoot, apply them and add them to the dictionaries
-        foreach (var modifier in _modifiers)
+        
+        foreach (var mod in modifiers)
         {
-            if (modifier is BulletMovementModifier movementModifier)
+            var modifier = mod.GetModifier(this);
+
+            switch (modifier)
             {
-                if(!_movementModifiers.ContainsKey(movementModifier.GetType()))
-                    _movementModifiers.Add(movementModifier.GetType(), movementModifier);
+                case BulletStatsModifier statsModifier:
+                    statsModifier.Apply();
+                    break;
+                case BulletMovementModifier movementModifier:
+                {
+                    if(!_movementModifiers.ContainsKey(movementModifier.GetType()))
+                        _movementModifiers.Add(movementModifier.GetType(), movementModifier);
             
-                _movementModifiers[movementModifier.GetType()].Apply();
-            }
-            else if (modifier is BulletHitModifier hitModifier)
-            {
-                if(!_hitModifiers.ContainsKey(hitModifier.GetType()))
-                    _hitModifiers.Add(hitModifier.GetType(), hitModifier);
+                    _movementModifiers[movementModifier.GetType()].Apply();
+                    break;
+                }
+                case BulletHitModifier hitModifier:
+                {
+                    if(!_hitModifiers.ContainsKey(hitModifier.GetType()))
+                        _hitModifiers.Add(hitModifier.GetType(), hitModifier);
             
-                _hitModifiers[hitModifier.GetType()].Apply();
+                    _hitModifiers[hitModifier.GetType()].Apply();
+                    break;
+                }
             }
         }
         
+        transform.localScale = Vector3.one * _stats.Size;
+
         _initialSpeed = Speed = _stats.Speed;
-        _initialDirection = Direction = direction;
+        _initialDirection = Direction = direction.normalized;
     }
 
     private void FixedUpdate()
@@ -83,6 +150,9 @@ public class Bullet : MonoBehaviour, IEffectTarget
 
     private void Move()
     {
+        //Disable bullet if it's out of range
+        if(Vector2.SqrMagnitude(transform.position - _initialPosition) > _stats.MaxRange * _stats.MaxRange) gameObject.SetActive(false);
+        
         Speed = _initialSpeed;
         Direction = _initialDirection;
         foreach (var modifier in _movementModifiers)
@@ -94,17 +164,9 @@ public class Bullet : MonoBehaviour, IEffectTarget
     
     private void OnTriggerEnter2D(Collider2D col)
     {
-        HandleCollision(col);
-    }
-
-    private void OnTriggerStay2D(Collider2D col)
-    {
-        HandleCollision(col);
-    }
-
-    private void HandleCollision(Collider2D col)
-    {
         if((Spawner != null && col.gameObject == Spawner.gameObject) || col.CompareTag("Bullet")) return;
+        var effectTarget = col.GetComponent<IEffectTarget>();
+        if(effectTarget != null && effectTarget == PreviousHit) return;
         
         float attack = _stats.GetAttack(_stats.Element, _stats.Damage);
 
@@ -113,7 +175,7 @@ public class Bullet : MonoBehaviour, IEffectTarget
 
         foreach (var modifier in _hitModifiers)
         {
-            modifier.Value.OnHit(col.GetComponent<IEffectTarget>(), attack, modifier.Value is ExplosiveModifier ? _hitModifiers.Values.Where(m => m.RemainsAfterHit > 0 && m != modifier.Value).ToList() : null, _stats.Element);
+            modifier.Value.OnHit(col.GetComponent<IEffectTarget>(), attack, _hitModifiers.Values.Where(m => m != modifier.Value).ToList() , _stats.Element);
         }
 
         //Bounce if colliding with not an enemy
@@ -123,10 +185,26 @@ public class Bullet : MonoBehaviour, IEffectTarget
             _initialDirection = Vector2.Reflect(Direction, normal);
             return;
         }
-        //Piece if colliding with an enemy
+        //Pierce if colliding with an enemy
         if(_stats.Pierce-- <= 0 || damageable == null) gameObject.SetActive(false);
     }
 
+    private void OnTriggerStay2D(Collider2D col)
+    {
+        if ((Spawner != null && col.gameObject == Spawner.gameObject) || col.CompareTag("Bullet")) return;
+
+        if (!col.TryGetComponent(out IDamageable _) && _stats.Bounce-- > 0)
+        {
+            Vector2 normal = ((Vector2)(transform.position - (Vector3)Direction) - col.ClosestPoint(transform.position - (Vector3)Direction)).normalized;
+            _initialDirection = Vector2.Reflect(Direction, normal);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        PreviousHit = null;
+    }
+    
     public void ApplyEffect(IEffect effect) { }
     public void ReApplyEffects() { }
 }

@@ -8,7 +8,8 @@ public class BulletHitModifierInfo : BulletModifierInfo
     public enum HitModifierType
     {
         Explosive,
-        Freezing
+        Freezing,
+        Fragmentation
     }
     
     [Header("Type")]
@@ -20,6 +21,7 @@ public class BulletHitModifierInfo : BulletModifierInfo
         {
             HitModifierType.Explosive => new ExplosiveModifier(target, maxLevel, remainsAfterHit, priority, OnHitEffect),
             HitModifierType.Freezing => new FreezingModifier(target, maxLevel, remainsAfterHit, priority, OnHitEffect), 
+            HitModifierType.Fragmentation => new FragmentationModifier(target, maxLevel, remainsAfterHit, priority, OnHitEffect),
             _ => null
         };
     }
