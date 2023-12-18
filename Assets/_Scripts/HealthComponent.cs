@@ -34,7 +34,7 @@ public class HealthComponent : MonoBehaviour, IDamageable
         {
             gameObject.SetActive(false);
         }
-        //Debug.Log(_health);
+//        Debug.Log(_health);
         OnHealthUpdate?.Invoke(_health);
     }
 

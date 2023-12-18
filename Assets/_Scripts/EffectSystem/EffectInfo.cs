@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Effects/Stats Effect", fileName = "Stats Effect", order = 0)]
+[CreateAssetMenu(menuName = "Effects/Stats Effect", fileName = "Stats Effect")]
 public class EffectInfo : ScriptableObject
 {
     [Header("Effect Type")]
@@ -38,3 +38,4 @@ public enum EffectType
     HealthBuff,
     FreezingDebuff
 }
+

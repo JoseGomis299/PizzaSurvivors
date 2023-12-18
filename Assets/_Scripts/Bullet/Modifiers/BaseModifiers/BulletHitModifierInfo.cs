@@ -9,7 +9,8 @@ public class BulletHitModifierInfo : BulletModifierInfo
     {
         Explosive,
         Freezing,
-        Fragmentation
+        Fragmentation,
+        Burning
     }
     
     [Header("Type")]
@@ -22,6 +23,7 @@ public class BulletHitModifierInfo : BulletModifierInfo
             HitModifierType.Explosive => new ExplosiveModifier(target, maxLevel, remainsAfterHit, priority, OnHitEffect),
             HitModifierType.Freezing => new FreezingModifier(target, maxLevel, remainsAfterHit, priority, OnHitEffect), 
             HitModifierType.Fragmentation => new FragmentationModifier(target, maxLevel, remainsAfterHit, priority, OnHitEffect),
+            HitModifierType.Burning => new BurningModifier(target, maxLevel, remainsAfterHit, priority, OnHitEffect),
             _ => null
         };
     }

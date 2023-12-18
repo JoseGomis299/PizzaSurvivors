@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b51703f307d4e139e8e17acd209facb, type: 3}
+  m_Name: Burning
+  m_EditorClassIdentifier: 
+  name: Burning
+  descriptionsByLevel: []
+  maxLevel: 1
+  remainsAfterHit: 100
+  priority: 0
+  OnHitEffect: {fileID: 7706588757050966641, guid: 264957b066512be41a2eb4b68220b4db, type: 3}
+  type: 3

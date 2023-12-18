@@ -5373,6 +5373,10 @@ MonoBehaviour:
     quantity: 20
     lifeTime: 1
     activeTime: 0
+  - gameObject: {fileID: 7706588757050966641, guid: 264957b066512be41a2eb4b68220b4db, type: 3}
+    quantity: 20
+    lifeTime: 1
+    activeTime: 0
 --- !u!4 &1638752853
 Transform:
   m_ObjectHideFlags: 0
@@ -6864,6 +6868,18 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8878666665695811720, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
+      propertyPath: modifiers.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878666665695811720, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
+      propertyPath: modifiers.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 9892cbe014b15b748bf6cadc3352a06d, type: 2}
+    - target: {fileID: 8878666665695811720, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
+      propertyPath: modifiers.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: c5d5bf9304b246a4db379297185f859e, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

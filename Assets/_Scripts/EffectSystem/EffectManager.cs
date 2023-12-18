@@ -28,6 +28,15 @@ public class EffectManager
         
         _effects[effect.GetType()].Apply();
     }
+    
+    public void DeApplyAllEffects()
+    {
+        foreach (var effect in _effects)
+            effect.Value.DeApply();
+        
+        foreach (var buff in _statBuffs)
+            buff.DeApply();
+    }
 
     public void ReApplyEffects()
     {

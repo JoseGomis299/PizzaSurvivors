@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class StatsManager : MonoBehaviour, IEffectTarget
@@ -22,5 +23,15 @@ public class StatsManager : MonoBehaviour, IEffectTarget
     
     public void ReApplyEffects() {
         _effectManager.ReApplyEffects();
+    }
+
+    private void OnDisable()
+    {
+        _effectManager.DeApplyAllEffects();
+    }
+
+    private void OnDestroy()
+    {
+        _effectManager.DeApplyAllEffects();
     }
 }
