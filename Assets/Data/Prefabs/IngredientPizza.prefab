@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4667952474361201120}
   - component: {fileID: 1262854665721007956}
   - component: {fileID: 2718009698845416172}
+  - component: {fileID: 8635154502407741137}
   m_Layer: 0
   m_Name: IngredientPizza
   m_TagString: Untagged
@@ -76,3 +77,15 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7376024405022746620}
   m_CullTransparentMesh: 1
+--- !u!114 &8635154502407741137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7376024405022746620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42e390ccdd589294ba5b8c0eaf5f8767, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

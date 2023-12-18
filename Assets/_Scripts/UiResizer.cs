@@ -2,39 +2,53 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UiResizer : MonoBehaviour
 {
-    [SerializeField] private bool scaleWidth;
-    [SerializeField] private bool scaleHeight;
+    private GridLayoutGroup _gridLayoutGroup;
+    private HorizontalLayoutGroup _horizontalLayoutGroup;
+    private VerticalLayoutGroup _verticalLayoutGroup;
+    
+    private RectTransform _rectTransform;
+    
     private void OnEnable()
     {
-        Resize();
+        _gridLayoutGroup = GetComponent<GridLayoutGroup>();
+        _horizontalLayoutGroup = GetComponent<HorizontalLayoutGroup>();
+        _verticalLayoutGroup = GetComponent<VerticalLayoutGroup>();
+        _rectTransform = GetComponent<RectTransform>();
     }
-
-    private void Start()
+    
+    public void Resize()
     {
-        Resize();
-    }
-
-    private void Resize()
-    {
-        RectTransform rectTransform = GetComponent<RectTransform>();
-        
         float width = 0;
         float height = 0;
 
-        foreach (RectTransform child in rectTransform)
+        if (_gridLayoutGroup != null)
         {
-            width += child.rect.width;
-            height += child.rect.height;
+            width = (_gridLayoutGroup.cellSize.x+_gridLayoutGroup.spacing.x) * _gridLayoutGroup.constraintCount;
+            height = (_gridLayoutGroup.cellSize.y+_gridLayoutGroup.spacing.y) * Mathf.CeilToInt(_rectTransform.childCount / (float)_gridLayoutGroup.constraintCount);
+        }
+        else if (_horizontalLayoutGroup != null)
+        {
+            foreach (RectTransform child in _rectTransform)
+                width += child.rect.width + _horizontalLayoutGroup.spacing;
+
+            width = Math.Max(width, _rectTransform.rect.width);
+            height = _rectTransform.rect.height;
+        }
+        else if (_verticalLayoutGroup != null)
+        {
+            foreach (RectTransform child in _rectTransform)
+                height += child.rect.height + _verticalLayoutGroup.spacing;
+
+            width = _rectTransform.rect.width;
+            height = Math.Max(height, _rectTransform.rect.height);
         }
         
-        width = scaleWidth ? Math.Max(width, rectTransform.rect.width) : rectTransform.rect.width;
-        height = scaleHeight ? Math.Max(height, rectTransform.rect.height) : rectTransform.rect.height;
+        _rectTransform.sizeDelta = new Vector2(width, height);
         
-        rectTransform.sizeDelta = new Vector2(width, height);
-        
-        rectTransform.localPosition = new Vector3(width/2, -height/2, 0);
+        _rectTransform.localPosition = new Vector3(width/2, -height/2, 0);
     }
 }

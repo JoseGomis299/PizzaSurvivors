@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -18,6 +19,11 @@ public abstract class BulletModifierInfo : ScriptableObject
     {
         if(level < 0) return null;
         return level < descriptionsByLevel.Length ? descriptionsByLevel[level] : descriptionsByLevel[^1];
+    }
+    
+    public IEnumerable<string> GetDescriptions()
+    {
+        return descriptionsByLevel;
     }
 }
 

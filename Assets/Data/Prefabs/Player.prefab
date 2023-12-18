@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 287.3, y: -39.9}
+  m_AnchoredPosition: {x: 287.3, y: -40}
   m_SizeDelta: {x: 545.1843, y: 68.148}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3098703498309468544
@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 6399705670015838170}
   - component: {fileID: 537413709811894413}
   - component: {fileID: 5200129759369003697}
+  - component: {fileID: 625090768827357778}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -269,7 +270,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 055e04e6ac294c4fa09180dcaa0f2bc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
   modifiers: []
 --- !u!114 &1353625776928100550
 MonoBehaviour:
@@ -283,7 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ae5c40afcdc4bdbbfce973c7e149f8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 9185154336958388077, guid: 33aebd7d8475e124f91d5e97e5f23058, type: 3}
+  <bulletPrefab>k__BackingField: {fileID: 9185154336958388077, guid: 33aebd7d8475e124f91d5e97e5f23058, type: 3}
   firePoint: {fileID: 6943845065931462988}
 --- !u!114 &5368257182971721860
 MonoBehaviour:
@@ -339,6 +339,18 @@ MonoBehaviour:
   interactableLayer:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &625090768827357778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2747259311984292245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8946ef173f864340ab5a72a25bdacd91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3568867714004947507
 GameObject:
   m_ObjectHideFlags: 0

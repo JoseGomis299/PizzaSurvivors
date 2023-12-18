@@ -40,6 +40,8 @@ namespace ProjectUtils.Helpers
             {
                 Object.Destroy(child.gameObject);
             }
+            
+            transform.DetachChildren();
         }
 
         /// <summary>Returns the angle in degrees between this position and the mouse position</summary>

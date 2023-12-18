@@ -19,6 +19,8 @@ public class IngredientPlacer : MonoBehaviour
     
     private Paintable _currentPaintable;
     private Ingredient _currentIngredient;
+    public Ingredient CurrentIngredient => _currentIngredient;
+    
     [SerializeField] private GameObject ingredientPrefab;
 
     private void Start()
@@ -105,16 +107,21 @@ public class IngredientPlacer : MonoBehaviour
 
         Vector2 mousePos = Input.mousePosition;
         
-        float limit = pizzaBase.rect.width * pizzaBase.localScale.x / 2f - borderLength;
-        float distance = Vector2.Distance(mousePos, pizzaBase.position);
-        if (distance > limit) return;
+        if (!IsInBounds(mousePos)) return;
         
         IngredientInventory.RemoveIngredient(_currentIngredient);
 
         _pizza.PlaceIngredient(_currentIngredient);
         GameObject ingredient = Instantiate(ingredientPrefab, mousePos,  Quaternion.Euler(0, 0, Random.Range(0, 360)), pizzaBase.parent);
-        ingredient.GetComponent<Image>().sprite = _currentIngredient.onPizzaSprite;
+        ingredient.GetComponent<PizzaIngredient>().Initialize(_currentIngredient, _pizza);
         
         if (IngredientInventory.GetIngredientQuantity(_currentIngredient) <= 0) ClearSelection();
+    }
+    
+    public bool IsInBounds(Vector2 position)
+    {
+        float limit = pizzaBase.rect.width * pizzaBase.localScale.x / 2f - borderLength;
+        float distance = Vector2.Distance(position, pizzaBase.position);
+        return distance <= limit;
     }
 }

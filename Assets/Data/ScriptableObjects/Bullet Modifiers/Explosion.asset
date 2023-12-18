@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Explosion
   m_EditorClassIdentifier: 
   name: Explosion
-  descriptionsByLevel: []
+  descriptionsByLevel:
+  - '[Level 1] Bullets explode on collision.'
+  - '[Level 2] You are immune to your own explosions.'
   maxLevel: 2
   remainsAfterHit: 100
   priority: 100

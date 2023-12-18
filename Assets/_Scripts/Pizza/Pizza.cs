@@ -59,4 +59,9 @@ public class Pizza : MonoBehaviour
     {
         _placedIngredients.Add(ingredient);
     }
+    
+    public void RemoveIngredient(Ingredient ingredient)
+    {
+        _placedIngredients.Remove(ingredient);
+    }
 }
