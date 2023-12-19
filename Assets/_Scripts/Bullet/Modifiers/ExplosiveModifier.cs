@@ -12,18 +12,19 @@ public class ExplosiveModifier : BulletHitModifier
         AddStack();
     }
     
-    public override void OnHit(StatsManager target, float damage, List<BulletHitModifier> hitModifiers, Element element)
+    public override void OnHit(StatsManager target, Damage damage, List<BulletHitModifier> hitModifiers, Element element)
     {
         var collisions = Physics2D.OverlapCircleAll(EffectTarget.transform.position, EffectTarget.Stats.Size * 1.5f);
         foreach (var col in collisions)
         {
             if((CurrentStacks >= 2 && col.gameObject == EffectTarget.Spawner.gameObject) || !col.TryGetComponent(out IDamageable damageable)) continue;
-            damageable.TakeDamage(damage * 0.5f, element);
+            damage = new Damage(damage.value * 0.5f, damage.element, 1, col.transform.position - EffectTarget.transform.position);
+            damageable.TakeDamage(damage);
             
             if(target != null && col.gameObject == target.gameObject) continue;
             foreach (var modifier in hitModifiers)
             {
-                modifier.OnHit(col.GetComponent<StatsManager>(), damage * 0.5f, hitModifiers, element);
+                modifier.OnHit(col.GetComponent<StatsManager>(), damage, hitModifiers, element);
             }
         }
 

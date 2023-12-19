@@ -186,13 +186,14 @@ public class Bullet : MonoBehaviour
         if(effectTarget != null && effectTarget == PreviousHit) return;
         
         float attack = _stats.GetAttack(_stats.Element, _stats.Damage);
-
+        Damage damage = new Damage(attack, _stats.Element, _stats.KnockBack, Direction);
+        
         if (col.TryGetComponent(out IDamageable damageable))
-            damageable.TakeDamage(attack, _stats.Element);
+            damageable.TakeDamage(damage);
 
         foreach (var modifier in _hitModifiers)
         {
-            modifier.Value.OnHit(col.GetComponent<StatsManager>(), attack, _hitModifiers.Values.Where(m => m != modifier.Value).ToList() , _stats.Element);
+            modifier.Value.OnHit(col.GetComponent<StatsManager>(), damage, _hitModifiers.Values.Where(m => m != modifier.Value).ToList() , _stats.Element);
         }
 
         //Bounce if colliding with not an enemy

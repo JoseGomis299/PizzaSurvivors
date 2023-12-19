@@ -31,6 +31,7 @@ public class Stats : ScriptableObject
     [field: SerializeField] public int AdditionalBulletsPierce { get; set; } = 0;
     [field: SerializeField] public int AdditionalBulletsBounce { get; set; } = 0;
     [field: SerializeField] public float AdditionalBulletsSize { get; set; } = 0f;
+    [field: SerializeField] public float BulletKnockBack { get; set; } = 0f;
     
 
     [field:Header("Damage Multipliers")]
@@ -76,6 +77,7 @@ public class Stats : ScriptableObject
         AdditionalBulletsSpeed = otherStats.AdditionalBulletsSpeed;
         AdditionalBulletsBounce = otherStats.AdditionalBulletsBounce;
         AdditionalBulletsSize = otherStats.AdditionalBulletsSize;
+        BulletKnockBack = otherStats.BulletKnockBack;
         BulletsMaxRange = otherStats.BulletsMaxRange;
         
         defenseCurve = otherStats.defenseCurve;

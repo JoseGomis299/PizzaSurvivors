@@ -68,7 +68,7 @@ public class PersistentDamage : BaseEffect
                 DamageType.CurrentHealthPercentage => _healthComponent.Health * _damage,
                 _ => _damage
             };
-            _healthComponent.TakeDamage(damage, _element);
+            _healthComponent.TakeDamage(new Damage(damage, _element, 0, Vector3.zero));
 
             yield return new WaitForSeconds(_interval);
         }

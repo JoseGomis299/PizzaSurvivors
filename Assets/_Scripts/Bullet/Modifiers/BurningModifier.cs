@@ -15,7 +15,7 @@ public class BurningModifier : BulletHitModifier
         AddStack();
     }
 
-    public override void OnHit(StatsManager target, float damage, List<BulletHitModifier> hitModifiers, Element element)
+    public override void OnHit(StatsManager target, Damage damage, List<BulletHitModifier> hitModifiers, Element element)
     {
         if(target == null || !target.gameObject.activeInHierarchy) return;
         

@@ -8,6 +8,7 @@ public class BulletStats : ScriptableObject
     [field: SerializeField] public float Damage { get; set; } = 20f;
     [field: SerializeField] public float Speed { get; set; } = 10f;
     [field: SerializeField] public float Size { get; set; } = 1f;
+    [field: SerializeField] public float KnockBack { get; set; } = 0f;
     public float MaxRange { get; private set; }
 
     [field: SerializeField] public int Pierce { get; set; } = 0;
@@ -29,6 +30,7 @@ public class BulletStats : ScriptableObject
         Size = bulletStats.Size + characterStats.AdditionalBulletsSize;
         Pierce = bulletStats.Pierce + characterStats.AdditionalBulletsPierce;
         Bounce = bulletStats.Bounce + characterStats.AdditionalBulletsBounce;
+        KnockBack = bulletStats.KnockBack + characterStats.BulletKnockBack;
         MaxRange = characterStats.BulletsMaxRange;
         
         List<ElementalMultiplier> multipliers = new List<ElementalMultiplier>(characterStats.AttackMultipliers);

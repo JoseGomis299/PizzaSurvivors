@@ -27,9 +27,9 @@ public class HealthComponent : MonoBehaviour, IDamageable
         OnHealthUpdate?.Invoke(Health);
     }
 
-    public void TakeDamage(float damage, Element element)
+    public void TakeDamage(Damage damage)
     {
-        _health -= _statsManager.Stats.GetReceivedDamage(element, damage);
+        _health -= _statsManager.Stats.GetReceivedDamage(damage.element, damage.value);
         if (_health <= 0)
         {
             gameObject.SetActive(false);
