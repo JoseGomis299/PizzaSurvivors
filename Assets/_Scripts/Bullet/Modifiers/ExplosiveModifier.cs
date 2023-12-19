@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ExplosiveModifier : BulletHitModifier
 {
-    public ExplosiveModifier(IEffectTarget target, int maxStacks, int remainsAfterHit, int priority, GameObject onHiEffect) : base(target, maxStacks, remainsAfterHit, priority, onHiEffect)
+    public ExplosiveModifier(Bullet target, int maxStacks, int remainsAfterHit, int priority, GameObject onHiEffect) : base(target, maxStacks, remainsAfterHit, priority, onHiEffect)
     {
     }
     public override void Apply()

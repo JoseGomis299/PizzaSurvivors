@@ -15,11 +15,11 @@ public class BulletStatsModifierInfo : BulletModifierInfo
     [Header("Type")]
     public StatsModifierType type;
     
-    public override BulletModifier GetModifier(IEffectTarget target)
+    public override BulletModifier GetBulletModification(Bullet target)
     {
         return type switch
         {
-            StatsModifierType.Size => new BulletSizeModifier(target, maxLevel, remainsAfterHit, priority, multiplier),
+            StatsModifierType.Size => new BulletSizeModifier(target, maxLevel, priority, multiplier),
             _ => null
         };
     }

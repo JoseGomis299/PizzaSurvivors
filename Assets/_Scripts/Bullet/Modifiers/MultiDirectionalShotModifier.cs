@@ -3,11 +3,11 @@ using ProjectUtils.Helpers;
 
 public class MultiDirectionalShotModifier : BulletShotModifier
 {
-    public MultiDirectionalShotModifier(IEffectTarget target, int maxStacks, int remainsAfterHit, int priority, List<BulletModifierInfo> modifiers) : base(target, maxStacks, remainsAfterHit, priority, modifiers)
+    public MultiDirectionalShotModifier(BulletSpawner target, int maxStacks, int priority, List<BulletModifierInfo> modifiers) : base(target, maxStacks, priority, modifiers)
     {
     }
     
-    public override List<BulletShotData> GetModifications(BulletShotData baseData)
+    public override List<BulletShotData> GetModifiedShotData(BulletShotData baseData)
     {
         List<BulletShotData> modifications = new List<BulletShotData>();
         List<BulletModifierInfo> modifiers = new List<BulletModifierInfo>(Modifiers);

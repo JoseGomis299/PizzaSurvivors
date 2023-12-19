@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class FreezingModifier : BulletHitModifier
 {
-    public FreezingModifier(IEffectTarget target, int maxStacks, int remainsAfterHit, int priority, GameObject onHiEffect) : base(target, maxStacks, remainsAfterHit, priority, onHiEffect)
+    public FreezingModifier(Bullet target, int maxStacks, int remainsAfterHit, int priority, GameObject onHiEffect) : base(target, maxStacks, remainsAfterHit, priority, onHiEffect)
     {
     }
     

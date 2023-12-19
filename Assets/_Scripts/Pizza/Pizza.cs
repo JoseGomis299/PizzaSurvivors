@@ -26,11 +26,13 @@ public class Pizza : MonoBehaviour
         transform.GetChild(0).gameObject.SetActive(false);
         
         List<BulletModifierInfo> bulletModifiers = new List<BulletModifierInfo>();
+        List<ShotModifierInfo> bulletShotModifiers = new List<ShotModifierInfo>();
         _currentBuffs = new List<StatsManagerEffect>();
         
         foreach (var ingredient in _placedIngredients)
         {
             bulletModifiers.AddRange(ingredient.BulletModifiers);
+            bulletShotModifiers.AddRange(ingredient.ShotModifiers);
             for (var i = 0; i < ingredient.Buffs.Length; i++)
             {
                 _currentBuffs.Add(ingredient.Buffs[i].GetEffect(_statsManager));
@@ -38,7 +40,7 @@ public class Pizza : MonoBehaviour
             }
         }
         
-        _bulletSpawner.Initialize(bulletModifiers);
+        _bulletSpawner.Initialize(bulletModifiers, bulletShotModifiers);
         OnExitPizzaView?.Invoke();
     }
     

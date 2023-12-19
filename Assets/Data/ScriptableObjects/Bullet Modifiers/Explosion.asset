@@ -13,11 +13,9 @@ MonoBehaviour:
   m_Name: Explosion
   m_EditorClassIdentifier: 
   name: Explosion
-  descriptionsByLevel:
-  - '[Level 1] Bullets explode on collision.'
-  - '[Level 2] You are immune to your own explosions.'
+  descriptions: []
   maxLevel: 2
-  remainsAfterHit: 100
   priority: 100
-  OnHitEffect: {fileID: 1694715364255247975, guid: c7601adafcc51ab47aef5e5042abbe73, type: 3}
+  onHitEffect: {fileID: 1694715364255247975, guid: c7601adafcc51ab47aef5e5042abbe73, type: 3}
+  remainsAfterHit: 100
   type: 0

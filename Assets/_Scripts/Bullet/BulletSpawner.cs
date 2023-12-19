@@ -4,7 +4,7 @@ using System.Linq;
 using ProjectUtils.ObjectPooling;
 using UnityEngine;
 
-public class BulletSpawner : MonoBehaviour, IEffectTarget
+public class BulletSpawner : MonoBehaviour
 {
     [field: SerializeField] public GameObject bulletPrefab { get; private set; }
     private Stats _characterStats;
@@ -14,28 +14,35 @@ public class BulletSpawner : MonoBehaviour, IEffectTarget
     
     private List<BulletModifierInfo> _modifiers;
     
-    private Dictionary<Type, BulletShotModifier> _shootModifiers;
-    private List<BulletShotModifier> _shootModifiersList;
-
-    //private HashSet<Bullet> _bullets;
+    private List<BulletShotModifier> _shotModifiers;
     
     private float _lastShotTime;
 
-    public void Initialize(List<BulletModifierInfo> modifiers)
+    public void Initialize(List<BulletModifierInfo> modifiers, List<ShotModifierInfo> shotModifiers)
     {
+        var shootModifiers = new Dictionary<ShotModifierInfo.ShootModifierType, BulletShotModifier>();
         _characterStats = GetComponent<StatsManager>().Stats;
-        _shootModifiers = new Dictionary<Type, BulletShotModifier>();
-        _modifiers = new List<BulletModifierInfo>();
-        //_bullets = new HashSet<Bullet>();
+        _modifiers = new List<BulletModifierInfo>(modifiers);
+        _shotModifiers = new List<BulletShotModifier>();
 
-        foreach (var modifier in modifiers)
+        foreach (var mod in shotModifiers)
         {
-            if (modifier is BulletShotModifierInfo)
-                ApplyEffect(modifier.GetModifier(this) as BulletShotModifier);
-            else _modifiers.Add(modifier);
-        }
+            if (shootModifiers.ContainsKey(mod.type))
+            {
+                shootModifiers[mod.type].Apply();
+                continue;
+            }
 
-        _shootModifiersList = _shootModifiers.Values.OrderByDescending(x => x.Priority).ToList();
+            var modifier = mod.GetBulletShotModification(this);
+            modifier.Apply();
+
+            shootModifiers.Add(mod.type, modifier);
+            _shotModifiers.Add(modifier);
+        }
+        
+        //Sort lists on priority
+        _shotModifiers = _shotModifiers.OrderByDescending(x => x.Priority).ToList();
+        _modifiers = _modifiers.OrderByDescending(x => x.priority).ToList();
         
         _firePointDistance = Vector2.Distance(firePoint.position, transform.position);
         
@@ -50,12 +57,12 @@ public class BulletSpawner : MonoBehaviour, IEffectTarget
         List<BulletShotData> shotData = new List<BulletShotData>();
         shotData.Add(new BulletShotData(firePoint.position, _firePointDistance, direction, null));
         
-        foreach (var shootModifier in _shootModifiersList)
+        foreach (var shotModifier in _shotModifiers)
         {
             List<BulletShotData> temp = new List<BulletShotData>();
             foreach (var data in shotData)
             {
-                temp.AddRange(shootModifier.GetModifications(data));
+                temp.AddRange(shotModifier.GetModifiedShotData(data));
             }
             shotData = temp;
         }
@@ -81,28 +88,9 @@ public class BulletSpawner : MonoBehaviour, IEffectTarget
         _lastShotTime = Time.time;
     }
 
-    // private void FixedUpdate()
-    // {
-    //     if(_bullets == null) return;
-    //
-    //     foreach (var bullet in _bullets)
-    //         bullet.Move();
-    // }
-    
     public void MoveFirePoint(Vector2 direction)
     {
         firePoint.position = _firePointDistance*direction + (Vector2) transform.position;
         firePoint.right = direction;
     }
-    
-    public void ApplyEffect(IEffect effect)
-    {
-        if(!_shootModifiers.ContainsKey(effect.GetType()))
-            _shootModifiers.Add(effect.GetType(), (BulletShotModifier) effect);
-        
-        _shootModifiers[effect.GetType()].Apply();
-       //_shootModifiers[effect.GetType()].RemainsAfterHit--;
-    }
-    
-    public void ReApplyEffects() { }
 }

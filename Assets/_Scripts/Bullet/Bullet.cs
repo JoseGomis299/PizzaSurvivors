@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Bullet : MonoBehaviour, IEffectTarget
+public class Bullet : MonoBehaviour
 {
     [SerializeField] private BulletStats stats;
     private BulletStats _stats;
@@ -56,9 +56,8 @@ public class Bullet : MonoBehaviour, IEffectTarget
         
         foreach (var mod in other._modifiersInfo)
         {
-            var modifier = mod.GetModifier(this);
-            float remains = other._hitModifiers.ContainsKey(modifier.GetType()) ? other._hitModifiers[modifier.GetType()].RemainsAfterHit : mod.remainsAfterHit;
-            if(remains - ID < 0) continue;
+            var modifier = mod.GetBulletModification(this);
+            if(other._hitModifiers.ContainsKey(modifier.GetType()) && other._hitModifiers[modifier.GetType()].RemainsAfterHit - ID < 0) continue;
 
             _modifiersInfo.Add(mod);
 
@@ -111,7 +110,7 @@ public class Bullet : MonoBehaviour, IEffectTarget
         
         foreach (var mod in modifiers)
         {
-            var modifier = mod.GetModifier(this);
+            var modifier = mod.GetBulletModification(this);
 
             switch (modifier)
             {
@@ -204,8 +203,5 @@ public class Bullet : MonoBehaviour, IEffectTarget
     {
         PreviousHit = null;
     }
-    
-    public void ApplyEffect(IEffect effect) { }
-    public void ReApplyEffects() { }
 }
 

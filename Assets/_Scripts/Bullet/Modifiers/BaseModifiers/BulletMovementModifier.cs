@@ -4,7 +4,7 @@ public abstract class BulletMovementModifier : BulletModifier
     protected readonly float amplitude;
     protected readonly float frequency;
     
-    protected BulletMovementModifier(IEffectTarget target, int maxStacks, int remainsAfterHit, int priority, float amplitude, float frequency) : base(target, maxStacks, remainsAfterHit, priority)
+    protected BulletMovementModifier(Bullet target, int maxStacks, int priority, float amplitude, float frequency) : base(target, maxStacks, priority)
     {
         this.amplitude = amplitude;
         this.frequency = frequency;

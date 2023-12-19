@@ -6,12 +6,11 @@ public abstract class BulletShotModifier : BulletModifier
     protected new readonly BulletSpawner EffectTarget;
     protected List<BulletModifierInfo> Modifiers;
 
-    protected BulletShotModifier(IEffectTarget target, int maxStacks, int remainsAfterHit, int priority, List<BulletModifierInfo> modifiers) : base(target,
-        maxStacks, remainsAfterHit, priority)
+    protected BulletShotModifier(BulletSpawner target, int maxStacks, int priority, List<BulletModifierInfo> modifiers) : base(null, maxStacks, priority)
     {
-        EffectTarget = target as BulletSpawner;
+        EffectTarget = target;
         Modifiers = modifiers;
     }
 
-    public abstract List<BulletShotData> GetModifications(BulletShotData baseData);
+    public abstract List<BulletShotData> GetModifiedShotData(BulletShotData baseData);
 }

@@ -11,7 +11,7 @@ public class BoomerangModifier : BulletMovementModifier
     
     private Transform _spawner;
 
-    public BoomerangModifier(IEffectTarget target, int maxStacks, int remainsAfterHit, int priority, float amplitude, float frequency) : base(target, maxStacks, remainsAfterHit, priority, amplitude, frequency)
+    public BoomerangModifier(Bullet target, int maxStacks, int priority, float amplitude, float frequency) : base(target, maxStacks, priority, amplitude, frequency)
     {
     }
 

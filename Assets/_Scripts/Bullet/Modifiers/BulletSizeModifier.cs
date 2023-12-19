@@ -1,6 +1,6 @@
 public class BulletSizeModifier : BulletStatsModifier
 {
-    public BulletSizeModifier(IEffectTarget target, int maxStacks, int remainsAfterHit, int priority, float multiplier) : base(target, maxStacks, remainsAfterHit, priority, multiplier) { }
+    public BulletSizeModifier(Bullet target, int maxStacks, int priority, float multiplier) : base(target, maxStacks, priority, multiplier) { }
 
     public override void Apply()
     {

@@ -4,10 +4,12 @@ using UnityEngine;
 public abstract class BulletHitModifier : BulletModifier
 {
     protected readonly GameObject OnHitEffect;
+    public int RemainsAfterHit {get; set;}
 
-    protected BulletHitModifier(IEffectTarget target, int maxStacks, int remainsAfterHit, int priority, GameObject onHitEffect) : base(target, maxStacks, remainsAfterHit, priority)
+    protected BulletHitModifier(Bullet target, int maxStacks, int remainsAfterHit, int priority, GameObject onHitEffect) : base(target, maxStacks, priority)
     {
         OnHitEffect = onHitEffect;
+        RemainsAfterHit = remainsAfterHit;
     }
 
     public abstract void OnHit(IEffectTarget target, float damage, List<BulletHitModifier> hitModifiers, Element element);

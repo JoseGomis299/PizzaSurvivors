@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class FragmentationModifier : BulletHitModifier
 {
-    public FragmentationModifier(IEffectTarget target, int maxStacks, int remainsAfterHit, int priority, GameObject onHitEffect) : base(target, maxStacks, remainsAfterHit, priority, onHitEffect)
+    public FragmentationModifier(Bullet target, int maxStacks, int remainsAfterHit, int priority, GameObject onHitEffect) : base(target, maxStacks, remainsAfterHit, priority, onHitEffect)
     {
     }
 

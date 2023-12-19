@@ -72,7 +72,7 @@ public class PizzaUiManager : MonoBehaviour
     private void UpdateCurrentIngredient()
     {
         Sprite sprite = _ingredientPlacer.GetCurrentSprite();
-        if (sprite == null)
+        if (sprite == null || _ingredientPlacer.CurrentIngredient == null)
         {
             statsPanel.SetActive(false);
             return;
@@ -91,8 +91,9 @@ public class PizzaUiManager : MonoBehaviour
             instance.GetComponentInChildren<Image>().sprite = statIcons.FirstOrDefault(x => x.type == statBuff.Type).icon;
             instance.GetComponentInChildren<TMP_Text>().text = statBuff.ToString();
         }
-        
-        foreach (var modifier in _ingredientPlacer.CurrentIngredient.BulletModifiers)
+
+        var descriptors = _ingredientPlacer.CurrentIngredient.GetDescriptors();
+        foreach (var modifier in descriptors)
         {
             foreach (var description in modifier.GetDescriptions())
             {

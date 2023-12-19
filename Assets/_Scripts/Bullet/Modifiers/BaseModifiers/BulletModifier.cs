@@ -1,26 +1,23 @@
-public abstract class BulletModifier : IEffect
+public abstract class BulletModifier 
 {
     protected Bullet EffectTarget;
-    public int RemainsAfterHit {get; set;}
     public readonly int Priority;
-    
-    protected int MaxStacks;
+
+    private readonly int _maxStacks;
     protected int CurrentStacks { get; private set; }
 
-    protected BulletModifier(IEffectTarget target, int maxStacks, int remainsAfterHit, int priority)
+    protected BulletModifier(Bullet target, int maxStacks, int priority)
     {
-        EffectTarget = target as Bullet;
-        RemainsAfterHit = remainsAfterHit;
+        EffectTarget = target;
         Priority = priority;
-        this.MaxStacks = maxStacks;
+        _maxStacks = maxStacks;
     }
 
-    public virtual void Apply() { }
-    public virtual void DeApply() { }
+    public abstract void Apply();
     
     protected void AddStack()
     {
-        if(CurrentStacks < MaxStacks)
+        if(CurrentStacks < _maxStacks)
             CurrentStacks++;
     }
 }

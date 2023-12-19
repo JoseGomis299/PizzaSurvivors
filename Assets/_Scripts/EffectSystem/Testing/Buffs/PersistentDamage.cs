@@ -43,6 +43,7 @@ public class PersistentDamage : BaseEffect
         _damageCoroutine = ((MonoBehaviour) EffectTarget).StartCoroutine(DealDamage());
         _effectInstance = ObjectPool.Instance.InstantiateFromPool(_visualEffect, ((MonoBehaviour) EffectTarget).transform.position, Quaternion.identity);
         _particleSystem = _effectInstance.GetComponent<ParticleSystem>();
+        _effectInstance.transform.parent = ((MonoBehaviour)EffectTarget).transform;
     }
 
     public override void DeApply()
@@ -51,6 +52,7 @@ public class PersistentDamage : BaseEffect
 
         ((MonoBehaviour) EffectTarget).StopCoroutine(_damageCoroutine);
         _effectInstance.SetActive(false);
+
         _damageCoroutine = null;
         _particleSystem = null;
     }

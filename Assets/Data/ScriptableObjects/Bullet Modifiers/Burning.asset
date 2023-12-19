@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Burning
   m_EditorClassIdentifier: 
   name: Burning
-  descriptionsByLevel: []
+  descriptions: []
   maxLevel: 1
-  remainsAfterHit: 100
   priority: 0
-  OnHitEffect: {fileID: 7706588757050966641, guid: 264957b066512be41a2eb4b68220b4db, type: 3}
+  onHitEffect: {fileID: 7706588757050966641, guid: 264957b066512be41a2eb4b68220b4db, type: 3}
+  remainsAfterHit: 100
   type: 3

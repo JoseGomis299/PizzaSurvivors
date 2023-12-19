@@ -2,8 +2,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Bullet Modifiers/Shot Modifier", fileName = "Bullet Shot Modifier")]
-public class BulletShotModifierInfo : BulletModifierInfo
+public class ShotModifierInfo : Descriptor
 {
+    [Header("Modifier Settings")]
+    public int maxLevel;
+    public int priority;
     public List<BulletModifierInfo> modifiers;
     
     public enum ShootModifierType
@@ -15,12 +18,12 @@ public class BulletShotModifierInfo : BulletModifierInfo
     [Header("Type")]
     public ShootModifierType type;
     
-    public override BulletModifier GetModifier(IEffectTarget target)
+    public BulletShotModifier GetBulletShotModification(BulletSpawner target)
     {
         return type switch
         {
-            ShootModifierType.TripleShot => new TripleShotModifier(target, maxLevel, remainsAfterHit, priority, modifiers),
-            ShootModifierType.MultiDirectionalShot => new MultiDirectionalShotModifier(target, maxLevel, remainsAfterHit, priority, modifiers),
+            ShootModifierType.TripleShot => new TripleShotModifier(target, maxLevel, priority, modifiers),
+            ShootModifierType.MultiDirectionalShot => new MultiDirectionalShotModifier(target, maxLevel, priority, modifiers),
             _ => null
         };
     }
