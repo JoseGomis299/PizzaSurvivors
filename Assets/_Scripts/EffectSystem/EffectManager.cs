@@ -5,7 +5,7 @@ using UnityEngine;
 public class EffectManager
 {
     private readonly Dictionary<Type, BaseEffect> _effects = new Dictionary<Type, BaseEffect>();
-    private readonly HashSet<StatsManagerEffect> _statBuffs = new HashSet<StatsManagerEffect>();
+    private readonly HashSet<IncrementalEffect> _statBuffs = new HashSet<IncrementalEffect>();
 
     private readonly StatsManager _statsManager;
     
@@ -15,7 +15,7 @@ public class EffectManager
     
     public void ApplyEffect(BaseEffect effect)
     {
-        if (effect is StatsManagerEffect statBuff && effect.MaxStacks == 1)
+        if (effect is IncrementalEffect statBuff && effect.MaxStacks == 1)
         {
             _statBuffs.Add(statBuff);
             statBuff.Apply();

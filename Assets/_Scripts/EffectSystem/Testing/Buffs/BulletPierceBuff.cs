@@ -1,4 +1,4 @@
-public class BulletPierceBuff : StatsManagerEffect
+public class BulletPierceBuff : IncrementalEffect
 {
     public BulletPierceBuff(StatsManager target, float duration, int maxStacks, TimerType timerType, float bulletPierceIncrement, IncrementType incrementType) : base(target, duration, maxStacks, timerType, bulletPierceIncrement, incrementType) { }
     

@@ -15,7 +15,7 @@ public class Bullet : MonoBehaviour
 
     public BulletSpawner Spawner { get; private set; }
     public int ID { get; private set; }
-    public IEffectTarget PreviousHit { get; private set; }
+    public StatsManager PreviousHit { get; private set; }
 
     private Vector3 _initialPosition;
     
@@ -28,8 +28,8 @@ public class Bullet : MonoBehaviour
     private Rigidbody2D _rb;
     private GameObject _gfx;
     
-    private Dictionary<Type, BulletMovementModifier> _movementModifiers;
-    private Dictionary<Type, BulletHitModifier> _hitModifiers;
+    private List<BulletMovementModifier> _movementModifiers;
+    private Dictionary<BulletHitModifierInfo.HitModifierType, BulletHitModifier>_hitModifiers;
     
     private void Awake()
     {
@@ -37,7 +37,7 @@ public class Bullet : MonoBehaviour
         _gfx = transform.GetChild(0).gameObject;
     }
 
-    public void Initialize(Bullet other, Vector2 direction, IEffectTarget previousHit)
+    public void Initialize(Bullet other, Vector2 direction, StatsManager previousHit)
     {
         Spawner = other.Spawner;
         _initialPosition = transform.position;
@@ -51,38 +51,46 @@ public class Bullet : MonoBehaviour
         
         _modifiersInfo = new List<BulletModifierInfo>();
         
-        _movementModifiers = new Dictionary<Type, BulletMovementModifier>();
-        _hitModifiers = new Dictionary<Type, BulletHitModifier>();
+        _movementModifiers = new List<BulletMovementModifier>();
+        _hitModifiers = new Dictionary<BulletHitModifierInfo.HitModifierType, BulletHitModifier>();
+        
+        var movementModifiersDictionary = new Dictionary<BulletMovementModifierInfo.MovementModifierType, BulletMovementModifier>();
         
         foreach (var mod in other._modifiersInfo)
         {
-            var modifier = mod.GetBulletModification(this);
-            if(other._hitModifiers.ContainsKey(modifier.GetType()) && other._hitModifiers[modifier.GetType()].RemainsAfterHit - ID < 0) continue;
-
-            _modifiersInfo.Add(mod);
-
-            switch (modifier)
+            switch (mod)
             {
-                case BulletStatsModifier statsModifier:
-                    statsModifier.Apply();
+                case BulletStatsModifierInfo statsModifier:
+                    var modifierStats = statsModifier.GetBulletModification(this);
+                    modifierStats.Apply();
                     break;
-                case BulletMovementModifier movementModifier:
+                case BulletMovementModifierInfo movementModifier:
                 {
-                    if(!_movementModifiers.ContainsKey(movementModifier.GetType()))
-                        _movementModifiers.Add(movementModifier.GetType(), movementModifier);
+                    var modifierMovement = movementModifier.GetBulletModification(this);
+                    
+                    if (!movementModifiersDictionary.ContainsKey(movementModifier.type))
+                    {
+                        movementModifiersDictionary.Add(movementModifier.type, modifierMovement);
+                        _movementModifiers.Add(modifierMovement);
+                    }
             
-                    _movementModifiers[movementModifier.GetType()].Apply();
+                    movementModifiersDictionary[movementModifier.type].Apply();
                     break;
                 }
-                case BulletHitModifier hitModifier:
+                case BulletHitModifierInfo hitModifier:
                 {
-                    if(!_hitModifiers.ContainsKey(hitModifier.GetType()))
-                        _hitModifiers.Add(hitModifier.GetType(), hitModifier);
+                    if(other._hitModifiers.ContainsKey(hitModifier.type) && other._hitModifiers[hitModifier.type].RemainsAfterHit - ID < 0) break;
+                    var modifierHit = hitModifier.GetBulletModification(this);
+
+                    if(!_hitModifiers.ContainsKey(hitModifier.type))
+                        _hitModifiers.Add(hitModifier.type, modifierHit);
             
-                    _hitModifiers[hitModifier.GetType()].Apply();
+                    _hitModifiers[hitModifier.type].Apply();
                     break;
                 }
             }
+            
+            _modifiersInfo.Add(mod);
         }
         
         transform.localScale = Vector3.one * _stats.Size;
@@ -105,35 +113,45 @@ public class Bullet : MonoBehaviour
         
         _modifiersInfo = new List<BulletModifierInfo>(modifiers);
         
-        _movementModifiers = new Dictionary<Type, BulletMovementModifier>();
-        _hitModifiers = new Dictionary<Type, BulletHitModifier>();
+        _movementModifiers = new List<BulletMovementModifier>();
+        _hitModifiers = new Dictionary<BulletHitModifierInfo.HitModifierType, BulletHitModifier>();
+        
+        var movementModifiersDictionary = new Dictionary<BulletMovementModifierInfo.MovementModifierType, BulletMovementModifier>();
         
         foreach (var mod in modifiers)
         {
-            var modifier = mod.GetBulletModification(this);
-
-            switch (modifier)
+            switch (mod)
             {
-                case BulletStatsModifier statsModifier:
-                    statsModifier.Apply();
+                case BulletStatsModifierInfo statsModifier:
+                    var modifierStats = statsModifier.GetBulletModification(this);
+                    modifierStats.Apply();
                     break;
-                case BulletMovementModifier movementModifier:
+                case BulletMovementModifierInfo movementModifier:
                 {
-                    if(!_movementModifiers.ContainsKey(movementModifier.GetType()))
-                        _movementModifiers.Add(movementModifier.GetType(), movementModifier);
+                    var modifierMovement = movementModifier.GetBulletModification(this);
+                    
+                    if (!movementModifiersDictionary.ContainsKey(movementModifier.type))
+                    {
+                        movementModifiersDictionary.Add(movementModifier.type, modifierMovement);
+                        _movementModifiers.Add(modifierMovement);
+                    }
             
-                    _movementModifiers[movementModifier.GetType()].Apply();
+                    movementModifiersDictionary[movementModifier.type].Apply();
                     break;
                 }
-                case BulletHitModifier hitModifier:
+                case BulletHitModifierInfo hitModifier:
                 {
-                    if(!_hitModifiers.ContainsKey(hitModifier.GetType()))
-                        _hitModifiers.Add(hitModifier.GetType(), hitModifier);
+                    var modifierHit = hitModifier.GetBulletModification(this);
+
+                    if(!_hitModifiers.ContainsKey(hitModifier.type))
+                        _hitModifiers.Add(hitModifier.type, modifierHit);
             
-                    _hitModifiers[hitModifier.GetType()].Apply();
+                    _hitModifiers[hitModifier.type].Apply();
                     break;
                 }
             }
+            
+            _modifiersInfo.Add(mod);
         }
         
         transform.localScale = Vector3.one * _stats.Size;
@@ -155,7 +173,7 @@ public class Bullet : MonoBehaviour
         Speed = _initialSpeed;
         Direction = _initialDirection;
         foreach (var modifier in _movementModifiers)
-            modifier.Value.ModifyMovement();
+            modifier.ModifyMovement();
         
         _gfx.transform.up = Direction;
         _rb.velocity = Direction.normalized * Speed;
@@ -164,7 +182,7 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D col)
     {
         if((Spawner != null && col.gameObject == Spawner.gameObject) || col.CompareTag("Bullet")) return;
-        var effectTarget = col.GetComponent<IEffectTarget>();
+        var effectTarget = col.GetComponent<StatsManager>();
         if(effectTarget != null && effectTarget == PreviousHit) return;
         
         float attack = _stats.GetAttack(_stats.Element, _stats.Damage);
@@ -174,7 +192,7 @@ public class Bullet : MonoBehaviour
 
         foreach (var modifier in _hitModifiers)
         {
-            modifier.Value.OnHit(col.GetComponent<IEffectTarget>(), attack, _hitModifiers.Values.Where(m => m != modifier.Value).ToList() , _stats.Element);
+            modifier.Value.OnHit(col.GetComponent<StatsManager>(), attack, _hitModifiers.Values.Where(m => m != modifier.Value).ToList() , _stats.Element);
         }
 
         //Bounce if colliding with not an enemy

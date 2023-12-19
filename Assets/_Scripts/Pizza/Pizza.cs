@@ -11,7 +11,7 @@ public class Pizza : MonoBehaviour
     private StatsManager _statsManager;
 
     private readonly List<Ingredient> _placedIngredients = new  List<Ingredient> ();
-    private List<StatsManagerEffect> _currentBuffs = new List<StatsManagerEffect>();
+    private List<IncrementalEffect> _currentBuffs = new List<IncrementalEffect>();
 
     private void Start()
     {
@@ -26,13 +26,11 @@ public class Pizza : MonoBehaviour
         transform.GetChild(0).gameObject.SetActive(false);
         
         List<BulletModifierInfo> bulletModifiers = new List<BulletModifierInfo>();
-        List<ShotModifierInfo> bulletShotModifiers = new List<ShotModifierInfo>();
-        _currentBuffs = new List<StatsManagerEffect>();
+        _currentBuffs = new List<IncrementalEffect>();
         
         foreach (var ingredient in _placedIngredients)
         {
             bulletModifiers.AddRange(ingredient.BulletModifiers);
-            bulletShotModifiers.AddRange(ingredient.ShotModifiers);
             for (var i = 0; i < ingredient.Buffs.Length; i++)
             {
                 _currentBuffs.Add(ingredient.Buffs[i].GetEffect(_statsManager));
@@ -40,7 +38,7 @@ public class Pizza : MonoBehaviour
             }
         }
         
-        _bulletSpawner.Initialize(bulletModifiers, bulletShotModifiers);
+        _bulletSpawner.Initialize(bulletModifiers);
         OnExitPizzaView?.Invoke();
     }
     

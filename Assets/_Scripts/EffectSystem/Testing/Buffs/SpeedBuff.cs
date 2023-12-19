@@ -1,4 +1,4 @@
-public class SpeedBuff : StatsManagerEffect
+public class SpeedBuff : IncrementalEffect
 {
     public SpeedBuff(StatsManager target, float duration, int maxStacks, TimerType timerType , float speedIncrement, IncrementType incrementType) : base(target, duration, maxStacks, timerType, speedIncrement, incrementType){}
 

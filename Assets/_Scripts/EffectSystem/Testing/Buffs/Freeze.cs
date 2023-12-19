@@ -4,7 +4,7 @@ public class Freeze : BaseEffect
 {
     private SpriteRenderer _renderer;
     
-    public Freeze(IEffectTarget target, float duration, int maxStacks, TimerType timerType, Timer timer) : base(target, duration, maxStacks, timerType)
+    public Freeze(StatsManager target, float duration, int maxStacks, TimerType timerType, Timer timer) : base(target, duration, maxStacks, timerType)
     {
         Timer = timer;
         _renderer = ((MonoBehaviour)target).GetComponent<SpriteRenderer>();

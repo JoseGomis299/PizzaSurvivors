@@ -16,7 +16,7 @@ public class FragmentationModifier : BulletHitModifier
         if (EffectTarget.ID == 0 && CurrentStacks >= 2) RemainsAfterHit = 1;
     }
 
-    public override void OnHit(IEffectTarget target, float damage, List<BulletHitModifier> hitModifiers, Element element)
+    public override void OnHit(StatsManager target, float damage, List<BulletHitModifier> hitModifiers, Element element)
     {
         if(target == null) return;
         

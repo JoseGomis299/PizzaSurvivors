@@ -15,7 +15,7 @@ public class BulletMovementModifierInfo : BulletModifierInfo
     [Header("Type")]
     public MovementModifierType type;
     
-    public override BulletModifier GetBulletModification(Bullet target)
+    public BulletMovementModifier GetBulletModification(Bullet target)
     {
         return type switch
         {

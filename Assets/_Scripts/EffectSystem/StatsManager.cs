@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class StatsManager : MonoBehaviour, IEffectTarget
+public class StatsManager : MonoBehaviour
 {
     [SerializeField] private Stats stats;
     private Stats _stats;

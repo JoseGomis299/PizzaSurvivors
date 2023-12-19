@@ -18,7 +18,7 @@ public class BoomerangModifier : BulletMovementModifier
     public override void Apply()
     {
         AddStack();
-        _spawner = EffectTarget.PreviousHit != null ? ((MonoBehaviour) EffectTarget.PreviousHit).transform : EffectTarget.Spawner.transform;
+        _spawner = EffectTarget.PreviousHit != null ? EffectTarget.PreviousHit.transform : EffectTarget.Spawner.transform;
         _startPosition = _spawner.position;
     }
     

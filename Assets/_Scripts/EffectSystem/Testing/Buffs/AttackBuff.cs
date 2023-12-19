@@ -1,6 +1,4 @@
-using UnityEngine;
-
-public class AttackBuff : StatsManagerEffect
+public class AttackBuff : IncrementalEffect
 {
     public AttackBuff(StatsManager target, float duration, int maxStacks, TimerType timerType, float attackIncrement, IncrementType incrementType) : base(target, duration, maxStacks, timerType, attackIncrement, incrementType) { }
 

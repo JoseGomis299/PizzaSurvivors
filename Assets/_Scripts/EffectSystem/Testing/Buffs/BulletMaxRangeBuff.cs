@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BulletMaxRangeBuff : StatsManagerEffect
+public class BulletMaxRangeBuff : IncrementalEffect
 {
     public BulletMaxRangeBuff(StatsManager target, float duration, int maxStacks, TimerType timerType, float bulletRangeIncrement, IncrementType incrementType) : base(target, duration, maxStacks, timerType, bulletRangeIncrement, incrementType) { }
     

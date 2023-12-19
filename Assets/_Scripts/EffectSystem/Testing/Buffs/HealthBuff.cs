@@ -1,4 +1,4 @@
-public class HealthBuff : StatsManagerEffect
+public class HealthBuff : IncrementalEffect
 {
     private HealthComponent _healthComponent;
     public HealthBuff(StatsManager target, float duration, int maxStacks, TimerType timerType, float healthIncrement,

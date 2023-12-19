@@ -18,26 +18,33 @@ public class BulletSpawner : MonoBehaviour
     
     private float _lastShotTime;
 
-    public void Initialize(List<BulletModifierInfo> modifiers, List<ShotModifierInfo> shotModifiers)
+    public void Initialize(List<BulletModifierInfo> modifiers)
     {
         var shootModifiers = new Dictionary<ShotModifierInfo.ShootModifierType, BulletShotModifier>();
         _characterStats = GetComponent<StatsManager>().Stats;
-        _modifiers = new List<BulletModifierInfo>(modifiers);
+        _modifiers = new List<BulletModifierInfo>();
         _shotModifiers = new List<BulletShotModifier>();
 
-        foreach (var mod in shotModifiers)
+        foreach (var mod in modifiers)
         {
-            if (shootModifiers.ContainsKey(mod.type))
+            if(mod is ShotModifierInfo shotModifier)
             {
-                shootModifiers[mod.type].Apply();
-                continue;
+                if (shootModifiers.ContainsKey(shotModifier.type))
+                {
+                    shootModifiers[shotModifier.type].Apply();
+                    continue;
+                }
+
+                var modifier = shotModifier.GetBulletShotModification(this);
+                modifier.Apply();
+
+                shootModifiers.Add(shotModifier.type, modifier);
+                _shotModifiers.Add(modifier);
             }
-
-            var modifier = mod.GetBulletShotModification(this);
-            modifier.Apply();
-
-            shootModifiers.Add(mod.type, modifier);
-            _shotModifiers.Add(modifier);
+            else
+            {
+                _modifiers.Add(mod);
+            }
         }
         
         //Sort lists on priority

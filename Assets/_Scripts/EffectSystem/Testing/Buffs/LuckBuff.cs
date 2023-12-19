@@ -1,4 +1,4 @@
-public class LuckBuff : StatsManagerEffect
+public class LuckBuff : IncrementalEffect
 {
     public LuckBuff(StatsManager target, float duration, int maxStacks, TimerType timerType, float luckIncrement, IncrementType incrementType) : base(target, duration, maxStacks, timerType, luckIncrement, incrementType) { }
 

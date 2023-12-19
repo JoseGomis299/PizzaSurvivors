@@ -12,5 +12,5 @@ public abstract class BulletHitModifier : BulletModifier
         RemainsAfterHit = remainsAfterHit;
     }
 
-    public abstract void OnHit(IEffectTarget target, float damage, List<BulletHitModifier> hitModifiers, Element element);
+    public abstract void OnHit(StatsManager target, float damage, List<BulletHitModifier> hitModifiers, Element element);
 }

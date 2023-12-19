@@ -13,7 +13,7 @@ public class FreezingModifier : BulletHitModifier
         EffectTarget.Stats.Element = Element.Ice;
     }
     
-    public override void OnHit(IEffectTarget target, float damage, List<BulletHitModifier> hitModifiers, Element element)
+    public override void OnHit(StatsManager target, float damage, List<BulletHitModifier> hitModifiers, Element element)
     {
         if(target == null) return;
         FreezingDebuff debuff = new FreezingDebuff(target, 3, 5, 0, -0.2f, IncrementType.AddBase);

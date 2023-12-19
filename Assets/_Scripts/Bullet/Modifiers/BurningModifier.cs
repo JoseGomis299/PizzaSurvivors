@@ -15,9 +15,9 @@ public class BurningModifier : BulletHitModifier
         AddStack();
     }
 
-    public override void OnHit(IEffectTarget target, float damage, List<BulletHitModifier> hitModifiers, Element element)
+    public override void OnHit(StatsManager target, float damage, List<BulletHitModifier> hitModifiers, Element element)
     {
-        if(target == null || !((MonoBehaviour)target).gameObject.activeInHierarchy) return;
+        if(target == null || !target.gameObject.activeInHierarchy) return;
         
         _debuff ??= new PersistentDamage(target, 3, 5, Element.Fire, DamageType.Additive, 1, OnHitEffect);
         target.ApplyEffect(_debuff);

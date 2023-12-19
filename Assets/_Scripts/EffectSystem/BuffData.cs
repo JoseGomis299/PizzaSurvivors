@@ -11,7 +11,7 @@ public struct BuffData
     public float multiplier;
     public IncrementType incrementType;
     
-    public StatsManagerEffect GetEffect(StatsManager target)
+    public IncrementalEffect GetEffect(StatsManager target)
     {
         return buffType switch
         {

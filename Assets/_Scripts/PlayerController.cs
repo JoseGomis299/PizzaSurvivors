@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour
     private CharacterMovement _playerMovement;
 
     public List<BulletModifierInfo> modifiers;
-    public List<ShotModifierInfo> shotModifiers;
     
     private void Awake()
     {
@@ -23,7 +22,7 @@ public class PlayerController : MonoBehaviour
         
         _playerMovement = GetComponent<CharacterMovement>();
         
-        _bulletSpawner.Initialize(modifiers, shotModifiers);
+        _bulletSpawner.Initialize(modifiers);
     }
     
     private void Update()

@@ -1,4 +1,4 @@
-public class BulletBounceBuff : StatsManagerEffect
+public class BulletBounceBuff : IncrementalEffect
 {
     public BulletBounceBuff(StatsManager target, float duration, int maxStacks, TimerType timerType, float bulletBounceIncrement, IncrementType incrementType) : base(target, duration, maxStacks, timerType, bulletBounceIncrement, incrementType) { }
     

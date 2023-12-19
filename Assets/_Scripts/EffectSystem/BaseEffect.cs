@@ -17,14 +17,14 @@ public abstract class BaseEffect : IEffect{
     public int CurrentStacks { get; private set; }
     public readonly int MaxStacks;
     
-    protected readonly IEffectTarget EffectTarget;
+    protected readonly StatsManager EffectTarget;
     
-    protected BaseEffect(IEffectTarget target, float duration, int maxStacks, TimerType timerType)
+    protected BaseEffect(StatsManager target, float duration, int maxStacks, TimerType timerType)
     {
         EffectTarget = target;
         MaxStacks = maxStacks;
         
-        Timer = new Timer(duration, target as MonoBehaviour);
+        Timer = new Timer(duration, target);
         _timerType = timerType;
     }
 

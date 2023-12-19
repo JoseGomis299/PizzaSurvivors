@@ -16,9 +16,9 @@ public class PersistentDamage : BaseEffect
     private GameObject _effectInstance;
     private ParticleSystem _particleSystem;
     
-    public PersistentDamage(IEffectTarget target, float duration, float damage, Element element, DamageType damageType, float interval, GameObject visualEffect) : base(target, duration, 1, TimerType.Default)
+    public PersistentDamage(StatsManager target, float duration, float damage, Element element, DamageType damageType, float interval, GameObject visualEffect) : base(target, duration, 1, TimerType.Default)
     {
-        _healthComponent = ((MonoBehaviour) target).GetComponent<HealthComponent>();
+        _healthComponent = target.GetComponent<HealthComponent>();
         _damage = damage;
         _element = element;
         _damageType = damageType;
@@ -40,10 +40,10 @@ public class PersistentDamage : BaseEffect
         if(_damageCoroutine != null) return;
         
         DeApplyOnTimerEnd();
-        _damageCoroutine = ((MonoBehaviour) EffectTarget).StartCoroutine(DealDamage());
-        _effectInstance = ObjectPool.Instance.InstantiateFromPool(_visualEffect, ((MonoBehaviour) EffectTarget).transform.position, Quaternion.identity);
+        _damageCoroutine = EffectTarget.StartCoroutine(DealDamage());
+        _effectInstance = ObjectPool.Instance.InstantiateFromPool(_visualEffect, EffectTarget.transform.position, Quaternion.identity);
         _particleSystem = _effectInstance.GetComponent<ParticleSystem>();
-        _effectInstance.transform.parent = ((MonoBehaviour)EffectTarget).transform;
+        _effectInstance.transform.parent = EffectTarget.transform;
     }
 
     public override void DeApply()

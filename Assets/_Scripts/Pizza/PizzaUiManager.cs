@@ -92,8 +92,7 @@ public class PizzaUiManager : MonoBehaviour
             instance.GetComponentInChildren<TMP_Text>().text = statBuff.ToString();
         }
 
-        var descriptors = _ingredientPlacer.CurrentIngredient.GetDescriptors();
-        foreach (var modifier in descriptors)
+        foreach (var modifier in _ingredientPlacer.CurrentIngredient.BulletModifiers)
         {
             foreach (var description in modifier.GetDescriptions())
             {

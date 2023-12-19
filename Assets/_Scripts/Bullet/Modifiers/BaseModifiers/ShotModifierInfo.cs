@@ -2,11 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Bullet Modifiers/Shot Modifier", fileName = "Bullet Shot Modifier")]
-public class ShotModifierInfo : Descriptor
+public class ShotModifierInfo : BulletModifierInfo
 {
-    [Header("Modifier Settings")]
-    public int maxLevel;
-    public int priority;
     public List<BulletModifierInfo> modifiers;
     
     public enum ShootModifierType
