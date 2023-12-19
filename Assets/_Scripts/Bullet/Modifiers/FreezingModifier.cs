@@ -15,7 +15,7 @@ public class FreezingModifier : BulletHitModifier
     
     public override void OnHit(StatsManager target, Damage damage, List<BulletHitModifier> hitModifiers, Element element)
     {
-        if(target == null) return;
+        if(target == null || !target.gameObject.activeInHierarchy) return;
         FreezingDebuff debuff = new FreezingDebuff(target, 3, 5, 0, -0.2f, IncrementType.AddBase);
         target.ApplyEffect(debuff);
     }

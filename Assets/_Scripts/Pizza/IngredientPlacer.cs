@@ -33,6 +33,8 @@ public class IngredientPlacer : MonoBehaviour
     
     private void Update()
     {
+        if(!transform.GetChild(0).gameObject.activeInHierarchy) return;
+        
         if(Input.GetKeyDown(KeyCode.Escape))
         {        
             ExitPizzaView();

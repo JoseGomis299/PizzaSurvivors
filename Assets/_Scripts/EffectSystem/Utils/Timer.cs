@@ -36,6 +36,8 @@ public class Timer
 
     public void StartTimer()
     {
+        if(!_timePlayer.gameObject.activeInHierarchy) return;
+        
         if (_timerCoroutine != null)
             _timePlayer.StopCoroutine(_timerCoroutine);
         _timerCoroutine = _timePlayer.StartCoroutine(TickTimer());

@@ -18,10 +18,14 @@ public class StatsManager : MonoBehaviour
     }
     
     public void ApplyEffect(IEffect effect) {
+        if(!gameObject.activeInHierarchy) return;
+        
         _effectManager.ApplyEffect(effect as BaseEffect);
     }
     
     public void ReApplyEffects() {
+        if(!gameObject.activeInHierarchy) return;
+
         _effectManager.ReApplyEffects();
     }
 

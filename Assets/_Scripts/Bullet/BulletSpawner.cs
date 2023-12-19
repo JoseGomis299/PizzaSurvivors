@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using ProjectUtils.ObjectPooling;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public class BulletSpawner : MonoBehaviour
 {
@@ -20,25 +22,25 @@ public class BulletSpawner : MonoBehaviour
 
     public void Initialize(List<BulletModifierInfo> modifiers)
     {
-        var shootModifiers = new Dictionary<ShotModifierInfo.ShootModifierType, BulletShotModifier>();
         _characterStats = GetComponent<StatsManager>().Stats;
+        
         _modifiers = new List<BulletModifierInfo>();
         _shotModifiers = new List<BulletShotModifier>();
-
+      
         foreach (var mod in modifiers)
         {
             if(mod is ShotModifierInfo shotModifier)
             {
-                if (shootModifiers.ContainsKey(shotModifier.type))
+                var modifier = shotModifier.GetBulletShotModification(this);
+
+                var found = _shotModifiers.Find(x => x.GetType() == modifier.GetType());
+                if (found != null)
                 {
-                    shootModifiers[shotModifier.type].Apply();
+                    found.Apply();
                     continue;
                 }
 
-                var modifier = shotModifier.GetBulletShotModification(this);
                 modifier.Apply();
-
-                shootModifiers.Add(shotModifier.type, modifier);
                 _shotModifiers.Add(modifier);
             }
             else
@@ -46,7 +48,7 @@ public class BulletSpawner : MonoBehaviour
                 _modifiers.Add(mod);
             }
         }
-        
+
         //Sort lists on priority
         _shotModifiers = _shotModifiers.OrderByDescending(x => x.Priority).ToList();
         _modifiers = _modifiers.OrderByDescending(x => x.priority).ToList();

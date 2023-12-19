@@ -25,7 +25,6 @@ public class BoomerangModifier : BulletMovementModifier
     public override void ModifyMovement()
     {
         if(_spawner != null) _spawnerPosition = _spawner.position;
-        Debug.Log(_spawner);
         
         float distance = Vector2.Distance(EffectTarget.transform.position, _spawnerPosition);
         float multiplier = Mathf.Lerp(-1, 1, time / frequency);
