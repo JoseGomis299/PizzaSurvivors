@@ -6,6 +6,8 @@ public class HealthComponent : MonoBehaviour, IDamageable
 {
     private StatsManager _statsManager;
     private float _health;
+
+    private CharacterMovement _characterMovement;
     
     public float Health => _health;
     public float MaxHealth => _statsManager.Stats.MaxHealth;
@@ -16,6 +18,7 @@ public class HealthComponent : MonoBehaviour, IDamageable
     private void Awake()
     {
         _statsManager = GetComponent<StatsManager>();
+        _characterMovement = GetComponent<CharacterMovement>();
         _health = _statsManager.Stats.MaxHealth;
     }
     
@@ -30,6 +33,7 @@ public class HealthComponent : MonoBehaviour, IDamageable
     public void TakeDamage(Damage damage)
     {
         _health -= _statsManager.Stats.GetReceivedDamage(damage.element, damage.value);
+        if (_characterMovement != null) _characterMovement.ApplyKnockBack(damage.KnockBack);
         if (_health <= 0)
         {
             gameObject.SetActive(false);
