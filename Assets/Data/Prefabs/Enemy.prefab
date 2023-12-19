@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3223756141241326911}
   - component: {fileID: 7314304941758566722}
   - component: {fileID: 3545766749966752578}
+  - component: {fileID: 6905251877862819796}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -35,7 +36,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8423285212657662377
 SpriteRenderer:
@@ -171,7 +172,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 50
-  m_LinearDrag: 0
+  m_LinearDrag: 3.5
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -198,3 +199,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: df18d20399188514797d8c60662df645, type: 2}
+--- !u!114 &6905251877862819796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370464564111723388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8946ef173f864340ab5a72a25bdacd91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  receiveKnockBack: 1

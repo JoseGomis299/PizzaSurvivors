@@ -48,6 +48,6 @@ public class PlayerController : MonoBehaviour
     
     private void FixedUpdate()
     {
-        _playerMovement.UpdateMovement(_direction);
+        _playerMovement.UpdateMovement(_direction, Time.fixedDeltaTime);
     }
 }

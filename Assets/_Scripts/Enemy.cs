@@ -5,12 +5,17 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private StatsManager statsManager;
+    private StatsManager _statsManager;
+    private CharacterMovement _characterMovement;
 
     private void Start()
     {
-        statsManager = GetComponent<StatsManager>();
+        _statsManager = GetComponent<StatsManager>();
+        _characterMovement = GetComponent<CharacterMovement>();
     }
 
-
+    private void FixedUpdate()
+    {
+        _characterMovement.UpdateMovement(Vector3.zero, Time.fixedDeltaTime);
+    }
 }

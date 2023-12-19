@@ -15,6 +15,7 @@ MonoBehaviour:
   <Damage>k__BackingField: 20
   <Speed>k__BackingField: 10
   <Size>k__BackingField: 1
+  <KnockBack>k__BackingField: 0
   <Pierce>k__BackingField: 0
   <Bounce>k__BackingField: 0
   <Element>k__BackingField: 0

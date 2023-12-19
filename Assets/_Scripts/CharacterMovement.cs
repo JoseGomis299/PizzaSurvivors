@@ -7,6 +7,7 @@ public class CharacterMovement : MonoBehaviour
     private StatsManager _statsManager;
 
     [SerializeField] private bool receiveKnockBack;
+    private Vector2 _knockBackImpulse;
     
     private void Awake()
     {
@@ -14,16 +15,17 @@ public class CharacterMovement : MonoBehaviour
         _statsManager = GetComponent<StatsManager>();
     }
     
-    public void UpdateMovement(Vector3 direction)
+    public void UpdateMovement(Vector3 direction, float deltaTime)
     {
         _direction = direction;
         
-        _rb.velocity = _direction * _statsManager.Stats.Speed;
+        _knockBackImpulse = Vector2.Lerp(_knockBackImpulse, Vector2.zero, deltaTime*10f);
+        _rb.velocity = _direction * _statsManager.Stats.Speed + _knockBackImpulse;
     }
 
     public void ApplyKnockBack(Vector3 damageKnockBack)
     {
-        if(receiveKnockBack)
-            _rb.AddForce(damageKnockBack, ForceMode2D.Impulse);
+        if (receiveKnockBack)
+            _knockBackImpulse = damageKnockBack;
     }
 }

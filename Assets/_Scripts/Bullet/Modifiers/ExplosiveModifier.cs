@@ -18,7 +18,7 @@ public class ExplosiveModifier : BulletHitModifier
         foreach (var col in collisions)
         {
             if((CurrentStacks >= 2 && col.gameObject == EffectTarget.Spawner.gameObject) || !col.TryGetComponent(out IDamageable damageable)) continue;
-            damage = new Damage(damage.value * 0.5f, damage.element, 1, col.transform.position - EffectTarget.transform.position);
+            damage = new Damage(damage.value * 0.5f, damage.element, 15, col.transform.position - EffectTarget.transform.position);
             damageable.TakeDamage(damage);
             
             if(target != null && col.gameObject == target.gameObject) continue;
