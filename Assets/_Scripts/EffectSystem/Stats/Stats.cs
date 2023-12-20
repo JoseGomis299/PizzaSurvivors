@@ -22,10 +22,7 @@ public class Stats : ScriptableObject
     [field: Space(10)]
     [field: SerializeField] public float AttackSpeed { get; set; } = 0.1f;
     [field: SerializeField] public float Attack { get; set; } = 20f;
-    [field: SerializeField] public float AccelTime { get; set; } = 0.5f;
     [field: SerializeField] public float Speed { get; set; } = 10f;
-    [field: SerializeField] public float RollDistance { get; set; } = 3f;
-    [field: SerializeField] public float RollTime { get; set; } = 0.2f;
     [field: SerializeField] public float Luck { get; set; } = 7f;
 
     [field: Header("Bullets Stats")]

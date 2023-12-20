@@ -6807,10 +6807,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6905251877862819796, guid: cf5e24f5777b23748bc1e95bcf30539f, type: 3}
-      propertyPath: receiveKnockBack
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6868,6 +6864,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 625090768827357778, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
+      propertyPath: ignoreLayer.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 2747259311984292245, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
       propertyPath: m_Name
       value: Player
@@ -6878,14 +6878,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5266834885008939877, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7644783296182811206, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8878666665695811720, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: modifiers.Array.size
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7644783296182811206}
   - component: {fileID: 3098703498309468544}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 537413709811894413}
   - component: {fileID: 5200129759369003697}
   - component: {fileID: 625090768827357778}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -270,13 +270,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 055e04e6ac294c4fa09180dcaa0f2bc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  modifiers:
-  - {fileID: 11400000, guid: f2f1d8ec6e928224693b1e5816adca97, type: 2}
-  - {fileID: 11400000, guid: 9892cbe014b15b748bf6cadc3352a06d, type: 2}
-  - {fileID: 11400000, guid: dba044d124d510e4cb2630d16400ad86, type: 2}
-  - {fileID: 11400000, guid: dba044d124d510e4cb2630d16400ad86, type: 2}
-  - {fileID: 11400000, guid: e09f25795fe85e44ab3f22d6de5237f4, type: 2}
-  - {fileID: 11400000, guid: d60dda64a6fc3a448b3f0c62b6791f7f, type: 2}
+  modifiers: []
+  rollBufferTime: 0.1
 --- !u!114 &1353625776928100550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,7 +352,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8946ef173f864340ab5a72a25bdacd91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ignoreLayer:
+    serializedVersion: 2
+    m_Bits: 0
   receiveKnockBack: 1
+  accelTime: 0.1
+  rollDistance: 3
+  rollTime: 0.2
 --- !u!1 &3568867714004947507
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,7 +370,7 @@ GameObject:
   - component: {fileID: 5266834885008939877}
   - component: {fileID: 4848720159806631579}
   - component: {fileID: 4727990744380642605}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -443,7 +444,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2221413298177402469}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -482,7 +483,7 @@ GameObject:
   - component: {fileID: 890133140131123285}
   - component: {fileID: 2392442428979593033}
   - component: {fileID: 8897265757228012563}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -559,7 +560,7 @@ GameObject:
   - component: {fileID: 5193949018068577296}
   - component: {fileID: 3935860155921231358}
   - component: {fileID: 242316380165835489}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -660,7 +661,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6943845065931462988}
   - component: {fileID: 7129742784419077878}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -746,7 +747,7 @@ GameObject:
   - component: {fileID: 4144772642805271540}
   - component: {fileID: 5602009735855297907}
   - component: {fileID: 2124686564874451612}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}

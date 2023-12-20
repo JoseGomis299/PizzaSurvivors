@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -7,8 +8,14 @@ public class CharacterMovement : MonoBehaviour
     private Rigidbody2D _rb;
     private StatsManager _statsManager;
 
+    [SerializeField] private LayerMask ignoreLayer;
     [SerializeField] private bool receiveKnockBack;
     private Vector2 _knockBackImpulse;
+    
+    [Space(10)]
+    [SerializeField] private float accelTime = 0.5f;
+    [SerializeField] private float rollDistance = 3f;
+    [SerializeField] private float rollTime = 0.2f;
     
     //VARIABLECITAS PARA MOVIMIENTO TO GUAPO QUE SE SIENTA BIEN
     private float _startMoveTime = 0f;
@@ -23,6 +30,8 @@ public class CharacterMovement : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _statsManager = GetComponent<StatsManager>();
+        
+        _rb.excludeLayers = ignoreLayer;
     }
     
     public void UpdateMovement(Vector3 direction, float deltaTime)
@@ -50,18 +59,18 @@ public class CharacterMovement : MonoBehaviour
 
     private void UpdateMovementRoll()
     {
-        if (Time.time - _startRollTime >= _statsManager.Stats.RollTime)
+        if (Time.time - _startRollTime >= rollTime)
         {
             _isRolling = false;
             return;
         }
 
-        float val = -((2 * _statsManager.Stats.RollDistance) *
-            (-1 + (Time.time - _startRollTime) / _statsManager.Stats.RollTime) / _statsManager.Stats.RollTime);
+        float val = -((2 * rollDistance) *
+            (-1 + (Time.time - _startRollTime) / rollTime) / rollTime);
 
         _rb.velocity = _rollDirection * val;
-        Debug.Log(val);
-        Debug.Log(_rb.velocity);
+        // Debug.Log(val);
+        // Debug.Log(_rb.velocity);
     }
 
     public void ApplyKnockBack(Vector3 damageKnockBack)
@@ -77,7 +86,7 @@ public class CharacterMovement : MonoBehaviour
 
     private void HandleAccel()
     {
-        _speed = Mathf.Lerp(0, _statsManager.Stats.Speed, (Time.time - _startMoveTime) / _statsManager.Stats.AccelTime);
+        _speed = Mathf.Lerp(0, _statsManager.Stats.Speed, (Time.time - _startMoveTime) / accelTime);
     }
 
     public bool StartRoll(Vector3 direction)
@@ -89,5 +98,11 @@ public class CharacterMovement : MonoBehaviour
         _startRollTime = Time.time;
 
         return true;
+    }
+
+    public void SetRollData(float rollDistance, float rollTime)
+    {
+        this.rollDistance = rollDistance;
+        this.rollTime = rollTime;
     }
 }
