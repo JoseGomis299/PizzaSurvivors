@@ -8,12 +8,12 @@ using JetBrains.Annotations;
 /// </summary>
 public class EnumSet<T> : IEnumerable<T>
 {
-    private int _size;
+    private readonly int _size;
     
     public int Length { get; private set; }
 
-    [ItemCanBeNull] private T[] _values;
-    private int[] _keys;
+    [ItemCanBeNull] private readonly T[] _values;
+    private readonly int[] _keys;
     
     public EnumSet(Type enumType)
     {

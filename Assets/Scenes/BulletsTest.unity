@@ -6880,46 +6880,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8878666665695811720, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: modifiers.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8878666665695811720, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: modifiers.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: f2f1d8ec6e928224693b1e5816adca97, type: 2}
-    - target: {fileID: 8878666665695811720, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: modifiers.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: 9892cbe014b15b748bf6cadc3352a06d, type: 2}
-    - target: {fileID: 8878666665695811720, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: modifiers.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: dba044d124d510e4cb2630d16400ad86, type: 2}
-    - target: {fileID: 8878666665695811720, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: modifiers.Array.data[3]
-      value: 
-      objectReference: {fileID: 11400000, guid: dba044d124d510e4cb2630d16400ad86, type: 2}
-    - target: {fileID: 8878666665695811720, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: modifiers.Array.data[4]
-      value: 
-      objectReference: {fileID: 11400000, guid: e09f25795fe85e44ab3f22d6de5237f4, type: 2}
-    - target: {fileID: 8878666665695811720, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: modifiers.Array.data[5]
-      value: 
-      objectReference: {fileID: 11400000, guid: e09f25795fe85e44ab3f22d6de5237f4, type: 2}
-    - target: {fileID: 8878666665695811720, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: modifiers.Array.data[6]
-      value: 
-      objectReference: {fileID: 11400000, guid: e09f25795fe85e44ab3f22d6de5237f4, type: 2}
-    - target: {fileID: 8878666665695811720, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: modifiers.Array.data[7]
-      value: 
-      objectReference: {fileID: 11400000, guid: e09f25795fe85e44ab3f22d6de5237f4, type: 2}
-    - target: {fileID: 8878666665695811720, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: modifiers.Array.data[8]
-      value: 
-      objectReference: {fileID: 11400000, guid: e09f25795fe85e44ab3f22d6de5237f4, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
