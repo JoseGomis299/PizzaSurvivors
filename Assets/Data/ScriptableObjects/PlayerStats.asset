@@ -74,5 +74,6 @@ MonoBehaviour:
   <AdditionalBulletsPierce>k__BackingField: 0
   <AdditionalBulletsBounce>k__BackingField: 0
   <AdditionalBulletsSize>k__BackingField: 0
+  <BulletKnockBack>k__BackingField: 0
   <DamageMultipliers>k__BackingField: []
   <AttackMultipliers>k__BackingField: []

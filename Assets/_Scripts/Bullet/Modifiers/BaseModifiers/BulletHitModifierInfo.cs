@@ -6,7 +6,7 @@ public class BulletHitModifierInfo : BulletModifierInfo
     public GameObject onHitEffect;
     public int remainsAfterHit;
 
-    public enum HitModifierType
+    public enum HitModifierType : int
     {
         Explosive,
         Freezing,

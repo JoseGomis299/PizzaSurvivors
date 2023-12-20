@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Bullet : MonoBehaviour
@@ -28,8 +30,8 @@ public class Bullet : MonoBehaviour
     private Rigidbody2D _rb;
     private GameObject _gfx;
     
-    private List<BulletMovementModifier> _movementModifiers;
-    private Dictionary<BulletHitModifierInfo.HitModifierType, BulletHitModifier>_hitModifiers;
+    private EnumSet<BulletMovementModifier> _movementModifiers;
+    private EnumSet<BulletHitModifier> _hitModifiers;
     
     private void Awake()
     {
@@ -51,10 +53,8 @@ public class Bullet : MonoBehaviour
         
         _modifiersInfo = new List<BulletModifierInfo>();
         
-        _movementModifiers = new List<BulletMovementModifier>();
-        _hitModifiers = new Dictionary<BulletHitModifierInfo.HitModifierType, BulletHitModifier>();
-        
-        var movementModifiersDictionary = new Dictionary<BulletMovementModifierInfo.MovementModifierType, BulletMovementModifier>();
+        _movementModifiers = new EnumSet<BulletMovementModifier>(typeof(BulletMovementModifierInfo.MovementModifierType));
+        _hitModifiers = new EnumSet<BulletHitModifier>(typeof(BulletHitModifierInfo.HitModifierType));
         
         foreach (var mod in other._modifiersInfo)
         {
@@ -67,25 +67,21 @@ public class Bullet : MonoBehaviour
                 case BulletMovementModifierInfo movementModifier:
                 {
                     var modifierMovement = movementModifier.GetBulletModification(this);
-                    
-                    if (!movementModifiersDictionary.ContainsKey(movementModifier.type))
-                    {
-                        movementModifiersDictionary.Add(movementModifier.type, modifierMovement);
-                        _movementModifiers.Add(modifierMovement);
-                    }
-            
-                    movementModifiersDictionary[movementModifier.type].Apply();
+                    int index = (int)movementModifier.type;
+
+                    _movementModifiers.SetValue(index, modifierMovement);
+                    _movementModifiers[index].Apply();
                     break;
                 }
                 case BulletHitModifierInfo hitModifier:
                 {
-                    if(other._hitModifiers.ContainsKey(hitModifier.type) && other._hitModifiers[hitModifier.type].RemainsAfterHit - ID < 0) break;
+                    int index = (int)hitModifier.type;
+                    
+                    if(other._hitModifiers[index].RemainsAfterHit - ID < 0) break;
                     var modifierHit = hitModifier.GetBulletModification(this);
 
-                    if(!_hitModifiers.ContainsKey(hitModifier.type))
-                        _hitModifiers.Add(hitModifier.type, modifierHit);
-            
-                    _hitModifiers[hitModifier.type].Apply();
+                    _hitModifiers.SetValue(index, modifierHit);
+                    _hitModifiers[index].Apply();
                     break;
                 }
             }
@@ -112,11 +108,9 @@ public class Bullet : MonoBehaviour
         _characterStats = characterStats;
         
         _modifiersInfo = new List<BulletModifierInfo>(modifiers);
-        
-        _movementModifiers = new List<BulletMovementModifier>();
-        _hitModifiers = new Dictionary<BulletHitModifierInfo.HitModifierType, BulletHitModifier>();
-        
-        var movementModifiersDictionary = new Dictionary<BulletMovementModifierInfo.MovementModifierType, BulletMovementModifier>();
+
+        _movementModifiers = new EnumSet<BulletMovementModifier>(typeof(BulletMovementModifierInfo.MovementModifierType));
+        _hitModifiers = new EnumSet<BulletHitModifier>(typeof(BulletHitModifierInfo.HitModifierType));
         
         foreach (var mod in modifiers)
         {
@@ -129,31 +123,26 @@ public class Bullet : MonoBehaviour
                 case BulletMovementModifierInfo movementModifier:
                 {
                     var modifierMovement = movementModifier.GetBulletModification(this);
-                    
-                    if (!movementModifiersDictionary.ContainsKey(movementModifier.type))
-                    {
-                        movementModifiersDictionary.Add(movementModifier.type, modifierMovement);
-                        _movementModifiers.Add(modifierMovement);
-                    }
-            
-                    movementModifiersDictionary[movementModifier.type].Apply();
+                    int index = (int)movementModifier.type;
+
+                    _movementModifiers.SetValue(index, modifierMovement);
+                    _movementModifiers[index].Apply();
                     break;
                 }
                 case BulletHitModifierInfo hitModifier:
                 {
                     var modifierHit = hitModifier.GetBulletModification(this);
+                    int index = (int)hitModifier.type;
 
-                    if(!_hitModifiers.ContainsKey(hitModifier.type))
-                        _hitModifiers.Add(hitModifier.type, modifierHit);
-            
-                    _hitModifiers[hitModifier.type].Apply();
+                    _hitModifiers.SetValue(index, modifierHit);
+                    _hitModifiers[index].Apply();
                     break;
                 }
             }
             
             _modifiersInfo.Add(mod);
         }
-        
+
         transform.localScale = Vector3.one * _stats.Size;
 
         _initialSpeed = Speed = _stats.Speed;
@@ -193,7 +182,7 @@ public class Bullet : MonoBehaviour
 
         foreach (var modifier in _hitModifiers)
         {
-            modifier.Value.OnHit(col.GetComponent<StatsManager>(), damage, _hitModifiers.Values.Where(m => m != modifier.Value).ToList() , _stats.Element);
+            modifier.OnHit(col.GetComponent<StatsManager>(), damage, _hitModifiers.Where(m => m != modifier).ToList() , _stats.Element);
         }
 
         //Bounce if colliding with not an enemy

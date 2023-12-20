@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class BurningModifier : BulletHitModifier
 {
-    private PersistentDamage _debuff;
     private ParticleSystem _particleSystem;
     public BurningModifier(Bullet target, int maxStacks, int remainsAfterHit, int priority, GameObject onHiEffect) : base(target, maxStacks, remainsAfterHit, priority, onHiEffect)
     {
@@ -19,7 +18,6 @@ public class BurningModifier : BulletHitModifier
     {
         if(target == null || !target.gameObject.activeInHierarchy) return;
         
-        _debuff ??= new PersistentDamage(target, 3, 5, Element.Fire, DamageType.Additive, 1, OnHitEffect);
-        target.ApplyEffect(_debuff);
+        target.ApplyEffect(new PersistentDamage(target, 3, 5, Element.Fire, DamageType.Additive, 1, OnHitEffect));
     }
 }
