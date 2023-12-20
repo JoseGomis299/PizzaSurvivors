@@ -30,8 +30,8 @@ public class Bullet : MonoBehaviour
     private Rigidbody2D _rb;
     private GameObject _gfx;
     
-    private EnumSet<BulletMovementModifier> _movementModifiers;
-    private EnumSet<BulletHitModifier> _hitModifiers;
+    private EnumSet<BulletMovementModifier, BulletMovementModifierInfo.MovementModifierType> _movementModifiers;
+    private EnumSet<BulletHitModifier, BulletHitModifierInfo.HitModifierType> _hitModifiers;
     
     private void Awake()
     {
@@ -53,8 +53,8 @@ public class Bullet : MonoBehaviour
         
         _modifiersInfo = new List<BulletModifierInfo>();
         
-        _movementModifiers = new EnumSet<BulletMovementModifier>(typeof(BulletMovementModifierInfo.MovementModifierType));
-        _hitModifiers = new EnumSet<BulletHitModifier>(typeof(BulletHitModifierInfo.HitModifierType));
+        _movementModifiers = new EnumSet<BulletMovementModifier, BulletMovementModifierInfo.MovementModifierType>();
+        _hitModifiers = new EnumSet<BulletHitModifier, BulletHitModifierInfo.HitModifierType>();
         
         foreach (var mod in other._modifiersInfo)
         {
@@ -109,8 +109,8 @@ public class Bullet : MonoBehaviour
         
         _modifiersInfo = new List<BulletModifierInfo>(modifiers);
 
-        _movementModifiers = new EnumSet<BulletMovementModifier>(typeof(BulletMovementModifierInfo.MovementModifierType));
-        _hitModifiers = new EnumSet<BulletHitModifier>(typeof(BulletHitModifierInfo.HitModifierType));
+        _movementModifiers = new EnumSet<BulletMovementModifier, BulletMovementModifierInfo.MovementModifierType>();
+        _hitModifiers = new EnumSet<BulletHitModifier, BulletHitModifierInfo.HitModifierType>();
         
         foreach (var mod in modifiers)
         {
