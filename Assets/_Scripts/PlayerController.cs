@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using ProjectUtils.Helpers;
 using UnityEngine;
@@ -13,6 +14,10 @@ public class PlayerController : MonoBehaviour
     private CharacterMovement _playerMovement;
 
     public List<BulletModifierInfo> modifiers;
+
+    [SerializeField] private float rollBufferTime = 0.1f;
+    private float _rollRequestTime = 0f;
+    private bool _rollRequested = false;
     
     private void Awake()
     {
@@ -44,10 +49,40 @@ public class PlayerController : MonoBehaviour
         {
             _bulletSpawner.SpawnBullet(mousePos);
         }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            if (_rollRequested)
+            {
+                StopCoroutine(nameof(RequestRoll));
+            }
+
+            StartCoroutine(RequestRoll());
+        }
     }
     
     private void FixedUpdate()
     {
         _playerMovement.UpdateMovement(_direction, Time.fixedDeltaTime);
+    }
+
+    private IEnumerator RequestRoll()
+    {
+        _rollRequested = true;
+        
+        _rollRequestTime = Time.time;
+
+        while (Time.time - _rollRequestTime < rollBufferTime)
+        {
+            bool result = _playerMovement.StartRoll(_direction);
+            if (result)
+            {
+                _rollRequestTime = -1f;
+            }
+
+            yield return null;
+        }
+
+        _rollRequested = false;
     }
 }
