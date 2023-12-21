@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
 {
     private StatsManager _statsManager;
     private CharacterMovement _characterMovement;
+    
     private StateMachine _stateMachine;
     
     [SerializeField] private float attackRange;
