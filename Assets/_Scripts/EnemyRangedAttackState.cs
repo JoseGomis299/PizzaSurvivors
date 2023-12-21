@@ -9,28 +9,32 @@ public class EnemyRangedAttackState : BaseState
     private Transform _target;
     private StatsManager _statsManager;
     
+    private float _timeBetweenAttacks;
+    private float _lastAttackTime;
+    
     private bool _isAttacking;
     private Coroutine _animationCoroutine;
     private Coroutine _currentCoroutine;
 
-    public EnemyRangedAttackState(BulletSpawner bulletSpawner,Transform shotPoint, Transform target, StatsManager statsManager)
-    {
+    public EnemyRangedAttackState(BulletSpawner bulletSpawner,Transform shotPoint, Transform target, StatsManager statsManager, float timeBetweenAttacks){
         _shotPoint = shotPoint;
         _statsManager = statsManager;
         _target = target;
         _bulletSpawner = bulletSpawner;
+        _timeBetweenAttacks = timeBetweenAttacks;
     }
 
     public override void Enter()
     {
         base.Enter();
-        _bulletSpawner.ResetTimer();
+        _lastAttackTime = Time.time;
     }
 
     public override void Update()
     {
         base.Update();
-
+        if(Time.time - _lastAttackTime < _timeBetweenAttacks) return;
+        
         if (!_isAttacking)
         {
             _animationCoroutine = _bulletSpawner.StartCoroutine(PlayAnimation());
@@ -40,6 +44,7 @@ public class EnemyRangedAttackState : BaseState
         if (_bulletSpawner.SpawnBullet((_target.position - _shotPoint.position).normalized))
         {
             _isAttacking = false;
+            _lastAttackTime = Time.time;
         }
     }
     
@@ -55,6 +60,8 @@ public class EnemyRangedAttackState : BaseState
 
     private IEnumerator PlayAnimation()
     {
+        _bulletSpawner.ResetTimer();
+
         yield return _currentCoroutine = _bulletSpawner.transform.DoScale(Vector3.one * 0.8f, _statsManager.Stats.AttackSpeed/2f, Transitions.TimeScales.Scaled);
         yield return _currentCoroutine = _bulletSpawner.transform.DoScale(Vector3.one * 1.1f, _statsManager.Stats.AttackSpeed/2f * 0.9f, Transitions.TimeScales.Scaled);
         yield return _currentCoroutine = _bulletSpawner.transform.DoScale(Vector3.one, _statsManager.Stats.AttackSpeed/2f * 0.1f, Transitions.TimeScales.Scaled);
