@@ -51,10 +51,15 @@ public class EnemyRangedAttackState : BaseState
     public override void Exit()
     {
         base.Exit();
-        _bulletSpawner.StopCoroutine(_animationCoroutine);
-        CoroutineController.Stop(_currentCoroutine);
-        
-        _bulletSpawner.transform.DoScale(Vector3.one, 0.1f, Transitions.TimeScales.Scaled);
+        if (_animationCoroutine != null)
+        {
+            _bulletSpawner.StopCoroutine(_animationCoroutine);
+            CoroutineController.Stop(_currentCoroutine);
+            
+            _bulletSpawner.transform.DoScale(Vector3.one, 0.1f, Transitions.TimeScales.Scaled);
+            _animationCoroutine = null;
+        }
+
         _isAttacking = false;
     }
 
