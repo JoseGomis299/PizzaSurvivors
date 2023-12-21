@@ -139,5 +139,61 @@ namespace ProjectUtils.Helpers
             v.y = (sin * tx) + (cos * ty);
             return v;
         }
+        
+        public static bool IsHimOrHisChild(Transform transform, Transform parent)
+        {
+            if (transform == parent) return true;
+            if (transform.parent == null) return false;
+            return IsHimOrHisChild(transform.parent, parent);
+        }
+
+        public static void DrawWiredRectangle(Vector3 position, Vector3 size, float angle, Color color)
+        {
+            Gizmos.color = color;
+
+            Vector2 lb = - size / 2f ;
+            lb = lb.Rotate(angle) + (Vector2) position;
+            
+            Vector2 rb =  new Vector3(size.x / 2f, -size.y / 2f) ;
+            rb = rb.Rotate(angle) + (Vector2) position;
+
+            Vector2 rt =  size / 2f ;
+            rt = rt.Rotate(angle) + (Vector2) position;
+            
+            Vector2 lt = new Vector3(-size.x / 2f, size.y / 2f) ;
+            lt = lt.Rotate(angle) + (Vector2) position;
+            
+
+            //LeftBottom to RightBottom
+            Gizmos.DrawLine(lb, rb);
+            
+            //RightBottom to RightTop
+            Gizmos.DrawLine(rb, rt);
+            
+            //RightTop to LeftTop
+            Gizmos.DrawLine(rt, lt);
+            
+            //LeftTop to LeftBottom
+            Gizmos.DrawLine(lt, lb);
+        }
+        
+        public static void DrawWiredCapsule(Vector2 position, Vector3 size, float angle, CapsuleDirection2D orientation, Color color)
+        {
+            Gizmos.color = color;
+
+            var rectSize = orientation == CapsuleDirection2D.Horizontal ? new Vector2(size.x-size.y, size.y) : new Vector2(size.x, size.y-size.x);
+            DrawWiredRectangle(position, rectSize, angle, color);
+            
+            if (orientation == CapsuleDirection2D.Horizontal)
+            {
+                Gizmos.DrawWireSphere(position + new Vector2(size.x / 2f - size.y / 2f, 0).Rotate(angle), size.y / 2f);
+                Gizmos.DrawWireSphere(position + new Vector2(-size.x / 2f + size.y / 2f, 0).Rotate(angle), size.y / 2f);
+            }
+            else
+            {
+                Gizmos.DrawWireSphere(position + new Vector2(0, -size.x / 2f + size.y / 2f).Rotate(angle), size.x / 2f);
+                Gizmos.DrawWireSphere(position + new Vector2(0, size.x / 2f - size.y / 2f).Rotate(angle), size.x / 2f);
+            }
+        }
     }
 }

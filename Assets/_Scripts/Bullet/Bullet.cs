@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using ProjectUtils.Helpers;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
@@ -170,7 +171,7 @@ public class Bullet : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if((Spawner != null && col.gameObject == Spawner.gameObject) || col.CompareTag("Bullet")) return;
+        if((Spawner != null && (Helpers.IsHimOrHisChild(col.transform, Spawner.transform) || col.CompareTag(Spawner.tag))) || col.CompareTag("Bullet")) return;
         var effectTarget = col.GetComponent<StatsManager>();
         if(effectTarget != null && effectTarget == PreviousHit) return;
         
@@ -198,7 +199,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D col)
     {
-        if ((Spawner != null && col.gameObject == Spawner.gameObject) || col.CompareTag("Bullet")) return;
+        if((Spawner != null && (Helpers.IsHimOrHisChild(col.transform, Spawner.transform) || col.CompareTag(Spawner.tag))) || col.CompareTag("Bullet")) return;
 
         if (!col.TryGetComponent(out IDamageable _) && _stats.Bounce-- > 0)
         {

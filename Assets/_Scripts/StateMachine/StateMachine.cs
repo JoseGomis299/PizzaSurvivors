@@ -36,7 +36,7 @@ public class StateMachine
 
     public void SetState(IState state)
     {
-        _currentState = _nodes[state.GetType()];
+        _currentState = GetOrAddNode(state);
         _currentState.State?.Enter();
     }
 
@@ -61,14 +61,10 @@ public class StateMachine
 
     private StateNode GetOrAddNode(IState state)
     {
-        var node = _nodes[state.GetType()];
-        if (node == null)
-        {
-            node = new StateNode(state);
-            _nodes.Add(state.GetType(), node);
-        }
+        if (!_nodes.ContainsKey(state.GetType()))
+            _nodes.Add(state.GetType(), new StateNode(state));
 
-        return node;
+        return _nodes[state.GetType()];
     }
 
 
