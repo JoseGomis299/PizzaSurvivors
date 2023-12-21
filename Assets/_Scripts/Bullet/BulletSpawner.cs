@@ -58,9 +58,9 @@ public class BulletSpawner : MonoBehaviour
         _lastShotTime = float.MinValue;
     }
 
-    public void SpawnBullet(Vector2 direction)
+    public bool SpawnBullet(Vector2 direction)
     {
-        if(_characterStats.AttackSpeed > Time.time - _lastShotTime) return;
+        if(_characterStats.AttackSpeed > Time.time - _lastShotTime) return false;
         
         //Get all BulletShotData (directions, modifiers)
         List<BulletShotData> shotData = new List<BulletShotData>();
@@ -95,11 +95,16 @@ public class BulletSpawner : MonoBehaviour
         }
         
         _lastShotTime = Time.time;
+        return true;
     }
 
     public void MoveFirePoint(Vector2 direction)
     {
         firePoint.position = _firePointDistance*direction + (Vector2) transform.position;
         firePoint.right = direction;
+    }
+    
+    public void ResetTimer(){
+        _lastShotTime = Time.time;
     }
 }

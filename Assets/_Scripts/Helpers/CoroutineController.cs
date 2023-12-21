@@ -35,6 +35,7 @@ namespace ProjectUtils.Helpers
             return coroutine;
         }
         public static void Stop ( IEnumerator routine ) => _singleton.StopCoroutine( routine );
+        public static void Stop ( Coroutine routine ) => _singleton.StopCoroutine( routine );
         public static void Stop ( string id )
         {
             if( _routines.TryGetValue(id,out var routine) )
