@@ -64,6 +64,8 @@ public class CharacterMovement : MonoBehaviour
             _isRolling = false;
             return;
         }
+        
+        //SI SE QUIERE QUE SE DASH, SUMAR LA VARIABLE _statsManager.Stats.Speed A LA EXPRESIÓN DE ABAJO
 
         float val = -((2 * rollDistance) *
             (-1 + (Time.time - _startRollTime) / rollTime) / rollTime);

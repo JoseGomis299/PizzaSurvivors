@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
             _bulletSpawner.SpawnBullet(mousePos);
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             if (_rollRequested)
             {
