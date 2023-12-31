@@ -4,7 +4,7 @@ public class FreezingDebuff : IncrementalEffect
 {
     private readonly Freeze _freeze;
 
-    public FreezingDebuff(StatsManager target, float duration, int maxStacks, TimerType timerType, float increment, IncrementType incrementType) : base(target, duration, maxStacks, timerType, increment, incrementType) {
+    public FreezingDebuff(StatsManager target, float duration, int maxStacks, TimerType timerType, float increment, IncrementType incrementType) : base(target, duration, maxStacks, timerType, increment, incrementType, BuffType.Speed) {
         _freeze = new Freeze(target, duration, 1, timerType, Timer);
     }
 
@@ -16,7 +16,7 @@ public class FreezingDebuff : IncrementalEffect
             return;
         }
         
-        EffectTarget.Stats.Speed = IncrementStat(EffectTarget.Stats.Speed, EffectTarget.BaseStats.Speed);
+        IncrementStat();
     }
 
     public override void DeApply()
@@ -28,7 +28,7 @@ public class FreezingDebuff : IncrementalEffect
     {
         for (int i = 0; i < CurrentStacks; i++)
         {
-            EffectTarget.Stats.Speed = IncrementStat(EffectTarget.Stats.Speed, EffectTarget.BaseStats.Speed);
+           IncrementStat();
         }
     }
 }

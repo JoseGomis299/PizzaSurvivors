@@ -20,10 +20,6 @@ public class EffectInfo : ScriptableObject
     {
         return effectType switch
         {
-            EffectType.AttackBuff => new AttackBuff(target, duration, maxStacks, timerType, multiplier, incrementType),
-            EffectType.DefenseBuff => new DefenseBuff(target, duration, maxStacks, timerType, multiplier, incrementType),
-            EffectType.SpeedBuff => new SpeedBuff(target, duration, maxStacks, timerType, multiplier, incrementType),
-            EffectType.HealthBuff => new HealthBuff(target, duration, maxStacks, timerType, multiplier, incrementType),
             EffectType.FreezingDebuff => new FreezingDebuff(target, duration, maxStacks, timerType, multiplier, incrementType),
             _ => null
         };
