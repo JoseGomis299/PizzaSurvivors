@@ -26,7 +26,7 @@ public class Stats : ScriptableObject
     [field: SerializeField] public float Luck { get; set; } = 7f;
 
     [field: Header("Bullets Stats")]
-    [field: SerializeField] public float BulletsMaxRange { get; set; } = 100f;
+    [field: SerializeField] public float BulletsMaxRange { get; set; } = 10f;
     [field: SerializeField] public float AdditionalBulletsSpeed { get; set; } = 0f;
     [field: SerializeField] public int AdditionalBulletsPierce { get; set; } = 0;
     [field: SerializeField] public int AdditionalBulletsBounce { get; set; } = 0;
