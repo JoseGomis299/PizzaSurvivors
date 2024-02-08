@@ -212,6 +212,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!224 &140225930 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4463446439685962058, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
+  m_PrefabInstance: {fileID: 3776674603517477058}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &163244097
 GameObject:
   m_ObjectHideFlags: 0
@@ -7013,6 +7018,10 @@ PrefabInstance:
       propertyPath: ignoreLayer.m_Bits
       value: 128
       objectReference: {fileID: 0}
+    - target: {fileID: 814793619121707808, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10
+      objectReference: {fileID: 0}
     - target: {fileID: 2747259311984292245, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
       propertyPath: m_Name
       value: Player
@@ -7026,16 +7035,36 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5649776274552823114, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
+      propertyPath: camRange
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5649776274552823114, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
       propertyPath: maxSpeed
-      value: 10
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 5649776274552823114, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
       propertyPath: offsetDistMult
-      value: 0.25
+      value: 0.4
       objectReference: {fileID: 0}
+    - target: {fileID: 5649776274552823114, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
+      propertyPath: playerMarginMult
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6926307963259918374, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7485102682530193721, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
+      propertyPath: reticle
+      value: 
+      objectReference: {fileID: 140225930}
     - target: {fileID: 7644783296182811206, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -34.0625
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8822757561439527633, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
+      propertyPath: m_Name
+      value: CameraEffects
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

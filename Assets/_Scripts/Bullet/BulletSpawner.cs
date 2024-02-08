@@ -103,6 +103,16 @@ public class BulletSpawner : MonoBehaviour
         firePoint.position = _firePointDistance*direction + (Vector2) transform.position;
         firePoint.right = direction;
     }
+
+    public Vector3 GetFirePoint()
+    {
+        return firePoint.position;
+    }
+
+    public float GetFirePointDistance()
+    {
+        return _firePointDistance;
+    }
     
     public void ResetTimer(){
         _lastShotTime = Time.time;
