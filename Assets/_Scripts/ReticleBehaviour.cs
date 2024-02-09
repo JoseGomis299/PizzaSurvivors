@@ -9,6 +9,8 @@ public class ReticleBehaviour : MonoBehaviour
     private Stats charStats;
     private Camera mainCam;
 
+    private CameraBehaviour camBehaviour;
+
     private Vector3 spawnPoint;
     private Vector3 mousePos;
     
@@ -16,6 +18,8 @@ public class ReticleBehaviour : MonoBehaviour
     void Start()
     {
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+
+        camBehaviour = GetComponentInChildren<CameraBehaviour>();
 
         charStats = GetComponent<StatsManager>().Stats;
         
@@ -38,6 +42,13 @@ public class ReticleBehaviour : MonoBehaviour
         spawnPoint.Set(spawnPoint.x, spawnPoint.y, 0f);
 
         Vector3 directionVector = Vector3.ClampMagnitude(mousePos - spawnPoint, charStats.BulletsMaxRange);
+
+        if (!camBehaviour.getIsAiming())
+        {
+            directionVector = Vector3.Lerp(directionVector, Vector3.zero,
+                (Time.time - camBehaviour.getLastMovedMouse() - camBehaviour.getMouseInactivityTime()) /
+                camBehaviour.getReelbackTime());
+        }
 
         reticle.position = mainCam.WorldToScreenPoint(spawnPoint + directionVector);
     }

@@ -164,4 +164,24 @@ public class CameraBehaviour : MonoBehaviour
     {
         camRange = playerStats.BulletsMaxRange * (1 + rangeMult);
     }
+
+    public bool getIsAiming()
+    {
+        return aimingMode;
+    }
+
+    public float getMouseInactivityTime()
+    {
+        return stopAimTime;
+    }
+
+    public float getReelbackTime()
+    {
+        return reelbackTime;
+    }
+
+    public float getLastMovedMouse()
+    {
+        return lastMovedMouse;
+    }
 }
