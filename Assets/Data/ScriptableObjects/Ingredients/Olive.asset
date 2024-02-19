@@ -9,14 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a44fa2b7a0ed4ab4bb56e55f7d6d59fa, type: 3}
-  m_Name: Multidirectional Shot
+  m_Script: {fileID: 11500000, guid: 36e93d53c04a45cbb155e2f728573f02, type: 3}
+  m_Name: Olive
   m_EditorClassIdentifier: 
-  name: Multi Directional Shot
-  descriptions:
-  - 
-  maxLevel: 2
-  priority: 1
-  modifiers:
-  - {fileID: 11400000, guid: f514c6d072da46e4e845aff3c5a21be0, type: 2}
-  type: 1
+  name: Olive
+  onPizzaSprite: {fileID: 0}
+  uiSprite: {fileID: 0}
+  <BulletModifiers>k__BackingField: []
+  <Buffs>k__BackingField: []

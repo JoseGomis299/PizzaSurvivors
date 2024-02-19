@@ -26,13 +26,12 @@ public class Enemy : MonoBehaviour
         {
             bulletSpawner.Initialize(new List<BulletModifierInfo>());
             
-            var rangeAttackState = new EnemyRangedAttackState(bulletSpawner, transform, player, _statsManager, 2);
+            EnemyRangedAttackState rangeAttackState = new EnemyRangedAttackState(bulletSpawner, transform, player, _statsManager, 2);
             _stateMachine.At(enemyMoveStateState, rangeAttackState, new FuncPredicate(() => Vector3.Distance(transform.position, player.position) < attackRange));
             _stateMachine.At(rangeAttackState, enemyMoveStateState, new FuncPredicate(() => Vector3.Distance(transform.position, player.position) > attackRange+1));
         }
         
         _stateMachine.SetState(enemyMoveStateState);
-        
     }
 
     private void FixedUpdate()

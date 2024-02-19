@@ -721,7 +721,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 370464564111723388, guid: cf5e24f5777b23748bc1e95bcf30539f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6671864738724586031, guid: cf5e24f5777b23748bc1e95bcf30539f, type: 3}
       propertyPath: m_RootOrder
@@ -4819,7 +4819,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 370464564111723388, guid: cf5e24f5777b23748bc1e95bcf30539f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6671864738724586031, guid: cf5e24f5777b23748bc1e95bcf30539f, type: 3}
       propertyPath: m_RootOrder
@@ -6906,7 +6906,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 370464564111723388, guid: cf5e24f5777b23748bc1e95bcf30539f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5649790674611271518, guid: cf5e24f5777b23748bc1e95bcf30539f, type: 3}
       propertyPath: angle
@@ -7017,6 +7017,38 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5266834885008939877, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266834885008939877, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878666665695811720, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
+      propertyPath: modifiers.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878666665695811720, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
+      propertyPath: modifiers.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: dba044d124d510e4cb2630d16400ad86, type: 2}
+    - target: {fileID: 8878666665695811720, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
+      propertyPath: modifiers.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: e09f25795fe85e44ab3f22d6de5237f4, type: 2}
+    - target: {fileID: 8878666665695811720, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
+      propertyPath: modifiers.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: ae34107e5a8ae5f4ebad180a5a1ca401, type: 2}
+    - target: {fileID: 8878666665695811720, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
+      propertyPath: modifiers.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: ae34107e5a8ae5f4ebad180a5a1ca401, type: 2}
+    - target: {fileID: 8878666665695811720, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
+      propertyPath: modifiers.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: ae34107e5a8ae5f4ebad180a5a1ca401, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
