@@ -17,7 +17,11 @@ MonoBehaviour:
   uiSprite: {fileID: 21300000, guid: 0814899c3703879429eca5ce46b72c6d, type: 3}
   <BulletModifiers>k__BackingField:
   - {fileID: 11400000, guid: ae34107e5a8ae5f4ebad180a5a1ca401, type: 2}
+  - {fileID: 11400000, guid: d60dda64a6fc3a448b3f0c62b6791f7f, type: 2}
   <Buffs>k__BackingField:
+  - buffType: 10
+    multiplier: 4
+    incrementType: 0
   - buffType: 6
-    multiplier: 2
+    multiplier: 10
     incrementType: 0

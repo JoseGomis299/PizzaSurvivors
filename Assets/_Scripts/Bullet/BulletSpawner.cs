@@ -13,6 +13,7 @@ public class BulletSpawner : MonoBehaviour
     
     [SerializeField] private Transform firePoint;
     private float _firePointDistance;
+    private Vector2 _firePointDirection;
     
     private List<BulletModifierInfo> _modifiers;
     
@@ -95,6 +96,7 @@ public class BulletSpawner : MonoBehaviour
         }
         
         _lastShotTime = Time.time;
+        _firePointDirection = direction;
         return true;
     }
 
@@ -107,6 +109,11 @@ public class BulletSpawner : MonoBehaviour
     public Vector3 GetFirePoint()
     {
         return firePoint.position;
+    }
+    
+    public Vector2 GetFirePointDirection()
+    {
+        return _firePointDirection;
     }
 
     public float GetFirePointDistance()

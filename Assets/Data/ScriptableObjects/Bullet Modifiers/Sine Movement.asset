@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Sine Movement
   m_EditorClassIdentifier: 
   name: Sine Movement
-  descriptionsByLevel: []
-  type: {fileID: 11500000, guid: 20c1ade0a9aa40b79b51914603fab02c, type: 3}
+  descriptions:
+  - 
   maxLevel: 1
-  remainsAfterHit: 100
   priority: 0
   amplitude: 1
   frequency: 15
+  type: 0

@@ -24,6 +24,8 @@ public class Bullet : MonoBehaviour
     
     //Movement
     public float Speed { get; set; }
+    public bool IgnoreMaxRange { get; set; }
+    
     private float _initialSpeed;
     public Vector2 Direction { get; set; }
     private Vector2 _initialDirection;
@@ -38,6 +40,12 @@ public class Bullet : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _gfx = transform.GetChild(0).gameObject;
+    }
+
+    private void OnDisable()
+    {
+        Direction = Vector2.zero;
+        Speed = 0;
     }
 
     public void Initialize(Bullet other, Vector2 direction, StatsManager previousHit)
@@ -158,7 +166,7 @@ public class Bullet : MonoBehaviour
     private void Move()
     {
         //Disable bullet if it's out of range
-        if(Vector2.SqrMagnitude(transform.position - _initialPosition) > _stats.MaxRange * _stats.MaxRange) gameObject.SetActive(false);
+        if(!IgnoreMaxRange && Vector2.SqrMagnitude(transform.position - _initialPosition) > (_stats.MaxRange * _stats.MaxRange)) gameObject.SetActive(false);
         
         Speed = _initialSpeed;
         Direction = _initialDirection;

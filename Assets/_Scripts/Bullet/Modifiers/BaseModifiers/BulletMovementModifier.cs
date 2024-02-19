@@ -1,6 +1,6 @@
 public abstract class BulletMovementModifier : BulletModifier
 {
-    protected float time;
+    protected float _time;
     protected readonly float amplitude;
     protected readonly float frequency;
     

@@ -212,11 +212,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!224 &140225930 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 4463446439685962058, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-  m_PrefabInstance: {fileID: 3776674603517477058}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &163244097
 GameObject:
   m_ObjectHideFlags: 0
@@ -726,7 +721,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 370464564111723388, guid: cf5e24f5777b23748bc1e95bcf30539f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6671864738724586031, guid: cf5e24f5777b23748bc1e95bcf30539f, type: 3}
       propertyPath: m_RootOrder
@@ -4824,7 +4819,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 370464564111723388, guid: cf5e24f5777b23748bc1e95bcf30539f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6671864738724586031, guid: cf5e24f5777b23748bc1e95bcf30539f, type: 3}
       propertyPath: m_RootOrder
@@ -6909,6 +6904,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 370464564111723388, guid: cf5e24f5777b23748bc1e95bcf30539f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5649790674611271518, guid: cf5e24f5777b23748bc1e95bcf30539f, type: 3}
       propertyPath: angle
       value: 447.1
@@ -7014,61 +7013,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 625090768827357778, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: ignoreLayer.m_Bits
-      value: 128
-      objectReference: {fileID: 0}
-    - target: {fileID: 814793619121707808, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -10
-      objectReference: {fileID: 0}
     - target: {fileID: 2747259311984292245, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 5266834885008939877, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5266834885008939877, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5649776274552823114, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: camRange
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 5649776274552823114, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: maxSpeed
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 5649776274552823114, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: offsetDistMult
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5649776274552823114, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: playerMarginMult
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6926307963259918374, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7485102682530193721, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: reticle
-      value: 
-      objectReference: {fileID: 140225930}
-    - target: {fileID: 7644783296182811206, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8822757561439527633, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: m_Name
-      value: CameraEffects
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 8754469459784461125, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}

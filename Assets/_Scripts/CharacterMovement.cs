@@ -17,6 +17,8 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private float rollDistance = 3f;
     [SerializeField] private float rollTime = 0.2f;
     
+    public float Speed => _direction.magnitude*_speed;
+    
     //VARIABLECITAS PARA MOVIMIENTO TO GUAPO QUE SE SIENTA BIEN
     private float _startMoveTime = 0f;
     private float _speed = 0f;

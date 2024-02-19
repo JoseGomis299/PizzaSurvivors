@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -17,12 +18,12 @@ public class CameraBehaviour : MonoBehaviour
     private float maxSpeed = 0.5f;
     [SerializeField] private float camRange = 1f;
     [SerializeField] private float rangeMult = 0.25f;
-    [SerializeField] private float offsetDistMult = 0.25f;
+    [SerializeField, Range(0, 1)] private float offsetDistMult = 0.25f;
     [SerializeField] private float distBuffer = 0.1f;
     
     [Header("CameraSettings")]
     [SerializeField] private bool useOffset = true;
-    [SerializeField] private float playerMarginMult = 0.2f;
+    [SerializeField, Range(0, 0.499f)] private float playerMarginMult = 0.2f;
 
     private Vector3 targetPos;
     private float speed = 0f;
@@ -79,7 +80,7 @@ public class CameraBehaviour : MonoBehaviour
             targetPos = transform.position + offset;
         }
         
-        Debug.Log(targetPos);
+        //Debug.Log(targetPos);
 
         UpdateCamSpeed(targetPos);
     }
@@ -109,7 +110,7 @@ public class CameraBehaviour : MonoBehaviour
     {
         Vector2 mouse = Input.mousePosition;
 
-        if (mouse != lastMousePos)
+        if (mouse != lastMousePos || Input.GetMouseButton(0))
         {
             lastMovedMouse = Time.time;
             aimingMode = true;

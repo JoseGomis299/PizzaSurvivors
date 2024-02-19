@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bullet Stats
   m_EditorClassIdentifier: 
   <Damage>k__BackingField: 0
-  <Speed>k__BackingField: 10
+  <Speed>k__BackingField: 15
   <Size>k__BackingField: 1
   <KnockBack>k__BackingField: 0
   <Pierce>k__BackingField: 0
