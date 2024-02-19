@@ -78,8 +78,6 @@ public class CameraBehaviour : MonoBehaviour
         {
             targetPos = transform.position + offset;
         }
-        
-        Debug.Log(targetPos);
 
         UpdateCamSpeed(targetPos);
     }
