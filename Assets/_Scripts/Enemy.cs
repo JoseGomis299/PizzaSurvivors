@@ -46,6 +46,7 @@ public class Enemy : MonoBehaviour, IKillable
 
     public void OnDeath()
     {
+        GetComponent<EnemyDropSystem>().DropItem();
         transform.parent = null;
         gameObject.SetActive(false);
     }
