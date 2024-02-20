@@ -41,8 +41,12 @@ public class SpawningSystem : MonoBehaviour
         CurrentRound++;
         RoundTimer = roundDuration;
         
-        SpawnRate = initialSpawnRate / spawnCurve.Evaluate(CurrentRound);
-        MaxSpawnCount = (int) (initialMaxSpawnCount * spawnCurve.Evaluate(CurrentRound));
+        float difficulty = spawnCurve.Evaluate(CurrentRound);
+        MaxSpawnCount = initialMaxSpawnCount + (int) (initialMaxSpawnCount * difficulty);
+        
+        if(difficulty < 1) difficulty = 1;        
+        SpawnRate = initialSpawnRate / difficulty;
+
         
         _isSpawning = true;
     }

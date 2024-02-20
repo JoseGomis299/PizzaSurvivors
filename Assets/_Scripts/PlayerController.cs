@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using ProjectUtils.Helpers;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(CharacterMovement))]
 public class PlayerController : MonoBehaviour, IKillable
@@ -88,6 +89,6 @@ public class PlayerController : MonoBehaviour, IKillable
 
     public void OnDeath()
     {
-        Time.timeScale = 0f;
+        SceneManager.LoadScene(0);
     }
 }

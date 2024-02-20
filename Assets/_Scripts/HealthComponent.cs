@@ -21,10 +21,20 @@ public class HealthComponent : MonoBehaviour, IDamageable
         _characterMovement = GetComponent<CharacterMovement>();
     }
 
+    private void Start()
+    {
+        SetInitialHealth();
+    }
+    
     private void OnEnable()
     {
-        if(_statsManager.Stats == null) return;
-        
+        SetInitialHealth();
+    }
+
+    private void SetInitialHealth()
+    {
+        if (_statsManager.Stats == null) return;
+
         _health = _statsManager.Stats.MaxHealth;
         OnMaxHealthUpdate?.Invoke(_health);
         OnHealthUpdate?.Invoke(_health);
