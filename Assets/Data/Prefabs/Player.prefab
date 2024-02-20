@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: 537413709811894413}
   - component: {fileID: 5200129759369003697}
   - component: {fileID: 625090768827357778}
+  - component: {fileID: 8263200344283678861}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -373,6 +374,18 @@ MonoBehaviour:
   accelTime: 0.1
   rollDistance: 3
   rollTime: 0.2
+--- !u!114 &8263200344283678861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2747259311984292245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55eff0e30ae9dbc41b536dc93ef56115, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3568867714004947507
 GameObject:
   m_ObjectHideFlags: 0
