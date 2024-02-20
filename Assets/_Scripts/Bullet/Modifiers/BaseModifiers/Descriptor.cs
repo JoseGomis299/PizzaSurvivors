@@ -5,7 +5,7 @@ public class Descriptor : ScriptableObject
 {
     [Header("Info")]
     public new string name;
-    [SerializeField] protected string[] descriptions;
+    [SerializeField] protected string[] descriptions = new string[1];
     
     public string GetDescription(int level)
     {

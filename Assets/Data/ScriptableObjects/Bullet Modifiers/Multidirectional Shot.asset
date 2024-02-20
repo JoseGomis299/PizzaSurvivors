@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Multidirectional Shot
   m_EditorClassIdentifier: 
   name: Multi Directional Shot
-  descriptionsByLevel: []
+  descriptions:
+  - 
   maxLevel: 2
-  remainsAfterHit: 100
   priority: 1
   modifiers:
   - {fileID: 11400000, guid: f514c6d072da46e4e845aff3c5a21be0, type: 2}
