@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 296, y: -34.074}
+  m_AnchoredPosition: {x: 292.12, y: -34.074}
   m_SizeDelta: {x: 545.1843, y: 68.148}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3098703498309468544
@@ -111,6 +111,7 @@ GameObject:
   - component: {fileID: 5200129759369003697}
   - component: {fileID: 625090768827357778}
   - component: {fileID: 8263200344283678861}
+  - component: {fileID: 6483737782510716467}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -386,6 +387,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55eff0e30ae9dbc41b536dc93ef56115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6483737782510716467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2747259311984292245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b2c10b947744ca3a4426cb110fcbab9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collectionRadius: 1.8
+  collectionSpeed: 100
+  collectableLayer:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!1 &3568867714004947507
 GameObject:
   m_ObjectHideFlags: 0

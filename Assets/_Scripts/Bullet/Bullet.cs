@@ -179,7 +179,7 @@ public class Bullet : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if((Spawner != null && (Helpers.IsHimOrHisChild(col.transform, Spawner.transform) || col.CompareTag(Spawner.tag))) || col.CompareTag("Bullet")) return;
+        if((Spawner != null && (Helpers.IsHimOrHisChild(col.transform, Spawner.transform) || col.CompareTag(Spawner.tag))) || col.CompareTag("Bullet") || col.TryGetComponent<ICollectable>(out _)) return;
         var effectTarget = col.GetComponent<StatsManager>();
         if(effectTarget != null && effectTarget == PreviousHit) return;
         
@@ -207,7 +207,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D col)
     {
-        if((Spawner != null && (Helpers.IsHimOrHisChild(col.transform, Spawner.transform) || col.CompareTag(Spawner.tag))) || col.CompareTag("Bullet")) return;
+        if((Spawner != null && (Helpers.IsHimOrHisChild(col.transform, Spawner.transform) || col.CompareTag(Spawner.tag))) || col.CompareTag("Bullet") || col.TryGetComponent<ICollectable>(out _)) return;
 
         if (!col.TryGetComponent(out IDamageable _) && _stats.Bounce-- > 0)
         {

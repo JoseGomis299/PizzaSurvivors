@@ -195,5 +195,10 @@ namespace ProjectUtils.Helpers
                 Gizmos.DrawWireSphere(position + new Vector2(0, size.x / 2f - size.y / 2f).Rotate(angle), size.x / 2f);
             }
         }
+        
+        public static Quaternion RandomRotation()
+        {
+            return Quaternion.Euler(0, 0, Random.Range(0, 360));
+        }
     }
 }

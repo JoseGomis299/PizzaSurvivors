@@ -5526,6 +5526,10 @@ MonoBehaviour:
     quantity: 20
     lifeTime: 1
     activeTime: 0
+  - gameObject: {fileID: 6572275906320508244, guid: 115fca423d5e4234b8a7955b05fad56e, type: 3}
+    quantity: 20
+    lifeTime: 1
+    activeTime: 0
 --- !u!4 &1638752853
 Transform:
   m_ObjectHideFlags: 0
@@ -7025,30 +7029,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8878666665695811720, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: modifiers.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8878666665695811720, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: modifiers.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: dba044d124d510e4cb2630d16400ad86, type: 2}
-    - target: {fileID: 8878666665695811720, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: modifiers.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: e09f25795fe85e44ab3f22d6de5237f4, type: 2}
-    - target: {fileID: 8878666665695811720, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: modifiers.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: ae34107e5a8ae5f4ebad180a5a1ca401, type: 2}
-    - target: {fileID: 8878666665695811720, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: modifiers.Array.data[3]
-      value: 
-      objectReference: {fileID: 11400000, guid: ae34107e5a8ae5f4ebad180a5a1ca401, type: 2}
-    - target: {fileID: 8878666665695811720, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: modifiers.Array.data[4]
-      value: 
-      objectReference: {fileID: 11400000, guid: ae34107e5a8ae5f4ebad180a5a1ca401, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
