@@ -103,15 +103,14 @@ GameObject:
   - component: {fileID: 8950251199607440318}
   - component: {fileID: 547477470185536393}
   - component: {fileID: 8878666665695811720}
+  - component: {fileID: 625090768827357778}
+  - component: {fileID: 537413709811894413}
   - component: {fileID: 1353625776928100550}
-  - component: {fileID: 7485102682530193721}
   - component: {fileID: 5368257182971721860}
   - component: {fileID: 6399705670015838170}
-  - component: {fileID: 537413709811894413}
-  - component: {fileID: 5200129759369003697}
-  - component: {fileID: 625090768827357778}
-  - component: {fileID: 8263200344283678861}
   - component: {fileID: 6483737782510716467}
+  - component: {fileID: 5200129759369003697}
+  - component: {fileID: 7630632247886938262}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -275,6 +274,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   modifiers: []
   rollBufferTime: 0.1
+--- !u!114 &625090768827357778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2747259311984292245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8946ef173f864340ab5a72a25bdacd91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ignoreLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  receiveKnockBack: 1
+  accelTime: 0.1
+  rollDistance: 3
+  rollTime: 0.2
+--- !u!114 &537413709811894413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2747259311984292245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea8caec43dd64666a6e1073142c94895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: df18d20399188514797d8c60662df645, type: 2}
 --- !u!114 &1353625776928100550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,19 +320,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <bulletPrefab>k__BackingField: {fileID: 9185154336958388077, guid: 33aebd7d8475e124f91d5e97e5f23058, type: 3}
   firePoint: {fileID: 6943845065931462988}
---- !u!114 &7485102682530193721
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2747259311984292245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1079c77ac1a01b46a86404f174249cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  reticle: {fileID: 4463446439685962058}
 --- !u!114 &5368257182971721860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,7 +345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarSlider: {fileID: 3098703498309468544}
---- !u!114 &537413709811894413
+--- !u!114 &6483737782510716467
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -336,10 +354,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2747259311984292245}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea8caec43dd64666a6e1073142c94895, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b2c10b947744ca3a4426cb110fcbab9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: df18d20399188514797d8c60662df645, type: 2}
+  collectionRadius: 3
+  collectionSpeed: 100
+  collectableLayer:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!114 &5200129759369003697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,7 +378,7 @@ MonoBehaviour:
   interactableLayer:
     serializedVersion: 2
     m_Bits: 64
---- !u!114 &625090768827357778
+--- !u!114 &7630632247886938262
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -365,45 +387,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2747259311984292245}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8946ef173f864340ab5a72a25bdacd91, type: 3}
+  m_Script: {fileID: 11500000, guid: c1079c77ac1a01b46a86404f174249cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ignoreLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  receiveKnockBack: 1
-  accelTime: 0.1
-  rollDistance: 3
-  rollTime: 0.2
---- !u!114 &8263200344283678861
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2747259311984292245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55eff0e30ae9dbc41b536dc93ef56115, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6483737782510716467
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2747259311984292245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b2c10b947744ca3a4426cb110fcbab9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collectionRadius: 1.8
-  collectionSpeed: 100
-  collectableLayer:
-    serializedVersion: 2
-    m_Bits: 512
+  reticle: {fileID: 4463446439685962058}
 --- !u!1 &3568867714004947507
 GameObject:
   m_ObjectHideFlags: 0

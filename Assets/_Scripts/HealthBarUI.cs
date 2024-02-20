@@ -9,15 +9,12 @@ public class HealthBarUI : MonoBehaviour
     [SerializeField] private Slider healthBarSlider;
     private HealthComponent _healthComponent;
 
-    private void Start()
+    private void Awake()
     {
         _healthComponent = GetComponent<HealthComponent>();
 
-        _healthComponent.OnHealthUpdate += UpdateSlider;
         _healthComponent.OnMaxHealthUpdate += UpdateMaxValue;
-        
-        healthBarSlider.maxValue = _healthComponent.Health;
-        healthBarSlider.value = _healthComponent.Health;
+        _healthComponent.OnHealthUpdate += UpdateSlider;
     }
 
     private void OnDestroy()

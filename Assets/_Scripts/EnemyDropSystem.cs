@@ -9,7 +9,22 @@ public class EnemyDropSystem : MonoBehaviour
 {
     [SerializeField] private List<GameObject> drops;
     [SerializeField] private float maxDropForce = 5f;
-        
+
+    private void Awake()
+    {
+        GetComponent<HealthComponent>().OnHealthUpdate += CheckDeath;
+    }
+
+    private void OnDestroy()
+    {
+        GetComponent<HealthComponent>().OnHealthUpdate -= CheckDeath;
+    }
+
+    private void CheckDeath(float health)
+    {
+        if (health <= 0) DropItem();
+    }
+
     public void DropItem() {
 
         for (int i = 0; i < drops.Count; i++)

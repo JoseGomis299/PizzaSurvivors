@@ -22,12 +22,15 @@ public class EnemyRangedAttackState : BaseState
         _target = target;
         _bulletSpawner = bulletSpawner;
         _timeBetweenAttacks = timeBetweenAttacks;
+        
+        _bulletSpawner.transform.localScale = Vector3.one;
     }
 
     public override void Enter()
     {
         base.Enter();
         _lastAttackTime = Time.time;
+        _bulletSpawner.transform.localScale = Vector3.one;
     }
 
     public override void Update()

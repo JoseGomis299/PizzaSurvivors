@@ -4,7 +4,7 @@ using ProjectUtils.Helpers;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterMovement))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IKillable
 {
     private Vector2 _direction;
     private Animator _animator;
@@ -84,5 +84,10 @@ public class PlayerController : MonoBehaviour
         }
 
         _rollRequested = false;
+    }
+
+    public void OnDeath()
+    {
+        Time.timeScale = 0f;
     }
 }

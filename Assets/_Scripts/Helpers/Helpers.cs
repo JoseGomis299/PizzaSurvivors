@@ -43,6 +43,16 @@ namespace ProjectUtils.Helpers
             
             transform.DetachChildren();
         }
+        
+        public static void DisableChildren(this Transform transform)
+        {
+            foreach (Transform child in transform)
+            {
+                child.gameObject.SetActive(false);
+            }
+            
+            transform.DetachChildren();
+        }
 
         /// <summary>Returns the angle in degrees between this position and the mouse position</summary>
         public static float GetAngleToPointer(this Vector3 position)

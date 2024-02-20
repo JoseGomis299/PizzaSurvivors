@@ -7,7 +7,6 @@ public class HealthComponent : MonoBehaviour, IDamageable
 {
     private StatsManager _statsManager;
     private float _health;
-    private bool _dropsItem;
     private CharacterMovement _characterMovement;
     
     public float Health => _health;
@@ -15,18 +14,22 @@ public class HealthComponent : MonoBehaviour, IDamageable
 
     public event Action<float> OnHealthUpdate;
     public event Action<float> OnMaxHealthUpdate;
-
-    EnemyDropSystem _enemyDrop;
-
+    
     private void Awake()
     {
         _statsManager = GetComponent<StatsManager>();
         _characterMovement = GetComponent<CharacterMovement>();
-        _health = _statsManager.Stats.MaxHealth;
-        _dropsItem = (gameObject.tag == "Enemy");
-        _enemyDrop = GetComponent<EnemyDropSystem>();
     }
-    
+
+    private void OnEnable()
+    {
+        if(_statsManager.Stats == null) return;
+        
+        _health = _statsManager.Stats.MaxHealth;
+        OnMaxHealthUpdate?.Invoke(_health);
+        OnHealthUpdate?.Invoke(_health);
+    }
+
     public void Heal(float amount)
     {
         _health += amount;
@@ -38,17 +41,10 @@ public class HealthComponent : MonoBehaviour, IDamageable
     public void TakeDamage(Damage damage)
     {
         _health -= _statsManager.Stats.GetReceivedDamage(damage.element, damage.value);
-        if (_characterMovement != null) _characterMovement.ApplyKnockBack(damage.KnockBack);
-        if (_health <= 0)
-        {
-            if (_dropsItem)
-            {
-                _enemyDrop.DropItem();
-            }
-            gameObject.SetActive(false);
-        }
-//        Debug.Log(_health);
         OnHealthUpdate?.Invoke(_health);
+
+        if (_characterMovement != null) _characterMovement.ApplyKnockBack(damage.KnockBack);
+        if (_health <= 0 && TryGetComponent(out IKillable killable)) killable.OnDeath();
     }
 
     public void SetMaxHealth(float maxHealth)

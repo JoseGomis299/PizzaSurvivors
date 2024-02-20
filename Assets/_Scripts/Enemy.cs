@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using ProjectUtils.Helpers;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IKillable
 {
     private StatsManager _statsManager;
     private CharacterMovement _characterMovement;
@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     
     [SerializeField] private float attackRange;
 
-    private void Start()
+    public void Initialize()
     {
         _statsManager = GetComponent<StatsManager>();
         _characterMovement = GetComponent<CharacterMovement>();
@@ -42,7 +42,11 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         _stateMachine.Update();
-        
+    }
 
+    public void OnDeath()
+    {
+        transform.parent = null;
+        gameObject.SetActive(false);
     }
 }
