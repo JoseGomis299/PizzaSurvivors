@@ -66,8 +66,8 @@ public class AudioPlayer : MonoBehaviour
         PlayerController.OnPlayerShoot += HandlePlayerShootSound;
         PlayerController.OnPlayerMoved += HandleWalkSound;
         PlayerController.OnPlayerRolled += HandleWalkSound;
-        Enemy.OnEnemyDeath += HandleEnemyDeathSound;
-        Enemy.OnEnemyHit += HandleEnemyHitSound;
+        EnemyBase.OnEnemyDeath += HandleEnemyDeathSound;
+        EnemyBase.OnEnemyHit += HandleEnemyHitSound;
         EnemyRangedAttackState.OnAttack += HandleEnemyShootSound;
         ItemCollector.OnItemCollected += HandleCollectSound;
         Pizza.OnIngredientPlaced += HandleAddIngredientSound;
@@ -93,8 +93,8 @@ public class AudioPlayer : MonoBehaviour
         PlayerController.OnPlayerShoot -= HandlePlayerShootSound;
         PlayerController.OnPlayerMoved -= HandleWalkSound;
         PlayerController.OnPlayerRolled -= HandleWalkSound;
-        Enemy.OnEnemyDeath -= HandleEnemyDeathSound;
-        Enemy.OnEnemyHit -= HandleEnemyHitSound;
+        EnemyBase.OnEnemyDeath -= HandleEnemyDeathSound;
+        EnemyBase.OnEnemyHit -= HandleEnemyHitSound;
         EnemyRangedAttackState.OnAttack -= HandleEnemyShootSound;
         ItemCollector.OnItemCollected -= HandleCollectSound;
         Pizza.OnIngredientPlaced -= HandleAddIngredientSound;
