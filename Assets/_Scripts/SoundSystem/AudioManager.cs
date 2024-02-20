@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager instance;
+    public static AudioManager Instance;
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource effectSource;
     
     void Awake()
     {
-        if(instance != null)
+        if(Instance != null)
         {
             Destroy(gameObject);
             return;
         }
-        instance = this;
+        Instance = this;
         DontDestroyOnLoad(gameObject);
     }
+    
     public void PlaySound(AudioClip clip)
     { 
         if(clip == null)
@@ -61,7 +62,7 @@ public class AudioManager : MonoBehaviour
         effectSource.volume = value;
     }
 
-    public void StopMusic()
+    public void PauseMusic()
     {
         musicSource.Pause();
     }
@@ -70,12 +71,17 @@ public class AudioManager : MonoBehaviour
     {
         effectSource.Stop();
     }
+    
+    public void StopMusic()
+    {
+        musicSource.Stop();
+    }
 
     public void ResumeMusic()
     {
         musicSource.Play();
     }
-    
+
     public void ToggleEffects()
     {
         effectSource.mute = !effectSource.mute;
@@ -84,5 +90,24 @@ public class AudioManager : MonoBehaviour
     public void ToggleMusic()
     {
         musicSource.mute = !musicSource.mute;
+    }
+    
+    public void ToggleEffects(bool value)
+    {
+        effectSource.mute = value;
+    }
+    
+    public void ToggleMusic(bool value)
+    {
+        musicSource.mute = value;
+        if(value)
+            musicSource.Pause();
+        else
+            musicSource.Play();
+    }
+    
+    public bool IsMusicPlaying()
+    {
+        return musicSource.isPlaying;
     }
 }

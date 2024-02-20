@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using ProjectUtils.Helpers;
 using UnityEngine;
 
 public class EnemyRangedAttackState : BaseState
 {
+    public static event Action OnAttack;
+    
     private BulletSpawner _bulletSpawner;
     private Transform _shotPoint;
     private Transform _target;
@@ -48,6 +51,7 @@ public class EnemyRangedAttackState : BaseState
         {
             _isAttacking = false;
             _lastAttackTime = Time.time;
+            OnAttack?.Invoke();
         }
     }
     

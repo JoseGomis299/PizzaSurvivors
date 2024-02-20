@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
   <MaxHealth>k__BackingField: 100
-  defense: 10
+  defense: 0
   defenseCurve:
     serializedVersion: 2
     m_Curve:

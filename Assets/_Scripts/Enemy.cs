@@ -5,8 +5,12 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour, IKillable
 {
+    public static event Action OnEnemyDeath;
+    public static event Action OnEnemyHit;
+    
     private StatsManager _statsManager;
     private CharacterMovement _characterMovement;
+    private HealthComponent _healthComponent;
     
     private StateMachine _stateMachine;
     
@@ -16,6 +20,8 @@ public class Enemy : MonoBehaviour, IKillable
     {
         _statsManager = GetComponent<StatsManager>();
         _characterMovement = GetComponent<CharacterMovement>();
+        _healthComponent = GetComponent<HealthComponent>();
+        _healthComponent.OnHealthUpdate += InvokeOnEnemyHit;
         
         Transform player = GameObject.FindWithTag("Player").transform;
         
@@ -49,5 +55,13 @@ public class Enemy : MonoBehaviour, IKillable
         GetComponent<EnemyDropSystem>().DropItem();
         transform.parent = null;
         gameObject.SetActive(false);
+        
+        _healthComponent.OnHealthUpdate -= InvokeOnEnemyHit;
+        OnEnemyDeath?.Invoke();
+    }
+    
+    private void InvokeOnEnemyHit(float _)
+    {
+        OnEnemyHit?.Invoke();
     }
 }

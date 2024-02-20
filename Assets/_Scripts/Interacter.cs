@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 
 public class Interacter : MonoBehaviour
 {
+    public static event Action OnInteract;
+    
     [SerializeField] private float interactRange = 1f;
     [SerializeField] private LayerMask interactableLayer;
     
@@ -31,6 +34,7 @@ public class Interacter : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             interactable.Interact();
+            OnInteract?.Invoke();
         }
     }
 }

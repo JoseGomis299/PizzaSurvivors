@@ -6,6 +6,8 @@ public class Pizza : MonoBehaviour
 {
     public static event Action OnEnterPizzaView;
     public static event Action OnExitPizzaView;
+    public static event Action OnIngredientPlaced;
+    public static event Action OnIngredientRemoved;
 
     private BulletSpawner _bulletSpawner;
     private StatsManager _statsManager;
@@ -58,10 +60,12 @@ public class Pizza : MonoBehaviour
     public void PlaceIngredient(Ingredient ingredient)
     {
         _placedIngredients.Add(ingredient);
+        OnIngredientPlaced?.Invoke();
     }
     
     public void RemoveIngredient(Ingredient ingredient)
     {
         _placedIngredients.Remove(ingredient);
+        OnIngredientRemoved?.Invoke();
     }
 }

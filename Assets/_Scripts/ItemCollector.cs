@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 
 public class ItemCollector : MonoBehaviour
 {
+    public static event Action OnItemCollected;
+    
     [SerializeField] private float collectionRadius = 1f;
     [SerializeField] private float collectionSpeed = 100f;
     [SerializeField] private LayerMask collectableLayer;
@@ -23,6 +26,7 @@ public class ItemCollector : MonoBehaviour
         {
             collectable.Collect(gameObject);
             collision.gameObject.SetActive(false);
+            OnItemCollected?.Invoke();
         }
     }
 

@@ -11,7 +11,7 @@ public class UIManager_MainMenu : MonoBehaviour
     [SerializeField] private Toggle musicToggle;
     [SerializeField] private Toggle sfxToggle;
 
-    protected void Awake()
+    protected void OnEnable()
     {
         playButton.onClick.AddListener(PlayButtonOnClick);
         exitButton.onClick.AddListener(ExitButtonOnClick);
@@ -22,8 +22,8 @@ public class UIManager_MainMenu : MonoBehaviour
         sfxToggle.isOn = PlayerPrefs.GetInt("SoundEffects", 0) == 1;
         musicToggle.isOn = PlayerPrefs.GetInt("Music", 0) == 1;
 
-        //AudioManager.Instance.ToggleEffects(soundEffectsToggle.isOn);
-        //AudioManager.Instance.ToggleMusic(musicToggle.isOn);
+        AudioManager.Instance.ToggleEffects(sfxToggle.isOn);
+        AudioManager.Instance.ToggleMusic(musicToggle.isOn);
     }
 
     private void ExitButtonOnClick()

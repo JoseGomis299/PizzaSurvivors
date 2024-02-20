@@ -66,7 +66,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   <AttackSpeed>k__BackingField: 1
-  <Attack>k__BackingField: 5
+  <Attack>k__BackingField: 100
   <Speed>k__BackingField: 4
   <Luck>k__BackingField: 0
   <BulletsMaxRange>k__BackingField: 100

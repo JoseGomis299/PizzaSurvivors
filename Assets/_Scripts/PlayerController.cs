@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using ProjectUtils.Helpers;
@@ -7,6 +8,12 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(CharacterMovement))]
 public class PlayerController : MonoBehaviour, IKillable
 {
+    public static event Action OnPlayerDeath;
+    public static event Action OnPlayerHit;
+    public static event Action OnPlayerShoot;
+    public static event Action OnPlayerRolled;
+    public static event Action OnPlayerMoved;
+
     private Vector2 _direction;
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
@@ -48,7 +55,8 @@ public class PlayerController : MonoBehaviour, IKillable
         
         if (Input.GetMouseButton(0))
         {
-            _bulletSpawner.SpawnBullet(mousePos);
+            if(_bulletSpawner.SpawnBullet(mousePos))
+             OnPlayerShoot?.Invoke();
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -59,12 +67,14 @@ public class PlayerController : MonoBehaviour, IKillable
             }
 
             StartCoroutine(RequestRoll());
+            OnPlayerRolled?.Invoke();
         }
     }
     
     private void FixedUpdate()
     {
         _playerMovement.UpdateMovement(_direction, Time.fixedDeltaTime);
+        if(_direction.sqrMagnitude > 0) OnPlayerMoved?.Invoke();
     }
 
     private IEnumerator RequestRoll()
@@ -89,6 +99,9 @@ public class PlayerController : MonoBehaviour, IKillable
 
     public void OnDeath()
     {
+        OnPlayerDeath?.Invoke();
+        
+        CoroutineController.StopAll();
         SceneManager.LoadScene(0);
     }
 }
