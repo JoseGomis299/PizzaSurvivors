@@ -5,7 +5,8 @@ using UnityEngine;
 public class Enemy : EnemyBase
 {
     private CharacterMovement _characterMovement;
-    
+
+    [SerializeField] private LayerMask playerLayer;
     [SerializeField] private float attackRange;
 
     public override void Initialize(int round)
@@ -24,6 +25,17 @@ public class Enemy : EnemyBase
             EnemyRangedAttackState rangeAttackState = new EnemyRangedAttackState(bulletSpawner, transform, player, statsManager, statsManager.Stats.AttackCooldown);
             stateMachine.At(enemyMoveStateState, rangeAttackState, new FuncPredicate(() => Vector3.Distance(transform.position, player.position) < attackRange));
             stateMachine.At(rangeAttackState, enemyMoveStateState, new FuncPredicate(() => Vector3.Distance(transform.position, player.position) > attackRange+1));
+        }
+        
+        if (TryGetComponent(out MeleeAttacker meleeAttacker))
+        {
+            meleeAttacker.Initialize(new List<BulletModifierInfo>());
+
+            EnemyMeleeAttackState meleeAttackState = new EnemyMeleeAttackState(meleeAttacker, transform, player,
+                statsManager, statsManager.Stats.AttackCooldown, attackRange, playerLayer);
+            
+            stateMachine.At(enemyMoveStateState, meleeAttackState, new FuncPredicate(() => Vector3.Distance(transform.position, player.position) <= attackRange));
+            stateMachine.At(meleeAttackState, enemyMoveStateState, new FuncPredicate(() => Vector3.Distance(transform.position, player.position) > attackRange));
         }
         
         stateMachine.SetState(enemyMoveStateState);

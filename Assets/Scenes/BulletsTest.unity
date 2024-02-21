@@ -2598,7 +2598,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3944558308042660005, guid: 2d533317839f6fb4cb0fb28a70412743, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3944558308042660005, guid: 2d533317839f6fb4cb0fb28a70412743, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3522,7 +3522,7 @@ MonoBehaviour:
     height: 20
   entitiesParent: {fileID: 1049130952}
   enemyPrefabs:
-  - {fileID: 370464564111723388, guid: cf5e24f5777b23748bc1e95bcf30539f, type: 3}
+  - {fileID: 370464564111723388, guid: ade9e705a5617194a9a6e6251a9a3919, type: 3}
   spawnEffectPrefab: {fileID: 4673598409569538933, guid: 87c068906c7a41242be547026ca46481, type: 3}
   spawnCurve:
     serializedVersion: 2
@@ -3860,7 +3860,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1106468134
 GameObject:
@@ -5588,6 +5588,10 @@ MonoBehaviour:
     lifeTime: 1
     activeTime: 0
   - gameObject: {fileID: 370464564111723388, guid: cf5e24f5777b23748bc1e95bcf30539f, type: 3}
+    quantity: 20
+    lifeTime: 1
+    activeTime: 0
+  - gameObject: {fileID: 370464564111723388, guid: ade9e705a5617194a9a6e6251a9a3919, type: 3}
     quantity: 20
     lifeTime: 1
     activeTime: 0

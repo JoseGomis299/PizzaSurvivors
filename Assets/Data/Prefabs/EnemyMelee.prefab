@@ -10,16 +10,16 @@ GameObject:
   m_Component:
   - component: {fileID: 6671864738724586031}
   - component: {fileID: 8423285212657662377}
-  - component: {fileID: 5649790674611271518}
+  - component: {fileID: 71373818173175882}
+  - component: {fileID: 3301708431688601472}
   - component: {fileID: 1487021330736714409}
   - component: {fileID: 3223756141241326911}
   - component: {fileID: 7314304941758566722}
   - component: {fileID: 3545766749966752578}
   - component: {fileID: 6905251877862819796}
-  - component: {fileID: 371627029561836160}
   - component: {fileID: 2245963577067727516}
   m_Layer: 7
-  m_Name: Enemy
+  m_Name: EnemyMelee
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39,7 +39,7 @@ Transform:
   m_Children:
   - {fileID: 4840480540452893960}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8423285212657662377
 SpriteRenderer:
@@ -93,7 +93,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5649790674611271518
+--- !u!114 &71373818173175882
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,7 +108,20 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
-  attackRange: 7
+  attackRange: 2.5
+--- !u!114 &3301708431688601472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370464564111723388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac2e4714140d9cb4c8ed20e1b17bbb55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitboxMult: {x: 0.5, y: 0.25}
 --- !u!114 &1487021330736714409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,20 +238,6 @@ MonoBehaviour:
   accelTime: 0.5
   rollDistance: 3
   rollTime: 0.2
---- !u!114 &371627029561836160
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 370464564111723388}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ae5c40afcdc4bdbbfce973c7e149f8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <bulletPrefab>k__BackingField: {fileID: 9185154336958388077, guid: 33aebd7d8475e124f91d5e97e5f23058, type: 3}
-  firePoint: {fileID: 6671864738724586031}
 --- !u!114 &2245963577067727516
 MonoBehaviour:
   m_ObjectHideFlags: 0
