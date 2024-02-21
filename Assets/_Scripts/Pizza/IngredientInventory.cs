@@ -6,7 +6,7 @@ public class IngredientInventory
 {
     public static event Action OnInventoryChanged;
 
-    private static Dictionary<Ingredient, int> _ingredients;
+    private static Dictionary<Ingredient, int> _ingredients = new Dictionary<Ingredient, int>();
     public static IEnumerable<KeyValuePair<Ingredient, int>> Ingredients => _ingredients;
 
     [RuntimeInitializeOnLoadMethod]

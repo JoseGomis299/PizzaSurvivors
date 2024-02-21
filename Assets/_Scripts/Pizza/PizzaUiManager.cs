@@ -62,7 +62,7 @@ public class PizzaUiManager : MonoBehaviour
         {
             GameObject instance = Instantiate(inventoryItemPrefab, inventory);
             
-            instance.GetComponent<Image>().sprite = ingredient.Key.uiSprite;
+            instance.GetComponent<Image>().sprite = ingredient.Key.icon;
             instance.GetComponentInChildren<TMP_Text>().text = ingredient.Value.ToString();
             
             instance.GetComponent<Button>().onClick.AddListener(() => _ingredientPlacer.SetIngredient(ingredient.Key));

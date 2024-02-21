@@ -84,7 +84,7 @@ public class IngredientPlacer : MonoBehaviour
     
     public Sprite GetCurrentSprite()
     {
-        if(_currentIngredient != null) return _currentIngredient.uiSprite;
+        if(_currentIngredient != null) return _currentIngredient.icon;
         return _currentPaintable != null ? _currentPaintable.GetSprite() : null;
     }
     

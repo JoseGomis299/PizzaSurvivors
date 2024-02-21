@@ -12,7 +12,7 @@ public class SpawningSystem : MonoBehaviour
     public float SpawnRate { get; private set; }
     public int MaxSpawnCount {get; private set;}
     public int CurrentRound { get; private set; }
-    public int CurrentSpawnCount => entitiesParent.childCount;
+    public int CurrentSpawnCount => entitiesParent.childCount + _pendingSpawnCount;
     
     [SerializeField] private Rect spawnArea;
     [SerializeField] private Transform entitiesParent;
@@ -20,11 +20,12 @@ public class SpawningSystem : MonoBehaviour
     [SerializeField] private GameObject spawnEffectPrefab;
     [SerializeField, Tooltip("MaxSpawnCount = initialMaxSpawnCount ")] private AnimationCurve spawnCurve;
     [SerializeField] private int initialMaxSpawnCount = 10;
-    [SerializeField] private float initialSpawnRate = 1;
+    [SerializeField] private float initialSpawnRate = 2;
     [SerializeField] private float roundDuration = 60f;
     [SerializeField] private float spawnDelay = 0.5f;
     
     private float _timer;
+    private float _spawnTime;
     private int _pendingSpawnCount;
     private bool _isSpawning;
 
@@ -43,11 +44,10 @@ public class SpawningSystem : MonoBehaviour
         
         float difficulty = spawnCurve.Evaluate(CurrentRound);
         MaxSpawnCount = initialMaxSpawnCount + (int) (initialMaxSpawnCount * difficulty);
+        SpawnRate = initialSpawnRate + (int) (initialSpawnRate * difficulty);
         
-        if(difficulty < 1) difficulty = 1;        
-        SpawnRate = initialSpawnRate / difficulty;
-
-        
+        _spawnTime = 1 / SpawnRate;
+        _timer = _spawnTime - 0.1f;
         _isSpawning = true;
     }
     
@@ -58,10 +58,11 @@ public class SpawningSystem : MonoBehaviour
         _timer += Time.deltaTime;
         RoundTimer -= Time.deltaTime;
         
-        if (_timer >= SpawnRate)
+        if (_timer >= _spawnTime)
         {
             _timer = 0;
-            SpawnEnemy();
+            for(int i = 0; i < Random.Range(1, 5); i++)
+                SpawnEnemy();
         }
         
         if (RoundTimer <= 0)
@@ -74,7 +75,7 @@ public class SpawningSystem : MonoBehaviour
     
     private void SpawnEnemy()
     {
-        if (CurrentSpawnCount + _pendingSpawnCount < MaxSpawnCount)
+        if (CurrentSpawnCount < MaxSpawnCount)
         {
             _pendingSpawnCount++;
             StartCoroutine(SpawnEnemyWithDelay());
@@ -83,14 +84,16 @@ public class SpawningSystem : MonoBehaviour
     
     private IEnumerator SpawnEnemyWithDelay()
     {
+        // Find a valid spawn position
         Vector3 spawnPosition = new Vector3(Random.Range(spawnArea.xMin, spawnArea.xMax), Random.Range(spawnArea.yMin, spawnArea.yMax), 0);
         while (Physics2D.OverlapCircle(spawnPosition, 0.1f) != null)
         {
             spawnPosition = new Vector3(Random.Range(spawnArea.xMin, spawnArea.xMax), Random.Range(spawnArea.yMin, spawnArea.yMax), 0);
             yield return null;
         }
+        
+        // Spawn effect and play animation
         GameObject effect = ObjectPool.Instance.InstantiateFromPool(spawnEffectPrefab, spawnPosition, Quaternion.identity);
-
         yield return new WaitForSeconds(spawnDelay/5f * 3);
         var spriteRenderers = effect.GetComponentsInChildren<SpriteRenderer>();
         
@@ -102,6 +105,7 @@ public class SpawningSystem : MonoBehaviour
         
         if(!_isSpawning) yield break;
         
+        // Spawn enemy
         GameObject enemy = ObjectPool.Instance.InstantiateFromPool(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], spawnPosition, Quaternion.identity);
         enemy.transform.parent = entitiesParent;
         enemy.GetComponent<Enemy>().Initialize();
