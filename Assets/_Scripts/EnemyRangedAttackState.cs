@@ -74,8 +74,8 @@ public class EnemyRangedAttackState : BaseState
     {
         _bulletSpawner.ResetTimer();
 
-        yield return _currentCoroutine = _bulletSpawner.transform.DoScale(Vector3.one * 0.8f, _statsManager.Stats.AttackSpeed/2f, Transitions.TimeScales.Scaled);
-        yield return _currentCoroutine = _bulletSpawner.transform.DoScale(Vector3.one * 1.1f, _statsManager.Stats.AttackSpeed/2f * 0.9f, Transitions.TimeScales.Scaled);
-        yield return _currentCoroutine = _bulletSpawner.transform.DoScale(Vector3.one, _statsManager.Stats.AttackSpeed/2f * 0.1f, Transitions.TimeScales.Scaled);
+        yield return _currentCoroutine = _bulletSpawner.transform.DoScale(Vector3.one * 0.8f, _statsManager.Stats.AttackCooldown/2f, Transitions.TimeScales.Scaled);
+        yield return _currentCoroutine = _bulletSpawner.transform.DoScale(Vector3.one * 1.1f, _statsManager.Stats.AttackCooldown/2f * 0.9f, Transitions.TimeScales.Scaled);
+        yield return _currentCoroutine = _bulletSpawner.transform.DoScale(Vector3.one, _statsManager.Stats.AttackCooldown/2f * 0.1f, Transitions.TimeScales.Scaled);
     }
 }

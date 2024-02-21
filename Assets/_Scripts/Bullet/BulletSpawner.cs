@@ -61,7 +61,7 @@ public class BulletSpawner : MonoBehaviour
 
     public bool SpawnBullet(Vector2 direction)
     {
-        if(_characterStats.AttackSpeed > Time.time - _lastShotTime) return false;
+        if(_characterStats.AttackCooldown > Time.time - _lastShotTime) return false;
         
         //Get all BulletShotData (directions, modifiers)
         List<BulletShotData> shotData = new List<BulletShotData>();

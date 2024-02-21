@@ -9,11 +9,13 @@ public abstract class EnemyBase : MonoBehaviour, IKillable
     protected StateMachine stateMachine;
     protected StatsManager statsManager;
 
-    public virtual void Initialize()
+    public virtual void Initialize(int round)
     {
         GetComponent<HealthComponent>().OnHealthUpdate += InvokeOnEnemyHit;
         statsManager = GetComponent<StatsManager>();
         stateMachine = new StateMachine();
+        statsManager.ResetStats();
+        statsManager.Stats.MultiplyBasicStats(1 + (round-1)*0.05f);
     }
 
     public void OnDeath()

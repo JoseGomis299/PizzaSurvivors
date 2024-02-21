@@ -61,7 +61,7 @@ public class SpawningSystem : MonoBehaviour
         if (_timer >= _spawnTime)
         {
             _timer = 0;
-            for(int i = 0; i < Random.Range(1, 5); i++)
+            for(int i = 0; i < GetSpawnCount(); i++)
                 SpawnEnemy();
         }
         
@@ -108,10 +108,20 @@ public class SpawningSystem : MonoBehaviour
         // Spawn enemy
         GameObject enemy = ObjectPool.Instance.InstantiateFromPool(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], spawnPosition, Quaternion.identity);
         enemy.transform.parent = entitiesParent;
-        enemy.GetComponent<Enemy>().Initialize();
+        enemy.GetComponent<Enemy>().Initialize(CurrentRound);
         
         _pendingSpawnCount--;
         OnEnemySpawned?.Invoke();
+    }
+    
+    private int GetSpawnCount()
+    {
+        float probability = Random.value;
+        if (probability < 0.5f) return 1;
+        if (probability < 0.7f) return 2;
+        if (probability < 0.8f) return 3;
+        if (probability < 0.9f) return 4;
+        return 5;
     }
 
 #if UNITY_EDITOR

@@ -76,8 +76,8 @@ MonoBehaviour:
   winSound: {fileID: 0}
   buttonClickSound: {fileID: 8300000, guid: a63408d1f19f82340b5e6c3c8259764d, type: 3}
   interactSound: {fileID: 0}
-  mainMenuMusic: {fileID: 8300000, guid: 1fc55bb4c7e8bab419da6e9a95bd9f1e, type: 3}
-  gameMusic: {fileID: 8300000, guid: 1d4fbd6390f9c364f848148c73b84f15, type: 3}
+  mainMenuMusic: {fileID: 8300000, guid: 889705d9bc899254c9ca4e08961d4c28, type: 3}
+  gameMusic: {fileID: 8300000, guid: fc2345cf105e4c94fb97186c38c27fcb, type: 3}
 --- !u!1 &8752621075060522176
 GameObject:
   m_ObjectHideFlags: 0
