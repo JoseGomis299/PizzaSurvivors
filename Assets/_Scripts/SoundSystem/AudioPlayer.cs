@@ -13,6 +13,7 @@ public class AudioPlayer : MonoBehaviour
     [SerializeField] private AudioClip collectSound;
     [SerializeField] private AudioClip spawnSound;
     [SerializeField] private AudioClip enemyShootSound;
+    [SerializeField] private AudioClip enemyMeleeAttackSound;
     [SerializeField] private AudioClip enemyHitSound;
     [SerializeField] private AudioClip enemyDeathSound;
     [SerializeField] private AudioClip playerShootSound;
@@ -73,6 +74,7 @@ public class AudioPlayer : MonoBehaviour
         Pizza.OnIngredientPlaced += HandleAddIngredientSound;
         Pizza.OnIngredientRemoved += HandleRemoveIngredientSound;
         Interacter.OnInteract += HandleInteractSound;
+        EnemyMeleeAttackState.OnAttack += HandleEnemyMeleeAttackSound;
 
         foreach (var button in FindObjectsOfType<Button>())
         {
@@ -100,6 +102,7 @@ public class AudioPlayer : MonoBehaviour
         Pizza.OnIngredientPlaced -= HandleAddIngredientSound;
         Pizza.OnIngredientRemoved -= HandleRemoveIngredientSound;
         Interacter.OnInteract -= HandleInteractSound;
+        EnemyMeleeAttackState.OnAttack -= HandleEnemyMeleeAttackSound;
 
         foreach (var button in FindObjectsOfType<Button>())
         {
@@ -110,6 +113,12 @@ public class AudioPlayer : MonoBehaviour
         {
             toggle.onValueChanged.RemoveListener(HandleToggleChangedSound);
         }
+    }
+    
+    private void HandleEnemyMeleeAttackSound()
+    {
+        if(enemyMeleeAttackSound == null) return;
+        AudioManager.Instance.PlaySound(enemyMeleeAttackSound);
     }
     
     private void HandleInteractSound()

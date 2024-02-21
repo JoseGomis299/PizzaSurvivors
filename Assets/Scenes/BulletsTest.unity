@@ -190,13 +190,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9190c820d58566e439ebbfeb25cf19f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredients:
-  - ingredient: {fileID: 11400000, guid: 750fe77108aeffa42a334b689cde428a, type: 2}
-    amount: 5
-  - ingredient: {fileID: 11400000, guid: c1a8f3e7641e3cf41ab0a7661198d98b, type: 2}
-    amount: 2
-  - ingredient: {fileID: 11400000, guid: f9eb09cc723a0d9469ba01d33b413975, type: 2}
-    amount: 3
 --- !u!4 &106489755
 Transform:
   m_ObjectHideFlags: 0
@@ -3548,7 +3541,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  initialMaxSpawnCount: 8
+  initialMaxSpawnCount: 5
   initialSpawnRate: 0.5
   roundDuration: 15
   spawnDelay: 1

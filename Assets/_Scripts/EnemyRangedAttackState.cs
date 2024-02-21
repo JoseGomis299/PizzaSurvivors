@@ -31,14 +31,13 @@ public class EnemyRangedAttackState : BaseState
 
     public override void Enter()
     {
-        base.Enter();
         _lastAttackTime = Time.time;
+        _isAttacking = false;
         _bulletSpawner.transform.localScale = Vector3.one;
     }
 
     public override void Update()
     {
-        base.Update();
         if(Time.time - _lastAttackTime < _timeBetweenAttacks) return;
         
         if (!_isAttacking)
@@ -57,7 +56,6 @@ public class EnemyRangedAttackState : BaseState
     
     public override void Exit()
     {
-        base.Exit();
         if (_animationCoroutine != null)
         {
             _bulletSpawner.StopCoroutine(_animationCoroutine);

@@ -53,7 +53,7 @@ public class HealthComponent : MonoBehaviour, IDamageable
         _health -= _statsManager.Stats.GetReceivedDamage(damage.element, damage.value);
         OnHealthUpdate?.Invoke(_health);
 
-        if (_characterMovement != null) _characterMovement.ApplyKnockBack(damage.KnockBack);
+        if (_characterMovement != null) _characterMovement.ApplyKnockBack(damage.GetKnockBack(transform.position));
         if (_health <= 0 && TryGetComponent(out IKillable killable)) killable.OnDeath();
     }
 

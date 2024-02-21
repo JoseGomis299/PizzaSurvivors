@@ -11,8 +11,6 @@ public class EnemyMeleeAttackState : BaseState
     private Transform _attackPoint;
     private Transform _target;
     private StatsManager _statsManager;
-    private float _attackRange;
-    private LayerMask _playerLayer;
     
     private float _timeBetweenAttacks;
     private float _lastAttackTime;
@@ -21,26 +19,23 @@ public class EnemyMeleeAttackState : BaseState
     private Coroutine _animationCoroutine;
     private Coroutine _currentCoroutine;
 
-    public EnemyMeleeAttackState(MeleeAttacker meleeAttacker, Transform attackPoint, Transform target, StatsManager statsManager, float timeBetweenAttacks, float attackRange, LayerMask playerLayer)
+    public EnemyMeleeAttackState(MeleeAttacker meleeAttacker, Transform attackPoint, Transform target, StatsManager statsManager, float timeBetweenAttacks)
     {
         _meleeAttacker = meleeAttacker;
         _attackPoint = attackPoint;
         _statsManager = statsManager;
         _target = target;
         _timeBetweenAttacks = timeBetweenAttacks;
-        _attackRange = attackRange;
-        _playerLayer = playerLayer;
     }
 
     public override void Enter()
     {
-        base.Enter();
         _lastAttackTime = Time.time;
+        _isAttacking = false;
     }
 
     public override void Update()
     {
-        base.Update();
         if(Time.time - _lastAttackTime < _timeBetweenAttacks) return;
         
         if (!_isAttacking)
@@ -49,7 +44,7 @@ public class EnemyMeleeAttackState : BaseState
             _isAttacking = true;
         }
             
-        if (_meleeAttacker.MeleeAttack(_attackPoint, _target, _timeBetweenAttacks,_attackRange, _statsManager.Stats.Attack, _playerLayer))
+        if (_meleeAttacker.MeleeAttack(_target))
         {
             _isAttacking = false;
             _lastAttackTime = Time.time;
@@ -59,7 +54,6 @@ public class EnemyMeleeAttackState : BaseState
     
     public override void Exit()
     {
-        base.Exit();
         if (_animationCoroutine != null)
         {
             _meleeAttacker.StopCoroutine(_animationCoroutine);

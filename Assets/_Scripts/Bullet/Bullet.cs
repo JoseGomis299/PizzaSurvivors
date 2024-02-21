@@ -166,7 +166,14 @@ public class Bullet : MonoBehaviour
     private void Move()
     {
         //Disable bullet if it's out of range
-        if(!IgnoreMaxRange && Vector2.SqrMagnitude(transform.position - _initialPosition) > (_stats.MaxRange * _stats.MaxRange)) gameObject.SetActive(false);
+        if (!IgnoreMaxRange && Vector2.SqrMagnitude(transform.position - _initialPosition) > _stats.MaxRange * _stats.MaxRange)
+        {
+            foreach (var modifier in _hitModifiers)
+            {
+                modifier.OnHit(null, new Damage(_stats.GetAttack(_stats.Element, _stats.Damage), _stats.Element, _stats.KnockBack, transform.position), _hitModifiers.Where(m => m != modifier).ToList() , _stats.Element);
+            }
+            gameObject.SetActive(false);
+        }
         
         Speed = _initialSpeed;
         Direction = _initialDirection;
@@ -184,7 +191,7 @@ public class Bullet : MonoBehaviour
         if(effectTarget != null && effectTarget == PreviousHit) return;
         
         float attack = _stats.GetAttack(_stats.Element, _stats.Damage);
-        Damage damage = new Damage(attack, _stats.Element, _stats.KnockBack, Direction);
+        Damage damage = new Damage(attack, _stats.Element, _stats.KnockBack, transform.position);
         
         if (col.TryGetComponent(out IDamageable damageable))
             damageable.TakeDamage(damage);

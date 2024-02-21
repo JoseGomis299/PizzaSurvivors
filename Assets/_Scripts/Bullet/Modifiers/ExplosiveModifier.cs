@@ -18,7 +18,7 @@ public class ExplosiveModifier : BulletHitModifier
         foreach (var col in collisions)
         {
             if((CurrentStacks >= 2 && col.gameObject == EffectTarget.Spawner.gameObject) || !col.TryGetComponent(out IDamageable damageable)) continue;
-            damage = new Damage(damage.value * 0.5f, damage.element, 15, col.transform.position - EffectTarget.transform.position);
+            damage = new Damage(damage.value * 0.5f, damage.element, 15, EffectTarget.transform.position);
             damageable.TakeDamage(damage);
             
             if(target != null && col.gameObject == target.gameObject) continue;
@@ -29,6 +29,6 @@ public class ExplosiveModifier : BulletHitModifier
         }
 
         GameObject effect = ObjectPool.Instance.InstantiateFromPool(OnHitEffect, EffectTarget.transform.position, Quaternion.identity, true);
-        effect.transform.localScale = Vector3.one * EffectTarget.Stats.Size * 3;
+        effect.transform.localScale = Vector3.one * (EffectTarget.Stats.Size * 3);
     }
 }

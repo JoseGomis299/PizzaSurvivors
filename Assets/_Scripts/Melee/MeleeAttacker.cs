@@ -1,48 +1,37 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
 
 public class MeleeAttacker : MonoBehaviour
 {
+    public event Action<Transform, Vector2, Vector2, MeleeAttack> OnAttack;
+
     private float _lastAttackTime;
-    private Vector2 lastDir;
-
-    [SerializeField] private Vector2 hitboxMult = new Vector2(1f, 0.25f);
-
-    private Rectangle lastHitbox;
+    private float _timeBetweenAttacks;
+    private float _attackRange;
+    private float _dmg;
+    private LayerMask _layer;
+    private RectangleCombosContainer _combosContainer;
     
-    // Start is called before the first frame update
-    void Start()
+    public void Initialize(float timeBetweenAttacks, float attackRange, float dmg, LayerMask layer)
     {
         _lastAttackTime = float.MinValue;
-    }
-
-    public void Initialize(List<BulletModifierInfo> modifiers)
-    {
-        _lastAttackTime = float.MinValue;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        _timeBetweenAttacks = timeBetweenAttacks;
+        _attackRange = attackRange;
+        _dmg = dmg;
+        _layer = layer;
         
+        _lastAttackTime = float.MinValue;
+
+        _combosContainer = GetComponent<RectangleCombosContainer>();
+        _combosContainer.Initialize(attackRange);
     }
 
-    public bool MeleeAttack(Transform enemy, Transform player, float timeBetweenAttacks, float attackRange, float dmg, LayerMask layer)
+    public bool MeleeAttack(Transform target)
     {
-        Console.WriteLine("Start");
-        if (timeBetweenAttacks < Time.time - _lastAttackTime){return false;}
-
-        Rectangle attackHitbox = new Rectangle(new Vector2(attackRange * hitboxMult.x, attackRange * hitboxMult.y));
-        lastHitbox = attackHitbox;
-        MeleeAttack attack = new MeleeAttack(new Damage(dmg, Element.None, 0, Vector3.zero), attackHitbox);
-
-        Vector2 dir = player.position - enemy.position;
-        lastDir = dir;
-
-        attack.Attack((Vector2)enemy.position + ( dir / 2f), dir.normalized, layer);
+        if (_timeBetweenAttacks > Time.time - _lastAttackTime) return false;
+        
+        Vector2 dir = target.position - transform.position;
+        _combosContainer.Attack(0, dir.normalized, _layer);
         
         _lastAttackTime = Time.time;
 
@@ -52,10 +41,5 @@ public class MeleeAttacker : MonoBehaviour
     public void ResetTimer()
     {
         _lastAttackTime = Time.time;
-    }
-
-    private void OnDrawGizmos()
-    {
-        lastHitbox.DrawGizmos((Vector2)transform.position +  lastDir / 2f, lastDir.normalized, Color.red);
     }
 }

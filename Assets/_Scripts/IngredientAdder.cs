@@ -1,23 +1,19 @@
 #if UNITY_EDITOR
 
 using System;
+using UnityEditor;
 using UnityEngine;
 
 public class IngredientAdder : MonoBehaviour
 {
-    [Serializable]
-    class IngredientPair
-    {
-        public Ingredient ingredient;
-        public int amount;
-    }
-    [SerializeField] private IngredientPair[] ingredients;
-   
     void Start()
     {
-        foreach (var ingredient in ingredients)
+        string[] guids = AssetDatabase.FindAssets("t:Ingredient");
+        foreach (string guid in guids)
         {
-            IngredientInventory.AddIngredient(ingredient.ingredient, ingredient.amount);
+            string assetPath = AssetDatabase.GUIDToAssetPath(guid);
+            Ingredient ingredient = AssetDatabase.LoadAssetAtPath<Ingredient>(assetPath);
+            IngredientInventory.AddIngredient(ingredient, 5);
         }
     }
 }

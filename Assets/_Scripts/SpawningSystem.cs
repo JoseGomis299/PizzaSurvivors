@@ -108,7 +108,7 @@ public class SpawningSystem : MonoBehaviour
         // Spawn enemy
         GameObject enemy = ObjectPool.Instance.InstantiateFromPool(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], spawnPosition, Quaternion.identity);
         enemy.transform.parent = entitiesParent;
-        enemy.GetComponent<Enemy>().Initialize(CurrentRound);
+        enemy.GetComponent<EnemyBase>().Initialize(CurrentRound);
         
         _pendingSpawnCount--;
         OnEnemySpawned?.Invoke();
