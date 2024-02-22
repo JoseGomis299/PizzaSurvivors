@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class MeleeEnemy : EnemyBase
 {
-    private CharacterMovement _characterMovement;
-
     [SerializeField] private LayerMask playerLayer;
     [field: SerializeField] public float AttackRange { get; private set; }
 
@@ -11,10 +9,10 @@ public class MeleeEnemy : EnemyBase
     {
         base.Initialize(round);
 
-        _characterMovement = GetComponent<CharacterMovement>();
+        GetComponent<CharacterMovement>();
         
         Transform player = GameObject.FindWithTag("Player").transform;
-        EnemyMoveState enemyMoveStateState = new EnemyMoveState(_characterMovement, transform, player);
+        EnemyMoveState enemyMoveStateState = new EnemyMoveState(this, transform, player);
 
         if (TryGetComponent(out MeleeAttacker meleeAttacker))
         {

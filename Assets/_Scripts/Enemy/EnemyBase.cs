@@ -8,11 +8,15 @@ public abstract class EnemyBase : MonoBehaviour, IKillable
     
     protected StateMachine stateMachine;
     protected StatsManager statsManager;
+    protected CharacterMovement characterMovement;
+    
+    public Vector2 Direction {get; set;}
 
     public virtual void Initialize(int round)
     {
         GetComponent<HealthComponent>().OnHealthUpdate += InvokeOnEnemyHit;
         statsManager = GetComponent<StatsManager>();
+        characterMovement = GetComponent<CharacterMovement>();
         stateMachine = new StateMachine();
         statsManager.ResetStats();
         statsManager.Stats.MultiplyBasicStats(1 + (round-1)*0.05f);
@@ -33,12 +37,13 @@ public abstract class EnemyBase : MonoBehaviour, IKillable
         OnEnemyHit?.Invoke();
     }
     
-    protected void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         stateMachine.FixedUpdate();
+        characterMovement.UpdateMovement(Direction, Time.fixedDeltaTime);
     }
 
-    protected void Update()
+    protected virtual void Update()
     {
         stateMachine.Update();
     }

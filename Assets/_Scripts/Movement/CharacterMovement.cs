@@ -34,8 +34,14 @@ public class CharacterMovement : MonoBehaviour
         _statsManager = GetComponent<StatsManager>();
         
         _rb.excludeLayers = ignoreLayer;
+        _isRolling = false;
     }
-    
+
+    private void OnDisable()
+    {
+        _knockBackImpulse = Vector2.zero;
+    }
+
     public void UpdateMovement(Vector3 direction, float deltaTime)
     {
         if (_isRolling)
@@ -53,8 +59,8 @@ public class CharacterMovement : MonoBehaviour
         
         HandleAccel();
         
-        _knockBackImpulse = Vector2.Lerp(_knockBackImpulse, Vector2.zero, deltaTime*10f);
         _rb.velocity = _direction * _speed + _knockBackImpulse;
+        _knockBackImpulse = Vector2.Lerp(_knockBackImpulse, Vector2.zero, deltaTime*10f);
 
         _prevDirection = direction;
     }

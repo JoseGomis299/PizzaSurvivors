@@ -80,7 +80,7 @@ public class IncrementalEffect : BaseEffect {
                 EffectTarget.Stats.Speed = value;
                 break;
             case BuffType.Health:
-                EffectTarget.Stats.MaxHealth = value;
+                EffectTarget.Stats.SetMaxHealth(value);
                 break;
             case BuffType.Luck:
                 EffectTarget.Stats.Luck = value;

@@ -23,9 +23,15 @@ public class HealthComponent : MonoBehaviour, IDamageable
 
     private void Start()
     {
+        _statsManager.Stats.OnMaxHealthChanged += SetMaxHealth;
         SetInitialHealth();
     }
-    
+
+    private void OnDestroy()
+    {
+        _statsManager.Stats.OnMaxHealthChanged -= SetMaxHealth;
+    }
+
     private void OnEnable()
     {
         SetInitialHealth();
@@ -59,7 +65,8 @@ public class HealthComponent : MonoBehaviour, IDamageable
 
     public void SetMaxHealth(float maxHealth)
     {
-        _statsManager.Stats.MaxHealth = maxHealth;
+        _health = Mathf.Min(_health, maxHealth);
         OnMaxHealthUpdate?.Invoke(maxHealth);
+        OnHealthUpdate?.Invoke(_health);
     }
 }

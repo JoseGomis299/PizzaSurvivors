@@ -191,7 +191,7 @@ public class Bullet : MonoBehaviour
         if(effectTarget != null && effectTarget == PreviousHit) return;
         
         float attack = _stats.GetAttack(_stats.Element, _stats.Damage);
-        Damage damage = new Damage(attack, _stats.Element, _stats.KnockBack, transform.position);
+        Damage damage = new Damage(attack, _stats.Element, _stats.KnockBack, Direction, false);
         
         if (col.TryGetComponent(out IDamageable damageable))
             damageable.TakeDamage(damage);
@@ -208,6 +208,7 @@ public class Bullet : MonoBehaviour
             _initialDirection = Vector2.Reflect(Direction, normal);
             return;
         }
+
         //Pierce if colliding with an enemy
         if(_stats.Pierce-- <= 0 || damageable == null) gameObject.SetActive(false);
     }

@@ -19,4 +19,7 @@ MonoBehaviour:
   onPizzaSprite: {fileID: 0}
   <BulletModifiers>k__BackingField:
   - {fileID: 11400000, guid: c5d5bf9304b246a4db379297185f859e, type: 2}
-  <Buffs>k__BackingField: []
+  <Buffs>k__BackingField:
+  - buffType: 10
+    multiplier: 0.1
+    incrementType: 1

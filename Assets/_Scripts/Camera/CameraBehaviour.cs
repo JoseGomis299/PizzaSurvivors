@@ -24,6 +24,9 @@ public class CameraBehaviour : MonoBehaviour
     [Header("CameraSettings")]
     [SerializeField] private bool useOffset = true;
     [SerializeField, Range(0, 0.499f)] private float playerMarginMult = 0.2f;
+    [SerializeField, Range(0.5f, 1)] private float camSizeMult = 1f;
+    [SerializeField] private float maxCamSize = 10f;
+    [SerializeField] private float minCamSize = 8f;
 
     private Vector3 targetPos;
     private float speed = 0f;
@@ -143,10 +146,11 @@ public class CameraBehaviour : MonoBehaviour
         //targetCamSize = (playerStats.BulletsMaxRange + bulletSpawner.GetFirePointDistance()) / (2 - 1.5f * playerMarginMult);
 
         targetCamSize = Mathf.Max(
-            (playerStats.BulletsMaxRange * (1 - offsetDistMult) + bulletSpawner.GetFirePointDistance()) /
+            (playerStats.BulletsMaxRange * camSizeMult * (1 - offsetDistMult) + bulletSpawner.GetFirePointDistance()) /
             (1 - playerMarginMult * 2f),
-            (playerStats.BulletsMaxRange * (1 - offsetDistMult)) / (1 - playerMarginMult * 2f));
+            (playerStats.BulletsMaxRange * camSizeMult* (1 - offsetDistMult)) / (1 - playerMarginMult * 2f));
 
+        targetCamSize = Mathf.Clamp(targetCamSize, minCamSize, maxCamSize);
         //targetCamSize = (playerStats.BulletsMaxRange * offsetDistMult + bulletSpawner.GetFirePointDistance()) / (1 - playerMarginMult);
     }
 

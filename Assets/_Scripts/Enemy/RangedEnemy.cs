@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class RangedEnemy : EnemyBase
 {
-    private CharacterMovement _characterMovement;
 
     [SerializeField] private float attackRange;
 
@@ -12,10 +11,10 @@ public class RangedEnemy : EnemyBase
     {
         base.Initialize(round);
 
-        _characterMovement = GetComponent<CharacterMovement>();
+        characterMovement = GetComponent<CharacterMovement>();
         
         Transform player = GameObject.FindWithTag("Player").transform;
-        EnemyMoveState enemyMoveStateState = new EnemyMoveState(_characterMovement, transform, player);
+        EnemyMoveState enemyMoveStateState = new EnemyMoveState(this, transform, player);
 
         if (TryGetComponent(out BulletSpawner bulletSpawner))
         {

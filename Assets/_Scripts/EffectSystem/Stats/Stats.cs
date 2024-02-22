@@ -1,11 +1,13 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Stats/Character Stats", fileName = "Character Stats")]
 public class Stats : ScriptableObject
 {
+    public event Action<float> OnMaxHealthChanged;
     [field: Header("Base Stats")]
-    [field: SerializeField] public float MaxHealth {get; set;} = 100f;
+    [field: SerializeField] public float MaxHealth {get; private set;} = 100f;
     [SerializeField, Range(0,100), InspectorName("Defense")] private float defense = 10f;
     public float Defense
     {
@@ -64,6 +66,12 @@ public class Stats : ScriptableObject
     {
         if(_attackMultipliers.ContainsKey(element))
             _attackMultipliers[element] += multiplier;
+    }
+    
+    public void SetMaxHealth(float value)
+    {
+        MaxHealth = value;
+        OnMaxHealthChanged?.Invoke(MaxHealth);
     }
 
     public void SetValues(Stats otherStats)

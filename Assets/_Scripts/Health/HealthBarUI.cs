@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,7 @@ using UnityEngine.UI;
 public class HealthBarUI : MonoBehaviour
 {
     [SerializeField] private Slider healthBarSlider;
+    [SerializeField] private TMP_Text healthText;
     private HealthComponent _healthComponent;
 
     private void Awake()
@@ -26,10 +28,12 @@ public class HealthBarUI : MonoBehaviour
     private void UpdateSlider(float health)
     {
         healthBarSlider.value = health;
+        healthText.text = $"HP {Mathf.CeilToInt(health)}/{Mathf.CeilToInt(_healthComponent.MaxHealth)}";
     }
     
     private void UpdateMaxValue(float maxHealth)
     {
         healthBarSlider.maxValue = maxHealth;
+        healthText.text = $"HP {Mathf.CeilToInt(healthBarSlider.value)}/{Mathf.CeilToInt(_healthComponent.MaxHealth)}";
     }
 }

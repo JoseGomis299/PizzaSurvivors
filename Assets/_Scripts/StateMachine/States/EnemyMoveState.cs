@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class EnemyMoveState : BaseState{
     
-    private CharacterMovement _characterMovement;
+    private EnemyBase _enemyBase;
     private Transform _transform;
     private Transform _target;
     
-    public EnemyMoveState(CharacterMovement characterMovement, Transform transform, Transform target)
+    public EnemyMoveState(EnemyBase enemyBase, Transform transform, Transform target)
     {
-        _characterMovement = characterMovement;
+        _enemyBase = enemyBase;
         _transform = transform;
         _target = target;
     }
@@ -16,6 +16,12 @@ public class EnemyMoveState : BaseState{
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        _characterMovement.UpdateMovement((_target.position -_transform.position).normalized, Time.fixedDeltaTime);
+        _enemyBase.Direction = (_target.position -_transform.position).normalized;
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        _enemyBase.Direction = Vector2.zero;
     }
 }

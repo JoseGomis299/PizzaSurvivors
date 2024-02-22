@@ -29,3 +29,6 @@ MonoBehaviour:
   - buffType: 4
     multiplier: 0.6
     incrementType: 4
+  - buffType: 11
+    multiplier: 100
+    incrementType: 0
