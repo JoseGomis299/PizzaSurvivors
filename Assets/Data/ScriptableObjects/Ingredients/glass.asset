@@ -10,16 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36e93d53c04a45cbb155e2f728573f02, type: 3}
-  m_Name: Pineapple
+  m_Name: glass
   m_EditorClassIdentifier: 
-  name: Pineapple
-  icon: {fileID: 21300000, guid: f1ef0b8f13f751643b493a210bd9d5f9, type: 3}
+  name: Glass
+  icon: {fileID: 21300000, guid: 09fdb57019f079340a1165166ee65e4f, type: 3}
   price: 0
   rarity: 0
-  onPizzaSprite: {fileID: 21300000, guid: 7832a8189498c53498b0d3e901ddb687, type: 3}
+  onPizzaSprite: {fileID: 21300000, guid: 01e58fab6e73f244f87afd9c510aa293, type: 3}
   <BulletModifiers>k__BackingField:
-  - {fileID: 11400000, guid: d60dda64a6fc3a448b3f0c62b6791f7f, type: 2}
+  - {fileID: 11400000, guid: f514c6d072da46e4e845aff3c5a21be0, type: 2}
   <Buffs>k__BackingField:
-  - buffType: 9
+  - buffType: 0
+    multiplier: 20
+    incrementType: 0
+  - buffType: 7
     multiplier: 1
     incrementType: 0
+  - buffType: 4
+    multiplier: 0.6
+    incrementType: 4

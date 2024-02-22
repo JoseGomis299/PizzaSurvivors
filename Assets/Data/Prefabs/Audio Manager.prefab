@@ -70,7 +70,7 @@ MonoBehaviour:
   enemyMeleeAttackSound: {fileID: 0}
   enemyHitSound: {fileID: 8300000, guid: 9c32ce639f2b6734b92e75fa1ecc8c0a, type: 3}
   enemyDeathSound: {fileID: 8300000, guid: e1fb92eb8c352ae4c88be077547c55b4, type: 3}
-  playerShootSound: {fileID: 8300000, guid: d9daa66ef4fbe954899c0b9fc20f01bb, type: 3}
+  playerShootSound: {fileID: 0}
   playerRollSound: {fileID: 0}
   playerHitSound: {fileID: 8300000, guid: b24beb18b07a40246a314c75792bd4ce, type: 3}
   playerDeathSound: {fileID: 8300000, guid: b97273a75778a704eabf60cf16003d1a, type: 3}
