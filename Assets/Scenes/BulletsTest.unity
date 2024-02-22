@@ -1597,17 +1597,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &387878531 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1353625776928100550, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-  m_PrefabInstance: {fileID: 3776674603517477058}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ae5c40afcdc4bdbbfce973c7e149f8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &411714828
 GameObject:
   m_ObjectHideFlags: 0
@@ -28274,38 +28263,6 @@ PrefabInstance:
       propertyPath: camera
       value: 
       objectReference: {fileID: 1094963203}
-    - target: {fileID: 5649776274552823114, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: camRange
-      value: 8.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 5649776274552823114, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: maxCamSize
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5649776274552823114, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: camSizeMult
-      value: 0.58
-      objectReference: {fileID: 0}
-    - target: {fileID: 5649776274552823114, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: playerStats
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5649776274552823114, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: bulletSpawner
-      value: 
-      objectReference: {fileID: 387878531}
-    - target: {fileID: 5649776274552823114, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: offsetDistMult
-      value: 0.147
-      objectReference: {fileID: 0}
-    - target: {fileID: 5649776274552823114, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: playerMarginMult
-      value: 0.176
-      objectReference: {fileID: 0}
-    - target: {fileID: 7644783296182811206, guid: 1d32aa5627d372c40969dfa43e696493, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -36
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

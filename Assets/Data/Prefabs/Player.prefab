@@ -37,7 +37,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 292.28, y: -34.074}
+  m_AnchoredPosition: {x: 292.28, y: -36}
   m_SizeDelta: {x: 545.1843, y: 68.148}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3098703498309468544
@@ -892,16 +892,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 0}
   playerStats: {fileID: 0}
-  bulletSpawner: {fileID: 0}
+  bulletSpawner: {fileID: 1353625776928100550}
   maxSpeed: 25
-  camRange: 25
+  camRange: 8.75
   rangeMult: 0.25
-  offsetDistMult: 0.1
+  offsetDistMult: 0.147
   distBuffer: 0.1
   useOffset: 1
-  playerMarginMult: 0
-  camSizeMult: 0.553
-  maxCamSize: 7.5
+  playerMarginMult: 0.176
+  camSizeMult: 0.58
+  maxCamSize: 10
   minCamSize: 5
   stopAimTime: 5
   reelbackTime: 2
