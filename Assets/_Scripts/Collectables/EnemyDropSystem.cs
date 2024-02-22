@@ -16,9 +16,20 @@ public class EnemyDropSystem : MonoBehaviour
         
         for (int i = 0; i < drops.Count; i++)
         {
-            Rigidbody2D itemRb = ObjectPool.Instance.InstantiateFromPool(drops[i], transform.position, Helpers.RandomRotation()).GetComponent<Rigidbody2D>();
-            itemRb.AddForce(new Vector2(Random.Range(-1f, 1f) * Random.Range(0, maxDropForce), Random.Range(-1f, 1f)) * Random.Range(0, maxDropForce), ForceMode2D.Impulse);
+            for (int j = 0; j < Random.Range(1, GetDropCount()+1); j++)
+            {
+                Rigidbody2D itemRb = ObjectPool.Instance.InstantiateFromPool(drops[i], transform.position, Helpers.RandomRotation()).GetComponent<Rigidbody2D>();
+                itemRb.AddForce(new Vector2(Random.Range(-1f, 1f) * Random.Range(3, maxDropForce), Random.Range(-1f, 1f)) * Random.Range(3, maxDropForce), ForceMode2D.Impulse);
+            }
         }
+    }
+    
+    private int GetDropCount()
+    {
+        float probability = Random.value;
+        if (probability < 0.5f) return 1;
+        if (probability < 0.8f) return 2;
+        return 3;
     }
 
 #if UNITY_EDITOR

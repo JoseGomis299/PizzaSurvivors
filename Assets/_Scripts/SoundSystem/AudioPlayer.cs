@@ -17,6 +17,7 @@ public class AudioPlayer : MonoBehaviour
     [SerializeField] private AudioClip enemyHitSound;
     [SerializeField] private AudioClip enemyDeathSound;
     [SerializeField] private AudioClip playerShootSound;
+    [SerializeField] private AudioClip playerRollSound;
     [SerializeField] private AudioClip playerHitSound;
     [SerializeField] private AudioClip playerDeathSound;
     [SerializeField] private AudioClip loseSound;
@@ -29,6 +30,8 @@ public class AudioPlayer : MonoBehaviour
     [SerializeField] private AudioClip gameMusic;
     
     private bool _wasPlayingMusic;
+    [SerializeField] private float walkSoundCooldown = 0.5f;
+    private float _lastWalkSoundTime;
     
     private void Awake()
     {
@@ -38,6 +41,7 @@ public class AudioPlayer : MonoBehaviour
     private void Start()
     {
         SubscribeToEvents();
+        _lastWalkSoundTime = float.MinValue;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -66,7 +70,7 @@ public class AudioPlayer : MonoBehaviour
         PlayerController.OnPlayerHit += HandlePlayerHitSound;
         PlayerController.OnPlayerShoot += HandlePlayerShootSound;
         PlayerController.OnPlayerMoved += HandleWalkSound;
-        PlayerController.OnPlayerRolled += HandleWalkSound;
+        PlayerController.OnPlayerRolled += handleRollSound;
         EnemyBase.OnEnemyDeath += HandleEnemyDeathSound;
         EnemyBase.OnEnemyHit += HandleEnemyHitSound;
         EnemyRangedAttackState.OnAttack += HandleEnemyShootSound;
@@ -94,7 +98,7 @@ public class AudioPlayer : MonoBehaviour
         PlayerController.OnPlayerHit -= HandlePlayerHitSound;
         PlayerController.OnPlayerShoot -= HandlePlayerShootSound;
         PlayerController.OnPlayerMoved -= HandleWalkSound;
-        PlayerController.OnPlayerRolled -= HandleWalkSound;
+        PlayerController.OnPlayerRolled -= handleRollSound;
         EnemyBase.OnEnemyDeath -= HandleEnemyDeathSound;
         EnemyBase.OnEnemyHit -= HandleEnemyHitSound;
         EnemyRangedAttackState.OnAttack -= HandleEnemyShootSound;
@@ -113,6 +117,12 @@ public class AudioPlayer : MonoBehaviour
         {
             toggle.onValueChanged.RemoveListener(HandleToggleChangedSound);
         }
+    }
+    
+    private void handleRollSound()
+    {
+        if(playerRollSound == null) return;
+        AudioManager.Instance.PlaySound(playerRollSound);
     }
     
     private void HandleEnemyMeleeAttackSound()
@@ -153,7 +163,9 @@ public class AudioPlayer : MonoBehaviour
     
     private void HandleWalkSound()
     {
-        if(walkSound == null) return;
+        if(walkSound == null || walkSoundCooldown > Time.time - _lastWalkSoundTime) return;
+        _lastWalkSoundTime = Time.time;
+        
         AudioManager.Instance.PlaySound(walkSound);
     }
     

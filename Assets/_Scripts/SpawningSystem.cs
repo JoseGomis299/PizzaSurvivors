@@ -8,6 +8,9 @@ using Random = UnityEngine.Random;
 public class SpawningSystem : MonoBehaviour
 {
     public static event Action OnEnemySpawned;
+    public static event Action<int> OnRoundStart;
+    public static event Action<int> OnRoundEnd;
+    public static event Action<float> OnTimerChanged;
     public float RoundTimer { get; private set; }
     public float SpawnRate { get; private set; }
     public int MaxSpawnCount {get; private set;}
@@ -41,6 +44,7 @@ public class SpawningSystem : MonoBehaviour
     {
         CurrentRound++;
         RoundTimer = roundDuration;
+        OnRoundStart?.Invoke(CurrentRound);
         
         float difficulty = spawnCurve.Evaluate(CurrentRound);
         MaxSpawnCount = initialMaxSpawnCount + (int) (initialMaxSpawnCount * difficulty);
@@ -53,6 +57,9 @@ public class SpawningSystem : MonoBehaviour
     
     private void Update()
     {
+        if (RoundTimer <= 0 && Input.GetKeyDown(KeyCode.N))
+            GoNextRound();
+        
         if(!_isSpawning) return;
         
         _timer += Time.deltaTime;
@@ -69,8 +76,10 @@ public class SpawningSystem : MonoBehaviour
         {
             entitiesParent.DisableChildren();
             _isSpawning = false;
-            GoNextRound();
+            OnRoundEnd?.Invoke(CurrentRound);
         }
+        
+        OnTimerChanged?.Invoke(RoundTimer);
     }
     
     private void SpawnEnemy()

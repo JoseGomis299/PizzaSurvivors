@@ -23,6 +23,7 @@ public class CurrencyManager : MonoBehaviour
     private void Start()
     {
         _money = 0;
+        OnMoneyChanged?.Invoke(_money);
     }
     
     public void AddValue(int amount)
