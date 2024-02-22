@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Fragmentation
   m_EditorClassIdentifier: 
   name: Fragmentation
-  descriptionsByLevel: []
+  descriptions:
+  - Fragmentation (1) - 2 more bullets are spawned when the bullet collides.
   maxLevel: 2
-  remainsAfterHit: 0
   priority: 0
-  OnHitEffect: {fileID: 0}
+  onHitEffect: {fileID: 0}
+  remainsAfterHit: 0
   type: 2

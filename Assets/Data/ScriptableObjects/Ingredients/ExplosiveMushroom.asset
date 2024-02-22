@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: ExplosiveMushroom
   m_EditorClassIdentifier: 
   name: Explosive Mushroom
-  icon: {fileID: 21300000, guid: 70d739f6f71784e45ab96b781997f548, type: 3}
+  icon: {fileID: 21300000, guid: d06a10ca51fd88140a5b9723a67a4f13, type: 3}
   price: 0
-  rarity: 0
+  rarity: 4
   onPizzaSprite: {fileID: 21300000, guid: 70d739f6f71784e45ab96b781997f548, type: 3}
   <BulletModifiers>k__BackingField:
   - {fileID: 11400000, guid: f2f1d8ec6e928224693b1e5816adca97, type: 2}
@@ -23,3 +23,6 @@ MonoBehaviour:
   - buffType: 7
     multiplier: -999
     incrementType: 0
+  - buffType: 1
+    multiplier: 0.7
+    incrementType: 4

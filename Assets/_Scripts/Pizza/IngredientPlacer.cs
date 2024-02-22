@@ -117,7 +117,7 @@ public class IngredientPlacer : MonoBehaviour
         GameObject ingredient = Instantiate(ingredientPrefab, mousePos,  Quaternion.Euler(0, 0, Random.Range(0, 360)), pizzaBase.parent);
         ingredient.GetComponent<PizzaIngredient>().Initialize(_currentIngredient, _pizza);
         
-        if (IngredientInventory.GetIngredientQuantity(_currentIngredient) <= 0) ClearSelection();
+        //if (IngredientInventory.GetIngredientQuantity(_currentIngredient) <= 0) ClearSelection();
     }
     
     public bool IsInBounds(Vector2 position)

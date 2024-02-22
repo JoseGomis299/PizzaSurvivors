@@ -20,6 +20,7 @@ public struct BuffData
     {
         string op = "";
         string color = "";
+        string percent = "";
         
         switch (incrementType)
         {
@@ -27,11 +28,12 @@ public struct BuffData
                 switch (multiplier)
                 {
                     case > 0:
-                        op = "+= ";
+                        op = "+ ";
                         color = "<color=green>";
                         break;
                     case < 0:
-                        op = "-= ";
+                        multiplier *= -1;
+                        op = "- ";
                         color = "<color=red>";
                         break;
                     default:
@@ -41,13 +43,23 @@ public struct BuffData
                 }
                 break;
             case IncrementType.Exponential:
-                op = "*= ";
-                color = multiplier switch
+                switch (multiplier)
                 {
-                    > 1 => "<color=green>",
-                    < 1 => "<color=red>",
-                    _ => "<color=white>"
-                };
+                    case > 1:
+                        op = "+ ";
+                        color = "<color=green>";
+                        break;
+                    case < 1:
+                        op = "- ";
+                        color = "<color=red>";
+                        break;
+                    default:
+                        op = "= ";
+                        color = "<color=white>";
+                        break;
+                }
+                percent = "%";
+                multiplier *= 100;
                 break;
             default:
                 op = "= ";
@@ -55,7 +67,7 @@ public struct BuffData
                 break;
         }
 
-        return $"{color}{op}{multiplier}</color>";
+        return $"{color}{op}{multiplier}{percent}</color>";
     }
 }
 

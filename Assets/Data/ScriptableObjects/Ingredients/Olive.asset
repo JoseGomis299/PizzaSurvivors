@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Olive
   m_EditorClassIdentifier: 
   name: Olive
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: dd7f2c9bc23249245aede2ab0d805f30, type: 3}
   price: 0
-  rarity: 0
-  onPizzaSprite: {fileID: 0}
+  rarity: 4
+  onPizzaSprite: {fileID: 21300000, guid: 23bef2877a528934db12190c950dfdd7, type: 3}
   <BulletModifiers>k__BackingField:
   - {fileID: 11400000, guid: c5d5bf9304b246a4db379297185f859e, type: 2}
   <Buffs>k__BackingField:

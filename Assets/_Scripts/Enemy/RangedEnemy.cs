@@ -13,7 +13,6 @@ public class RangedEnemy : EnemyBase
 
         characterMovement = GetComponent<CharacterMovement>();
         
-        Transform player = GameObject.FindWithTag("Player").transform;
         EnemyMoveState enemyMoveStateState = new EnemyMoveState(this, transform, player);
 
         if (TryGetComponent(out BulletSpawner bulletSpawner))

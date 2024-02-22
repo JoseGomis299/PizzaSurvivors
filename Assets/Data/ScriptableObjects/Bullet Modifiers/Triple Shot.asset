@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Triple Shot
   m_EditorClassIdentifier: 
   name: Triple Shot
-  descriptionsByLevel: []
-  type: {fileID: 11500000, guid: ad9c089122234c8d87c4bf1d287c8f20, type: 3}
+  descriptions:
+  - Triple Shot (1) - Now you shoot 3 bullets.
   maxLevel: 1
-  remainsAfterHit: 100
   priority: 0
   modifiers:
   - {fileID: 11400000, guid: f514c6d072da46e4e845aff3c5a21be0, type: 2}
+  type: 0

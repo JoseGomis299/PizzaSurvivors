@@ -57,6 +57,13 @@ public class CameraBehaviour : MonoBehaviour
         lastMovedMouse = Time.time;
         lastMousePos = Input.mousePosition;
         aimingMode = true;
+        
+        Cursor.visible = false;
+    }
+
+    private void OnDestroy()
+    {
+        Cursor.visible = true;
     }
 
     // Update is called once per frame

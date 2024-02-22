@@ -11,7 +11,13 @@ public class UiResizer : MonoBehaviour
     private VerticalLayoutGroup _verticalLayoutGroup;
     
     private RectTransform _rectTransform;
+    private Vector2 _initialSizeDelta;
     
+    private void Awake()
+    {
+        _initialSizeDelta = GetComponent<RectTransform>().sizeDelta;
+    }
+
     private void OnEnable()
     {
         _gridLayoutGroup = GetComponent<GridLayoutGroup>();
@@ -20,7 +26,7 @@ public class UiResizer : MonoBehaviour
         _rectTransform = GetComponent<RectTransform>();
     }
     
-    public void Resize()
+    public void Resize(bool move = true)
     {
         float width = 0;
         float height = 0;
@@ -35,7 +41,9 @@ public class UiResizer : MonoBehaviour
             foreach (RectTransform child in _rectTransform)
                 width += child.rect.width + _horizontalLayoutGroup.spacing;
 
-            width = Math.Max(width, _rectTransform.rect.width);
+            width += _horizontalLayoutGroup.padding.left;
+            if(width < _initialSizeDelta.x)
+                width = _initialSizeDelta.x;
             height = _rectTransform.rect.height;
         }
         else if (_verticalLayoutGroup != null)
@@ -44,11 +52,11 @@ public class UiResizer : MonoBehaviour
                 height += child.rect.height + _verticalLayoutGroup.spacing;
 
             width = _rectTransform.rect.width;
-            height = Math.Max(height, _rectTransform.rect.height);
+            height = Math.Max(height, _initialSizeDelta.y);
         }
         
         _rectTransform.sizeDelta = new Vector2(width, height);
         
-        _rectTransform.localPosition = new Vector3(width/2, -height/2, 0);
+        if(move)_rectTransform.localPosition = new Vector3(width/2, -height/2, 0);
     }
 }

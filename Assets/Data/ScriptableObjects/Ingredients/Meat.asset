@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36e93d53c04a45cbb155e2f728573f02, type: 3}
   m_Name: Meat
   m_EditorClassIdentifier: 
-  name: 
-  icon: {fileID: 0}
+  name: Pork Meat
+  icon: {fileID: 21300000, guid: 5ecb9d681a433dc4986028faa24a5719, type: 3}
   price: 0
-  rarity: 0
-  onPizzaSprite: {fileID: 0}
+  rarity: 2
+  onPizzaSprite: {fileID: 21300000, guid: 56e4a5f4f0a648448b609ef21337bc58, type: 3}
   <BulletModifiers>k__BackingField: []
   <Buffs>k__BackingField:
   - buffType: 4

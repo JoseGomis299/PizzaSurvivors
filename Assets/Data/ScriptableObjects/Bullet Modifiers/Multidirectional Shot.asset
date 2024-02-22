@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Multi Directional Shot
   descriptions:
-  - 
+  - Multi Directional Shot (1) - Now you shot in 2 directions.
+  - Multi Directional Shot (2) - Now you shot in 4 directions.
   maxLevel: 2
   priority: 1
   modifiers:

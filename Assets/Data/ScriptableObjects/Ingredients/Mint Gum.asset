@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36e93d53c04a45cbb155e2f728573f02, type: 3}
   m_Name: Mint Gum
   m_EditorClassIdentifier: 
-  name: 
-  icon: {fileID: 0}
+  name: Mint Gum
+  icon: {fileID: 21300000, guid: 8e433977a2d27ed4c81a25a329a7ffce, type: 3}
   price: 0
-  rarity: 0
-  onPizzaSprite: {fileID: 0}
+  rarity: 3
+  onPizzaSprite: {fileID: 21300000, guid: 8e433977a2d27ed4c81a25a329a7ffce, type: 3}
   <BulletModifiers>k__BackingField:
   - {fileID: 11400000, guid: ad2dae0c8f9cdd44db853f73d7d32475, type: 2}
   <Buffs>k__BackingField: []

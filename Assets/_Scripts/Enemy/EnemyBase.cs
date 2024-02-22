@@ -9,6 +9,7 @@ public abstract class EnemyBase : MonoBehaviour, IKillable
     protected StateMachine stateMachine;
     protected StatsManager statsManager;
     protected CharacterMovement characterMovement;
+    protected Transform player;
     
     public Vector2 Direction {get; set;}
 
@@ -17,6 +18,7 @@ public abstract class EnemyBase : MonoBehaviour, IKillable
         GetComponent<HealthComponent>().OnHealthUpdate += InvokeOnEnemyHit;
         statsManager = GetComponent<StatsManager>();
         characterMovement = GetComponent<CharacterMovement>();
+        player = GameObject.FindWithTag("Player").transform;
         stateMachine = new StateMachine();
         statsManager.ResetStats();
         statsManager.Stats.MultiplyBasicStats(1 + (round-1)*0.05f);
@@ -41,6 +43,7 @@ public abstract class EnemyBase : MonoBehaviour, IKillable
     {
         stateMachine.FixedUpdate();
         characterMovement.UpdateMovement(Direction, Time.fixedDeltaTime);
+        characterMovement.UpdateFacingDirection((player.position - transform.position).normalized);
     }
 
     protected virtual void Update()

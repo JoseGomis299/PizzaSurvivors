@@ -40,6 +40,7 @@ public class Pizza : MonoBehaviour
             }
         }
         
+        Cursor.visible = false;
         _bulletSpawner.Initialize(bulletModifiers);
         OnExitPizzaView?.Invoke();
     }
@@ -54,6 +55,7 @@ public class Pizza : MonoBehaviour
             buff.DeApply();
         }
         
+        Cursor.visible = true;
         OnEnterPizzaView?.Invoke();
     }
 
@@ -67,5 +69,15 @@ public class Pizza : MonoBehaviour
     {
         _placedIngredients.Remove(ingredient);
         OnIngredientRemoved?.Invoke();
+    }
+    
+    public int GetModifierStacks(BulletModifierInfo modifier)
+    {
+        int stacks = 0;
+        foreach (var ingredient in _placedIngredients)
+        {
+            stacks += ingredient.GetModifierCount(modifier);
+        }
+        return stacks;
     }
 }

@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Boomerang
   m_EditorClassIdentifier: 
   name: Boomerang
-  descriptionsByLevel: []
+  descriptions:
+  - Boomerang (1)  - The bullet moves like a boomerang.
+  - Boomerang (2) - The circular movement does not stop.
   maxLevel: 2
-  remainsAfterHit: 100
   priority: 1
   amplitude: 0.5
   frequency: 1.3

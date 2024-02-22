@@ -15,7 +15,7 @@ C:/Users/Jose Gomis/Documents/GitHub/PizzaSurvivors
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-50867
+60061
 Successfully changed project path to: C:/Users/Jose Gomis/Documents/GitHub/PizzaSurvivors
 C:/Users/Jose Gomis/Documents/GitHub/PizzaSurvivors
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -49,11 +49,11 @@ C:/Users/Jose Gomis/Documents/GitHub/PizzaSurvivors
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [26552] Host "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 2003631753 [EditorId] 2003631753 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-RKP6VT2) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+Player connection [25692] Host "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 4270802717 [EditorId] 4270802717 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-RKP6VT2) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
 
-Player connection [26552] Host "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 2003631753 [EditorId] 2003631753 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-RKP6VT2) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [25692] Host "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 4270802717 [EditorId] 4270802717 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-RKP6VT2) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
 
-Refreshing native plugins compatible for Editor in 14.18 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 16.42 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2022.3.4f1 (35713cd46cd7)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2022.3.4f1/Editor/Data/Resources/UnitySubsystems
@@ -69,51 +69,51 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2022.3.4f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2022.3.4f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2022.3.4f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56896
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56244
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.4f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.4f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.4f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.4f1/Editor/Data/PlaybackEngines/MetroSupport/UnityEditor.UWP.Extensions.dll
-Registered in 0.016312 seconds.
-- Loaded All Assemblies, in  0.353 seconds
+Registered in 0.019524 seconds.
+- Loaded All Assemblies, in  0.407 seconds
 Native extension for UWP target not found
 Native extension for WindowsStandalone target not found
 Native extension for Android target not found
-Android Extension - Scanning For ADB Devices 343 ms
+Android Extension - Scanning For ADB Devices 376 ms
 Native extension for WebGL target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.698 seconds
-Domain Reload Profiling: 1048ms
-	BeginReloadAssembly (92ms)
+- Finished resetting the current domain, in  0.796 seconds
+Domain Reload Profiling: 1200ms
+	BeginReloadAssembly (105ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (1ms)
-	RebuildCommonClasses (32ms)
+	RebuildCommonClasses (38ms)
 	RebuildNativeTypeToScriptingClass (9ms)
-	initialDomainReloadingComplete (70ms)
-	LoadAllAssembliesAndSetupDomain (146ms)
-		LoadAssemblies (90ms)
+	initialDomainReloadingComplete (76ms)
+	LoadAllAssembliesAndSetupDomain (175ms)
+		LoadAssemblies (103ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (137ms)
-			TypeCache.Refresh (136ms)
-				TypeCache.ScanAssembly (125ms)
+		AnalyzeDomain (165ms)
+			TypeCache.Refresh (164ms)
+				TypeCache.ScanAssembly (150ms)
 			ScanForSourceGeneratedMonoScriptInfo (0ms)
-			ResolveRequiredComponents (1ms)
-	FinalizeReload (698ms)
+			ResolveRequiredComponents (0ms)
+	FinalizeReload (796ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (640ms)
+		SetupLoadedEditorAssemblies (728ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (470ms)
-			SetLoadedEditorAssemblies (4ms)
+			InitializePlatformSupportModulesInManaged (527ms)
+			SetLoadedEditorAssemblies (6ms)
 			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (4ms)
-			ProcessInitializeOnLoadAttributes (109ms)
-			ProcessInitializeOnLoadMethodAttributes (53ms)
+			BeforeProcessingInitializeOnLoad (3ms)
+			ProcessInitializeOnLoadAttributes (117ms)
+			ProcessInitializeOnLoadMethodAttributes (75ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -123,55 +123,123 @@ Worker process is ready to serve import requests
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory doesn't match image C:\Users\Jose Gomis\Documents\GitHub\PizzaSurvivors\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
 Symbol file LoadedFromMemory doesn't match image C:\Users\Jose Gomis\Documents\GitHub\PizzaSurvivors\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-- Loaded All Assemblies, in  0.867 seconds
-Refreshing native plugins compatible for Editor in 6.72 ms, found 4 plugins.
+- Loaded All Assemblies, in  0.937 seconds
+Refreshing native plugins compatible for Editor in 5.54 ms, found 4 plugins.
 Native extension for UWP target not found
 Native extension for WindowsStandalone target not found
 Native extension for Android target not found
 Native extension for WebGL target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.768 seconds
-Domain Reload Profiling: 1630ms
-	BeginReloadAssembly (132ms)
+- Finished resetting the current domain, in  0.745 seconds
+Domain Reload Profiling: 1677ms
+	BeginReloadAssembly (147ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (6ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (25ms)
-	RebuildCommonClasses (30ms)
-	RebuildNativeTypeToScriptingClass (9ms)
-	initialDomainReloadingComplete (48ms)
-	LoadAllAssembliesAndSetupDomain (642ms)
-		LoadAssemblies (391ms)
+		CreateAndSetChildDomain (29ms)
+	RebuildCommonClasses (32ms)
+	RebuildNativeTypeToScriptingClass (13ms)
+	initialDomainReloadingComplete (53ms)
+	LoadAllAssembliesAndSetupDomain (686ms)
+		LoadAssemblies (403ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (307ms)
-			TypeCache.Refresh (272ms)
-				TypeCache.ScanAssembly (257ms)
+		AnalyzeDomain (346ms)
+			TypeCache.Refresh (310ms)
+				TypeCache.ScanAssembly (296ms)
 			ScanForSourceGeneratedMonoScriptInfo (26ms)
-			ResolveRequiredComponents (9ms)
-	FinalizeReload (769ms)
+			ResolveRequiredComponents (10ms)
+	FinalizeReload (746ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (553ms)
+		SetupLoadedEditorAssemblies (547ms)
 			LogAssemblyErrors (0ms)
 			InitializePlatformSupportModulesInManaged (31ms)
-			SetLoadedEditorAssemblies (7ms)
+			SetLoadedEditorAssemblies (6ms)
 			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (148ms)
-			ProcessInitializeOnLoadAttributes (271ms)
-			ProcessInitializeOnLoadMethodAttributes (83ms)
-			AfterProcessingInitializeOnLoad (12ms)
+			BeforeProcessingInitializeOnLoad (142ms)
+			ProcessInitializeOnLoadAttributes (277ms)
+			ProcessInitializeOnLoadMethodAttributes (81ms)
+			AfterProcessingInitializeOnLoad (10ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (15ms)
+		AwakeInstancesAfterBackupRestoration (13ms)
 Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
-Refreshing native plugins compatible for Editor in 7.01 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 5.86 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 5773 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 85 unused Assets / (351.4 KB). Loaded Objects now: 6243.
-Memory consumption went from 228.0 MB to 227.7 MB.
-Total: 4.345300 ms (FindLiveObjects: 0.514100 ms CreateObjectMapping: 0.453100 ms MarkObjects: 3.150800 ms  DeleteObjects: 0.226000 ms)
+Unloading 5774 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 85 unused Assets / (351.0 KB). Loaded Objects now: 6244.
+Memory consumption went from 228.2 MB to 227.9 MB.
+Total: 4.015000 ms (FindLiveObjects: 0.460500 ms CreateObjectMapping: 0.216700 ms MarkObjects: 3.146600 ms  DeleteObjects: 0.190500 ms)
 
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: a3ef5dd2817f97addfee359851a9dba5 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/precompiled-assembly-types:Assembly-CSharp: 2591c30f360ec4c0fdf11f7337d52eff -> 52b6201dc0eca5cf2f6f245393f1cf7e
+  custom:scripting/monoscript/fileName/RandomItemGiver.cs:  -> 3d33af9ec937f7b89e6fb8f2003ecbad
+========================================================================
+Received Prepare
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Users\Jose Gomis\Documents\GitHub\PizzaSurvivors\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\Jose Gomis\Documents\GitHub\PizzaSurvivors\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+- Loaded All Assemblies, in  0.879 seconds
+Refreshing native plugins compatible for Editor in 6.02 ms, found 4 plugins.
+Native extension for UWP target not found
+Native extension for WindowsStandalone target not found
+Native extension for Android target not found
+Native extension for WebGL target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.493 seconds
+Domain Reload Profiling: 2366ms
+	BeginReloadAssembly (173ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (16ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (48ms)
+	RebuildCommonClasses (31ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (36ms)
+	LoadAllAssembliesAndSetupDomain (623ms)
+		LoadAssemblies (387ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (298ms)
+			TypeCache.Refresh (288ms)
+				TypeCache.ScanAssembly (273ms)
+			ScanForSourceGeneratedMonoScriptInfo (0ms)
+			ResolveRequiredComponents (10ms)
+	FinalizeReload (1494ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (578ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (35ms)
+			SetLoadedEditorAssemblies (8ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (150ms)
+			ProcessInitializeOnLoadAttributes (290ms)
+			ProcessInitializeOnLoadMethodAttributes (83ms)
+			AfterProcessingInitializeOnLoad (11ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (25ms)
+Refreshing native plugins compatible for Editor in 6.91 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5606 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 48 unused Assets / (320.8 KB). Loaded Objects now: 6250.
+Memory consumption went from 197.5 MB to 197.2 MB.
+Total: 5.082900 ms (FindLiveObjects: 0.913900 ms CreateObjectMapping: 0.695300 ms MarkObjects: 3.279700 ms  DeleteObjects: 0.192900 ms)
+
+Prepare: number of updated asset objects reloaded= 0
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
@@ -186,316 +254,118 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  Time since last request: 15855.244818 seconds.
-  path: Assets/Art/Sprites/dark_forest.png
-  artifactKey: Guid(27bbfe5315ee7b140a1079c8a4152f40) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Sprites/dark_forest.png using Guid(27bbfe5315ee7b140a1079c8a4152f40) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '84b6c87c56cd51aa1157fa734f843f89') in 0.014644 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2
-========================================================================
-Received Import Request.
-  Time since last request: 30.264074 seconds.
-  path: Assets/Art/Sprites/dark_forest.png
-  artifactKey: Guid(27bbfe5315ee7b140a1079c8a4152f40) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Sprites/dark_forest.png using Guid(27bbfe5315ee7b140a1079c8a4152f40) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0c9aa1b9cc59335a57d7638360331868') in 0.001413 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 20.832686 seconds.
-  path: Assets/Art/Sprites/dark_forest.png
-  artifactKey: Guid(27bbfe5315ee7b140a1079c8a4152f40) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Sprites/dark_forest.png using Guid(27bbfe5315ee7b140a1079c8a4152f40) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6fc1402f215ba8ce216be9f8c06ffc68') in 0.011677 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 153
-========================================================================
-Received Import Request.
-  Time since last request: 24.781141 seconds.
-  path: Assets/Art/Sprites/dark_forest.png
-  artifactKey: Guid(27bbfe5315ee7b140a1079c8a4152f40) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Sprites/dark_forest.png using Guid(27bbfe5315ee7b140a1079c8a4152f40) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dce2fc15785475fce0e4a6fb2db946e1') in 0.013609 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 153
-========================================================================
-Received Import Request.
-  Time since last request: 246.899172 seconds.
-  path: Assets/Art/Sprites/Forest.prefab
-  artifactKey: Guid(44bde4a975a4eb94a981036edd3a5c7e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Sprites/Forest.prefab using Guid(44bde4a975a4eb94a981036edd3a5c7e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0fe2e4c11688e6cdf5e58aa6b0349038') in 0.001854 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 9
-========================================================================
-Received Import Request.
-  Time since last request: 12.097848 seconds.
-  path: Assets/Art/Tile Palettes
-  artifactKey: Guid(87aa143bffbd4134fa5d7ad1c07772c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Tile Palettes using Guid(87aa143bffbd4134fa5d7ad1c07772c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e282c12a23c3935d64aeb95d6e943038') in 0.000568 seconds
+  Time since last request: 7806.273802 seconds.
+  path: Assets/_Scripts/Store/RandomItemGiver.cs
+  artifactKey: Guid(8fe904b8f0f4601438ccaae3f7229e94) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_Scripts/Store/RandomItemGiver.cs using Guid(8fe904b8f0f4601438ccaae3f7229e94) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7e1ba5de55ab76c46bbaf277ed681969') in 0.002403 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 0
 ========================================================================
 Received Import Request.
-  Time since last request: 3.686418 seconds.
-  path: Assets/Art/Sprites
-  artifactKey: Guid(ec72c1f78da3a4543a4a9795724a20b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Sprites using Guid(ec72c1f78da3a4543a4a9795724a20b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2f593b0cbbf17270875cc31095cb891e') in 0.000531 seconds
+  Time since last request: 269.671725 seconds.
+  path: Assets/_Scripts/Store/RandomItemGiver.cs
+  artifactKey: Guid(8fe904b8f0f4601438ccaae3f7229e94) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_Scripts/Store/RandomItemGiver.cs using Guid(8fe904b8f0f4601438ccaae3f7229e94) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8dd77329337befffc9e88f0205e7aac2') in 0.000668 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 0
 ========================================================================
+Received Prepare
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Users\Jose Gomis\Documents\GitHub\PizzaSurvivors\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\Jose Gomis\Documents\GitHub\PizzaSurvivors\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+- Loaded All Assemblies, in  0.903 seconds
+Refreshing native plugins compatible for Editor in 6.23 ms, found 4 plugins.
+Native extension for UWP target not found
+Native extension for WindowsStandalone target not found
+Native extension for Android target not found
+Native extension for WebGL target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.411 seconds
+Domain Reload Profiling: 2308ms
+	BeginReloadAssembly (175ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (13ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (53ms)
+	RebuildCommonClasses (43ms)
+	RebuildNativeTypeToScriptingClass (14ms)
+	initialDomainReloadingComplete (40ms)
+	LoadAllAssembliesAndSetupDomain (623ms)
+		LoadAssemblies (393ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (296ms)
+			TypeCache.Refresh (280ms)
+				TypeCache.ScanAssembly (267ms)
+			ScanForSourceGeneratedMonoScriptInfo (6ms)
+			ResolveRequiredComponents (10ms)
+	FinalizeReload (1412ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (524ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (32ms)
+			SetLoadedEditorAssemblies (6ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (144ms)
+			ProcessInitializeOnLoadAttributes (245ms)
+			ProcessInitializeOnLoadMethodAttributes (86ms)
+			AfterProcessingInitializeOnLoad (11ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (23ms)
+Refreshing native plugins compatible for Editor in 8.12 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5606 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 48 unused Assets / (320.9 KB). Loaded Objects now: 6255.
+Memory consumption went from 197.5 MB to 197.2 MB.
+Total: 4.710800 ms (FindLiveObjects: 0.475100 ms CreateObjectMapping: 0.639700 ms MarkObjects: 3.457600 ms  DeleteObjects: 0.137300 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: a3ef5dd2817f97addfee359851a9dba5 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
 Received Import Request.
-  Time since last request: 291.603060 seconds.
-  path: Assets/Art/Sprites/dark_forest 1.png
-  artifactKey: Guid(3a964953b4ce07343a0dcee808ec1c70) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Sprites/dark_forest 1.png using Guid(3a964953b4ce07343a0dcee808ec1c70) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f2faee52d29a8aa41b68147d098050a0') in 0.001567 seconds
+  Time since last request: 243.567750 seconds.
+  path: Assets/Art/Sprites/enmpuge.png
+  artifactKey: Guid(20d87a8bba608a2448fca53c859e8cfc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Sprites/enmpuge.png using Guid(20d87a8bba608a2448fca53c859e8cfc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cb8d1bda2716e542f8ded361f25983cc') in 0.023289 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 2
 ========================================================================
 Received Import Request.
-  Time since last request: 18.728007 seconds.
-  path: Assets/Art/Sprites/dark_forest 1.png
-  artifactKey: Guid(3a964953b4ce07343a0dcee808ec1c70) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Sprites/dark_forest 1.png using Guid(3a964953b4ce07343a0dcee808ec1c70) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '115abd7e44fba0ec52ad794ddfa6f3c3') in 0.001791 seconds
+  Time since last request: 0.000022 seconds.
+  path: Assets/Art/Sprites/rango.png
+  artifactKey: Guid(6953ea1eec3076a46ac1c35a9e64f02d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Sprites/rango.png using Guid(6953ea1eec3076a46ac1c35a9e64f02d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '39cadb1c503a06f5ef52d551f1a8644b') in 0.001589 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 2
 ========================================================================
 Received Import Request.
-  Time since last request: 25.343728 seconds.
-  path: Assets/Art/Tile Palettes/Forest.prefab
-  artifactKey: Guid(44bde4a975a4eb94a981036edd3a5c7e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Tile Palettes/Forest.prefab using Guid(44bde4a975a4eb94a981036edd3a5c7e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2a59277a16d67088bd9efce292296296') in 0.001629 seconds
+  Time since last request: 21.022627 seconds.
+  path: Assets/Art/Sprites/penetracion.png
+  artifactKey: Guid(7fb98809ef557fa44b2347421945deaf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Sprites/penetracion.png using Guid(7fb98809ef557fa44b2347421945deaf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '96a80b543830fb91cf255bc30a6a1616') in 0.001742 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 9
+Number of asset objects unloaded after import = 2
 ========================================================================
 Received Import Request.
-  Time since last request: 0.045718 seconds.
-  path: Assets/Art/Tile Palettes/dark_forest_95.asset
-  artifactKey: Guid(c6395e597ebc50e45a19b553954a0d6c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Tile Palettes/dark_forest_95.asset using Guid(c6395e597ebc50e45a19b553954a0d6c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '86b719a713dd87237d484f4c1cd45626') in 0.002109 seconds
+  Time since last request: 0.000014 seconds.
+  path: Assets/Art/Sprites/rebote.png
+  artifactKey: Guid(b70dba610dfdf524fa485f6cf6f6ee43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Sprites/rebote.png using Guid(b70dba610dfdf524fa485f6cf6f6ee43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '33ccaf920609a0d6ff221c9c60350fd9') in 0.001650 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 0.003641 seconds.
-  path: Assets/Art/Tile Palettes/dark_forest_98.asset
-  artifactKey: Guid(e539108125bb19f4ca0d6af451219c14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Tile Palettes/dark_forest_98.asset using Guid(e539108125bb19f4ca0d6af451219c14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9f2348cb61a13b625f23f379cf28f17b') in 0.001230 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 0.000017 seconds.
-  path: Assets/Art/Tile Palettes/dark_forest_100.asset
-  artifactKey: Guid(19af48e3c62ad8a4ab74e5c34ada5a52) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Tile Palettes/dark_forest_100.asset using Guid(19af48e3c62ad8a4ab74e5c34ada5a52) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1021c492c029189de89d7f4874c8c6ca') in 0.001324 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 0.001068 seconds.
-  path: Assets/Art/Tile Palettes/dark_forest_103.asset
-  artifactKey: Guid(9ffb603f0ca624941b977ad112b6c578) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Tile Palettes/dark_forest_103.asset using Guid(9ffb603f0ca624941b977ad112b6c578) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '50d079d0cda7129ca6dc2a4d7bf69049') in 0.001633 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Art/Tile Palettes/dark_forest_109.asset
-  artifactKey: Guid(ba37af5f29871184980e0f63639aaf56) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Tile Palettes/dark_forest_109.asset using Guid(ba37af5f29871184980e0f63639aaf56) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4e761a4ed8a3949182d52ce21c825d90') in 0.001698 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 0.000016 seconds.
-  path: Assets/Art/Tile Palettes/dark_forest_128.asset
-  artifactKey: Guid(d87a0b1c2a833eb438749261c3e93a0e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Tile Palettes/dark_forest_128.asset using Guid(d87a0b1c2a833eb438749261c3e93a0e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5aea4d36a3464bb16f482b5b277a7297') in 0.001184 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 0.000016 seconds.
-  path: Assets/Art/Tile Palettes/dark_forest_132.asset
-  artifactKey: Guid(38ebb56eeac36be4d9f73de3c5c623e2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Tile Palettes/dark_forest_132.asset using Guid(38ebb56eeac36be4d9f73de3c5c623e2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f072bc81913026f7e06c4f11e65c22cd') in 0.001784 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 0.000016 seconds.
-  path: Assets/Art/Tile Palettes/dark_forest_147.asset
-  artifactKey: Guid(e3a17bd5681502244956ee68468b6ceb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Tile Palettes/dark_forest_147.asset using Guid(e3a17bd5681502244956ee68468b6ceb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '60f5753aba39d1e8bce7ceb93f9d32d3') in 0.001235 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 0.000013 seconds.
-  path: Assets/Art/Tile Palettes/dark_forest_115.asset
-  artifactKey: Guid(f3cf5a980d2fc5940ad74619c1d65112) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Tile Palettes/dark_forest_115.asset using Guid(f3cf5a980d2fc5940ad74619c1d65112) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dfb15fcfb387272d22e5241a9d9c1f6d') in 0.001561 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 0.000040 seconds.
-  path: Assets/Art/Tile Palettes/dark_forest_148.asset
-  artifactKey: Guid(74f4f32e394e65f4dbc0323d0975af01) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Tile Palettes/dark_forest_148.asset using Guid(74f4f32e394e65f4dbc0323d0975af01) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6efca8c8557da1d296ec38ca01e63f4a') in 0.001249 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Art/Tile Palettes/dark_forest_123.asset
-  artifactKey: Guid(59d4cba928c3a53489551442a0600caa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Tile Palettes/dark_forest_123.asset using Guid(59d4cba928c3a53489551442a0600caa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd2e2ffa8536a31f73b57d6cdb5fc9263') in 0.001357 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 0.000013 seconds.
-  path: Assets/Art/Tile Palettes/dark_forest_121.asset
-  artifactKey: Guid(e8e1d3aff77ce8548a193ce49836a75d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Tile Palettes/dark_forest_121.asset using Guid(e8e1d3aff77ce8548a193ce49836a75d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c5a2eae91702f1c0fdb449335cfbdde7') in 0.001083 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 0.000012 seconds.
-  path: Assets/Art/Tile Palettes/dark_forest_143.asset
-  artifactKey: Guid(7708a4d1bb3095849864d68f232800f2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Tile Palettes/dark_forest_143.asset using Guid(7708a4d1bb3095849864d68f232800f2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2f54c0e00e681fb0879f623dd6175e27') in 0.001488 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 0.000097 seconds.
-  path: Assets/Art/Tile Palettes/dark_forest_145.asset
-  artifactKey: Guid(3fc007a7cf37de545816250315513163) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Tile Palettes/dark_forest_145.asset using Guid(3fc007a7cf37de545816250315513163) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd1f3ef24a975bcd059fbedb8c9ae18c0') in 0.001062 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 0.000012 seconds.
-  path: Assets/Art/Tile Palettes/dark_forest_111.asset
-  artifactKey: Guid(aeb54b70ca992cc44b8f6d260fad11d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Tile Palettes/dark_forest_111.asset using Guid(aeb54b70ca992cc44b8f6d260fad11d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c8f270dd5fecbb8f70286b05c815e38f') in 0.001097 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 0.000013 seconds.
-  path: Assets/Art/Tile Palettes/dark_forest_129.asset
-  artifactKey: Guid(086d6bce836518b48a934a36dbc380eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Tile Palettes/dark_forest_129.asset using Guid(086d6bce836518b48a934a36dbc380eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b55f09e2037b666bbbb71c233270292c') in 0.001083 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 0.000025 seconds.
-  path: Assets/Art/Tile Palettes/dark_forest_114.asset
-  artifactKey: Guid(9567b55c191cb3640b139cad5a70687f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Tile Palettes/dark_forest_114.asset using Guid(9567b55c191cb3640b139cad5a70687f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '589e9e016296a7ce47261acf7b32562b') in 0.001151 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 0.000013 seconds.
-  path: Assets/Art/Tile Palettes/dark_forest_144.asset
-  artifactKey: Guid(35fcee5d6e10ca5468d517f786f119bd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Tile Palettes/dark_forest_144.asset using Guid(35fcee5d6e10ca5468d517f786f119bd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bc32d329fff3b0b17aa953332a69e337') in 0.001120 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 0.000023 seconds.
-  path: Assets/Art/Tile Palettes/dark_forest_149.asset
-  artifactKey: Guid(d3e22e1549ce52c4a9e11fa0cef7b12b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Tile Palettes/dark_forest_149.asset using Guid(d3e22e1549ce52c4a9e11fa0cef7b12b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6f72f71be17fe571bdf275ae200a521e') in 0.001400 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 0.000041 seconds.
-  path: Assets/Art/Tile Palettes/dark_forest_146.asset
-  artifactKey: Guid(02e5a895038a4af42b78691230e59ac0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Tile Palettes/dark_forest_146.asset using Guid(02e5a895038a4af42b78691230e59ac0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '23f38bc237bdd4b6eb5a7cb727ae294f') in 0.001382 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 0.000125 seconds.
-  path: Assets/Art/Tile Palettes/dark_forest_142.asset
-  artifactKey: Guid(33b0adfc598ee344e96058ad967a7ee7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Tile Palettes/dark_forest_142.asset using Guid(33b0adfc598ee344e96058ad967a7ee7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1bdc703098edfbf9d36c4d1b56d652ad') in 0.001177 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 0.000013 seconds.
-  path: Assets/Art/Tile Palettes/dark_forest_150.asset
-  artifactKey: Guid(a1e86e88929ca1e4d8242fbb1c4caba5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Tile Palettes/dark_forest_150.asset using Guid(a1e86e88929ca1e4d8242fbb1c4caba5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dee1705991d3f717e67cee382edd1dfa') in 0.001293 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 0.000016 seconds.
-  path: Assets/Art/Tile Palettes/dark_forest_130.asset
-  artifactKey: Guid(db0fd82499ad6ba43af09b18f38fcbdb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Tile Palettes/dark_forest_130.asset using Guid(db0fd82499ad6ba43af09b18f38fcbdb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0e25807eac0bfe96dfb20d045f02108f') in 0.001365 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 0.000012 seconds.
-  path: Assets/Art/Tile Palettes/dark_forest_127.asset
-  artifactKey: Guid(1babfff532ecf564086dcb56b6b928ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Tile Palettes/dark_forest_127.asset using Guid(1babfff532ecf564086dcb56b6b928ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '335d7e6310850d8149bc1f063475a79a') in 0.001917 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 0.000021 seconds.
-  path: Assets/Art/Tile Palettes/dark_forest_107.asset
-  artifactKey: Guid(539b0dffea9afd946aab9ac7c23b3c71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Tile Palettes/dark_forest_107.asset using Guid(539b0dffea9afd946aab9ac7c23b3c71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9601207e82f0f2b5d71298aac2fe6e54') in 0.001662 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 0.000018 seconds.
-  path: Assets/Art/Tile Palettes/dark_forest_119.asset
-  artifactKey: Guid(911fc664ae784ba489fa8c41ad3deccb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Tile Palettes/dark_forest_119.asset using Guid(911fc664ae784ba489fa8c41ad3deccb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1168807efe5306ae8cb36576260f3e0a') in 0.001211 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 0.000020 seconds.
-  path: Assets/Art/Tile Palettes/dark_forest_101.asset
-  artifactKey: Guid(add12400bcd53c94e8c667e2d995092b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Tile Palettes/dark_forest_101.asset using Guid(add12400bcd53c94e8c667e2d995092b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '41a4115d5d55f4d14aecaad5124f8e9f') in 0.001150 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 0.000034 seconds.
-  path: Assets/Art/Tile Palettes/dark_forest_133.asset
-  artifactKey: Guid(68aa69421d9c4ed429b1e0f918fc77d3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Tile Palettes/dark_forest_133.asset using Guid(68aa69421d9c4ed429b1e0f918fc77d3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '97d6cd6a8b21780b8e97d9f3abd3a517') in 0.001126 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 0.000032 seconds.
-  path: Assets/Art/Tile Palettes/dark_forest_125.asset
-  artifactKey: Guid(e326c62fd41a07140998b73f39aa1809) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Tile Palettes/dark_forest_125.asset using Guid(e326c62fd41a07140998b73f39aa1809) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b4b6cbd55ca4837ddac57c8f96cf908c') in 0.001349 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
+Number of asset objects unloaded after import = 2
 Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
 TcpMessagingSession - receive error: operation aborted. errorcode: 995, details: La operación de E/S se anuló por una salida de subproceso o por una solicitud de aplicación.
 AssetImportWorker is now disconnected from the server

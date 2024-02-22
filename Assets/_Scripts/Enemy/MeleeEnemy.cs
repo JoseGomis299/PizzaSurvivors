@@ -11,7 +11,6 @@ public class MeleeEnemy : EnemyBase
 
         GetComponent<CharacterMovement>();
         
-        Transform player = GameObject.FindWithTag("Player").transform;
         EnemyMoveState enemyMoveStateState = new EnemyMoveState(this, transform, player);
 
         if (TryGetComponent(out MeleeAttacker meleeAttacker))

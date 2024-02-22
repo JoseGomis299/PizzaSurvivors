@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Sine Movement
   descriptions:
-  - 
+  - Sine Movement (1) - Your bullets move with the sine function.
   maxLevel: 1
   priority: 0
   amplitude: 1

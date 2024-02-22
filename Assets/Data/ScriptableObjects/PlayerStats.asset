@@ -69,7 +69,7 @@ MonoBehaviour:
   <Attack>k__BackingField: 25
   <Speed>k__BackingField: 8
   <Luck>k__BackingField: 0
-  <BulletsMaxRange>k__BackingField: 10
+  <BulletsMaxRange>k__BackingField: 7
   <AdditionalBulletsSpeed>k__BackingField: 0
   <AdditionalBulletsPierce>k__BackingField: 0
   <AdditionalBulletsBounce>k__BackingField: 0

@@ -12,19 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36e93d53c04a45cbb155e2f728573f02, type: 3}
   m_Name: Vegan Cheese
   m_EditorClassIdentifier: 
-  name: 
-  icon: {fileID: 0}
+  name: Vegan Cheese
+  icon: {fileID: 21300000, guid: 552c674b9659fd2448b1491041793b71, type: 3}
   price: 0
-  rarity: 0
-  onPizzaSprite: {fileID: 0}
+  rarity: 3
+  onPizzaSprite: {fileID: 21300000, guid: 25bdc344a6757804ebd1cd703f7e4b5e, type: 3}
   <BulletModifiers>k__BackingField: []
   <Buffs>k__BackingField:
   - buffType: 0
-    multiplier: 0
-    incrementType: 0
-  - buffType: 0
-    multiplier: -0.85
-    incrementType: 1
+    multiplier: 0.15
+    incrementType: 4
   - buffType: 1
     multiplier: 2
     incrementType: 1

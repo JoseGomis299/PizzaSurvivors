@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Pineapple
   icon: {fileID: 21300000, guid: f1ef0b8f13f751643b493a210bd9d5f9, type: 3}
   price: 0
-  rarity: 0
+  rarity: 1
   onPizzaSprite: {fileID: 21300000, guid: 7832a8189498c53498b0d3e901ddb687, type: 3}
   <BulletModifiers>k__BackingField:
   - {fileID: 11400000, guid: d60dda64a6fc3a448b3f0c62b6791f7f, type: 2}

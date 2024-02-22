@@ -28,10 +28,13 @@ public class CharacterMovement : MonoBehaviour
     private float _startRollTime = 0f;
     private Vector2 _rollDirection = new Vector2(0, 0);
     
+    private SpriteRenderer _spriteRenderer;
+    
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
         _statsManager = GetComponent<StatsManager>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         
         _rb.excludeLayers = ignoreLayer;
         _isRolling = false;
@@ -44,6 +47,8 @@ public class CharacterMovement : MonoBehaviour
 
     public void UpdateMovement(Vector3 direction, float deltaTime)
     {
+        UpdateFacingDirection(direction);
+        
         if (_isRolling)
         {
             UpdateMovementRoll();
@@ -63,6 +68,14 @@ public class CharacterMovement : MonoBehaviour
         _knockBackImpulse = Vector2.Lerp(_knockBackImpulse, Vector2.zero, deltaTime*10f);
 
         _prevDirection = direction;
+    }
+    
+    public void UpdateFacingDirection(Vector3 direction)
+    {
+        if(direction.x > 0)
+            _spriteRenderer.flipX = false;
+        else if(direction.x < 0)
+            _spriteRenderer.flipX = true;
     }
 
     private void UpdateMovementRoll()

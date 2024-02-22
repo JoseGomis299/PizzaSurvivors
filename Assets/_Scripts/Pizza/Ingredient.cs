@@ -8,5 +8,15 @@ public class Ingredient : StoreItem
     
     [field: SerializeField] public BulletModifierInfo[] BulletModifiers { get; private set; }
     [field: SerializeField] public BuffData[] Buffs { get; private set; }
+
+    public int GetModifierCount(BulletModifierInfo modifier)
+    {
+        int count = 0;
+        foreach (var modifierInfo in BulletModifiers)
+        {
+            if (modifierInfo.name == modifier.name) count++;
+        }
+        return count;
+    }
 }
 
