@@ -10,7 +10,7 @@ public class MeleeAttacker : MonoBehaviour
     private float _attackRange;
     private float _dmg;
     private LayerMask _layer;
-    private RectangleCombosContainer _combosContainer;
+    private CombosContainer _combosContainer;
     
     public void Initialize(float timeBetweenAttacks, float attackRange, float dmg, LayerMask layer)
     {
@@ -22,7 +22,7 @@ public class MeleeAttacker : MonoBehaviour
         
         _lastAttackTime = float.MinValue;
 
-        _combosContainer = GetComponent<RectangleCombosContainer>();
+        _combosContainer = GetComponent<CombosContainer>();
         _combosContainer.Initialize(attackRange);
     }
 

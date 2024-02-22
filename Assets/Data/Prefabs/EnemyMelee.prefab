@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 6905251877862819796}
   - component: {fileID: 2245963577067727516}
   - component: {fileID: 8541133433193589029}
-  - component: {fileID: -4986893932914599748}
+  - component: {fileID: 8745027673335284106}
   m_Layer: 7
   m_Name: EnemyMelee
   m_TagString: Enemy
@@ -252,8 +252,8 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
-  attackRange: 2
---- !u!114 &-4986893932914599748
+  <AttackRange>k__BackingField: 2
+--- !u!114 &8745027673335284106
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -265,18 +265,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0153cd3fd2684292b773b2761e376102, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rectangleCombos:
+  combos:
   - Attacks:
     - damageMultiplier: 1
       element: 0
       knockback: 0
-      Size: {x: 1, y: 0}
-      RelativePosition: {x: 0, y: 0}
-      Angle: 0
+      ShapeType: 0
+      Size: {x: 1.5, y: 1.5}
+      RelativePosition: {x: 0, y: 1.25}
+      Angle: 90
+      Orientation: 0
       MatchRange: 1
     FlipXWhenFacingLeft: 0
     ShowGizmos: 1
-    MatchRange: 1
 --- !u!1 &1987326083758887137
 GameObject:
   m_ObjectHideFlags: 0

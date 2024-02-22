@@ -5,7 +5,7 @@ public class MeleeEnemy : EnemyBase
     private CharacterMovement _characterMovement;
 
     [SerializeField] private LayerMask playerLayer;
-    [SerializeField] private float attackRange;
+    [field: SerializeField] public float AttackRange { get; private set; }
 
     public override void Initialize(int round)
     {
@@ -18,13 +18,13 @@ public class MeleeEnemy : EnemyBase
 
         if (TryGetComponent(out MeleeAttacker meleeAttacker))
         {
-            meleeAttacker.Initialize(statsManager.Stats.AttackCooldown, attackRange, statsManager.Stats.Attack, playerLayer);
+            meleeAttacker.Initialize(statsManager.Stats.AttackCooldown, AttackRange, statsManager.Stats.Attack, playerLayer);
 
             EnemyMeleeAttackState meleeAttackState = new EnemyMeleeAttackState(meleeAttacker, transform, player,
                 statsManager, statsManager.Stats.AttackCooldown);
 
-            stateMachine.At(enemyMoveStateState, meleeAttackState, new FuncPredicate(() => Vector3.Distance(transform.position, player.position) <= attackRange + 0.5f));
-            stateMachine.At(meleeAttackState, enemyMoveStateState, new FuncPredicate(() => Vector3.Distance(transform.position, player.position) > attackRange + 0.5f));
+            stateMachine.At(enemyMoveStateState, meleeAttackState, new FuncPredicate(() => Vector3.Distance(transform.position, player.position) <= AttackRange + 0.5f));
+            stateMachine.At(meleeAttackState, enemyMoveStateState, new FuncPredicate(() => Vector3.Distance(transform.position, player.position) > AttackRange + 0.5f));
         }
 
         stateMachine.SetState(enemyMoveStateState);
