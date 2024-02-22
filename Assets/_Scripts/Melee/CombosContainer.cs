@@ -88,7 +88,7 @@ public class CombosContainer : MonoBehaviour
     }
 
     #if UNITY_EDITOR
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         if(combos == null) return;
         for (var i = 0; i < combos.Count; i++)

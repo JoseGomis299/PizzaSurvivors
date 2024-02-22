@@ -21,8 +21,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ae34107e5a8ae5f4ebad180a5a1ca401, type: 2}
   <Buffs>k__BackingField:
   - buffType: 10
-    multiplier: 4
-    incrementType: 0
+    multiplier: -0.2
+    incrementType: 1
   - buffType: 6
     multiplier: 10
     incrementType: 0

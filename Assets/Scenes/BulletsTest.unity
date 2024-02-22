@@ -6248,6 +6248,10 @@ MonoBehaviour:
     quantity: 20
     lifeTime: 1
     activeTime: 0
+  - gameObject: {fileID: 9185154336958388077, guid: fffd15965571d2d41a87b8835826dbe7, type: 3}
+    quantity: 100
+    lifeTime: 5
+    activeTime: 0
 --- !u!4 &1638752853
 Transform:
   m_ObjectHideFlags: 0

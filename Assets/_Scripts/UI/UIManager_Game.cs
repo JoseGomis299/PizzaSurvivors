@@ -8,12 +8,20 @@ public class UIManager_Game : MonoBehaviour
     [SerializeField] private TMP_Text roundText;
     [SerializeField] private TMP_Text indicatorText;
 
-    private void Start()
+    private void Awake()
     {
         SpawningSystem.OnRoundStart += UpdateRoundText;
         SpawningSystem.OnRoundEnd += HideText;
         SpawningSystem.OnTimerChanged += UpdateTimerText;
         CurrencyManager.OnMoneyChanged += UpdateMoneyText;
+    }
+    
+    private void OnDestroy()
+    {
+        SpawningSystem.OnRoundStart -= UpdateRoundText;
+        SpawningSystem.OnRoundEnd -= HideText;
+        SpawningSystem.OnTimerChanged -= UpdateTimerText;
+        CurrencyManager.OnMoneyChanged -= UpdateMoneyText;
     }
 
     private void UpdateRoundText(int round)

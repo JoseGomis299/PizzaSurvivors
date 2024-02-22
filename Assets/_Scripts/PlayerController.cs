@@ -101,6 +101,7 @@ public class PlayerController : MonoBehaviour, IKillable
     {
         OnPlayerDeath?.Invoke();
         
+        IngredientInventory.Clear();
         CoroutineController.StopAll();
         SceneManager.LoadScene(0);
     }

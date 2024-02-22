@@ -82,7 +82,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6d7a7a26f682b6f44870e11860a2ffc3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -105,9 +105,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1850292b10c93444815e435bfee058e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 256
   attackRange: 7
 --- !u!114 &1487021330736714409
 MonoBehaviour:
@@ -237,7 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ae5c40afcdc4bdbbfce973c7e149f8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <bulletPrefab>k__BackingField: {fileID: 9185154336958388077, guid: 33aebd7d8475e124f91d5e97e5f23058, type: 3}
+  <bulletPrefab>k__BackingField: {fileID: 9185154336958388077, guid: fffd15965571d2d41a87b8835826dbe7, type: 3}
   firePoint: {fileID: 6671864738724586031}
 --- !u!114 &2245963577067727516
 MonoBehaviour:
