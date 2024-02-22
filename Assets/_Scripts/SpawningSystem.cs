@@ -8,6 +8,9 @@ using Random = UnityEngine.Random;
 public class SpawningSystem : MonoBehaviour
 {
     public static event Action OnEnemySpawned;
+    public static event Action<int> OnRoundStart;
+    public static event Action<int> OnRoundEnd;
+    public static event Action<float> OnTimerChanged;
     public float RoundTimer { get; private set; }
     public float SpawnRate { get; private set; }
     public int MaxSpawnCount {get; private set;}
@@ -41,6 +44,7 @@ public class SpawningSystem : MonoBehaviour
     {
         CurrentRound++;
         RoundTimer = roundDuration;
+        OnRoundStart?.Invoke(CurrentRound);
         
         float difficulty = spawnCurve.Evaluate(CurrentRound);
         MaxSpawnCount = initialMaxSpawnCount + (int) (initialMaxSpawnCount * difficulty);
@@ -53,6 +57,9 @@ public class SpawningSystem : MonoBehaviour
     
     private void Update()
     {
+        if (RoundTimer <= 0 && Input.GetKeyDown(KeyCode.N))
+            GoNextRound();
+        
         if(!_isSpawning) return;
         
         _timer += Time.deltaTime;
@@ -61,7 +68,7 @@ public class SpawningSystem : MonoBehaviour
         if (_timer >= _spawnTime)
         {
             _timer = 0;
-            for(int i = 0; i < Random.Range(1, 5); i++)
+            for(int i = 0; i < GetSpawnCount(); i++)
                 SpawnEnemy();
         }
         
@@ -69,8 +76,10 @@ public class SpawningSystem : MonoBehaviour
         {
             entitiesParent.DisableChildren();
             _isSpawning = false;
-            GoNextRound();
+            OnRoundEnd?.Invoke(CurrentRound);
         }
+        
+        OnTimerChanged?.Invoke(RoundTimer);
     }
     
     private void SpawnEnemy()
@@ -108,10 +117,20 @@ public class SpawningSystem : MonoBehaviour
         // Spawn enemy
         GameObject enemy = ObjectPool.Instance.InstantiateFromPool(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], spawnPosition, Quaternion.identity);
         enemy.transform.parent = entitiesParent;
-        enemy.GetComponent<Enemy>().Initialize();
+        enemy.GetComponent<EnemyBase>().Initialize(CurrentRound);
         
         _pendingSpawnCount--;
         OnEnemySpawned?.Invoke();
+    }
+    
+    private int GetSpawnCount()
+    {
+        float probability = Random.value;
+        if (probability < 0.5f) return 1;
+        if (probability < 0.7f) return 2;
+        if (probability < 0.8f) return 3;
+        if (probability < 0.9f) return 4;
+        return 5;
     }
 
 #if UNITY_EDITOR

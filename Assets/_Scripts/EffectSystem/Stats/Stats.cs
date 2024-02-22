@@ -21,6 +21,7 @@ public class Stats : ScriptableObject
     
     [field: Space(10)]
     [field: SerializeField] public float AttackSpeed { get; set; } = 0.1f;
+    public float AttackCooldown => 1/AttackSpeed;
     [field: SerializeField] public float Attack { get; set; } = 20f;
     [field: SerializeField] public float Speed { get; set; } = 10f;
     [field: SerializeField] public float Luck { get; set; } = 7f;
@@ -106,5 +107,15 @@ public class Stats : ScriptableObject
         if(_damageMultipliers.ContainsKey(element))
             return _damageMultipliers[element];
         return 1;
+    }
+    
+    public void MultiplyBasicStats(float value)
+    {
+        MaxHealth *= value;
+        Defense *= value;
+        AttackSpeed *= value;
+        Attack *= value;
+        Speed *= value;
+        Luck *= value;
     }
 }

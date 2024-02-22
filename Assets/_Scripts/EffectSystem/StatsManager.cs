@@ -38,4 +38,9 @@ public class StatsManager : MonoBehaviour
     {
         _effectManager.DeApplyAllEffects();
     }
+    
+    public void ResetStats()
+    {
+        _stats.SetValues(stats);
+    }
 }

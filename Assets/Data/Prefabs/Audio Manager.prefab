@@ -33,7 +33,7 @@ Transform:
   - {fileID: 6537575806128741486}
   - {fileID: 9088814941883725916}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2667024625748659345
 MonoBehaviour:
@@ -62,22 +62,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSound: {fileID: 0}
-  addIngredientSound: {fileID: 0}
-  removeIngredientSound: {fileID: 0}
+  addIngredientSound: {fileID: 8300000, guid: a8de319cf9f6c2b44b0508e1cc07aa62, type: 3}
+  removeIngredientSound: {fileID: 8300000, guid: 7a372aa26db99184fa1cac626a1556e0, type: 3}
   collectSound: {fileID: 8300000, guid: 3f2dd9559120b384d8076ecc9145a03e, type: 3}
   spawnSound: {fileID: 0}
-  enemyShootSound: {fileID: 0}
-  enemyHitSound: {fileID: 0}
-  enemyDeathSound: {fileID: 0}
-  playerShootSound: {fileID: 0}
-  playerHitSound: {fileID: 0}
-  playerDeathSound: {fileID: 0}
-  loseSound: {fileID: 0}
-  winSound: {fileID: 0}
+  enemyShootSound: {fileID: 8300000, guid: d9daa66ef4fbe954899c0b9fc20f01bb, type: 3}
+  enemyMeleeAttackSound: {fileID: 0}
+  enemyHitSound: {fileID: 8300000, guid: 9c32ce639f2b6734b92e75fa1ecc8c0a, type: 3}
+  enemyDeathSound: {fileID: 8300000, guid: e1fb92eb8c352ae4c88be077547c55b4, type: 3}
+  playerShootSound: {fileID: 8300000, guid: d9daa66ef4fbe954899c0b9fc20f01bb, type: 3}
+  playerRollSound: {fileID: 0}
+  playerHitSound: {fileID: 8300000, guid: b24beb18b07a40246a314c75792bd4ce, type: 3}
+  playerDeathSound: {fileID: 8300000, guid: b97273a75778a704eabf60cf16003d1a, type: 3}
+  loseSound: {fileID: 8300000, guid: d51ff389d5b029042866146612449152, type: 3}
+  winSound: {fileID: 8300000, guid: 7635fd27bc312c9419a5748123bbdca0, type: 3}
   buttonClickSound: {fileID: 8300000, guid: a63408d1f19f82340b5e6c3c8259764d, type: 3}
-  interactSound: {fileID: 0}
-  mainMenuMusic: {fileID: 8300000, guid: 1fc55bb4c7e8bab419da6e9a95bd9f1e, type: 3}
-  gameMusic: {fileID: 8300000, guid: 1d4fbd6390f9c364f848148c73b84f15, type: 3}
+  interactSound: {fileID: 8300000, guid: 047cd625cde78324586d1e34f3603d23, type: 3}
+  mainMenuMusic: {fileID: 8300000, guid: c5bd355ca55b85a4cb5e39fa03edd03e, type: 3}
+  gameMusic: {fileID: 8300000, guid: 77b534c8701e0874cafaf0435e0f1c8e, type: 3}
+  walkSoundCooldown: 0.3
 --- !u!1 &8752621075060522176
 GameObject:
   m_ObjectHideFlags: 0
@@ -122,7 +125,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.096
+  m_Volume: 0.153
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -248,7 +251,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 1fc55bb4c7e8bab419da6e9a95bd9f1e, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 77b534c8701e0874cafaf0435e0f1c8e, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.136
   m_Pitch: 1

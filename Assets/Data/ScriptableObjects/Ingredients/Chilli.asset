@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Chilli
   m_EditorClassIdentifier: 
   name: Chilli
+  icon: {fileID: 21300000, guid: 5cc52aee471f3d346a97fd9879768c6a, type: 3}
+  price: 0
+  rarity: 0
   onPizzaSprite: {fileID: 21300000, guid: 325a01a2176e79047a9f55f886b3cd01, type: 3}
-  uiSprite: {fileID: 21300000, guid: 5cc52aee471f3d346a97fd9879768c6a, type: 3}
   <BulletModifiers>k__BackingField:
   - {fileID: 11400000, guid: 9892cbe014b15b748bf6cadc3352a06d, type: 2}
   <Buffs>k__BackingField:
