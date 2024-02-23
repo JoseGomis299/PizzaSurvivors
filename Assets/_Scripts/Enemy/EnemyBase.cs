@@ -3,8 +3,11 @@ using UnityEngine;
 
 public abstract class EnemyBase : MonoBehaviour, IKillable
 {
-    public static event Action OnEnemyDeath;
-    public static event Action OnEnemyHit;
+    public event Action OnEnemyDeath;
+    public event Action OnEnemyHit;
+    public event Action OnEnemyRangedAttack;
+    public event Action OnEnemyMeleeAttack;
+    public event Action OnEnemySpawn;
     
     protected StateMachine stateMachine;
     protected StatsManager statsManager;
@@ -22,9 +25,10 @@ public abstract class EnemyBase : MonoBehaviour, IKillable
         stateMachine = new StateMachine();
         statsManager.ResetStats();
         statsManager.Stats.MultiplyBasicStats(1 + (round-1)*0.05f);
+        OnEnemySpawn?.Invoke();
     }
 
-    public void OnDeath()
+    public virtual void OnDeath()
     {
         GetComponent<EnemyDropSystem>().DropItem();
         transform.parent = null;
@@ -37,6 +41,16 @@ public abstract class EnemyBase : MonoBehaviour, IKillable
     private void InvokeOnEnemyHit(float _)
     {
         OnEnemyHit?.Invoke();
+    }
+    
+    protected void InvokeOnEnemyMeleeAttack()
+    {
+        OnEnemyMeleeAttack?.Invoke();
+    }
+    
+    protected void InvokeOnEnemyRangedAttack()
+    {
+        OnEnemyRangedAttack?.Invoke();
     }
     
     protected virtual void FixedUpdate()

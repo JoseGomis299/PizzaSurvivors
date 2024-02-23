@@ -56,7 +56,6 @@ public class AudioPlayer : MonoBehaviour
         SpawningSystem.OnEnemySpawned += HandleSpawnSound;
         Pizza.OnIngredientPlaced += HandleAddIngredientSound;
         Pizza.OnIngredientRemoved += HandleRemoveIngredientSound;
-        EnemyMeleeAttackState.OnAttack += HandleEnemyMeleeAttackSound;
 
         foreach (var button in FindObjectsOfType<Button>())
         {
@@ -75,7 +74,6 @@ public class AudioPlayer : MonoBehaviour
         
         Pizza.OnIngredientPlaced -= HandleAddIngredientSound;
         Pizza.OnIngredientRemoved -= HandleRemoveIngredientSound;
-        EnemyMeleeAttackState.OnAttack -= HandleEnemyMeleeAttackSound;
 
         foreach (var button in FindObjectsOfType<Button>())
         {

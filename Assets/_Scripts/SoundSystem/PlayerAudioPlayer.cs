@@ -7,9 +7,9 @@ public class PlayerAudioPlayer : CharacterAudioPlayer
     [SerializeField] private AudioClip interactSound;
     protected override void SubscribeToEvents()
     {
-        PlayerController.OnPlayerDeath += HandlePlayerDeathSound;
-        PlayerController.OnPlayerHit += HandlePlayerHitSound;
-        PlayerController.OnPlayerShoot += HandlePlayerShootSound;
+        PlayerController.OnPlayerDeath += HandleDeathSound;
+        PlayerController.OnPlayerHit += HandleHitSound;
+        PlayerController.OnPlayerShoot += HandleShootSound;
         PlayerController.OnPlayerMoved += HandleWalkSound;
         PlayerController.OnPlayerRolled += HandleRollSound;
         ItemCollector.OnItemCollected += HandleCollectSound;
@@ -18,9 +18,9 @@ public class PlayerAudioPlayer : CharacterAudioPlayer
 
     protected override void UnsubscribeToEvents()
     {
-        PlayerController.OnPlayerDeath -= HandlePlayerDeathSound;
-        PlayerController.OnPlayerHit -= HandlePlayerHitSound;
-        PlayerController.OnPlayerShoot -= HandlePlayerShootSound;
+        PlayerController.OnPlayerDeath -= HandleDeathSound;
+        PlayerController.OnPlayerHit -= HandleHitSound;
+        PlayerController.OnPlayerShoot -= HandleShootSound;
         PlayerController.OnPlayerMoved -= HandleWalkSound;
         PlayerController.OnPlayerRolled -= HandleRollSound;
         ItemCollector.OnItemCollected -= HandleCollectSound;

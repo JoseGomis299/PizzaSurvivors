@@ -25,25 +25,25 @@ public abstract class CharacterAudioPlayer : BaseAudioPlayer
         PlaySoundAtThisPosition(walkSound);
     }
     
-    protected void HandlePlayerShootSound()
+    protected void HandleShootSound()
     {
         if(shootSound == null) return;
         PlaySoundAtThisPosition(shootSound);
     }
     
-    protected void HandlePlayerHitSound()
+    protected void HandleHitSound()
     {
         if(hitSound == null) return;
         PlaySoundAtThisPosition(hitSound);
     }
     
-    protected void HandlePlayerDeathSound()
+    protected void HandleDeathSound()
     {
         if(deathSound == null) return;
         PlaySoundAtThisPosition(deathSound);
     }
     
-    protected void HandlePlayerMeleeAttackSound()
+    protected void HandleMeleeAttackSound()
     {
         if(meleeAttackSound == null) return;
         PlaySoundAtThisPosition(meleeAttackSound);

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemyRangedAttackState : BaseState
 {
-    public static event Action OnAttack;
+    public event Action OnAttack;
     
     private BulletSpawner _bulletSpawner;
     private Transform _shotPoint;

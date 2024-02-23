@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemyMeleeAttackState : BaseState
 {
-    public static event Action OnAttack;
+    public event Action OnAttack;
 
     private MeleeAttacker _meleeAttacker;
     private Transform _attackPoint;
