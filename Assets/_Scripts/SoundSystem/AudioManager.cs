@@ -51,6 +51,16 @@ public class AudioManager : MonoBehaviour
     {
         return AudioListener.volume;
     }
+    
+    public float GetMusicVolume()
+    {
+        return musicSource.volume;
+    }
+    
+    public float GetEffectsVolume()
+    {
+        return effectSource.volume;
+    }
 
     public void ChangeMusicVolume(float value)
     {
@@ -90,6 +100,16 @@ public class AudioManager : MonoBehaviour
     public void ToggleMusic()
     {
         musicSource.mute = !musicSource.mute;
+    }
+    
+    public bool IsMusicMuted()
+    {
+        return musicSource.mute;
+    }
+    
+    public bool AreEffectsMuted()
+    {
+        return effectSource.mute;
     }
     
     public void ToggleEffects(bool value)

@@ -47,10 +47,12 @@ public struct BuffData
                 {
                     case > 1:
                         op = "+ ";
+                        multiplier -= 1;
                         color = "<color=green>";
                         break;
                     case < 1:
                         op = "- ";
+                        multiplier = 1 - multiplier;
                         color = "<color=red>";
                         break;
                     default:

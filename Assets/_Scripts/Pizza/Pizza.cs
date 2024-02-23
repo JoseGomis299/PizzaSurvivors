@@ -40,6 +40,7 @@ public class Pizza : MonoBehaviour
             }
         }
         
+        _statsManager.ReApplyEffects();
         Cursor.visible = false;
         _bulletSpawner.Initialize(bulletModifiers);
         OnExitPizzaView?.Invoke();

@@ -3,14 +3,14 @@ using UnityEngine;
 public class IncrementalEffect : BaseEffect {
     
     protected readonly float increment;
-    protected readonly IncrementType incrementType;
+    public readonly IncrementType IncrementType;
 
     public readonly BuffType Type;
     
     public IncrementalEffect(StatsManager target, float duration, int maxStacks, TimerType timerType, float increment, IncrementType incrementType, BuffType type) : base(target, duration, maxStacks, timerType)
     {
         this.increment = increment;
-        this.incrementType = incrementType;
+        this.IncrementType = incrementType;
         Type = type;
     }
     
@@ -40,7 +40,7 @@ public class IncrementalEffect : BaseEffect {
     {
         GetCurrentStat(out float currentStat, out float baseStat);
 
-        switch (incrementType)
+        switch (IncrementType)
         {
             case IncrementType.AddBase:
                 currentStat += baseStat * increment;

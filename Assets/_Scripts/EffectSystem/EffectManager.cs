@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EffectManager
 {
     private readonly Dictionary<Type, BaseEffect> _effects = new Dictionary<Type, BaseEffect>();
-    private readonly HashSet<IncrementalEffect> _statBuffs = new HashSet<IncrementalEffect>();
+    private HashSet<IncrementalEffect> _statBuffs = new HashSet<IncrementalEffect>();
 
     private readonly StatsManager _statsManager;
     
@@ -47,6 +48,7 @@ public class EffectManager
             effect.Value.ReApply();
         }
 
+        _statBuffs = _statBuffs.OrderBy(x => x.IncrementType).ToHashSet();
         foreach (var buff in _statBuffs)
         {
             buff.ReApply();

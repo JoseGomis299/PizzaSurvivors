@@ -4,34 +4,23 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
+
 public class AudioPlayer : MonoBehaviour
 {
     [Header("Sound Effects")]
-    [SerializeField] private AudioClip walkSound;
     [SerializeField] private AudioClip addIngredientSound;
     [SerializeField] private AudioClip removeIngredientSound;
-    [SerializeField] private AudioClip collectSound;
     [SerializeField] private AudioClip spawnSound;
-    [SerializeField] private AudioClip enemyShootSound;
     [SerializeField] private AudioClip enemyMeleeAttackSound;
-    [SerializeField] private AudioClip enemyHitSound;
-    [SerializeField] private AudioClip enemyDeathSound;
-    [SerializeField] private AudioClip playerShootSound;
-    [SerializeField] private AudioClip playerRollSound;
-    [SerializeField] private AudioClip playerHitSound;
-    [SerializeField] private AudioClip playerDeathSound;
     [SerializeField] private AudioClip loseSound;
     [SerializeField] private AudioClip winSound;
     [SerializeField] private AudioClip buttonClickSound;
-    [SerializeField] private AudioClip interactSound;
     
     [Header("Music")]
     [SerializeField] private AudioClip mainMenuMusic;
     [SerializeField] private AudioClip gameMusic;
     
     private bool _wasPlayingMusic;
-    [SerializeField] private float walkSoundCooldown = 0.5f;
-    private float _lastWalkSoundTime;
     
     private void Awake()
     {
@@ -41,7 +30,6 @@ public class AudioPlayer : MonoBehaviour
     private void Start()
     {
         SubscribeToEvents();
-        _lastWalkSoundTime = float.MinValue;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -66,18 +54,8 @@ public class AudioPlayer : MonoBehaviour
     private void SubscribeToEvents()
     {
         SpawningSystem.OnEnemySpawned += HandleSpawnSound;
-        PlayerController.OnPlayerDeath += HandlePlayerDeathSound;
-        PlayerController.OnPlayerHit += HandlePlayerHitSound;
-        PlayerController.OnPlayerShoot += HandlePlayerShootSound;
-        PlayerController.OnPlayerMoved += HandleWalkSound;
-        PlayerController.OnPlayerRolled += handleRollSound;
-        EnemyBase.OnEnemyDeath += HandleEnemyDeathSound;
-        EnemyBase.OnEnemyHit += HandleEnemyHitSound;
-        EnemyRangedAttackState.OnAttack += HandleEnemyShootSound;
-        ItemCollector.OnItemCollected += HandleCollectSound;
         Pizza.OnIngredientPlaced += HandleAddIngredientSound;
         Pizza.OnIngredientRemoved += HandleRemoveIngredientSound;
-        Interacter.OnInteract += HandleInteractSound;
         EnemyMeleeAttackState.OnAttack += HandleEnemyMeleeAttackSound;
 
         foreach (var button in FindObjectsOfType<Button>())
@@ -94,18 +72,9 @@ public class AudioPlayer : MonoBehaviour
     private void UnsubscribeToEvents()
     {
         SpawningSystem.OnEnemySpawned -= HandleSpawnSound;
-        PlayerController.OnPlayerDeath -= HandlePlayerDeathSound;
-        PlayerController.OnPlayerHit -= HandlePlayerHitSound;
-        PlayerController.OnPlayerShoot -= HandlePlayerShootSound;
-        PlayerController.OnPlayerMoved -= HandleWalkSound;
-        PlayerController.OnPlayerRolled -= handleRollSound;
-        EnemyBase.OnEnemyDeath -= HandleEnemyDeathSound;
-        EnemyBase.OnEnemyHit -= HandleEnemyHitSound;
-        EnemyRangedAttackState.OnAttack -= HandleEnemyShootSound;
-        ItemCollector.OnItemCollected -= HandleCollectSound;
+        
         Pizza.OnIngredientPlaced -= HandleAddIngredientSound;
         Pizza.OnIngredientRemoved -= HandleRemoveIngredientSound;
-        Interacter.OnInteract -= HandleInteractSound;
         EnemyMeleeAttackState.OnAttack -= HandleEnemyMeleeAttackSound;
 
         foreach (var button in FindObjectsOfType<Button>())
@@ -119,34 +88,16 @@ public class AudioPlayer : MonoBehaviour
         }
     }
     
-    private void handleRollSound()
-    {
-        if(playerRollSound == null) return;
-        AudioManager.Instance.PlaySound(playerRollSound);
-    }
-    
     private void HandleEnemyMeleeAttackSound()
     {
         if(enemyMeleeAttackSound == null) return;
         AudioManager.Instance.PlaySound(enemyMeleeAttackSound);
     }
     
-    private void HandleInteractSound()
-    {
-        if(interactSound == null) return;
-        AudioManager.Instance.PlaySound(interactSound);
-    }
-    
     private void HandleSpawnSound()
     {
         if(spawnSound == null) return;
         AudioManager.Instance.PlaySound(spawnSound);
-    }
-    
-    private void HandleCollectSound()
-    {
-        if(collectSound == null) return;
-        AudioManager.Instance.PlaySound(collectSound);
     }
     
     private void HandleAddIngredientSound()
@@ -159,50 +110,6 @@ public class AudioPlayer : MonoBehaviour
     {
         if(removeIngredientSound == null) return;
         AudioManager.Instance.PlaySound(removeIngredientSound);
-    }
-    
-    private void HandleWalkSound()
-    {
-        if(walkSound == null || walkSoundCooldown > Time.time - _lastWalkSoundTime) return;
-        _lastWalkSoundTime = Time.time;
-        
-        AudioManager.Instance.PlaySound(walkSound);
-    }
-    
-    private void HandleEnemyShootSound()
-    {
-        if(enemyShootSound == null) return;
-        AudioManager.Instance.PlaySound(enemyShootSound);
-    }
-    
-    private void HandleEnemyHitSound()
-    {
-        if(enemyHitSound == null) return;
-        AudioManager.Instance.PlaySound(enemyHitSound);
-    }
-    
-    private void HandleEnemyDeathSound()
-    {
-        if(enemyDeathSound == null) return;
-        AudioManager.Instance.PlaySound(enemyDeathSound);
-    }
-    
-    private void HandlePlayerShootSound()
-    {
-        if(playerShootSound == null) return;
-        AudioManager.Instance.PlaySound(playerShootSound);
-    }
-    
-    private void HandlePlayerHitSound()
-    {
-        if(playerHitSound == null) return;
-        AudioManager.Instance.PlaySound(playerHitSound);
-    }
-    
-    private void HandlePlayerDeathSound()
-    {
-        if(playerDeathSound == null) return;
-        AudioManager.Instance.PlaySound(playerDeathSound);
     }
     
     private void HandleWinSound()
