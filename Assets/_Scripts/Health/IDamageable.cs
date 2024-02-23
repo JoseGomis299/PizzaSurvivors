@@ -12,7 +12,7 @@ public struct Damage
 
     public Vector3 GetKnockBack(Vector3 position)
     {
-        if(_direction == Vector3.zero) return (position-_origin).normalized*_knockBackForce;
+        if(_direction == default) return (position-_origin).normalized*_knockBackForce;
         return _direction*_knockBackForce;
     } 
     
@@ -20,20 +20,12 @@ public struct Damage
     private readonly Vector3 _origin;
     private readonly Vector3 _direction;
 
-    public Damage(float value, Element element, float knockBackForce, Vector3 vector, bool vectorIsOrigin = true)
+    public Damage(float value, Element element, float knockBackForce, Vector3 origin, Vector3 direction = default)
     {
         this.value = value;
         this.element = element;
         _knockBackForce = knockBackForce;
-        if (vectorIsOrigin)
-        {
-            _origin = vector;
-            _direction = Vector3.zero;
-        }
-        else
-        {
-            _origin = vector;
-            _direction = vector.normalized;
-        }
+        _origin = origin;
+        _direction = direction;
     }
 }

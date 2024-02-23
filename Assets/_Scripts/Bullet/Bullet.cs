@@ -191,7 +191,7 @@ public class Bullet : MonoBehaviour
         if(effectTarget != null && effectTarget == PreviousHit) return;
         
         float attack = _stats.GetAttack(_stats.Element, _stats.Damage);
-        Damage damage = new Damage(attack, _stats.Element, _stats.KnockBack, Direction, false);
+        Damage damage = new Damage(attack, _stats.Element, _stats.KnockBack, transform.position, Direction);
         
         if (col.TryGetComponent(out IDamageable damageable))
             damageable.TakeDamage(damage);

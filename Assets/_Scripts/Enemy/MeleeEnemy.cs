@@ -15,7 +15,7 @@ public class MeleeEnemy : EnemyBase
 
         if (TryGetComponent(out MeleeAttacker meleeAttacker))
         {
-            meleeAttacker.Initialize(statsManager.Stats.AttackCooldown, AttackRange, statsManager.Stats.Attack, playerLayer);
+            meleeAttacker.Initialize(statsManager.Stats.AttackCooldown, AttackRange, playerLayer);
 
             EnemyMeleeAttackState meleeAttackState = new EnemyMeleeAttackState(meleeAttacker, transform, player,
                 statsManager, statsManager.Stats.AttackCooldown);

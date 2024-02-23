@@ -44,7 +44,7 @@ public class EnemyMeleeAttackState : BaseState
             _isAttacking = true;
         }
             
-        if (_meleeAttacker.MeleeAttack(_target))
+        if (_meleeAttacker.MeleeAttack((_target.position - _meleeAttacker.transform.position).normalized))
         {
             _isAttacking = false;
             _lastAttackTime = Time.time;

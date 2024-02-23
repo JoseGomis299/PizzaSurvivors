@@ -3,21 +3,15 @@ using UnityEngine;
 
 public class MeleeAttacker : MonoBehaviour
 {
-    public event Action<Transform, Vector2, Vector2, MeleeAttack> OnAttack;
-
     private float _lastAttackTime;
     private float _timeBetweenAttacks;
-    private float _attackRange;
-    private float _dmg;
     private LayerMask _layer;
     private CombosContainer _combosContainer;
     
-    public void Initialize(float timeBetweenAttacks, float attackRange, float dmg, LayerMask layer)
+    public void Initialize(float timeBetweenAttacks, float attackRange, LayerMask layer)
     {
         _lastAttackTime = float.MinValue;
         _timeBetweenAttacks = timeBetweenAttacks;
-        _attackRange = attackRange;
-        _dmg = dmg;
         _layer = layer;
         
         _lastAttackTime = float.MinValue;
@@ -26,15 +20,12 @@ public class MeleeAttacker : MonoBehaviour
         _combosContainer.Initialize(attackRange);
     }
 
-    public bool MeleeAttack(Transform target)
+    public bool MeleeAttack(Vector3 direction)
     {
         if (_timeBetweenAttacks > Time.time - _lastAttackTime) return false;
-        
-        Vector2 dir = target.position - transform.position;
-        _combosContainer.Attack(0, dir.normalized, _layer);
-        
         _lastAttackTime = Time.time;
 
+        _combosContainer.Attack(0, direction.normalized, _layer);
         return true;
     }
 
