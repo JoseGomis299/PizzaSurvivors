@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class IncrementalEffect : BaseEffect {
     
-    protected readonly float increment;
+    public float Increment;
     public readonly IncrementType IncrementType;
 
     public readonly BuffType Type;
-    
+
     public IncrementalEffect(StatsManager target, float duration, int maxStacks, TimerType timerType, float increment, IncrementType incrementType, BuffType type) : base(target, duration, maxStacks, timerType)
     {
-        this.increment = increment;
+        this.Increment = increment;
         this.IncrementType = incrementType;
         Type = type;
     }
@@ -36,6 +36,35 @@ public class IncrementalEffect : BaseEffect {
         }
     }
     
+    public bool IsEqual(IncrementalEffect other)
+    {
+        return other.Type == Type && other.IncrementType == IncrementType;
+    }
+    
+    public bool IncreaseValue(float value)
+    {
+        switch (IncrementType)
+        {
+            case IncrementType.AddBase:
+                if(value > 1) Increment += value - 1;
+                else if(value <= 0) Increment = 0;
+                else if(value < 1) Increment -= 1 - value;
+                return true;
+            case IncrementType.Multiplicative:
+                if(value > 1) Increment += value - 1;
+                else if(value <= 0) Increment = 0;
+                else if(value < 1) Increment -= 1 - value;
+                if(Increment < 0) Increment = 0;
+                return true;
+            case IncrementType.KeepBestAdditive:
+            case IncrementType.KeepBest:
+            case IncrementType.Additive:
+                Increment += value; 
+                return true;
+        }
+        return false;
+    }
+    
     protected void IncrementStat()
     {
         GetCurrentStat(out float currentStat, out float baseStat);
@@ -43,22 +72,23 @@ public class IncrementalEffect : BaseEffect {
         switch (IncrementType)
         {
             case IncrementType.AddBase:
-                currentStat += baseStat * increment;
+                currentStat += baseStat * Increment;
                 break;
             case IncrementType.Exponential:
-                currentStat *= increment;
+            case IncrementType.Multiplicative:
+                currentStat *= Increment;
                 break;
             case IncrementType.Additive:
-                currentStat += increment;
+                currentStat += Increment;
                 break;
             case IncrementType.KeepBest:
-                currentStat = Mathf.Max(currentStat, baseStat * increment);
+                currentStat = Mathf.Max(currentStat, baseStat * Increment);
                 break;
             case IncrementType.KeepBestAdditive:
-                currentStat = Mathf.Max(currentStat, baseStat + increment);
+                currentStat = Mathf.Max(currentStat, baseStat + Increment);
                 break;
             case IncrementType.Set:
-                currentStat = increment;
+                currentStat = Increment;
                 break;
         }
 
@@ -192,8 +222,13 @@ public enum IncrementType
     KeepBestAdditive,
     /// <summary>
     /// Stat = Stat * Increment
+    /// If we have another IncremantalEffect with Multiplicative, the value is added to the current value
     /// </summary>
     [Tooltip("Stat = Stat * Increment")]
+    Multiplicative,
+    /// <summary>
+    /// Stat = Stat * Increment
+    /// <summary>
     Exponential,
     Set
 }

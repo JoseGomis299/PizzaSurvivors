@@ -43,6 +43,7 @@ public struct BuffData
                 }
                 break;
             case IncrementType.Exponential:
+            case IncrementType.Multiplicative:
                 switch (multiplier)
                 {
                     case > 1:

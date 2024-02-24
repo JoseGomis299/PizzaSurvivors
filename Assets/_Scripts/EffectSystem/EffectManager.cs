@@ -6,7 +6,7 @@ using UnityEngine;
 public class EffectManager
 {
     private readonly Dictionary<Type, BaseEffect> _effects = new Dictionary<Type, BaseEffect>();
-    private HashSet<IncrementalEffect> _statBuffs = new HashSet<IncrementalEffect>();
+    private List<IncrementalEffect> _statBuffs = new List<IncrementalEffect>();
 
     private readonly StatsManager _statsManager;
     
@@ -18,9 +18,13 @@ public class EffectManager
     {
         if (effect is IncrementalEffect statBuff && effect.MaxStacks == 1)
         {
-            _statBuffs.Add(statBuff);
-            statBuff.Apply();
-            statBuff.OnDeApply += () => _statBuffs.Remove(statBuff);
+            IncrementalEffect existingBuff = _statBuffs.FirstOrDefault(x => x.IsEqual(statBuff));
+            if (existingBuff == null || !existingBuff.IncreaseValue(statBuff.Increment))
+            {
+                _statBuffs.Add(statBuff);
+                statBuff.OnDeApply += () => _statBuffs.Remove(statBuff);
+            }
+            ReApplyEffects();
             return;
         }
 
@@ -29,7 +33,7 @@ public class EffectManager
         
         _effects[effect.GetType()].Apply();
     }
-    
+
     public void DeApplyAllEffects()
     {
         foreach (var effect in _effects)
@@ -48,7 +52,7 @@ public class EffectManager
             effect.Value.ReApply();
         }
 
-        _statBuffs = _statBuffs.OrderBy(x => x.IncrementType).ToHashSet();
+        _statBuffs = _statBuffs.OrderBy(x => x.IncrementType).ToList();
         foreach (var buff in _statBuffs)
         {
             buff.ReApply();
