@@ -31,7 +31,9 @@ public class Bullet : MonoBehaviour
     private Vector2 _initialDirection;
 
     private Rigidbody2D _rb;
-    private GameObject _gfx;
+    private SpriteRenderer _gfx;
+    private Sprite _sprite;
+    private float _exitPreviousHitTime;
     
     private EnumSet<BulletMovementModifier, BulletMovementModifierInfo.MovementModifierType> _movementModifiers;
     private EnumSet<BulletHitModifier, BulletHitModifierInfo.HitModifierType> _hitModifiers;
@@ -39,20 +41,24 @@ public class Bullet : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _gfx = transform.GetChild(0).gameObject;
+        _gfx = transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
+        _sprite = _gfx.sprite;
     }
 
     private void OnDisable()
     {
         Direction = Vector2.zero;
         Speed = 0;
+        _gfx.sprite = _sprite;
     }
 
-    public void Initialize(Bullet other, Vector2 direction, StatsManager previousHit)
+    public void Initialize(Bullet other, Vector2 direction, StatsManager previousHit, Sprite newSprite)
     {
         Spawner = other.Spawner;
         _initialPosition = transform.position;
+        _exitPreviousHitTime = float.MaxValue;
         ID = other.ID + 1;
+        if(newSprite != null) _gfx.sprite = newSprite;
         
         PreviousHit = previousHit;
 
@@ -111,6 +117,7 @@ public class Bullet : MonoBehaviour
         Spawner = spawner;
         _initialPosition = transform.position;
         ID = 0;
+        _exitPreviousHitTime = float.MinValue;
         
         _stats = ScriptableObject.CreateInstance<BulletStats>();
         _stats.SetValues(characterStats, stats);
@@ -187,46 +194,44 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D col)
     {
         if((Spawner != null && (Helpers.IsHimOrHisChild(col.transform, Spawner.transform) || col.CompareTag(Spawner.tag))) || col.CompareTag("Bullet") || col.TryGetComponent<ICollectable>(out _)) return;
-        var effectTarget = col.GetComponent<StatsManager>();
-        if(effectTarget != null && effectTarget == PreviousHit) return;
+        var target = col.GetComponent<StatsManager>();
+        if(0.05f > Time.time - _exitPreviousHitTime) return;
         
         float attack = _stats.GetAttack(_stats.Element, _stats.Damage);
         Damage damage = new Damage(attack, _stats.Element, _stats.KnockBack, transform.position, Direction);
         
-        if (col.TryGetComponent(out IDamageable damageable))
-            damageable.TakeDamage(damage);
+        var damageable = col.GetComponent<IDamageable>();
 
         foreach (var modifier in _hitModifiers)
         {
-            modifier.OnHit(col.GetComponent<StatsManager>(), damage, _hitModifiers.Where(m => m != modifier).ToList() , _stats.Element);
+            modifier.OnHit(target, damage, _hitModifiers.Where(m => m != modifier).ToList() , _stats.Element);
         }
 
-        //Bounce if colliding with not an enemy
-        if (damageable == null && _stats.Bounce-- > 0)
+        //Bounce if colliding with something
+        if (_stats.Bounce-- > 0)
         {
             Vector2 normal = ((Vector2) (transform.position - (Vector3)Direction) - col.ClosestPoint(transform.position - (Vector3)Direction)).normalized;
             _initialDirection = Vector2.Reflect(Direction, normal);
+            _initialPosition = transform.position;
+            
+            if (damageable != null) damageable.TakeDamage(damage);
             return;
         }
 
         //Pierce if colliding with an enemy
-        if(_stats.Pierce-- <= 0 || damageable == null) gameObject.SetActive(false);
+        if(_stats.Pierce-- <= 0) gameObject.SetActive(false);
+        if (damageable != null) damageable.TakeDamage(damage);
+        else gameObject.SetActive(false);
     }
 
-    private void OnTriggerStay2D(Collider2D col)
-    {
-        if((Spawner != null && (Helpers.IsHimOrHisChild(col.transform, Spawner.transform) || col.CompareTag(Spawner.tag))) || col.CompareTag("Bullet") || col.TryGetComponent<ICollectable>(out _)) return;
-
-        if (!col.TryGetComponent(out IDamageable _) && _stats.Bounce-- > 0)
-        {
-            Vector2 normal = ((Vector2)(transform.position - (Vector3)Direction) - col.ClosestPoint(transform.position - (Vector3)Direction)).normalized;
-            _initialDirection = Vector2.Reflect(Direction, normal);
-        }
-    }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        PreviousHit = null;
+       if (PreviousHit != null && other.gameObject == PreviousHit.gameObject)
+       {
+           PreviousHit = null;
+           _exitPreviousHitTime = Time.time;
+       }
     }
 }
 

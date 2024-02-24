@@ -16,6 +16,8 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private float accelTime = 0.5f;
     [SerializeField] private float rollDistance = 3f;
     [SerializeField] private float rollTime = 0.2f;
+    [SerializeField] private float rollCoolDown = 0.2f;
+    private float _lastRollTime = 0f;
     
     public float Speed => _direction.magnitude*_speed;
     
@@ -38,6 +40,7 @@ public class CharacterMovement : MonoBehaviour
         
         _rb.excludeLayers = ignoreLayer;
         _isRolling = false;
+        _lastRollTime = float.MinValue;
     }
 
     private void OnDisable()
@@ -115,6 +118,8 @@ public class CharacterMovement : MonoBehaviour
     public bool StartRoll(Vector3 direction)
     {
         if (_isRolling) return false;
+        if(rollCoolDown > Time.time - _lastRollTime) return false;
+        _lastRollTime = Time.time;
         
         _rollDirection = direction;
         _isRolling = true;

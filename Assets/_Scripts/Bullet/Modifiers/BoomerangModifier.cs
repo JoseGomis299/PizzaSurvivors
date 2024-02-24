@@ -5,12 +5,12 @@ public class BoomerangModifier : BulletMovementModifier
 {
     private Vector2 _finalDirection;
     private bool _hasReturned = false;
+    private Vector2 _returnDirection;
     
     private Transform _spawner;
 
     public BoomerangModifier(Bullet target, int maxStacks, int priority, float amplitude, float frequency) : base(target, maxStacks, priority, amplitude, frequency)
     {
-        priority = -1;
     }
 
     public override void Apply()
@@ -48,11 +48,21 @@ public class BoomerangModifier : BulletMovementModifier
       
     public override void ModifyMovement()
     {
-        float time = _time * ((EffectTarget.Stats.Speed*2f)/EffectTarget.Stats.MaxRange);
+        float time = _time * ((EffectTarget.Stats.Speed*1.5f)/EffectTarget.Stats.MaxRange);
         if (time*Mathf.Rad2Deg < 350 || CurrentStacks > 1)
         {
-            EffectTarget.Direction = (Vector2)EffectTarget.transform.right * (Mathf.Sin(time));
-            EffectTarget.Direction -= (Vector2) EffectTarget.transform.up * (Mathf.Cos(time));
+            EffectTarget.Direction *= Mathf.Sin(Mathf.PI/2f+time)*10f;
+            // if (time > Mathf.PI)
+            // {
+            //     Debug.Log(-0.9f + (time/Mathf.PI));
+            //     _returnDirection = Vector2.Lerp(_returnDirection, (Vector2) EffectTarget.transform.up * (Mathf.Sin(Mathf.PI+time)*20f), -0.9f + (time/Mathf.PI)*10f);
+            //     EffectTarget.Direction += _returnDirection;
+            // }
+            // else
+            //{
+                _returnDirection = (Vector2)EffectTarget.transform.up * (Mathf.Sin(Mathf.PI * 0.7f + time));
+                EffectTarget.Direction += _returnDirection;
+            //}
             _finalDirection = EffectTarget.Direction;
         }
         else
@@ -61,6 +71,8 @@ public class BoomerangModifier : BulletMovementModifier
             EffectTarget.IgnoreMaxRange = false;
         }
         
+        if(CurrentStacks == 1 && Vector3.Distance(EffectTarget.transform.position, _spawner.position) < 0.5f) EffectTarget.gameObject.SetActive(false);
+
         _time += Time.fixedDeltaTime;
     }
 }

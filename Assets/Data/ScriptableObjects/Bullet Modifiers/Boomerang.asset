@@ -17,7 +17,7 @@ MonoBehaviour:
   - Boomerang (1)  - The bullet moves like a boomerang.
   - Boomerang (2) - The circular movement does not stop.
   maxLevel: 2
-  priority: 1
+  priority: -10000
   amplitude: 0.5
   frequency: 1.3
   type: 1

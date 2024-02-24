@@ -21,8 +21,8 @@ public class FragmentationModifier : BulletHitModifier
         if(target == null) return;
         
         var bullet = ObjectPool.Instance.InstantiateFromPool(EffectTarget.Spawner.bulletPrefab, EffectTarget.transform.position, quaternion.identity, true);
-        bullet.GetComponent<Bullet>().Initialize(EffectTarget, EffectTarget.Direction.Rotate(15f), target);
+        bullet.GetComponent<Bullet>().Initialize(EffectTarget, EffectTarget.Direction.Rotate(15f), target, OnHitEffect.GetComponent<SpriteRenderer>().sprite);
         bullet = ObjectPool.Instance.InstantiateFromPool(EffectTarget.Spawner.bulletPrefab, EffectTarget.transform.position, quaternion.identity, true);
-        bullet.GetComponent<Bullet>().Initialize(EffectTarget, EffectTarget.Direction.Rotate(-15f), target);
+        bullet.GetComponent<Bullet>().Initialize(EffectTarget, EffectTarget.Direction.Rotate(-15f), target, OnHitEffect.GetComponent<SpriteRenderer>().sprite);
     }
 }
