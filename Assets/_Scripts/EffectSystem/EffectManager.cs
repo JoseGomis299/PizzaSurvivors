@@ -23,6 +23,7 @@ public class EffectManager
             {
                 _statBuffs.Add(statBuff);
                 statBuff.OnDeApply += () => _statBuffs.Remove(statBuff);
+                statBuff.Apply();
             }
             ReApplyEffects();
             return;

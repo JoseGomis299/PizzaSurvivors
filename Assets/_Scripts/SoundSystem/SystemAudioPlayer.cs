@@ -5,13 +5,9 @@ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 
-public class AudioPlayer : MonoBehaviour
+public class SystemAudioPlayer : BaseAudioPlayer
 {
     [Header("Sound Effects")]
-    [SerializeField] private AudioClip addIngredientSound;
-    [SerializeField] private AudioClip removeIngredientSound;
-    [SerializeField] private AudioClip spawnSound;
-    [SerializeField] private AudioClip enemyMeleeAttackSound;
     [SerializeField] private AudioClip loseSound;
     [SerializeField] private AudioClip winSound;
     [SerializeField] private AudioClip buttonClickSound;
@@ -22,21 +18,10 @@ public class AudioPlayer : MonoBehaviour
     
     private bool _wasPlayingMusic;
     
-    private void Awake()
+    protected override void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void Start()
-    {
-        SubscribeToEvents();
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        UnsubscribeToEvents();
-        SubscribeToEvents();
-
+        base.OnSceneLoaded(scene, mode);
+        
         if (scene.buildIndex == 0)
         {
             AudioManager.Instance.PlayMusic(mainMenuMusic);
@@ -46,17 +31,8 @@ public class AudioPlayer : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
+    protected override void SubscribeToEvents()
     {
-        UnsubscribeToEvents();
-    }
-
-    private void SubscribeToEvents()
-    {
-        SpawningSystem.OnEnemySpawned += HandleSpawnSound;
-        Pizza.OnIngredientPlaced += HandleAddIngredientSound;
-        Pizza.OnIngredientRemoved += HandleRemoveIngredientSound;
-
         foreach (var button in FindObjectsOfType<Button>())
         {
             button.onClick.AddListener(HandleButtonClickSound);
@@ -68,13 +44,8 @@ public class AudioPlayer : MonoBehaviour
         }
     }
 
-    private void UnsubscribeToEvents()
+    protected override  void UnsubscribeToEvents()
     {
-        SpawningSystem.OnEnemySpawned -= HandleSpawnSound;
-        
-        Pizza.OnIngredientPlaced -= HandleAddIngredientSound;
-        Pizza.OnIngredientRemoved -= HandleRemoveIngredientSound;
-
         foreach (var button in FindObjectsOfType<Button>())
         {
             button.onClick.RemoveListener(HandleButtonClickSound);
@@ -84,30 +55,6 @@ public class AudioPlayer : MonoBehaviour
         {
             toggle.onValueChanged.RemoveListener(HandleToggleChangedSound);
         }
-    }
-    
-    private void HandleEnemyMeleeAttackSound()
-    {
-        if(enemyMeleeAttackSound == null) return;
-        AudioManager.Instance.PlaySound(enemyMeleeAttackSound);
-    }
-    
-    private void HandleSpawnSound()
-    {
-        if(spawnSound == null) return;
-        AudioManager.Instance.PlaySound(spawnSound);
-    }
-    
-    private void HandleAddIngredientSound()
-    {
-        if(addIngredientSound == null) return;
-        AudioManager.Instance.PlaySound(addIngredientSound);
-    }
-    
-    private void HandleRemoveIngredientSound()
-    {
-        if(removeIngredientSound == null) return;
-        AudioManager.Instance.PlaySound(removeIngredientSound);
     }
     
     private void HandleWinSound()

@@ -63,9 +63,13 @@ public class HealthComponent : MonoBehaviour, IDamageable
         if (_health <= 0 && TryGetComponent(out IKillable killable)) killable.OnDeath();
     }
 
-    public void SetMaxHealth(float maxHealth)
+    public void SetMaxHealth(float previousMaxHealth, float maxHealth)
     {
         _health = Mathf.Min(_health, maxHealth);
+        
+        if(maxHealth - previousMaxHealth > 0) Heal(previousMaxHealth - maxHealth);
+        if(_health > maxHealth) _health = maxHealth;
+        
         OnMaxHealthUpdate?.Invoke(maxHealth);
         OnHealthUpdate?.Invoke(_health);
     }

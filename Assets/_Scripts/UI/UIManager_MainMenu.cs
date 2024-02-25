@@ -25,6 +25,15 @@ public class UIManager_MainMenu : MonoBehaviour
         AudioManager.Instance.ToggleEffects(sfxToggle.isOn);
         AudioManager.Instance.ToggleMusic(musicToggle.isOn);
     }
+    
+    protected void OnDisable()
+    {
+        playButton.onClick.RemoveListener(PlayButtonOnClick);
+        exitButton.onClick.RemoveListener(ExitButtonOnClick);
+
+        sfxToggle.onValueChanged.RemoveListener(MenuManager.SoundEffectsToggleOnValueChanged);
+        musicToggle.onValueChanged.RemoveListener(MenuManager.MusicToggleOnValueChanged);
+    }
 
     private void ExitButtonOnClick()
     {

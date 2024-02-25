@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using ProjectUtils.Helpers;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(CharacterMovement))]
 public class PlayerController : MonoBehaviour, IKillable
@@ -100,9 +99,6 @@ public class PlayerController : MonoBehaviour, IKillable
     public void OnDeath()
     {
         OnPlayerDeath?.Invoke();
-        
-        IngredientInventory.Clear();
-        CoroutineController.StopAll();
-        SceneManager.LoadScene(0);
+        GameManager.Instance.EndGame();
     }
 }

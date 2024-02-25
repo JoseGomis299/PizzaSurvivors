@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Stats/Character Stats", fileName = "Character Stats")]
 public class Stats : ScriptableObject
 {
-    public event Action<float> OnMaxHealthChanged;
+    public event Action<float, float> OnMaxHealthChanged;
     [field: Header("Base Stats")]
     [field: SerializeField] public float MaxHealth {get; private set;} = 100f;
     [SerializeField, Range(0,100), InspectorName("Defense")] private float defense = 10f;
@@ -70,8 +70,9 @@ public class Stats : ScriptableObject
     
     public void SetMaxHealth(float value)
     {
+        float oldValue = MaxHealth;
         MaxHealth = value;
-        OnMaxHealthChanged?.Invoke(MaxHealth);
+        OnMaxHealthChanged?.Invoke(oldValue, MaxHealth);
     }
 
     public void SetValues(Stats otherStats)

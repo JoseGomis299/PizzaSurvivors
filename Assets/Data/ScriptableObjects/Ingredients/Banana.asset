@@ -22,7 +22,7 @@ MonoBehaviour:
   <Buffs>k__BackingField:
   - buffType: 10
     multiplier: 0.8
-    incrementType: 4
+    incrementType: 5
   - buffType: 6
     multiplier: 10
     incrementType: 0

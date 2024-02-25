@@ -12,8 +12,8 @@ public class PizzaTable : MonoBehaviour, IInteractable
 
     private void Awake()
     {
-        SpawningSystem.OnRoundStart += OnRoundStart;
-        SpawningSystem.OnRoundEnd += OnRoundEnd;
+        RoundManager.OnRoundStart += OnRoundStart;
+        RoundManager.OnRoundEnd += OnRoundEnd;
     }
 
     private void Start()
@@ -25,8 +25,8 @@ public class PizzaTable : MonoBehaviour, IInteractable
 
     private void OnDestroy()
     {
-        SpawningSystem.OnRoundStart -= OnRoundStart;
-        SpawningSystem.OnRoundEnd -= OnRoundEnd;
+        RoundManager.OnRoundStart -= OnRoundStart;
+        RoundManager.OnRoundEnd -= OnRoundEnd;
     }
 
     private void OnRoundStart(int round)

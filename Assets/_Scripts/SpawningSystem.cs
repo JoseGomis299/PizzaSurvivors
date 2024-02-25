@@ -8,13 +8,9 @@ using Random = UnityEngine.Random;
 public class SpawningSystem : MonoBehaviour
 {
     public static event Action OnEnemySpawned;
-    public static event Action<int> OnRoundStart;
-    public static event Action<int> OnRoundEnd;
-    public static event Action<float> OnTimerChanged;
-    public float RoundTimer { get; private set; }
+    
     public float SpawnRate { get; private set; }
     public int MaxSpawnCount {get; private set;}
-    public int CurrentRound { get; private set; }
     public int CurrentSpawnCount => entitiesParent.childCount + _pendingSpawnCount;
     
     [SerializeField] private Rect spawnArea;
@@ -24,46 +20,51 @@ public class SpawningSystem : MonoBehaviour
     [SerializeField, Tooltip("MaxSpawnCount = initialMaxSpawnCount ")] private AnimationCurve spawnCurve;
     [SerializeField] private int initialMaxSpawnCount = 10;
     [SerializeField] private float initialSpawnRate = 2;
-    [SerializeField] private float roundDuration = 60f;
     [SerializeField] private float spawnDelay = 0.5f;
     
     private float _timer;
     private float _spawnTime;
     private int _pendingSpawnCount;
     private bool _isSpawning;
+    private int _currentRound;
 
-    private void Start()
+    private void Awake()
     {
         _timer = 0;
-        CurrentRound = 0;
-        
-        GoNextRound();
+        RoundManager.OnRoundStart += GoNextRound;
+        RoundManager.OnRoundEnd += ClearStage;
     }
     
-    public void GoNextRound()
+    private void OnDestroy()
     {
-        CurrentRound++;
-        RoundTimer = roundDuration;
-        OnRoundStart?.Invoke(CurrentRound);
-        
-        float difficulty = spawnCurve.Evaluate(CurrentRound);
+        RoundManager.OnRoundStart -= GoNextRound;
+        RoundManager.OnRoundEnd -= ClearStage;
+    }
+
+    
+    public void GoNextRound(int currentRound)
+    {
+        float difficulty = spawnCurve.Evaluate(currentRound);
         MaxSpawnCount = initialMaxSpawnCount + (int) (initialMaxSpawnCount * difficulty);
         SpawnRate = initialSpawnRate + (int) (initialSpawnRate * difficulty);
         
         _spawnTime = 1 / SpawnRate;
         _timer = _spawnTime - 0.1f;
         _isSpawning = true;
+        _currentRound = currentRound;
     }
     
+    public void ClearStage(int round)
+    {
+        _isSpawning = false;
+        _pendingSpawnCount = 0;
+        entitiesParent.DisableChildren();
+    }
+    
+
     private void Update()
     {
-        if (RoundTimer <= 0 && Input.GetKeyDown(KeyCode.N))
-            GoNextRound();
-        
         if(!_isSpawning) return;
-        
-        _timer += Time.deltaTime;
-        RoundTimer -= Time.deltaTime;
         
         if (_timer >= _spawnTime)
         {
@@ -71,15 +72,7 @@ public class SpawningSystem : MonoBehaviour
             for(int i = 0; i < GetSpawnCount(); i++)
                 SpawnEnemy();
         }
-        
-        if (RoundTimer <= 0)
-        {
-            entitiesParent.DisableChildren();
-            _isSpawning = false;
-            OnRoundEnd?.Invoke(CurrentRound);
-        }
-        
-        OnTimerChanged?.Invoke(RoundTimer);
+        _timer += Time.deltaTime;
     }
     
     private void SpawnEnemy()
@@ -117,7 +110,7 @@ public class SpawningSystem : MonoBehaviour
         // Spawn enemy
         GameObject enemy = ObjectPool.Instance.InstantiateFromPool(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], spawnPosition, Quaternion.identity);
         enemy.transform.parent = entitiesParent;
-        enemy.GetComponent<EnemyBase>().Initialize(CurrentRound);
+        enemy.GetComponent<EnemyBase>().Initialize(_currentRound);
         
         _pendingSpawnCount--;
         OnEnemySpawned?.Invoke();

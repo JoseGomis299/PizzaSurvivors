@@ -12,12 +12,12 @@ public class RandomItemGiver : MonoBehaviour
     private void Start()
     {
         items = items.OrderBy(x => x.rarity).ToList();
-        SpawningSystem.OnRoundEnd += GiveRandomItem;
+        RoundManager.OnRoundEnd += GiveRandomItem;
     }
 
     private void OnDestroy()
     {
-        SpawningSystem.OnRoundEnd -= GiveRandomItem;
+        RoundManager.OnRoundEnd -= GiveRandomItem;
     }
 
     private void GiveRandomItem(int round)

@@ -10,17 +10,17 @@ public class UIManager_Game : MonoBehaviour
 
     private void Awake()
     {
-        SpawningSystem.OnRoundStart += UpdateRoundText;
-        SpawningSystem.OnRoundEnd += HideText;
-        SpawningSystem.OnTimerChanged += UpdateTimerText;
+        RoundManager.OnRoundStart += UpdateRoundText;
+        RoundManager.OnRoundEnd += HideText;
+        RoundManager.OnTimerChanged += UpdateTimerText;
         CurrencyManager.OnMoneyChanged += UpdateMoneyText;
     }
     
     private void OnDestroy()
     {
-        SpawningSystem.OnRoundStart -= UpdateRoundText;
-        SpawningSystem.OnRoundEnd -= HideText;
-        SpawningSystem.OnTimerChanged -= UpdateTimerText;
+        RoundManager.OnRoundStart -= UpdateRoundText;
+        RoundManager.OnRoundEnd -= HideText;
+        RoundManager.OnTimerChanged -= UpdateTimerText;
         CurrencyManager.OnMoneyChanged -= UpdateMoneyText;
     }
 
