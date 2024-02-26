@@ -40,11 +40,13 @@ public class PizzaUiManager : MonoBehaviour
     [SerializeField] private GameObject inventoryItemPrefab;
     
     private IngredientPlacer _ingredientPlacer;
+    private IngredientMover _ingredientMover;
     private Pizza _pizza;
     
     private void Start()    
     {
         _ingredientPlacer = GetComponent<IngredientPlacer>();
+        _ingredientMover = GetComponent<IngredientMover>();
         _pizza = FindObjectOfType<Pizza>();
         
         _ingredientPlacer.OnIngredientChanged += UpdateCurrentIngredient;
@@ -85,21 +87,23 @@ public class PizzaUiManager : MonoBehaviour
 
     private void UpdateCurrentIngredient()
     {
-        Sprite sprite = _ingredientPlacer.GetCurrentSprite();
-        if (sprite == null || _ingredientPlacer.CurrentIngredient == null)
+        Ingredient ingredient = _ingredientPlacer.CurrentIngredient;
+        if(ingredient == null) ingredient = _ingredientMover.CurrentIngredient;
+        
+        if (ingredient == null)
         {
             statsPanel.SetActive(false);
             return;
         }
         
         statsPanel.SetActive(true);
-        currentIngredientImage.sprite = sprite;
-        currentIngredientName.text = _ingredientPlacer.CurrentIngredient.name;
+        currentIngredientImage.sprite = ingredient.icon;
+        currentIngredientName.text = ingredient.name;
         
         buffsContainer.DeleteChildren();
         modificationsContainer.DeleteChildren();
 
-        foreach (var statBuff in _ingredientPlacer.CurrentIngredient.Buffs)
+        foreach (var statBuff in ingredient.Buffs)
         {
             GameObject instance = Instantiate(statPrefab, buffsContainer);
             instance.GetComponentInChildren<Image>().sprite = statIcons.FirstOrDefault(x => x.type == statBuff.Type).icon;
@@ -112,13 +116,13 @@ public class PizzaUiManager : MonoBehaviour
         modifiersText.text = "";
         modifiersText.color = Color.green;
         
-        foreach (var modifier in _ingredientPlacer.CurrentIngredient.BulletModifiers)
+        foreach (var modifier in ingredient.BulletModifiers)
         {
             if(seenModifiers.Contains(modifier)) continue;
             
             int i = 1;
             int currentLevel = _pizza.GetModifierStacks(modifier);
-            modifiersText.text += $"{modifier.name} +{_ingredientPlacer.CurrentIngredient.GetModifierCount(modifier)}\n";
+            modifiersText.text += $"{modifier.name} +{ingredient.GetModifierCount(modifier)}\n";
             seenModifiers.Add(modifier);
             foreach (var description in modifier.GetDescriptions())
             {

@@ -10,6 +10,8 @@ public class IngredientMover : MonoBehaviour
     private PizzaIngredient _selectedIngredient;
     private Image _selectedImage;
     private Vector3 _originalPosition;
+    
+    public Ingredient CurrentIngredient => _selectedIngredient?.Ingredient;
 
     private IngredientPlacer _ingredientPlacer;
     
@@ -31,6 +33,7 @@ public class IngredientMover : MonoBehaviour
                 
             _originalPosition = _selectedIngredient.transform.position;
             _selectedImage = _selectedIngredient.GetComponent<Image>();
+            _ingredientPlacer.OnIngredientChanged?.Invoke();
         }
 
         if (_selectedIngredient != null)
@@ -40,7 +43,10 @@ public class IngredientMover : MonoBehaviour
             if (!_ingredientPlacer.IsValid(Input.mousePosition, _selectedIngredient.gameObject))
                 _selectedImage.color = Color.white * 0.5f;
             else
+            {
                 _selectedImage.color = Color.white;
+                _ingredientPlacer.PreviewModification(_selectedIngredient);
+            }
         }
         
         if (Input.GetMouseButtonUp(0))
@@ -69,6 +75,7 @@ public class IngredientMover : MonoBehaviour
             
             _selectedImage.color = Color.white;
             _selectedImage = null;
+            _ingredientPlacer.OnIngredientChanged?.Invoke();
         }
     }
     

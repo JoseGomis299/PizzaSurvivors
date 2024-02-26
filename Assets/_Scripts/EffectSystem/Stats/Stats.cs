@@ -21,12 +21,34 @@ public class Stats : ScriptableObject
 
     [SerializeField] private AnimationCurve defenseCurve;
     
-    [field: Space(10)]
-    [field: SerializeField] public float AttackSpeed { get; set; } = 0.1f;
+    public float AttackSpeed { 
+        get => _attackSpeed;
+        set => _attackSpeed = Mathf.Clamp(value, 0.01f, 2.5f);
+    }
+    [Space(10)]
+    [SerializeField] private float _attackSpeed = 0.1f;
     public float AttackCooldown => 1/AttackSpeed;
-    [field: SerializeField] public float Attack { get; set; } = 20f;
-    [field: SerializeField] public float Speed { get; set; } = 10f;
-    [field: SerializeField] public float Luck { get; set; } = 7f;
+
+    public float Attack
+    {
+        get =>_attack;
+        set => _attack = Mathf.Clamp(value, 1f, 1000000f);
+    }
+    [SerializeField] private float _attack = 20f;
+    
+    public float Speed
+    {
+        get => _speed;
+        set => _speed = Mathf.Clamp(value, 1f, 100f);
+    }
+    [SerializeField] private float _speed = 10f;
+    
+    public float Luck
+    {
+        get => _luck;
+        set => _luck = Mathf.Clamp(value, 0f, 100f);
+    }
+    [SerializeField] private float _luck = 7f;
 
     [field: Header("Bullets Stats")]
     [field: SerializeField] public float BulletsMaxRange { get; set; } = 10f;
@@ -70,9 +92,9 @@ public class Stats : ScriptableObject
     
     public void SetMaxHealth(float value)
     {
+        if(value <= 0) value = 1;
         float oldValue = MaxHealth;
         MaxHealth = value;
-        Debug.Log(value);
         OnMaxHealthChanged?.Invoke(oldValue, MaxHealth);
     }
 

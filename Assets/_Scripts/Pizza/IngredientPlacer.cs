@@ -10,7 +10,7 @@ public class IngredientPlacer : MonoBehaviour
 {
     private Pizza _pizza;
     
-    public event Action OnIngredientChanged;
+    public Action OnIngredientChanged;
 
     [Header("Pizza")]
     [SerializeField] private RectTransform pizzaBase;
@@ -22,10 +22,11 @@ public class IngredientPlacer : MonoBehaviour
     
     private PizzaBaseIngredient _currentBaseIngredient;
     private Ingredient _currentIngredient;
-    public Ingredient CurrentIngredient => _currentIngredient;
+    public Ingredient CurrentIngredient => _instantiatedIngredient?.Ingredient;
     public PizzaBaseIngredient CurrentBaseIngredient => _currentBaseIngredient;
     
-    private Image _instantiatedIngredient;
+    private Image _instantiatedIngredientImage;
+    private PizzaIngredient _instantiatedIngredient;
     [SerializeField] private GameObject ingredientPrefab;
 
     private void Start()
@@ -43,13 +44,14 @@ public class IngredientPlacer : MonoBehaviour
             return;
         }
         
-        if (_currentIngredient != null && _instantiatedIngredient != null)
+        if (_currentIngredient != null && _instantiatedIngredientImage != null)
         {
-            _instantiatedIngredient.transform.position = Input.mousePosition;
-            if(!IsValid(Input.mousePosition, _instantiatedIngredient.gameObject)) _instantiatedIngredient.color = Color.white*0.5f;
+            _instantiatedIngredientImage.transform.position = Input.mousePosition;
+            if(!IsValid(Input.mousePosition, _instantiatedIngredientImage.gameObject)) _instantiatedIngredientImage.color = Color.white*0.5f;
             else
             {
-                _instantiatedIngredient.color = Color.white;
+                _instantiatedIngredientImage.color = Color.white;
+                PreviewModification(_instantiatedIngredient);
                 if (Input.GetMouseButtonDown(0))
                 {
                     PlaceIngredient();
@@ -76,9 +78,10 @@ public class IngredientPlacer : MonoBehaviour
 
     private void InstantiatePreview()
     {
-        _instantiatedIngredient = Instantiate(ingredientPrefab, Vector3.zero, Quaternion.Euler(0, 0, Random.Range(0, 360)), pizzaBase.parent).GetComponent<Image>();
-        _instantiatedIngredient.color = Color.white;
-        _instantiatedIngredient.GetComponent<PizzaIngredient>().Initialize(_currentIngredient, _pizza);
+        _instantiatedIngredientImage = Instantiate(ingredientPrefab, Vector3.zero, Quaternion.Euler(0, 0, Random.Range(0, 360)), pizzaBase.parent).GetComponent<Image>();
+        _instantiatedIngredient = _instantiatedIngredientImage.GetComponent<PizzaIngredient>();
+        _instantiatedIngredientImage.color = Color.white;
+        _instantiatedIngredient.Initialize(_currentIngredient, _pizza);
     }
 
     public void StartPlacingCheese()
@@ -95,12 +98,6 @@ public class IngredientPlacer : MonoBehaviour
         
         _currentBaseIngredient = sauce;
         OnIngredientChanged?.Invoke();
-    }
-    
-    public Sprite GetCurrentSprite()
-    {
-        if(_currentIngredient != null) return _currentIngredient.icon;
-        return _currentBaseIngredient != null ? _currentBaseIngredient.GetSprite() : null;
     }
     
     public void ExitPizzaView()
@@ -127,12 +124,13 @@ public class IngredientPlacer : MonoBehaviour
         if (IngredientInventory.GetIngredientQuantity(_currentIngredient) <= 0) return;
 
         IngredientInventory.RemoveIngredient(_currentIngredient);
-        PlaceIngredient(_instantiatedIngredient.GetComponent<PizzaIngredient>());
+        PlaceIngredient(_instantiatedIngredient);
 
-        _instantiatedIngredient.GetComponent<Image>().color = Color.white;
-        _instantiatedIngredient = null;
+        _instantiatedIngredientImage.GetComponent<Image>().color = Color.white;
+        _instantiatedIngredientImage = null;
         
         if (IngredientInventory.GetIngredientQuantity(_currentIngredient) > 0) InstantiatePreview();
+        else ClearSelection();
     }
     
     public bool IsValid(Vector2 position, GameObject selectedIngredient)
@@ -157,34 +155,59 @@ public class IngredientPlacer : MonoBehaviour
     {
         _currentIngredient = null;
         if(_instantiatedIngredient != null) Destroy(_instantiatedIngredient.gameObject);
+        _instantiatedIngredient = null;
+        _instantiatedIngredientImage = null;
     }
     
     private void PlaceIngredient(PizzaIngredient ingredient)
     {
-        if(!ApplyCheeseAndSauceEffects(ingredient))
          _pizza.PlaceIngredient(ingredient.Ingredient);
+         ApplyCheeseAndSauceEffects(ingredient);
     }
     
-    public bool ApplyCheeseAndSauceEffects(PizzaIngredient ingredient)
+    public void ApplyCheeseAndSauceEffects(PizzaIngredient ingredient)
+    {
+        Ingredient prevIngredient = ingredient.Ingredient;
+        ModifyIngredient(ingredient);
+        
+        _pizza.RemoveIngredient(prevIngredient);
+        _pizza.PlaceIngredient(ingredient.Ingredient);
+    }
+    
+    private void ModifyIngredient(PizzaIngredient ingredient)
     {
         bool hasSauce = sauce.IsPainted(ingredient.transform.position);
         bool hasCheese = cheese.IsPainted(ingredient.transform.position);
         
-        Ingredient prevIngredient = ingredient.Ingredient;
-        if(ingredient.Ingredient.OriginalIngredient != null) ingredient.Ingredient = ingredient.Ingredient.OriginalIngredient;
-
+        Ingredient originalIngredient = ingredient.Ingredient.OriginalIngredient;
+        if(originalIngredient != null) ingredient.Ingredient = originalIngredient;
+            
         if(hasSauce)
             sauce.ModifyIngredient(ingredient);
         
         if(hasCheese)
             cheese.ModifyIngredient(ingredient);
+    }
+    
+    public void PreviewModification(PizzaIngredient ingredient)
+    {
+        //bool hasSauce = sauce.IsPainted(ingredient.transform.position);
+        bool hasCheese = cheese.IsPainted(ingredient.transform.position);
         
-        if (prevIngredient != ingredient.Ingredient)
+        Ingredient originalIngredient = ingredient.Ingredient.OriginalIngredient;
+        if (originalIngredient != null && !hasCheese)
         {
-            _pizza.RemoveIngredient(prevIngredient);
-            _pizza.PlaceIngredient(ingredient.Ingredient);
-            return true;
+            ingredient.Ingredient = originalIngredient;
+            OnIngredientChanged?.Invoke();
         }
-        return false;
+        else if (originalIngredient == null && hasCheese)
+        {
+            cheese.ModifyIngredient(ingredient);
+            OnIngredientChanged?.Invoke();
+        }
+
+     
+        //if(hasSauce)
+        //   sauce.ModifyIngredient(ingredient);
     }
 }
