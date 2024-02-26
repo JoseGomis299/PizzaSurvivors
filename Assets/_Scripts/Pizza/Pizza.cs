@@ -38,6 +38,8 @@ public class Pizza : MonoBehaviour
                 _currentBuffs.Add(ingredient.Buffs[i].GetEffect(_statsManager));
                 _statsManager.ApplyEffect(_currentBuffs[^1]);
             }
+
+            Debug.Log(ingredient.Buffs[0].multiplier);
         }
         
         _statsManager.ReApplyEffects();

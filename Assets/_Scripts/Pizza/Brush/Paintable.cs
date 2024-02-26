@@ -41,7 +41,6 @@ public class Paintable : MonoBehaviour
         {
             _image = GetComponent<Image>();
             if(!_image.enabled) _image.enabled = true;
-            ImageMapper.SetImage(_image);
         }
         
         Initialize();
@@ -54,7 +53,6 @@ public class Paintable : MonoBehaviour
         else
         {
             _image = GetComponent<Image>();
-            ImageMapper.SetImage(_image);
         }
     }
 
@@ -227,4 +225,23 @@ public class Paintable : MonoBehaviour
     {
         return Sprite.Create(paints[_paintIndex].texture, new Rect(Vector2.zero, new Vector2(baseTexture.width, baseTexture.height)), Vector2.one / 2f);
     }
+
+    public bool IsPainted(Vector3 mousePos)
+    {
+        Vector2 coords = Vector2.zero;
+        if (_spriteRenderer != null)
+        {
+            if (!SpriteMapper.TryGetTextureSpaceUV(_spriteRenderer, mousePos, out  coords)) return false;
+        }
+        else if(!ImageMapper.TryGetTextureSpaceUV(_image, mousePos, out  coords)) return false;
+        
+        int coordX = (int)(coords.x*_maskTexture.width);
+        int coordY = (int)(coords.y*_maskTexture.height);
+        
+        int coordXMain = (int)(coords.x*_mainTexture.width);
+        int coordYMain = (int)(coords.y*_mainTexture.height);
+        
+        return _maskTexture.GetPixel(coordX, coordY).r > 0 || _mainTexture.GetPixel(coordXMain, coordYMain).a > 0;
+    }
 }
+

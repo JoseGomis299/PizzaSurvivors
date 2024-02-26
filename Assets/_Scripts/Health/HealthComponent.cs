@@ -67,7 +67,7 @@ public class HealthComponent : MonoBehaviour, IDamageable
     {
         _health = Mathf.Min(_health, maxHealth);
         
-        if(maxHealth - previousMaxHealth > 0) Heal(previousMaxHealth - maxHealth);
+        if(maxHealth - previousMaxHealth > 0) Heal(maxHealth - previousMaxHealth );
         if(_health > maxHealth) _health = maxHealth;
         
         OnMaxHealthUpdate?.Invoke(maxHealth);

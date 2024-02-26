@@ -5,7 +5,7 @@ using UnityEngine;
 [Serializable]
 public struct BuffData 
 {
-    [SerializeField] private BuffType buffType;
+    public BuffType buffType;
     public BuffType Type => buffType;
     
     public float multiplier;

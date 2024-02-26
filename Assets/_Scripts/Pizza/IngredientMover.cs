@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class IngredientMover : MonoBehaviour
 {
     private PizzaIngredient _selectedIngredient;
+    private Image _selectedImage;
     private Vector3 _originalPosition;
 
     private IngredientPlacer _ingredientPlacer;
@@ -19,7 +20,7 @@ public class IngredientMover : MonoBehaviour
     
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && _ingredientPlacer.CurrentIngredient == null)
+        if (Input.GetMouseButtonDown(0) && _ingredientPlacer.CurrentIngredient == null && _ingredientPlacer.CurrentBaseIngredient == null)
         {
             var eventDataCurrentPosition = new PointerEventData(EventSystem.current) { position = Input.mousePosition };
             var results = new List<RaycastResult>();
@@ -29,6 +30,17 @@ public class IngredientMover : MonoBehaviour
             if (_selectedIngredient == null) return;
                 
             _originalPosition = _selectedIngredient.transform.position;
+            _selectedImage = _selectedIngredient.GetComponent<Image>();
+        }
+
+        if (_selectedIngredient != null)
+        {
+            _selectedIngredient.transform.position = Input.mousePosition;
+
+            if (!_ingredientPlacer.IsValid(Input.mousePosition, _selectedIngredient.gameObject))
+                _selectedImage.color = Color.white * 0.5f;
+            else
+                _selectedImage.color = Color.white;
         }
         
         if (Input.GetMouseButtonUp(0))
@@ -39,20 +51,25 @@ public class IngredientMover : MonoBehaviour
             var results = new List<RaycastResult>();
             EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
 
-            if (_ingredientPlacer.IsInBounds(Input.mousePosition))
+            if (_ingredientPlacer.IsValid(Input.mousePosition, _selectedIngredient.gameObject))
                 _originalPosition = _selectedIngredient.transform.position;
 
             if (results.Any(x => x.gameObject.CompareTag("ThrashCan")))
+            {
                 _selectedIngredient.RemoveFromPizza();
-            else
-                _selectedIngredient.transform.DoMove(_originalPosition, 0.2f);
-            
-            _selectedIngredient = null;
-        }
-        
-        if(_selectedIngredient == null) return;
+                _selectedIngredient = null;
+            }
+            else _selectedIngredient.transform.DoMove(_originalPosition, 0.2f);
 
-        _selectedIngredient.transform.position = Input.mousePosition;
+            if (_selectedIngredient != null)
+            {
+                _ingredientPlacer.ApplyCheeseAndSauceEffects(_selectedIngredient);
+                _selectedIngredient = null;
+            }
+            
+            _selectedImage.color = Color.white;
+            _selectedImage = null;
+        }
     }
     
     private void OnMouseDrag()

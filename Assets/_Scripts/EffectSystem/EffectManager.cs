@@ -18,13 +18,9 @@ public class EffectManager
     {
         if (effect is IncrementalEffect statBuff && effect.MaxStacks == 1)
         {
-            IncrementalEffect existingBuff = _statBuffs.FirstOrDefault(x => x.IsEqual(statBuff));
-            if (existingBuff == null || !existingBuff.IncreaseValue(statBuff.Increment))
-            {
-                _statBuffs.Add(statBuff);
-                statBuff.OnDeApply += () => _statBuffs.Remove(statBuff);
-                statBuff.Apply();
-            }
+            _statBuffs.Add(statBuff);
+            statBuff.OnDeApply += () => _statBuffs.Remove(statBuff);
+            statBuff.Apply();
             ReApplyEffects();
             return;
         }

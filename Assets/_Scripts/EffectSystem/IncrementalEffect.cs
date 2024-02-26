@@ -30,7 +30,7 @@ public class IncrementalEffect : BaseEffect {
 
     public override void ReApply()
     {
-        for (int i = 0; i < CurrentStacks; i++)
+        for (int i = 0; i < CurrentStacks; i++) 
         {
            IncrementStat();
         }

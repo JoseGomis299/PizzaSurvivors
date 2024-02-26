@@ -72,6 +72,7 @@ public class Stats : ScriptableObject
     {
         float oldValue = MaxHealth;
         MaxHealth = value;
+        Debug.Log(value);
         OnMaxHealthChanged?.Invoke(oldValue, MaxHealth);
     }
 

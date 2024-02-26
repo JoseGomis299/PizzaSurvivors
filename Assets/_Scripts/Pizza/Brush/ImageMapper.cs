@@ -6,19 +6,10 @@ public class ImageMapper
 {
     
     private static Image _image;
-    public static bool SetImage(Image image)
-    {
-        if (_image == null || !_image.gameObject.activeInHierarchy || !_image.TryGetComponent(out Paintable paintable) || !paintable.enabled)
-        {
-            _image = image;
-        }
-        
-        return image == _image;
-    }
     
     public static bool TryGetTextureSpaceCoord(Image image, Vector3 screenPoint, out Vector2 coord) {
         coord = Vector2.zero;
-        if(!SetImage(image)) return false;
+        _image = image;
         
         var sprite = image.sprite;
         var transform = image.transform;
@@ -39,7 +30,7 @@ public class ImageMapper
     public static bool TryGetTextureSpaceUV(Image image, Vector3 screenPoint, out Vector2 uvs) 
     {
         uvs = Vector2.zero;
-        if(!SetImage(image)) return false;
+        _image = image;
         
         uvs = _image.rectTransform.position - screenPoint;
         

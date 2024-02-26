@@ -5,19 +5,19 @@ using UnityEngine.UI;
 
 public class PizzaIngredient : MonoBehaviour
 {
-    private Ingredient _ingredientType;
+    public Ingredient Ingredient;
     private Pizza _pizza;
     
     public void Initialize(Ingredient ingredient, Pizza pizza)
     {
-        _ingredientType = ingredient;
+        Ingredient = ingredient;
         _pizza = pizza;
         GetComponent<Image>().sprite = ingredient.onPizzaSprite;
     }
     
     public void RemoveFromPizza()
     {
-        _pizza.RemoveIngredient(_ingredientType);
+        _pizza.RemoveIngredient(Ingredient);
         Destroy(gameObject);
     }
 }

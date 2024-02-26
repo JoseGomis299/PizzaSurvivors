@@ -15,6 +15,7 @@ MonoBehaviour:
   name: Fragmentation
   descriptions:
   - Fragmentation (1) - 2 more bullets are spawned when the bullet collides.
+  - Fragmentation (2) - The effect remains for 1 hit more.
   maxLevel: 2
   priority: 0
   onHitEffect: {fileID: 7935656958968597830, guid: 7a72adaff113ca041b252027e9bcd96d, type: 3}
