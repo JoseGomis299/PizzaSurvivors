@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 2245963577067727516}
   - component: {fileID: 6374629019545396215}
   m_Layer: 7
-  m_Name: EnemyMelee 1
+  m_Name: ExplosiveEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +33,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 370464564111723388}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.2285414, y: 2.255213, z: 0}
+  m_LocalPosition: {x: 14.1362915, y: -15.172505, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -252,6 +252,7 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
+  explosionEffect: {fileID: 1694715364255247975, guid: c7601adafcc51ab47aef5e5042abbe73, type: 3}
   radius: 3
   damage:
     value: 50

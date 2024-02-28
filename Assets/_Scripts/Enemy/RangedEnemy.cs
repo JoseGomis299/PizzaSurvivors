@@ -30,6 +30,7 @@ public class RangedEnemy : EnemyBase
     public override void OnDeath()
     {
         base.OnDeath();
+        GetComponent<EnemyDropSystem>().DropItem();
         if(_rangedAttackState != null)
             _rangedAttackState.OnAttack -= InvokeOnEnemyRangedAttack;
     }

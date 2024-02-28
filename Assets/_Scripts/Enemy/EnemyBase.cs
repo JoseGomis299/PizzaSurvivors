@@ -30,7 +30,6 @@ public abstract class EnemyBase : MonoBehaviour, IKillable
 
     public virtual void OnDeath()
     {
-        GetComponent<EnemyDropSystem>().DropItem();
         transform.parent = null;
         gameObject.SetActive(false);
         

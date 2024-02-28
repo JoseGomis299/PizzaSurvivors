@@ -4,9 +4,9 @@ using UnityEngine;
 public class ExplosiveEnemy : EnemyBase
 {
     [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private GameObject explosionEffect;
     [SerializeField] private float radius;
     [SerializeField] private Damage damage;
-    [SerializeField] private GameObject explosionEffect;
     private ExplosiveAttackState _explosiveState;
     [field: SerializeField] public float AttackRange { get; private set; }
 
@@ -27,6 +27,7 @@ public class ExplosiveEnemy : EnemyBase
     public override void OnDeath()
     {
         base.OnDeath();
+        if(!_explosiveState.HasExploded) GetComponent<EnemyDropSystem>().DropItem();
         if(_explosiveState != null)
             _explosiveState.OnAttack -= InvokeOnEnemyExplosive;
     }

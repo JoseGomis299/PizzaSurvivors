@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
         IngredientInventory.Clear();
         CoroutineController.StopAll();
         
+        SceneManager.LoadScene(0);
         OnGameEnd?.Invoke();
     }
     

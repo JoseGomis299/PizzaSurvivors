@@ -65,10 +65,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  <AttackSpeed>k__BackingField: 3
-  <Attack>k__BackingField: 25
-  <Speed>k__BackingField: 8
-  <Luck>k__BackingField: 0
+  _attackSpeed: 2
+  _attack: 20
+  _speed: 10
+  _luck: 7
   <BulletsMaxRange>k__BackingField: 7
   <AdditionalBulletsSpeed>k__BackingField: 0
   <AdditionalBulletsPierce>k__BackingField: 0

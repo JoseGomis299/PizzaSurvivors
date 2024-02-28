@@ -377,7 +377,7 @@ namespace ProjectUtils.Helpers
         /// <param name="ticks">The number of times you want the object to blink</param>
         /// <param name="targetColor">The color to change in every blink, normally transparent or white</param>
         /// </summary>
-        public static void DoBlink(this SpriteRenderer spriteRenderer, float duration, int ticks, Color targetColor)
+        public static Coroutine DoBlink(this SpriteRenderer spriteRenderer, float duration, int ticks, Color targetColor)
             => CoroutineController.Start(DoBlinkEnumerator(spriteRenderer, duration, ticks, targetColor));
         private static IEnumerator DoBlinkEnumerator(SpriteRenderer spriteRenderer, float duration, int ticks, Color targetColor)
         {

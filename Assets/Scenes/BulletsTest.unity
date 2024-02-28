@@ -23935,7 +23935,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1049130951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23956,8 +23956,7 @@ MonoBehaviour:
     height: 32.1
   entitiesParent: {fileID: 1049130952}
   enemyPrefabs:
-  - {fileID: 370464564111723388, guid: ade9e705a5617194a9a6e6251a9a3919, type: 3}
-  - {fileID: 370464564111723388, guid: cf5e24f5777b23748bc1e95bcf30539f, type: 3}
+  - {fileID: 370464564111723388, guid: 31aecc2189bff2544bd1b2b559626ea9, type: 3}
   spawnEffectPrefab: {fileID: 4673598409569538933, guid: 87c068906c7a41242be547026ca46481, type: 3}
   spawnCurve:
     serializedVersion: 2
@@ -26173,6 +26172,10 @@ MonoBehaviour:
   - gameObject: {fileID: 9185154336958388077, guid: fffd15965571d2d41a87b8835826dbe7, type: 3}
     quantity: 100
     lifeTime: 5
+    activeTime: 0
+  - gameObject: {fileID: 370464564111723388, guid: 31aecc2189bff2544bd1b2b559626ea9, type: 3}
+    quantity: 20
+    lifeTime: 1
     activeTime: 0
 --- !u!4 &1638752853
 Transform:

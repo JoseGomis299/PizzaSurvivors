@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using ProjectUtils.Helpers;
 using ProjectUtils.ObjectPooling;
 using UnityEngine;
 
@@ -10,6 +12,8 @@ public class ExplosiveAttackState : BaseState
     private LayerMask _targetLayer;
     private Transform _transform;
     private GameObject _explosionEffect;
+    
+    public bool HasExploded { get; private set; }
     
     
     public ExplosiveAttackState(Transform transform, Damage damage, float radius, LayerMask targetLayer, GameObject explosionEffect)
@@ -23,6 +27,14 @@ public class ExplosiveAttackState : BaseState
     }
     public override void Enter()
     {
+        CoroutineController.Start(Explode());
+    }
+
+    private IEnumerator Explode()
+    {
+        yield return new WaitForSeconds(0.5f);
+        yield return _transform.GetComponent<SpriteRenderer>().DoBlink(1, 5, new Color(0, 0, 0, 0));
+        
         ObjectPool.Instance.InstantiateFromPool(_explosionEffect, _transform.position, Quaternion.identity, true);
         Collider2D[] hits = Physics2D.OverlapCircleAll(_transform.transform.position, _radius, _targetLayer);
         foreach (Collider2D hit in hits)
@@ -33,7 +45,7 @@ public class ExplosiveAttackState : BaseState
             }
         }
         OnAttack?.Invoke();
-        
+        HasExploded = true;
         _transform.GetComponent<IKillable>().OnDeath();
     }
 }

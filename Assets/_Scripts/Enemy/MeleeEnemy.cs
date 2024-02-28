@@ -31,6 +31,7 @@ public class MeleeEnemy : EnemyBase
     public override void OnDeath()
     {
         base.OnDeath();
+        GetComponent<EnemyDropSystem>().DropItem();
         if(_meleeAttackState != null)
             _meleeAttackState.OnAttack -= InvokeOnEnemyExplosive;
     }
