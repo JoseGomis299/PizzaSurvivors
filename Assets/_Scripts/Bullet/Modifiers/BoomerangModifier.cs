@@ -67,7 +67,7 @@ public class BoomerangModifier : BulletMovementModifier
         }
         else
         {
-            EffectTarget.Direction = _finalDirection;
+            EffectTarget.Direction *= _finalDirection;
             EffectTarget.IgnoreMaxRange = false;
         }
         

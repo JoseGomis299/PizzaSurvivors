@@ -128,6 +128,7 @@ public class IngredientPlacer : MonoBehaviour
 
         _instantiatedIngredientImage.GetComponent<Image>().color = Color.white;
         _instantiatedIngredientImage = null;
+        _instantiatedIngredient = null;
         
         if (IngredientInventory.GetIngredientQuantity(_currentIngredient) > 0) InstantiatePreview();
         else ClearSelection();
