@@ -11,8 +11,6 @@ public class RangedEnemy : EnemyBase
     {
         base.Initialize(round);
 
-        characterMovement = GetComponent<CharacterMovement>();
-        
         EnemyMoveState enemyMoveStateState = new EnemyMoveState(this, transform, player);
 
         if (TryGetComponent(out BulletSpawner bulletSpawner))

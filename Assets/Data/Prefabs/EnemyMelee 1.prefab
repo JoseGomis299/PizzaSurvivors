@@ -17,10 +17,9 @@ GameObject:
   - component: {fileID: 3545766749966752578}
   - component: {fileID: 6905251877862819796}
   - component: {fileID: 2245963577067727516}
-  - component: {fileID: 8745027673335284106}
-  - component: {fileID: 4872021746289074305}
+  - component: {fileID: 6374629019545396215}
   m_Layer: 7
-  m_Name: EnemyMelee
+  m_Name: EnemyMelee 1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -84,7 +83,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ceb9711a1d02a774dbe00e77279453fc, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.745283, g: 0.40473434, b: 0.27772337, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -238,7 +237,7 @@ MonoBehaviour:
   drops:
   - {fileID: 6572275906320508244, guid: 115fca423d5e4234b8a7955b05fad56e, type: 3}
   maxDropForce: 5
---- !u!114 &8745027673335284106
+--- !u!114 &6374629019545396215
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -247,37 +246,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 370464564111723388}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0153cd3fd2684292b773b2761e376102, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  combos:
-  - Attacks:
-    - damageMultiplier: 1
-      element: 0
-      knockback: 0
-      ShapeType: 0
-      Size: {x: 1.5, y: 1.5}
-      RelativePosition: {x: 0, y: 1.25}
-      Angle: 90
-      Orientation: 0
-      MatchRange: 1
-    FlipXWhenFacingLeft: 0
-    ShowGizmos: 1
---- !u!114 &4872021746289074305
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 370464564111723388}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ba48d87a3b84e6c8b96b3ff98f4633e, type: 3}
+  m_Script: {fileID: 11500000, guid: f5c3edc0eaa646e88a8f8c0a5d8f0392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
+  radius: 3
+  damage:
+    value: 50
+    element: 0
+    _knockBackForce: 10
   <AttackRange>k__BackingField: 2
 --- !u!1 &1987326083758887137
 GameObject:

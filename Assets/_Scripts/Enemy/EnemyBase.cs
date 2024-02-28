@@ -43,7 +43,7 @@ public abstract class EnemyBase : MonoBehaviour, IKillable
         OnEnemyHit?.Invoke();
     }
     
-    protected void InvokeOnEnemyMeleeAttack()
+    protected void InvokeOnEnemyExplosive()
     {
         OnEnemyMeleeAttack?.Invoke();
     }

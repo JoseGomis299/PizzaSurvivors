@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public interface IDamageable
@@ -5,6 +6,7 @@ public interface IDamageable
     public void TakeDamage(Damage damage);
 }
 
+[Serializable]
 public struct Damage
 {
     public float value;
@@ -16,7 +18,7 @@ public struct Damage
         return _direction*_knockBackForce;
     } 
     
-    private readonly float _knockBackForce;
+    [SerializeField] private float _knockBackForce;
     private readonly Vector3 _origin;
     private readonly Vector3 _direction;
 

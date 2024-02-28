@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class MeleeEnemy : EnemyBase
@@ -11,8 +10,6 @@ public class MeleeEnemy : EnemyBase
     {
         base.Initialize(round);
 
-        GetComponent<CharacterMovement>();
-        
         EnemyMoveState enemyMoveStateState = new EnemyMoveState(this, transform, player);
 
         if (TryGetComponent(out MeleeAttacker meleeAttacker))
@@ -25,7 +22,7 @@ public class MeleeEnemy : EnemyBase
             stateMachine.At(enemyMoveStateState, _meleeAttackState, new FuncPredicate(() => Vector3.Distance(transform.position, player.position) <= AttackRange + 0.5f));
             stateMachine.At(_meleeAttackState, enemyMoveStateState, new FuncPredicate(() => Vector3.Distance(transform.position, player.position) > AttackRange + 0.5f));
             
-            _meleeAttackState.OnAttack += InvokeOnEnemyMeleeAttack;
+            _meleeAttackState.OnAttack += InvokeOnEnemyExplosive;
         }
 
         stateMachine.SetState(enemyMoveStateState);
@@ -35,6 +32,6 @@ public class MeleeEnemy : EnemyBase
     {
         base.OnDeath();
         if(_meleeAttackState != null)
-            _meleeAttackState.OnAttack -= InvokeOnEnemyMeleeAttack;
+            _meleeAttackState.OnAttack -= InvokeOnEnemyExplosive;
     }
 }
