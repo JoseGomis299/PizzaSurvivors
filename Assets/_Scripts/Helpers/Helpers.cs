@@ -210,5 +210,11 @@ namespace ProjectUtils.Helpers
         {
             return Quaternion.Euler(0, 0, Random.Range(0, 360));
         }
+        
+        public static LayerMask GetLayerMask(Transform transform)
+        {
+            int layer = 1 << transform.gameObject.layer;
+            return layer;
+        }
     }
 }

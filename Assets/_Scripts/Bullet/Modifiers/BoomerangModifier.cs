@@ -3,11 +3,10 @@ using UnityEngine;
 
 public class BoomerangModifier : BulletMovementModifier
 {
-    private Vector2 _finalDirection;
-    private bool _hasReturned = false;
-    private Vector2 _returnDirection;
+    private float _totalTime;
     
     private Transform _spawner;
+    private Vector2 _initialDirection;
 
     public BoomerangModifier(Bullet target, int maxStacks, int priority, float amplitude, float frequency) : base(target, maxStacks, priority, amplitude, frequency)
     {
@@ -20,6 +19,7 @@ public class BoomerangModifier : BulletMovementModifier
         EffectTarget.Spawner.GetFirePointDistance();
         EffectTarget.IgnoreMaxRange = true;
         _time = 0;
+        _totalTime = 0;
     }
     
     // public override void ModifyMovement()
@@ -48,31 +48,27 @@ public class BoomerangModifier : BulletMovementModifier
       
     public override void ModifyMovement()
     {
+        if(_initialDirection != EffectTarget.InitialDirection)
+        {
+            _initialDirection = EffectTarget.InitialDirection;
+            _time = 0;
+        }
+        
         float time = _time * ((EffectTarget.Stats.Speed*1.5f)/EffectTarget.Stats.MaxRange);
         if (time*Mathf.Rad2Deg < 350 || CurrentStacks > 1)
         {
             EffectTarget.Direction *= Mathf.Sin(Mathf.PI/2f+time)*10f;
-            // if (time > Mathf.PI)
-            // {
-            //     Debug.Log(-0.9f + (time/Mathf.PI));
-            //     _returnDirection = Vector2.Lerp(_returnDirection, (Vector2) EffectTarget.transform.up * (Mathf.Sin(Mathf.PI+time)*20f), -0.9f + (time/Mathf.PI)*10f);
-            //     EffectTarget.Direction += _returnDirection;
-            // }
-            // else
-            //{
-                _returnDirection = (Vector2)EffectTarget.transform.up * (Mathf.Sin(Mathf.PI * 0.7f + time));
-                EffectTarget.Direction += _returnDirection;
-            //}
-            _finalDirection = EffectTarget.Direction;
+            EffectTarget.Direction += (Vector2)EffectTarget.transform.up * (Mathf.Sin(Mathf.PI * 0.7f + time));
         }
-        else
-        {
-            EffectTarget.Direction *= _finalDirection;
-            EffectTarget.IgnoreMaxRange = false;
-        }
-        
+        else EffectTarget.IgnoreMaxRange = false;
+
         if(CurrentStacks == 1 && Vector3.Distance(EffectTarget.transform.position, _spawner.position) < 0.5f) EffectTarget.gameObject.SetActive(false);
 
+        _totalTime += Time.fixedDeltaTime;
+        
+        float totalTime = _totalTime * ((EffectTarget.Stats.Speed*1.5f)/EffectTarget.Stats.MaxRange);
+        if(CurrentStacks == 1 && _time == 0 && totalTime > 2*Mathf.PI) _time = 2*Mathf.PI;
+        
         _time += Time.fixedDeltaTime;
     }
 }

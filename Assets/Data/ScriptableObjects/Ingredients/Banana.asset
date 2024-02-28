@@ -17,6 +17,7 @@ MonoBehaviour:
   price: 0
   rarity: 0
   onPizzaSprite: {fileID: 21300000, guid: 511218d0ccf5f0d4090d3b8557de538c, type: 3}
+  OriginalIngredient: {fileID: 0}
   <BulletModifiers>k__BackingField:
   - {fileID: 11400000, guid: ae34107e5a8ae5f4ebad180a5a1ca401, type: 2}
   <Buffs>k__BackingField:

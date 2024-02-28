@@ -28,13 +28,15 @@ public class Bullet : MonoBehaviour
     
     private float _initialSpeed;
     public Vector2 Direction { get; set; }
-    private Vector2 _initialDirection;
+    public Vector2 InitialDirection { get; private set; }
 
     private Rigidbody2D _rb;
     private SpriteRenderer _gfx;
     private Sprite _sprite;
     private float _exitPreviousHitTime;
-    
+    private PhysicsMaterial2D _bouncyMaterial;
+    private PhysicsMaterial2D _normalMaterial;
+
     private EnumSet<BulletMovementModifier, BulletMovementModifierInfo.MovementModifierType> _movementModifiers;
     private EnumSet<BulletHitModifier, BulletHitModifierInfo.HitModifierType> _hitModifiers;
     
@@ -43,6 +45,18 @@ public class Bullet : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _gfx = transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
         _sprite = _gfx.sprite;
+        
+        _bouncyMaterial = new PhysicsMaterial2D
+        {
+            bounciness = 1f,
+            friction = 0f
+        };
+        
+        _normalMaterial = new PhysicsMaterial2D
+        {
+            bounciness = 0f,
+            friction = 0f
+        };
     }
 
     private void OnDisable()
@@ -50,6 +64,7 @@ public class Bullet : MonoBehaviour
         Direction = Vector2.zero;
         Speed = 0;
         _gfx.sprite = _sprite;
+        if(Spawner != null) _rb.includeLayers &= ~Helpers.GetLayerMask(Spawner.transform);
     }
 
     public void Initialize(Bullet other, Vector2 direction, StatsManager previousHit, Sprite newSprite)
@@ -58,6 +73,7 @@ public class Bullet : MonoBehaviour
         _initialPosition = transform.position;
         _exitPreviousHitTime = float.MaxValue;
         ID = other.ID + 1;
+        _rb.excludeLayers |= Helpers.GetLayerMask(Spawner.transform);
         if(newSprite != null) _gfx.sprite = newSprite;
         
         PreviousHit = previousHit;
@@ -103,11 +119,14 @@ public class Bullet : MonoBehaviour
             
             _modifiersInfo.Add(mod);
         }
-        
+
+
+        _rb.sharedMaterial = _stats.Bounce > 0 ? _bouncyMaterial : _normalMaterial;
+
         transform.localScale = Vector3.one * _stats.Size;
 
         _initialSpeed = Speed = _stats.Speed;
-        _initialDirection = Direction = direction.normalized;
+        InitialDirection = Direction = direction.normalized;
         
         transform.right = Direction;
     }
@@ -118,6 +137,7 @@ public class Bullet : MonoBehaviour
         _initialPosition = transform.position;
         ID = 0;
         _exitPreviousHitTime = float.MinValue;
+        _rb.excludeLayers |= Helpers.GetLayerMask(Spawner.transform);
         
         _stats = ScriptableObject.CreateInstance<BulletStats>();
         _stats.SetValues(characterStats, stats);
@@ -127,7 +147,6 @@ public class Bullet : MonoBehaviour
 
         _movementModifiers = new EnumSet<BulletMovementModifier, BulletMovementModifierInfo.MovementModifierType>();
         _hitModifiers = new EnumSet<BulletHitModifier, BulletHitModifierInfo.HitModifierType>();
-        
         foreach (var mod in modifiers)
         {
             switch (mod)
@@ -158,11 +177,13 @@ public class Bullet : MonoBehaviour
             
             _modifiersInfo.Add(mod);
         }
+        
+        _rb.sharedMaterial = _stats.Bounce > 0 ? _bouncyMaterial : _normalMaterial;
 
         transform.localScale = Vector3.one * _stats.Size;
 
         _initialSpeed = Speed = _stats.Speed;
-        _initialDirection = Direction = direction.normalized;
+        InitialDirection = Direction = direction.normalized;
     }
 
     private void FixedUpdate()
@@ -183,7 +204,7 @@ public class Bullet : MonoBehaviour
         }
         
         Speed = _initialSpeed;
-        Direction = _initialDirection;
+        Direction = InitialDirection;
         foreach (var modifier in _movementModifiers)
             modifier.ModifyMovement();
         
@@ -191,16 +212,15 @@ public class Bullet : MonoBehaviour
         _rb.velocity = Direction.normalized * Speed;
     }
     
-    private void OnTriggerEnter2D(Collider2D col)
+    private void OnCollisionEnter2D(Collision2D col)
     {
-        if((Spawner != null && (Helpers.IsHimOrHisChild(col.transform, Spawner.transform) || col.CompareTag(Spawner.tag))) || col.CompareTag("Bullet") || col.TryGetComponent<ICollectable>(out _)) return;
-        var target = col.GetComponent<StatsManager>();
+        if((Spawner != null && (Helpers.IsHimOrHisChild(col.transform, Spawner.transform) || col.collider.CompareTag(Spawner.tag))) || col.collider.CompareTag("Bullet") || col.collider.TryGetComponent<ICollectable>(out _)) return;
+        var target = col.collider.GetComponent<StatsManager>();
         if(0.05f > Time.time - _exitPreviousHitTime) return;
-        
         float attack = _stats.GetAttack(_stats.Element, _stats.Damage);
         Damage damage = new Damage(attack, _stats.Element, _stats.KnockBack, transform.position, Direction);
         
-        var damageable = col.GetComponent<IDamageable>();
+        var damageable = col.collider.GetComponent<IDamageable>();
 
         foreach (var modifier in _hitModifiers)
         {
@@ -208,13 +228,13 @@ public class Bullet : MonoBehaviour
         }
 
         //Bounce if colliding with something
-        if (_stats.Bounce-- > 0)
+        if (--_stats.Bounce <= 0)
         {
-            Vector2 normal = ((Vector2) (transform.position - (Vector3)Direction) - col.ClosestPoint(transform.position - (Vector3)Direction)).normalized;
-            _initialDirection = Vector2.Reflect(Direction, normal);
-            _initialPosition = transform.position;
-            
-            if (damageable != null) damageable.TakeDamage(damage);
+            _rb.sharedMaterial = _normalMaterial;
+        }
+        else
+        {
+            InitialDirection = Vector2.Reflect(Direction, col.contacts[0].normal).normalized;
             return;
         }
 
@@ -225,9 +245,9 @@ public class Bullet : MonoBehaviour
     }
 
 
-    private void OnTriggerExit2D(Collider2D other)
+    private void OnCollisionExit2D(Collision2D col)
     {
-       if (PreviousHit != null && other.gameObject == PreviousHit.gameObject)
+       if (PreviousHit != null && col.gameObject == PreviousHit.gameObject)
        {
            PreviousHit = null;
            _exitPreviousHitTime = Time.time;

@@ -222,6 +222,7 @@ MonoBehaviour:
   accelTime: 0.5
   rollDistance: 3
   rollTime: 0.2
+  rollCoolDown: 0.2
 --- !u!114 &371627029561836160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,7 +262,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4840480540452893960}
   - component: {fileID: 2891684936598090642}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DamageCollider
   m_TagString: Enemy
   m_Icon: {fileID: 0}

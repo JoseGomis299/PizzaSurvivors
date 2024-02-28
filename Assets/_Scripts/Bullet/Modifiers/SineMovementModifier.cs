@@ -10,6 +10,6 @@ public class SineMovementModifier : BulletMovementModifier
     public override void ModifyMovement()
     {
         EffectTarget.Direction +=  (Vector2) EffectTarget.transform.up * (Mathf.Cos(_time * frequency) * amplitude);
-        _time += Time.fixedDeltaTime;    
+        _time += Time.fixedDeltaTime;
     }
 }

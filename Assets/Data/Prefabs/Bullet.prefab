@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8778348974667178117}
   - component: {fileID: 3469660026318880997}
   - component: {fileID: 1237238070630006167}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Visuals
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.09}
@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 5133063461413209775}
   - component: {fileID: 7005524218058725058}
   - component: {fileID: 6930761011341447215}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}

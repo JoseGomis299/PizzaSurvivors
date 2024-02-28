@@ -202,7 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea8caec43dd64666a6e1073142c94895, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: 8c32148db835af04193396c3fdd4ecfd, type: 2}
+  stats: {fileID: 11400000, guid: d98c01f54e72b244bb8026084faa04ee, type: 2}
 --- !u!114 &6905251877862819796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,7 +289,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4840480540452893960}
   - component: {fileID: 2891684936598090642}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DamageCollider
   m_TagString: Enemy
   m_Icon: {fileID: 0}

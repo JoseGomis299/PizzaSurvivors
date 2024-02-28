@@ -14,6 +14,7 @@ public class ExplosiveEnemy : EnemyBase
     {
         base.Initialize(round);
 
+        damage.value = statsManager.Stats.Attack;
         EnemyMoveState enemyMoveStateState = new EnemyMoveState(this, transform, player);
         
         _explosiveState = new ExplosiveAttackState(transform, damage, radius, playerLayer, explosionEffect);

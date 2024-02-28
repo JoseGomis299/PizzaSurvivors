@@ -23956,6 +23956,8 @@ MonoBehaviour:
     height: 32.1
   entitiesParent: {fileID: 1049130952}
   enemyPrefabs:
+  - {fileID: 370464564111723388, guid: cf5e24f5777b23748bc1e95bcf30539f, type: 3}
+  - {fileID: 370464564111723388, guid: ade9e705a5617194a9a6e6251a9a3919, type: 3}
   - {fileID: 370464564111723388, guid: 31aecc2189bff2544bd1b2b559626ea9, type: 3}
   spawnEffectPrefab: {fileID: 4673598409569538933, guid: 87c068906c7a41242be547026ca46481, type: 3}
   spawnCurve:
@@ -24007,12 +24009,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1049130950}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9f785758e314193b6da4acd9e7b8fdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roundDuration: 0
+  roundDuration: 30
 --- !u!1 &1082082433
 GameObject:
   m_ObjectHideFlags: 0
