@@ -12,7 +12,7 @@ public class RoundManager : MonoBehaviour
     public int CurrentRound { get; private set; }
     
     private bool _roundEnded;
-
+    
     private void Start()
     {
         CurrentRound = 0;

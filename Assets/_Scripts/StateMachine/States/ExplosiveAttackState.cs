@@ -35,6 +35,8 @@ public class ExplosiveAttackState : BaseState
         yield return new WaitForSeconds(0.5f);
         yield return _transform.GetComponent<SpriteRenderer>().DoBlink(1, 5, new Color(0, 0, 0, 0));
         
+        if(!_transform.gameObject.activeInHierarchy) yield break;
+        
         ObjectPool.Instance.InstantiateFromPool(_explosionEffect, _transform.position, Quaternion.identity, true);
         Collider2D[] hits = Physics2D.OverlapCircleAll(_transform.transform.position, _radius, _targetLayer);
         foreach (Collider2D hit in hits)

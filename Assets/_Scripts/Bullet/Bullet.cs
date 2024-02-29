@@ -33,9 +33,6 @@ public class Bullet : MonoBehaviour
     private Rigidbody2D _rb;
     private SpriteRenderer _gfx;
     private Sprite _sprite;
-    private float _exitPreviousHitTime;
-    private PhysicsMaterial2D _bouncyMaterial;
-    private PhysicsMaterial2D _normalMaterial;
 
     private EnumSet<BulletMovementModifier, BulletMovementModifierInfo.MovementModifierType> _movementModifiers;
     private EnumSet<BulletHitModifier, BulletHitModifierInfo.HitModifierType> _hitModifiers;
@@ -45,18 +42,6 @@ public class Bullet : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _gfx = transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
         _sprite = _gfx.sprite;
-        
-        _bouncyMaterial = new PhysicsMaterial2D
-        {
-            bounciness = 1f,
-            friction = 0f
-        };
-        
-        _normalMaterial = new PhysicsMaterial2D
-        {
-            bounciness = 0f,
-            friction = 0f
-        };
     }
 
     private void OnDisable()
@@ -67,20 +52,26 @@ public class Bullet : MonoBehaviour
         if(Spawner != null) _rb.includeLayers &= ~Helpers.GetLayerMask(Spawner.transform);
     }
 
+    private void SetInitialValues(int id, BulletSpawner bulletSpawner, Stats characterStats)
+    {
+        ID = id;
+        Spawner = bulletSpawner;
+
+        _initialPosition = transform.position;
+        _rb.excludeLayers |= Helpers.GetLayerMask(Spawner.transform);
+        
+        _stats = ScriptableObject.CreateInstance<BulletStats>();
+        _stats.SetValues(characterStats, stats);
+        _characterStats = characterStats;
+    }
+
     public void Initialize(Bullet other, Vector2 direction, StatsManager previousHit, Sprite newSprite)
     {
-        Spawner = other.Spawner;
-        _initialPosition = transform.position;
-        _exitPreviousHitTime = float.MaxValue;
-        ID = other.ID + 1;
-        _rb.excludeLayers |= Helpers.GetLayerMask(Spawner.transform);
+        SetInitialValues(other.ID + 1, other.Spawner, other._characterStats);
         if(newSprite != null) _gfx.sprite = newSprite;
-        
         PreviousHit = previousHit;
+        Physics2D.IgnoreCollision(GetComponentInChildren<Collider2D>(), previousHit.GetComponent<Collider2D>(), true);
 
-        _stats = ScriptableObject.CreateInstance<BulletStats>();
-        _stats.SetValues(other._characterStats, stats);
-        _characterStats = other._characterStats;
         
         _modifiersInfo = new List<BulletModifierInfo>();
         
@@ -120,9 +111,6 @@ public class Bullet : MonoBehaviour
             _modifiersInfo.Add(mod);
         }
 
-
-        _rb.sharedMaterial = _stats.Bounce > 0 ? _bouncyMaterial : _normalMaterial;
-
         transform.localScale = Vector3.one * _stats.Size;
 
         _initialSpeed = Speed = _stats.Speed;
@@ -133,16 +121,8 @@ public class Bullet : MonoBehaviour
     
     public void Initialize(Vector2 direction, List<BulletModifierInfo> modifiers, BulletSpawner spawner, Stats characterStats)
     {
-        Spawner = spawner;
-        _initialPosition = transform.position;
-        ID = 0;
-        _exitPreviousHitTime = float.MinValue;
-        _rb.excludeLayers |= Helpers.GetLayerMask(Spawner.transform);
-        
-        _stats = ScriptableObject.CreateInstance<BulletStats>();
-        _stats.SetValues(characterStats, stats);
-        _characterStats = characterStats;
-        
+        SetInitialValues(0, spawner, characterStats);
+
         _modifiersInfo = new List<BulletModifierInfo>(modifiers);
 
         _movementModifiers = new EnumSet<BulletMovementModifier, BulletMovementModifierInfo.MovementModifierType>();
@@ -177,8 +157,6 @@ public class Bullet : MonoBehaviour
             
             _modifiersInfo.Add(mod);
         }
-        
-        _rb.sharedMaterial = _stats.Bounce > 0 ? _bouncyMaterial : _normalMaterial;
 
         transform.localScale = Vector3.one * _stats.Size;
 
@@ -214,9 +192,8 @@ public class Bullet : MonoBehaviour
     
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if((Spawner != null && (Helpers.IsHimOrHisChild(col.transform, Spawner.transform) || col.collider.CompareTag(Spawner.tag))) || col.collider.CompareTag("Bullet") || col.collider.TryGetComponent<ICollectable>(out _)) return;
+        // if((Spawner != null && (Helpers.IsHimOrHisChild(col.transform, Spawner.transform) || col.collider.CompareTag(Spawner.tag))) || col.collider.CompareTag("Bullet") || col.collider.TryGetComponent<ICollectable>(out _)) return;
         var target = col.collider.GetComponent<StatsManager>();
-        if(0.05f > Time.time - _exitPreviousHitTime) return;
         float attack = _stats.GetAttack(_stats.Element, _stats.Damage);
         Damage damage = new Damage(attack, _stats.Element, _stats.KnockBack, transform.position, Direction);
         
@@ -228,30 +205,35 @@ public class Bullet : MonoBehaviour
         }
 
         //Bounce if colliding with something
-        if (--_stats.Bounce <= 0)
-        {
-            _rb.sharedMaterial = _normalMaterial;
-        }
-        else
+        if (--_stats.Bounce >= 0)
         {
             InitialDirection = Vector2.Reflect(Direction, col.contacts[0].normal).normalized;
             return;
         }
 
         //Pierce if colliding with an enemy
-        if(_stats.Pierce-- <= 0) gameObject.SetActive(false);
+        if(_stats.Pierce-- <= 0) DisableBullet();
         if (damageable != null) damageable.TakeDamage(damage);
-        else gameObject.SetActive(false);
+        else DisableBullet();
     }
 
-
-    private void OnCollisionExit2D(Collision2D col)
+    private void OnTriggerExit2D(Collider2D col)
     {
-       if (PreviousHit != null && col.gameObject == PreviousHit.gameObject)
+       if (PreviousHit != null)
        {
+           Physics2D.IgnoreCollision(GetComponentInChildren<Collider2D>(), PreviousHit.GetComponent<Collider2D>(), false);
            PreviousHit = null;
-           _exitPreviousHitTime = Time.time;
        }
+    }
+    
+    private void DisableBullet()
+    {
+        if (PreviousHit != null)
+        {
+            Physics2D.IgnoreCollision(GetComponentInChildren<Collider2D>(), PreviousHit.GetComponent<Collider2D>(), false);
+            PreviousHit = null;
+        }
+        gameObject.SetActive(false);
     }
 }
 

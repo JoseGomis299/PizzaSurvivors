@@ -24014,7 +24014,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9f785758e314193b6da4acd9e7b8fdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roundDuration: 30
+  roundDuration: 10
 --- !u!1 &1082082433
 GameObject:
   m_ObjectHideFlags: 0
