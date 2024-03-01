@@ -23959,6 +23959,7 @@ MonoBehaviour:
   - {fileID: 370464564111723388, guid: cf5e24f5777b23748bc1e95bcf30539f, type: 3}
   - {fileID: 370464564111723388, guid: ade9e705a5617194a9a6e6251a9a3919, type: 3}
   - {fileID: 370464564111723388, guid: 31aecc2189bff2544bd1b2b559626ea9, type: 3}
+  - {fileID: 370464564111723388, guid: 84cbe91e9a70d8043a66e880def439d3, type: 3}
   spawnEffectPrefab: {fileID: 4673598409569538933, guid: 87c068906c7a41242be547026ca46481, type: 3}
   spawnCurve:
     serializedVersion: 2
@@ -26176,6 +26177,10 @@ MonoBehaviour:
     lifeTime: 5
     activeTime: 0
   - gameObject: {fileID: 370464564111723388, guid: 31aecc2189bff2544bd1b2b559626ea9, type: 3}
+    quantity: 20
+    lifeTime: 1
+    activeTime: 0
+  - gameObject: {fileID: 370464564111723388, guid: 84cbe91e9a70d8043a66e880def439d3, type: 3}
     quantity: 20
     lifeTime: 1
     activeTime: 0

@@ -18,6 +18,8 @@ public class EnemyMeleeAttackState : BaseState
     private bool _isAttacking;
     private Coroutine _animationCoroutine;
     private Coroutine _currentCoroutine;
+    
+    private Vector3 _initialScale;
 
     public EnemyMeleeAttackState(MeleeAttacker meleeAttacker, Transform attackPoint, Transform target, StatsManager statsManager, float timeBetweenAttacks)
     {
@@ -26,6 +28,8 @@ public class EnemyMeleeAttackState : BaseState
         _statsManager = statsManager;
         _target = target;
         _timeBetweenAttacks = timeBetweenAttacks;
+        
+        _initialScale = _attackPoint.localScale;
     }
 
     public override void Enter()
@@ -36,7 +40,7 @@ public class EnemyMeleeAttackState : BaseState
 
     public override void Update()
     {
-        if(Time.time - _lastAttackTime < _timeBetweenAttacks) return;
+        //if(Time.time - _lastAttackTime < _timeBetweenAttacks) return;
         
         if (!_isAttacking)
         {
@@ -59,7 +63,7 @@ public class EnemyMeleeAttackState : BaseState
             _meleeAttacker.StopCoroutine(_animationCoroutine);
             CoroutineController.Stop(_currentCoroutine);
             
-            _meleeAttacker.transform.DoScale(Vector3.one, 0.1f, Transitions.TimeScales.Scaled);
+            _meleeAttacker.transform.DoScale(_initialScale, 0.1f, Transitions.TimeScales.Scaled);
             _animationCoroutine = null;
         }
 
@@ -70,8 +74,8 @@ public class EnemyMeleeAttackState : BaseState
     {
         _meleeAttacker.ResetTimer();
         
-        yield return _currentCoroutine = _attackPoint.transform.DoScale(Vector3.one * 0.8f, _statsManager.Stats.AttackCooldown/2f, Transitions.TimeScales.Scaled);
-        yield return _currentCoroutine = _attackPoint.transform.DoScale(Vector3.one * 1.1f, _statsManager.Stats.AttackCooldown/2f * 0.9f, Transitions.TimeScales.Scaled);
-        yield return _currentCoroutine = _attackPoint.transform.DoScale(Vector3.one, _statsManager.Stats.AttackCooldown/2f * 0.1f, Transitions.TimeScales.Scaled);
+        yield return _currentCoroutine = _attackPoint.transform.DoScale(_initialScale * 0.8f, _statsManager.Stats.AttackCooldown/2f, Transitions.TimeScales.Scaled);
+        yield return _currentCoroutine = _attackPoint.transform.DoScale(_initialScale * 1.1f, _statsManager.Stats.AttackCooldown/2f * 0.9f, Transitions.TimeScales.Scaled);
+        yield return _currentCoroutine = _attackPoint.transform.DoScale(_initialScale, _statsManager.Stats.AttackCooldown/2f * 0.1f, Transitions.TimeScales.Scaled);
     }
 }

@@ -93,7 +93,7 @@ public class AttackDrawer : PropertyDrawer
         SerializedProperty shapeType = property.FindPropertyRelative("ShapeType");
         SerializedProperty matchRange = property.FindPropertyRelative("MatchRange");
 
-        float height = EditorGUIUtility.singleLineHeight * 10;
+        float height = EditorGUIUtility.singleLineHeight * 11;
         if (shapeType.enumValueIndex == (int)ShapeType.Capsule) height += EditorGUIUtility.singleLineHeight;
         if(matchRange.boolValue) height -=  EditorGUIUtility.singleLineHeight;
         if(!(shapeType.enumValueIndex == (int)ShapeType.Capsule || shapeType.enumValueIndex == (int)ShapeType.Rectangle) && matchRange.boolValue) height -= EditorGUIUtility.singleLineHeight;

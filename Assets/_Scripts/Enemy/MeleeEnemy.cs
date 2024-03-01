@@ -19,8 +19,8 @@ public class MeleeEnemy : EnemyBase
             _meleeAttackState = new EnemyMeleeAttackState(meleeAttacker, transform, player,
                 statsManager, statsManager.Stats.AttackCooldown);
 
-            stateMachine.At(enemyMoveStateState, _meleeAttackState, new FuncPredicate(() => Vector3.Distance(transform.position, player.position) <= AttackRange + 0.5f));
-            stateMachine.At(_meleeAttackState, enemyMoveStateState, new FuncPredicate(() => Vector3.Distance(transform.position, player.position) > AttackRange + 0.5f));
+            stateMachine.At(enemyMoveStateState, _meleeAttackState, new FuncPredicate(() => Vector3.Distance(transform.position, player.position) <= AttackRange));
+            stateMachine.At(_meleeAttackState, enemyMoveStateState, new FuncPredicate(() => Vector3.Distance(transform.position, player.position) > AttackRange));
             
             _meleeAttackState.OnAttack += InvokeOnEnemyExplosive;
         }
